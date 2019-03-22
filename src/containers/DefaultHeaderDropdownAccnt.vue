@@ -1,5 +1,5 @@
 <template>
-  <AppHeaderDropdown right no-caret>
+  <AppHeaderDropdown left caret>
     <template slot="header">
       <img
         src="img/avatars/6.jpg"

@@ -1,17 +1,20 @@
 <template>
   <div id="app">
     <Header></Header>
-    <router-view :textMsg="card"></router-view>
+
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
   import Header from "./components/Header";
   import Hello from "./views/Hello";
+  import DefaultHeaderDropdownAccnt from "./containers/DefaultHeaderDropdownAccnt.vue";
+  import Navbars from "./views/base/Navbars";
 
   export default {
     name: 'app',
-    components: {Hello, Header},
+    components: {Hello, Header, DefaultHeaderDropdownAccnt, Navbars},
     data() {
       return {
         card: 'One piece is real!'

@@ -4,6 +4,7 @@ import Hello from '../views/Hello'
 import About from '../views/About'
 import Login from '../views/pages/Login'
 import Register from '../views/pages/Register'
+import Profile from '../views/pages/Profile'
 
 // Containers
 const DefaultContainer = () => import('@/containers/DefaultContainer')
@@ -306,10 +307,10 @@ export default new Router({
     //     }
     //   ]
     // },
-    {
+    /*{
       path: '/',
       redirect: '/pages'
-    },
+    },*/
     {
       path: '/hello',
       name: 'Hello',
@@ -330,6 +331,11 @@ export default new Router({
       path: '/Sign',
       name: 'Sign',
       component: Register
+    },
+    {
+      path: '/Profile',
+      name: 'Profile',
+      component: Profile
     },
     {
       path: '/pages',
