@@ -18,7 +18,7 @@
 
       <b-list-group flush>
         <b-list-group-item>Ventas realizadas: {{ ventas }}</b-list-group-item>
-        <b-list-group-item>Trueues realizados: {{ trueques }}</b-list-group-item>
+        <b-list-group-item>Trueques realizados: {{ trueques }}</b-list-group-item>
         <b-list-group-item>Compras realizadas: {{ compras }}</b-list-group-item>
       </b-list-group>
 
