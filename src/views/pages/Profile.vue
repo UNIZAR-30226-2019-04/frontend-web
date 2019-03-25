@@ -1,6 +1,6 @@
 <template>
-  <b-row>
-    <b-col cols="3">
+  <b-row style="margin-right: 15px;">
+    <b-col cols="auto" sm="3">
       <UserCard></UserCard>
     </b-col>
     <b-col>

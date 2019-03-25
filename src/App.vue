@@ -57,7 +57,7 @@
     margin: 0;
     height: 56px;
     padding: 0 16px 0 24px;
-    background-color: #35495E;
+    background-color: #fffdf5;
     color: #ffffff;
   }
 

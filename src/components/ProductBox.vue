@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card border-variant="light" style="max-width: 30rem;">
+    <b-card border-variant="light" style="max-width: 26rem;">
       <!---->
       <!--title="Card Title"-->
       <!--img-src="https://picsum.photos/600/300/?image=25"-->
@@ -17,8 +17,7 @@
         fade
         background="#ababab"
         :interval="3000"
-        img-width="450"
-        img-height="280"
+        img-width="60"
         v-model="slide"
         @sliding-start="onSlideStart"
         @sliding-end="onSlideEnd"
@@ -35,13 +34,16 @@
         {{ precio }}€
       </p>
       <b-button href="#" variant="primary">Ver Producto</b-button>
+      <ShareButton></ShareButton>
     </b-card>
   </div>
 </template>
 
 <script>
+    import ShareButton from "./Share";
     export default {
         name: "ProductBox",
+      components: {ShareButton},
       data () {
           return {
             descripcion: "Producto a la venta, recién estrenado y en muy buen estado, todavía en garantía, solamente se vende porque me han regalado otro.",

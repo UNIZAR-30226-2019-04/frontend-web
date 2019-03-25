@@ -12,6 +12,7 @@
         <p>{{ descripcion }}</p>
       </b-col>
     </b-row>
+    <hr/>
   </div>
 </template>
 

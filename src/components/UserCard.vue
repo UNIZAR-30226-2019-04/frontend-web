@@ -1,10 +1,10 @@
 <template>
   <div>
     <b-card
-      border-variant="primary"
+      border-variant="none"
       no-body
-      class="ml-md-4"
-      style="max-width: 20rem;"
+
+      style="max-width: 20rem; margin-top: 20px; margin-left: 15px;"
       :img-src="fotoPerfil"
       img-alt="Image"
       img-top

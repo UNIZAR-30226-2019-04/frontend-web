@@ -33,7 +33,7 @@
                 <div>
                   <h2>Regístrate</h2>
                   <p>¡Forma parte de la comunidad de compra-venta y trueque más grande de España!</p>
-                  <b-button variant="primary" class="active mt-3" href="#/pages/register">Regístrate ahora</b-button>
+                  <b-button variant="primary" class="active mt-3" href="#/Sign">Regístrate ahora</b-button>
                 </div>
               </b-card-body>
             </b-card>

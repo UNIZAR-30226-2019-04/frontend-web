@@ -1,6 +1,8 @@
 // If you want to override variables do it here
 @import "variables";
 
+$body-bg:                         #rgba(255, 255, 255, 0.7); //background color
+
 // Import styles
 @import "~@coreui/coreui/scss/coreui";
 

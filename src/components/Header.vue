@@ -31,8 +31,8 @@
           <template slot="button-content">
             <em>User</em>
           </template>
-          <b-dropdown-item>
-            <router-link to="Profile">Perfil</router-link>
+          <b-dropdown-item href="#/Profile">
+            <!--<router-link to="Profile">Perfil</router-link>-->Perfil
           </b-dropdown-item>
           <b-dropdown-item href="#">Settings</b-dropdown-item>
           <b-dropdown-item href="#">Signout</b-dropdown-item>
