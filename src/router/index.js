@@ -337,6 +337,11 @@ export default new Router({
       name: 'Profile',
       component: Profile
     },
+    // {
+    //   path: '/ProductItem',
+    //   name: 'ProductItem',
+    //   component: ProductItem
+    // },
     {
       path: '/pages',
       redirect: '/pages/login',
