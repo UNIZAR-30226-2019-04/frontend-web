@@ -5,7 +5,7 @@ import About from '../views/About'
 import Login from '../views/pages/Login'
 import Register from '../views/pages/Register'
 import Profile from '../views/pages/Profile'
-import ProductInfo from '@/components/ProductInfo' // Ruta absoluta. Habrá que cambiar las rutas de arriba que son relativas
+import ProductInfo from '@/components/ProductPage/ProductPage' // Ruta absoluta. Habrá que cambiar las rutas de arriba que son relativas
 
 
 // Containers
@@ -341,9 +341,9 @@ export default new Router({
       component: Profile
     },
     {
-      path: '/ProductInfo',
-      name: 'ProductInfo',
-      component: ProductInfo
+      path: '/ProductPage',
+      name: 'ProductPage',
+      component: ProductPage
     },
     {
       path: '/pages',
