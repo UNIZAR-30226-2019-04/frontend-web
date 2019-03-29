@@ -3,23 +3,17 @@
     <b-card
       border-variant="none"
       no-body
-
-      style="max-width: 20rem; margin-top: 20px; margin-left: 15px;">
-      <!--&lt;!&ndash;:img-src="fotoPerfil"&ndash;&gt;-->
-      <!--img-alt="Image"-->
-      <!--img-top-->
-      <!--&gt;-->
-      <h4 slot="header" style="text-align: center; text-emphasis: black ">hueheuheuheuheue</h4>
+      style="margin-top: 20px; margin-left: 5px;">
+      <h4 slot="header" style="text-align: center; text-emphasis: black ">Imágenes del producto</h4>
 
       <b-card-body>
-        <b-card-title>hueheuheuheuheue</b-card-title>
-        <b-card-text>hueheuheuheuheue</b-card-text>
+        <b-card-title>Imágenes del producto</b-card-title>
       </b-card-body>
 
       <b-list-group flush>
-        <b-list-group-item>hueheuheuheuheue</b-list-group-item>
-        <b-list-group-item>hueheuheuheuheue</b-list-group-item>
-        <b-list-group-item>hueheuheuheuheue</b-list-group-item>
+        <b-list-group-item>{{ method.images[0].src }}</b-list-group-item>
+        <b-list-group-item>{{ method.images[1].src }}</b-list-group-item>
+        <img :src=method.images[0].src width="auto">
       </b-list-group>
 
       <b-card-footer>Otras fotos</b-card-footer>
@@ -30,7 +24,14 @@
 
 <script>
   export default {
-    name: "ProductPage-img",
+    name: "ProductPage_img",
+    // la funcion que hereda del papi
+    props: {
+      method: {type: Function},
+    },
+    mounted(){
+      this.method();
+    }
   }
 </script>
 

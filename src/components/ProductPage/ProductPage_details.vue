@@ -3,23 +3,23 @@
     <b-card
       border-variant="none"
       no-body
-
-      style="max-width: 20rem; margin-top: 20px; margin-left: 15px;">
-      <!--&lt;!&ndash;:img-src="fotoPerfil"&ndash;&gt;-->
-      <!--img-alt="Image"-->
-      <!--img-top-->
-      <!--&gt;-->
-      <h4 slot="header" style="text-align: center; text-emphasis: black ">hueheuheuheuheue</h4>
+      style="margin-top: 20px; margin-left: 5px;"
+      :img-src="fotoPerfil"
+      img-alt="Image"
+      img-top
+    >
+      <h4 slot="header" style="text-align: center; text-emphasis: black ">Detalles del producto</h4>
 
       <b-card-body>
-        <b-card-title>hueheuheuheuheue</b-card-title>
-        <b-card-text>hueheuheuheuheue</b-card-text>
+        <b-card-title>{{parentData}}</b-card-title>
+        <!--<b-card-title>llelelellelelel</b-card-title>-->
+        <img :src=method.fotoPerfil width="auto">
       </b-card-body>
 
       <b-list-group flush>
         <b-list-group-item>hueheuheuheuheue</b-list-group-item>
-        <b-list-group-item>hueheuheuheuheue</b-list-group-item>
-        <b-list-group-item>hueheuheuheuheue</b-list-group-item>
+        <b-list-group-item>{{ method.descripcion }}</b-list-group-item>
+        <b-list-group-item>{{ method.precio }}€</b-list-group-item>
       </b-list-group>
 
       <b-card-footer>Otras fotos</b-card-footer>
@@ -29,9 +29,15 @@
 </template>
 
 <script>
-    export default {
-        name: "ProductPage-details"
+  export default {
+    name: "ProductPage_details",
+    props: {
+      method: {type: Function},
+    },
+    mounted(){
+      this.method();
     }
+  }
 </script>
 
 <style scoped>

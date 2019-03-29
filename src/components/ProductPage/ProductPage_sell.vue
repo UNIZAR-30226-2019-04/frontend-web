@@ -3,21 +3,20 @@
     <b-card
       border-variant="none"
       no-body
-
-      style="max-width: 20rem; margin-top: 20px; margin-left: 15px;">
+      style="margin-top: 20px; margin-left: 5px;">
       <!--&lt;!&ndash;:img-src="fotoPerfil"&ndash;&gt;-->
       <!--img-alt="Image"-->
       <!--img-top-->
       <!--&gt;-->
-      <h4 slot="header" style="text-align: center; text-emphasis: black ">hueheuheuheuheue</h4>
+      <h4 slot="header" style="text-align: center; text-emphasis: black ">Detalles de la venta</h4>
 
       <b-card-body>
-        <b-card-title>hueheuheuheuheue</b-card-title>
+        <b-card-title>jejejjejjejeje</b-card-title>
         <b-card-text>hueheuheuheuheue</b-card-text>
       </b-card-body>
 
       <b-list-group flush>
-        <b-list-group-item>hueheuheuheuheue</b-list-group-item>
+        <b-list-group-item>{{ method.descripcion }}</b-list-group-item>
         <b-list-group-item>hueheuheuheuheue</b-list-group-item>
         <b-list-group-item>hueheuheuheuheue</b-list-group-item>
       </b-list-group>
@@ -29,9 +28,16 @@
 </template>
 
 <script>
-    export default {
-        name: "ProductPage-sell"
+  export default {
+    name: "ProductPage_sell",
+    // la funcion que hereda del papi
+    props: {
+      method: {type: Function},
+    },
+    mounted(){
+      this.method();
     }
+  }
 </script>
 
 <style scoped>
