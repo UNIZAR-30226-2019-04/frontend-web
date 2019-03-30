@@ -2,9 +2,9 @@
   <div id="app">
     <Header></Header>
     <router-view></router-view>
-    <b-col cols="auto" sm="4">
-      <filters></filters>
-    </b-col>
+    <!--<b-col cols="auto" sm="4">-->
+      <!--<filters></filters>-->
+    <!--</b-col>-->
   </div>
 </template>
 

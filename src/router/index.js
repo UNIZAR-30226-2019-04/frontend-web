@@ -5,6 +5,7 @@ import About from '../views/About'
 import Login from '../views/pages/Login'
 import Register from '../views/pages/Register'
 import Profile from '../views/pages/Profile'
+import EditProfile from "../views/pages/EditProfile";
 
 // Containers
 const DefaultContainer = () => import('@/containers/DefaultContainer')
@@ -336,6 +337,11 @@ export default new Router({
       path: '/Profile',
       name: 'Profile',
       component: Profile
+    },
+    {
+      path: '/EditProfile',
+      name: 'EditProfile',
+      component: EditProfile
     },
     {
       path: '/pages',
