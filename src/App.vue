@@ -2,6 +2,9 @@
   <div id="app">
     <Header></Header>
     <router-view></router-view>
+    <b-col cols="auto" sm="4">
+      <filters></filters>
+    </b-col>
   </div>
 </template>
 
@@ -10,10 +13,11 @@
   import Hello from "./views/Hello";
   import DefaultHeaderDropdownAccnt from "./containers/DefaultHeaderDropdownAccnt.vue";
   import Navbars from "./views/base/Navbars";
+  import Filters from "./components/Filters";
 
   export default {
     name: 'app',
-    components: {Hello, Header, DefaultHeaderDropdownAccnt, Navbars},
+    components: {Filters, Hello, Header, DefaultHeaderDropdownAccnt, Navbars},
     data() {
       return {
         card: 'One piece is real!'

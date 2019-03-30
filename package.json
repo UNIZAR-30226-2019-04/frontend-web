@@ -32,6 +32,7 @@
     "vue-chartjs": "^3.4.0",
     "vue-perfect-scrollbar": "^0.1.0",
     "vue-router": "^3.0.2",
+    "vue-slide-bar": "^1.1.9",
     "vue-social-sharing": "^2.4.2"
   },
   "devDependencies": {
