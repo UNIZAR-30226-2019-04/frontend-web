@@ -11,18 +11,21 @@
       <h4 slot="header" style="text-align: center; text-emphasis: black ">Detalles de la venta</h4>
 
       <b-card-body>
-        <b-card-title>jejejjejjejeje</b-card-title>
-        <b-card-text>hueheuheuheuheue</b-card-text>
+        <b-card-title>{{ method.precio }}€</b-card-title>
+        <button>COMPRAR AHORA</button>
       </b-card-body>
 
       <b-list-group flush>
-        <b-list-group-item>{{ method.descripcion }}</b-list-group-item>
-        <b-list-group-item>hueheuheuheuheue</b-list-group-item>
-        <b-list-group-item>hueheuheuheuheue</b-list-group-item>
+        <b-list-group-item>{{ method.razones_venta }}</b-list-group-item>
+        <img :src="method.zona_geografica">
       </b-list-group>
 
+      <b-card-body v-if="method.trueque">
+        <b-card-title>Trueque disponible</b-card-title>
+        <b-card-text>{{ method.cambioTrueque }}</b-card-text>
+      </b-card-body>
+
       <b-card-footer>Otras fotos</b-card-footer>
-      <!--<b-card-img :src="fotoExtra" alt="Image" bottom/>-->
     </b-card>
   </div>
 </template>
