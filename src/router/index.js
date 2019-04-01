@@ -5,6 +5,8 @@ import About from '../views/About'
 import Login from '../views/pages/Login'
 import Register from '../views/pages/Register'
 import Profile from '../views/pages/Profile'
+import ProductPage from '@/components/ProductPage/ProductPage' // Ruta absoluta. Habrá que cambiar las rutas de arriba que son relativas
+
 
 // Containers
 const DefaultContainer = () => import('@/containers/DefaultContainer')
@@ -60,8 +62,9 @@ const Page500 = () => import('@/views/pages/Page500')
 // const Register = () => import('@/views/pages/Register')
 
 // Users
-const Users = () => import('@/views/users/Users')
-const User = () => import('@/views/users/User')
+const Users = () => import('@/views/users/Users');
+const User = () => import('@/views/users/User');
+
 
 Vue.use(Router);
 
@@ -336,6 +339,11 @@ export default new Router({
       path: '/Profile',
       name: 'Profile',
       component: Profile
+    },
+    {
+      path: '/ProductPage',
+      name: 'ProductPage',
+      component: ProductPage
     },
     {
       path: '/pages',
