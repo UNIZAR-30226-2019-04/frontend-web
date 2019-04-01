@@ -15,7 +15,8 @@
         <!--&lt;!&ndash;<img :src=method.fotoPerfil width="auto">&ndash;&gt;-->
       <!--</b-card-body>-->
 
-      <b-card-body>
+      <b-card-body style="width: 36rem; height: 36rem;">
+      <!--<b-card-body class="carousel">-->
         <b-carousel
           id="carousel1"
           style="height:auto"
