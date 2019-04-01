@@ -38,14 +38,15 @@
       <b-card-header header-tag="header" class="p-1">
         <b-button block href="#" v-b-toggle.accordion-2 variant="info">Precio</b-button>
       </b-card-header>
-      <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
-        <VueSlideBar style="width: auto" v-model="value">
-        </VueSlideBar>
-      </b-collapse>
+      <!--<b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">-->
+
+          <VueSlideBar v-model="value">
+          </VueSlideBar>
+      <!--</b-collapse>-->
     </b-card>
 
     <b-card no-body class="mb-1">
-      <b-card-header header-tag="header" class="p-1" >
+      <b-card-header header-tag="header" class="p-1">
         <b-button block href="#" v-b-toggle.accordion-3 variant="info">Categorías</b-button>
       </b-card-header>
       <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">

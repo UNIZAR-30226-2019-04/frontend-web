@@ -13,42 +13,42 @@
             <b-input-group-prepend>
               <b-input-group-text><i class="icon-user"></i></b-input-group-text>
             </b-input-group-prepend>
-            <b-form-input type="text" class="form-control" placeholder="Nombre de usuario" autocomplete="username"/>
+            <b-form-input type="text" class="form-control" :placeholder="username" autocomplete="username"/>
           </b-input-group>
 
           <b-input-group class="mb-3">
             <b-input-group-prepend>
               <b-input-group-text><i class="icon-user"></i></b-input-group-text>
             </b-input-group-prepend>
-            <b-form-input type="text" class="form-control" placeholder="Nombre" autocomplete="name"/>
+            <b-form-input type="text" class="form-control" :placeholder="name" autocomplete="name"/>
           </b-input-group>
 
           <b-input-group class="mb-3">
             <b-input-group-prepend>
               <b-input-group-text><i class="icon-user"></i></b-input-group-text>
             </b-input-group-prepend>
-            <b-form-input type="text" class="form-control" placeholder="Apellidos" autocomplete="lastName"/>
+            <b-form-input type="text" class="form-control" :placeholder="lastName" autocomplete="lastName"/>
           </b-input-group>
 
           <b-input-group class="mb-3">
             <b-input-group-prepend>
               <b-input-group-text>@</b-input-group-text>
             </b-input-group-prepend>
-            <b-form-input type="email" class="form-control" placeholder="Email" autocomplete="email"/>
+            <b-form-input type="email" class="form-control" :placeholder="mail" autocomplete="email"/>
           </b-input-group>
 
           <b-input-group class="mb-4">
             <b-input-group-prepend>
               <b-input-group-text><i class="icon-exclamation"></i></b-input-group-text>
             </b-input-group-prepend>
-            <b-form-textarea class="text-body" placeholder="Descripción" autocomplete="description"/>
+            <b-form-textarea class="text-body" :placeholder="description" autocomplete="description"/>
           </b-input-group>
 
           <b-input-group class="mb-4">
             <b-input-group-prepend>
               <b-input-group-text><i class="icon-direction"></i></b-input-group-text>
             </b-input-group-prepend>
-            <b-form-input class="text" placeholder="Localización" autocomplete="location"/>
+            <b-form-input class="text" :placeholder="location" autocomplete="location"/>
           </b-input-group>
 
           <b-button variant="success" block>Actualizar datos</b-button>
@@ -67,7 +67,8 @@
         name: '',
         lastName: 'Galve Ceamanos',
         username: '',
-        description: ''
+        description: '',
+        mail: ''
       }
     }
   }

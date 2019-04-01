@@ -17,7 +17,7 @@
         <UserReview></UserReview>
         <UserReview></UserReview>
       </b-tab>
-      <b-tab title="Lista de deseos" active style="margin-top: 10px; margin-left: 10px; ">
+      <b-tab title="Lista de deseos" style="margin-top: 10px; margin-left: 10px; ">
         <b-card-group columns="true">
           <ProductBox style="margin-bottom: 10px;"></ProductBox>
           <ProductBox style="margin-bottom: 10px;"></ProductBox>
