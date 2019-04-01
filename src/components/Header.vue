@@ -41,9 +41,6 @@
         <b-nav-item>
           <router-link to="About">About</router-link>
         </b-nav-item>
-        <b-nav-item>
-          <router-link to="ProductPage">ProductPage</router-link>
-        </b-nav-item>
       </b-navbar-nav>
 
 

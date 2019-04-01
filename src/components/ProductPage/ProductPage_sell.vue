@@ -25,7 +25,7 @@
         <b-card-text>{{ method.cambioTrueque }}</b-card-text>
       </b-card-body>
 
-      <b-card-footer>Otras fotos</b-card-footer>
+      <!--<b-card-footer>Otras fotos</b-card-footer>-->
     </b-card>
   </div>
 </template>

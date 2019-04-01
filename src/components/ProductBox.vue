@@ -24,7 +24,7 @@
       <p style="color: blue">
         {{ precio }}€
       </p>
-      <b-button href="#" variant="primary">Ver Producto</b-button>
+      <router-link to="ProductPage" variant="primary" class="btn" style="background-color: darkgray">Ver Producto</router-link>
       <ShareButton></ShareButton>
     </b-card>
   </div>
