@@ -345,6 +345,7 @@ export default new Router({
       name: 'EditProfile',
       component: EditProfile
      },
+    {
       path: '/ProductPage',
       name: 'ProductPage',
       component: ProductPage
