@@ -1,10 +1,14 @@
 <template>
-    <p>This is just an about page.</p>
+  <b-col cols="2">
+    <filters></filters>
+  </b-col>
 </template>
 
 <script>
+    import Filters from "../components/Filters";
     export default {
-        name: "About"
+        name: "About",
+      components: {Filters}
     }
 </script>
 

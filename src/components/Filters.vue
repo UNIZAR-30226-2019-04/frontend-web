@@ -1,48 +1,27 @@
 <template>
   <div style="margin-top: 30px">
+    <div>
+      <h4>Precio máximo</h4>
+      <VueSlideBar v-model="value">
+      </VueSlideBar>
+      <h6>Value: {{value}}</h6>
+    </div>
     <b-card no-body class="mb-1">
       <b-card-header header-tag="header" class="p-1" role="tab">
-        <b-button block href="#" v-b-toggle.accordion-1 variant="info">Valoración media del vendedor</b-button>
+        <b-button block href="#" v-b-toggle.accordion-1 variant="info">Val. minima del vendedor</b-button>
       </b-card-header>
       <b-collapse id="accordion-1" visible accordion="my-accordion">
         <b-card-body>
-          <b-card-text>I start opened because</b-card-text>
           <b-form-group>
-            <b-form-radio-group id="basicRadios">
-              <input type="radio" id="one" value="One">
-              <label for="one">
-                <star-rating value="4" :disabled="true"></star-rating>
-              </label>
-              <br/>
-              <input type="radio" id="two" value="Two">
-              <label for="two">
-                <star-rating value="3" :disabled="true"></star-rating>
-              </label>
-              <br/>
-              <input type="radio" id="three" value="Three">
-              <label for="three">
-                <star-rating value="3" :disabled="true"></star-rating>
-              </label>
-              <br/>
-              <input type="radio" id="four" value="Four">
-              <label for="four">
-                <star-rating value="3" :disabled="true"></star-rating>
-              </label>
-            </b-form-radio-group>
+            <!--No utilizar radio group sino un boton q actualice una variable de la valoracion media y se cambie la llamada axios-->
+            <b-btn v-on:click="minVal(4)" style="background-color: transparent; border: transparent"><label><star-rating value="4" :disabled="true"></star-rating></label></b-btn>
+            <b-btn v-on:click="minVal(3)" style="background-color: transparent; border: transparent"><label><star-rating value="3" :disabled="true"></star-rating></label></b-btn>
+            <b-btn v-on:click="minVal(2)" style="background-color: transparent; border: transparent"><label><star-rating value="2" :disabled="true"></star-rating></label></b-btn>
+            <b-btn v-on:click="minVal(1)" style="background-color: transparent; border: transparent"><label><star-rating value="1" :disabled="true"></star-rating></label></b-btn>
+            <p>Valoración mínima: {{valVendedor}}</p>
           </b-form-group>
         </b-card-body>
       </b-collapse>
-    </b-card>
-
-    <b-card no-body class="mb-1">
-      <b-card-header header-tag="header" class="p-1">
-        <b-button block href="#" v-b-toggle.accordion-2 variant="info">Precio</b-button>
-      </b-card-header>
-      <!--<b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">-->
-
-          <VueSlideBar v-model="value">
-          </VueSlideBar>
-      <!--</b-collapse>-->
     </b-card>
 
     <b-card no-body class="mb-1">
@@ -74,7 +53,13 @@
           {text: 'Option 3 ', value: '3'},
           {text: 'Option 4 ', value: '4'},
           {text: 'Option 5 ', value: '5'},],
-        value: 0
+        value: 100,
+        valVendedor: 1
+      }
+    },
+    methods: {
+      minVal :function (newVal) {
+        this.valVendedor = newVal;
       }
     }
   }

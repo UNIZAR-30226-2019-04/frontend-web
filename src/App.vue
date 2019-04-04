@@ -3,7 +3,7 @@
     <Header></Header>
     <router-view></router-view>
     <b-col cols="auto" sm="4">
-      <filters></filters>
+      <!--<filters></filters>-->
     </b-col>
   </div>
 </template>

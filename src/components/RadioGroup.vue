@@ -9,7 +9,9 @@
       <b-form-checkbox v-if="show || option.value < 4" v-for="option in options" :value="option.value" :key="option.value" >{{option.text}}</b-form-checkbox>
     </b-form-checkbox-group>
   </b-form-group>
-    <b-button class="btn-link" v-on:click="showMore()">Mostrar más</b-button>
+    <b-button v-if="show" class="btn-link" v-on:click="showMore()">Mostrar menos</b-button>
+    <b-button v-else class="btn-link" v-on:click="showMore()">Mostrar más</b-button>
+
   </div>
 </template>
 

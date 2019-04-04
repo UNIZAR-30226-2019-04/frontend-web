@@ -34,7 +34,7 @@
           <!--<b-btn class="btn-primary">SI</b-btn>-->
           <!--<b-btn class="btn-danger">NO</b-btn>-->
         </b-modal>
-        <a href="#/EditProfile" class="card-link">Modificar</a>
+        <router-link to="EditProfile" class="btn" style="background-color: darkgray">Modificar</router-link>
       </b-card-body>
 
       <b-card-footer>Otras fotos</b-card-footer>
