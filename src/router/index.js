@@ -5,8 +5,8 @@ import About from '../views/About'
 import Login from '../views/pages/Login'
 import Register from '../views/pages/Register'
 import Profile from '../views/pages/Profile'
+import EditProfile from "../views/pages/EditProfile";
 import ProductPage from '@/components/ProductPage/ProductPage' // Ruta absoluta. Habrá que cambiar las rutas de arriba que son relativas
-
 
 // Containers
 const DefaultContainer = () => import('@/containers/DefaultContainer')
@@ -341,6 +341,10 @@ export default new Router({
       component: Profile
     },
     {
+      path: '/EditProfile',
+      name: 'EditProfile',
+      component: EditProfile
+     },
       path: '/ProductPage',
       name: 'ProductPage',
       component: ProductPage
