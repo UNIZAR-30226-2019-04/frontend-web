@@ -1,15 +1,6 @@
 <template>
   <div>
     <b-card border-variant="light" style="max-width: 26rem;">
-      <!---->
-      <!--title="Card Title"-->
-      <!--img-src="https://picsum.photos/600/300/?image=25"-->
-      <!--img-alt="Image"-->
-      <!--img-top-->
-      <!--tag="article"-->
-      <!--style="max-width: 20rem;"-->
-      <!--class="mb-2"-->
-    <!--&gt;-->
       <b-carousel
         id="carousel1"
         style="text-shadow: 1px 1px 2px #333;"
@@ -33,7 +24,7 @@
       <p style="color: blue">
         {{ precio }}€
       </p>
-      <b-button href="#" variant="primary">Ver Producto</b-button>
+      <router-link to="ProductPage" variant="primary" class="btn" style="background-color: darkgray">Ver Producto</router-link>
       <ShareButton></ShareButton>
     </b-card>
   </div>
