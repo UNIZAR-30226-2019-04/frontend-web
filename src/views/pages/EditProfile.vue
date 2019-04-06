@@ -2,73 +2,38 @@
   <div>
     <b-row style="height: 20rem; margin-top: 20px; margin-right: 15px;">
         <b-card style="width: 15rem; height: 10rem; margin-left: 15px">
-          <b-card-body style="height: 2rem"><b-card-text><router-link to="EditProfile">Editar perfil</router-link></b-card-text></b-card-body>
+          <b-card-body style="height: 2rem"><b-card-text><b-btn v-on:click="changePass(false)">Editar perfil</b-btn></b-card-text></b-card-body>
           <hr/>
-          <b-card-body style="height: 5rem"><b-card-text><router-link to="About">Cambiar contraseña</router-link></b-card-text></b-card-body>
+          <b-card-body style="height: 5rem"><b-card-text><b-btn v-on:click="changePass(true)">Cambiar contraseña</b-btn></b-card-text></b-card-body>
         </b-card>
-      <b-card title="Editar Perfil" style="width: 45rem; margin-top: 20px; margin-left: 30px">
-        <b-form>
-          <!--<h1>Editar Perfil</h1>-->
-          <b-input-group class="mb-3">
-            <b-input-group-prepend>
-              <b-input-group-text><i class="icon-user"></i></b-input-group-text>
-            </b-input-group-prepend>
-            <b-form-input type="text" class="form-control" :placeholder="username" autocomplete="username"/>
-          </b-input-group>
-
-          <b-input-group class="mb-3">
-            <b-input-group-prepend>
-              <b-input-group-text><i class="icon-user"></i></b-input-group-text>
-            </b-input-group-prepend>
-            <b-form-input type="text" class="form-control" :placeholder="name" autocomplete="name"/>
-          </b-input-group>
-
-          <b-input-group class="mb-3">
-            <b-input-group-prepend>
-              <b-input-group-text><i class="icon-user"></i></b-input-group-text>
-            </b-input-group-prepend>
-            <b-form-input type="text" class="form-control" :placeholder="lastName" autocomplete="lastName"/>
-          </b-input-group>
-
-          <b-input-group class="mb-3">
-            <b-input-group-prepend>
-              <b-input-group-text>@</b-input-group-text>
-            </b-input-group-prepend>
-            <b-form-input type="email" class="form-control" :placeholder="mail" autocomplete="email"/>
-          </b-input-group>
-
-          <b-input-group class="mb-4">
-            <b-input-group-prepend>
-              <b-input-group-text><i class="icon-exclamation"></i></b-input-group-text>
-            </b-input-group-prepend>
-            <b-form-textarea class="text-body" :placeholder="description" autocomplete="description"/>
-          </b-input-group>
-
-          <b-input-group class="mb-4">
-            <b-input-group-prepend>
-              <b-input-group-text><i class="icon-direction"></i></b-input-group-text>
-            </b-input-group-prepend>
-            <b-form-input class="text" :placeholder="location" autocomplete="location"/>
-          </b-input-group>
-
-          <b-button variant="success" block>Actualizar datos</b-button>
-        </b-form>
-      </b-card>
+        <ModUserForm v-if="!optionPass" :userData="currentUser"></ModUserForm>
+        <ModPassForm v-else></ModPassForm>
     </b-row>
   </div>
 </template>
 
 <script>
+  import ModUserForm from "../../components/ModUserForm";
+  import ModPassForm from "../../components/ModPassForm";
   export default {
     name: "EditProfile",
+    components: {ModPassForm, ModUserForm},
     data() {
       return {
-        location: '',
-        name: '',
-        lastName: 'Galve Ceamanos',
-        username: '',
-        description: '',
-        mail: ''
+        currentUser: {
+          location: 'Zaragoza',
+          name: 'Ignacio',
+          lastName: 'Galve Ceamanos',
+          username: 'Galvecea',
+          description: 'Soy ingeniero informático.',
+          mail: 'goingtoraftel@gmail.com'
+        },
+        optionPass: false
+      }
+    },
+    methods: {
+      changePass: function (option) {
+        this.optionPass = option;
       }
     }
   }
