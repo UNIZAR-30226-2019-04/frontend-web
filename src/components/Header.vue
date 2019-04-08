@@ -16,6 +16,9 @@
         <b-nav-item>
           <router-link to="Sign">Sing Up</router-link>
         </b-nav-item>
+        <b-nav-item>
+          <router-link to="Search">Search</router-link>
+        </b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->

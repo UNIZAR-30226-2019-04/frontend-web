@@ -5,6 +5,7 @@ import About from '../views/About'
 import Login from '../views/pages/Login'
 import Register from '../views/pages/Register'
 import Profile from '../views/pages/Profile'
+import Search from '../views/pages/Search'
 import EditProfile from "../views/pages/EditProfile";
 import ProductPage from '@/components/ProductPage/ProductPage' // Ruta absoluta. Habrá que cambiar las rutas de arriba que son relativas
 
@@ -349,6 +350,11 @@ export default new Router({
       path: '/ProductPage',
       name: 'ProductPage',
       component: ProductPage
+    },
+    {
+      path: '/Search',
+      name: 'Search',
+      component: Search
     },
     {
       path: '/pages',
