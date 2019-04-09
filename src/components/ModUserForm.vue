@@ -7,7 +7,7 @@
             <b-input-group-prepend>
               <b-input-group-text><i class="icon-user"></i></b-input-group-text>
             </b-input-group-prepend>
-            <b-form-input type="text" class="form-control" v-model="userData.username"/>
+            <b-form-input type="text" class="form-control" v-model="userData.username" />
           </b-input-group>
 
           <b-input-group class="mb-3">

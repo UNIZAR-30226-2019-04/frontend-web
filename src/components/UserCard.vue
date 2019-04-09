@@ -10,7 +10,7 @@
       img-top
     >
       <h4 slot="header" style="text-align: center; text-emphasis: black ">{{ usuario }}</h4>
-
+      <!--<Uploader></Uploader>-->
       <b-card-body>
         <b-card-title>Descripción</b-card-title>
         <b-card-text>{{ description }}</b-card-text>
@@ -36,28 +36,24 @@
         </b-modal>
         <router-link to="EditProfile" class="btn" style="background-color: darkgray">Modificar</router-link>
       </b-card-body>
-
-      <b-card-footer>Otras fotos</b-card-footer>
-      <b-card-img :src="fotoExtra" alt="Image" bottom />
     </b-card>
   </div>
 </template>
 
 <script>
-    export default {
-        name: "UserCard",
-        data () {
-            return {
-              fotoPerfil: 'https://cdn.normacomics.com/media/catalog/product/cache/1/image/588x473/9df78eab33525d08d6e5fb8d27136e95/d/e/detective-conan-18.jpg',
-              usuario: 'Edogawa Conan',
-              description: 'Soy un chico de 17 años encogido con la forma de un niño, les dije a mis conocidos que mi nombre era Conan para protegerlos de la organización que me hizo esto.',
-              compras: 1998,
-              ventas: 22,
-              trueques: 5,
-              fotoExtra: 'https://cdn.myanimelist.net/images/characters/14/308382.jpg'
-            }
-        }
+  export default {
+    name: "UserCard",
+    data() {
+      return {
+        fotoPerfil: 'https://cdn.normacomics.com/media/catalog/product/cache/1/image/588x473/9df78eab33525d08d6e5fb8d27136e95/d/e/detective-conan-18.jpg',
+        usuario: 'Edogawa Conan',
+        description: 'Soy un chico de 17 años encogido con la forma de un niño, les dije a mis conocidos que mi nombre era Conan para protegerlos de la organización que me hizo esto.',
+        compras: 1998,
+        ventas: 22,
+        trueques: 5
+      }
     }
+  }
 </script>
 
 <style scoped>
