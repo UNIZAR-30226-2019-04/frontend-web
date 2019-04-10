@@ -318,8 +318,7 @@ export default new Router({
     {
       path: '/hello',
       name: 'Hello',
-      component: Hello,
-      textMsg: "holaaaaaaa!"
+      component: Hello
     },
     {
       path: '/about',
