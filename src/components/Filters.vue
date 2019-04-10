@@ -13,7 +13,6 @@
       <b-collapse id="accordion-1" visible accordion="my-accordion">
         <b-card-body>
           <b-form-group>
-            <!--No utilizar radio group sino un boton q actualice una variable de la valoracion media y se cambie la llamada axios-->
             <b-btn v-on:click="minVal(4)" style="background-color: transparent; border: transparent"><label><star-rating value="4" :disabled="true"></star-rating></label></b-btn>
             <b-btn v-on:click="minVal(3)" style="background-color: transparent; border: transparent"><label><star-rating value="3" :disabled="true"></star-rating></label></b-btn>
             <b-btn v-on:click="minVal(2)" style="background-color: transparent; border: transparent"><label><star-rating value="2" :disabled="true"></star-rating></label></b-btn>
