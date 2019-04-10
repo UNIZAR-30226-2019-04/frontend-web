@@ -18,6 +18,8 @@
     "@coreui/coreui-plugin-chartjs-custom-tooltips": "^1.2.0",
     "@coreui/icons": "0.3.0",
     "@coreui/vue": "^2.1.2",
+    "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.2.1",
     "bootstrap-vue": "^2.0.0-rc.11",
     "chart.js": "^2.7.3",
@@ -30,10 +32,12 @@
     "v-rating": "^1.1.2",
     "vue": "^2.5.22",
     "vue-chartjs": "^3.4.0",
+    "vue-image-crop-upload": "^2.5.0",
     "vue-perfect-scrollbar": "^0.1.0",
     "vue-router": "^3.0.2",
     "vue-slide-bar": "^1.1.9",
-    "vue-social-sharing": "^2.4.2"
+    "vue-social-sharing": "^2.4.2",
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.3.0",
