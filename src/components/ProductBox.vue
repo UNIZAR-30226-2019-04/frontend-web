@@ -9,11 +9,11 @@
         background="#ababab"
         :interval="3000"
         img-width="60"
-        v-model="slide"
-        @sliding-start="onSlideStart"
-        @sliding-end="onSlideEnd"
-      >
 
+      >
+        <!--v-model="slide"-->
+        <!--@sliding-start="onSlideStart"-->
+        <!--@sliding-end="onSlideEnd"-->
         <b-carousel-slide class="carousel-inner" v-for="img in images" :img-src="img.src" :key="img.id">
         </b-carousel-slide>
       </b-carousel>
@@ -56,7 +56,7 @@
             id: 3
           },]
       }
-    }
+    },
   }
 </script>
 

@@ -10,10 +10,10 @@
     <b-collapse is-nav id="nav_collapse">
 
       <b-navbar-nav>
-        <b-nav-item style="outline-color: green">
+        <b-nav-item v-if="!isLogged" style="outline-color: green">
           <router-link to="LogIn">Log In</router-link>
         </b-nav-item>
-        <b-nav-item>
+        <b-nav-item v-if="!isLogged">
           <router-link to="Sign">Sing Up</router-link>
         </b-nav-item>
         <b-nav-item>
@@ -63,6 +63,11 @@
             .then(() => this.$router.push("/"))
             .catch(err => console.log(err));
         },
+      },
+      computed: {
+          isLogged() {
+            return this.$store.getters.isLoggedIn
+          }
       }
     }
 </script>

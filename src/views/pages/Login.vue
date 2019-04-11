@@ -11,11 +11,11 @@
                   <p class="text-muted">Accede a tu cuenta</p>
                   <b-input-group class="mb-3">
                     <b-input-group-prepend><b-input-group-text>@</b-input-group-text></b-input-group-prepend>
-                    <b-form-input type="email" class="form-control" v-model="email" placeholder="Correo de usuario" autocomplete="username email" />
+                    <b-form-input type="email" class="form-control" v-model="email" placeholder="Correo de usuario" autocomplete />
                   </b-input-group>
                   <b-input-group class="mb-4">
                     <b-input-group-prepend><b-input-group-text><i class="icon-lock"></i></b-input-group-text></b-input-group-prepend>
-                    <b-form-input type="password" class="form-control" v-model="password" placeholder="Contraseña" autocomplete="current-password" />
+                    <b-form-input type="password" class="form-control" v-model="password" placeholder="Contraseña" autocomplete />
                   </b-input-group>
                   <b-row>
                     <b-col cols="6">

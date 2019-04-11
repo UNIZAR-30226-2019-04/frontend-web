@@ -1,15 +1,15 @@
 <template>
   <div>
-    <b-card
+     <b-card
       border-variant="none"
       no-body
 
       style="max-width: 20rem; margin-top: 20px; margin-left: 15px;"
       :img-src="fotoPerfil"
-      img-alt="Image"
+      img-alt="Foto de perfil"
       img-top
     >
-      <h4 slot="header" style="text-align: center; text-emphasis: black ">{{ usuario }}</h4>
+      <h4 slot="header" style="text-align: center; text-emphasis: black ">{{userInfo.nick}}</h4>
       <!--<Uploader></Uploader>-->
       <b-card-body>
         <b-card-title>Descripción</b-card-title>
@@ -43,6 +43,7 @@
 <script>
   export default {
     name: "UserCard",
+    props: ['userInfo'],
     data() {
       return {
         fotoPerfil: 'https://cdn.normacomics.com/media/catalog/product/cache/1/image/588x473/9df78eab33525d08d6e5fb8d27136e95/d/e/detective-conan-18.jpg',
