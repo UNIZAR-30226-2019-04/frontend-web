@@ -1,7 +1,7 @@
 <template>
   <div class="flex-row align-items-center">
     <div class="container">
-      <b-row class="justify-content-center"  style="margin-top: 20%">
+      <b-row class="justify-content-center" style="margin-top: 20%">
         <b-col md="6" sm="8">
           <b-card no-body class="mx-4">
             <b-card-body class="p-4">
@@ -12,28 +12,32 @@
                   <b-input-group-prepend>
                     <b-input-group-text><i class="icon-user"></i></b-input-group-text>
                   </b-input-group-prepend>
-                  <b-form-input type="text" v-model="username" class="form-control" placeholder="Nombre de usuario" autocomplete="username" />
+                  <b-form-input type="text" v-model="username" class="form-control" placeholder="Nombre de usuario"
+                                autocomplete="username"/>
                 </b-input-group>
 
                 <b-input-group class="mb-3">
                   <b-input-group-prepend>
                     <b-input-group-text>@</b-input-group-text>
                   </b-input-group-prepend>
-                  <b-form-input type="email" v-model="email" class="form-control" placeholder="Email" autocomplete="email" />
+                  <b-form-input type="email" v-model="email" class="form-control" placeholder="Email"
+                                autocomplete="email"/>
                 </b-input-group>
 
                 <b-input-group class="mb-3">
                   <b-input-group-prepend>
                     <b-input-group-text><i class="icon-lock"></i></b-input-group-text>
                   </b-input-group-prepend>
-                  <b-form-input type="password" v-model="password" class="form-control" placeholder="Contraseña" autocomplete="new-password" />
+                  <b-form-input type="password" v-model="password" class="form-control" placeholder="Contraseña"
+                                autocomplete="new-password"/>
                 </b-input-group>
 
                 <b-input-group class="mb-4">
                   <b-input-group-prepend>
                     <b-input-group-text><i class="icon-lock"></i></b-input-group-text>
                   </b-input-group-prepend>
-                  <b-form-input type="password" v-model="password_confirmation" class="form-control" placeholder="Repetir contraseña" autocomplete="new-password" />
+                  <b-form-input type="password" v-model="password_confirmation" class="form-control"
+                                placeholder="Repetir contraseña" autocomplete="new-password"/>
                 </b-input-group>
 
                 <a style="color: red;">{{ error_output }}</a>
@@ -61,13 +65,24 @@
       };
     },
     methods: {
-      register: function() {
+      validateEmail: function (mail) {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+          return (true);
+        }
+        else{
+          return (false);
+        }
+      },
+      register: function () {
         let data = {
           "email": this.email,
           "password": this.password,
           "username": this.username
         };
-        if (this.password === this.password_confirmation) {
+        if (!this.validateEmail(this.email)){
+          this.error_output = "El campo email es incorrecto."
+        }
+        else if (this.password === this.password_confirmation) {
           this.$store
             .dispatch("register", data)
             .then(() => this.$router.push("/"))

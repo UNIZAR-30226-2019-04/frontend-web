@@ -10,13 +10,20 @@
                   <h1>Acceso</h1>
                   <p class="text-muted">Accede a tu cuenta</p>
                   <b-input-group class="mb-3">
-                    <b-input-group-prepend><b-input-group-text>@</b-input-group-text></b-input-group-prepend>
-                    <b-form-input type="email" class="form-control" v-model="email" placeholder="Correo de usuario" autocomplete />
+                    <b-input-group-prepend>
+                      <b-input-group-text>@</b-input-group-text>
+                    </b-input-group-prepend>
+                    <b-form-input type="email" class="form-control" v-model="email" placeholder="Correo de usuario"
+                                  autocomplete/>
                   </b-input-group>
                   <b-input-group class="mb-4">
-                    <b-input-group-prepend><b-input-group-text><i class="icon-lock"></i></b-input-group-text></b-input-group-prepend>
-                    <b-form-input type="password" class="form-control" v-model="password" placeholder="Contraseña" autocomplete />
+                    <b-input-group-prepend>
+                      <b-input-group-text><i class="icon-lock"></i></b-input-group-text>
+                    </b-input-group-prepend>
+                    <b-form-input type="password" class="form-control" v-model="password" placeholder="Contraseña"
+                                  autocomplete/>
                   </b-input-group>
+                  <a style="color: red;">{{ error_output }}</a>
                   <b-row>
                     <b-col cols="6">
                       <b-button variant="primary" v-on:click="register" class="px-4">Acceso</b-button>
@@ -50,20 +57,33 @@
     name: "Login",
     data() {
       return {
-          email: "",
-        password: ""
+        email: "",
+        password: "",
+        error_output: ""
       };
     },
     methods: {
-      register: function() {
+      validateEmail: function (mail) {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+          return (true);
+        }
+        else {
+          return (false);
+        }
+      },
+      register: function () {
         let data = {
           "email": this.email,
           "password": this.password
         };
-        this.$store
-          .dispatch("login", data)
-          .then(() => this.$router.push("/"))
-          .catch(err => console.log(err));
+        if (!this.validateEmail(this.email)) {
+          this.error_output = "El campo email es incorrecto."
+        } else {
+          this.$store
+            .dispatch("login", data)
+            .then(() => this.$router.push("/"))
+            .catch(err => console.log(err));
+        }
       }
     }
   };
