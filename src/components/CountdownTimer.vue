@@ -1,5 +1,5 @@
 <template>
-  <h4>{{msg}}</h4>
+  <p>{{msg}}</p>
 </template>
 
 <script>
@@ -24,7 +24,7 @@
       },
       methods:{
         timeLeft: function (inp) {
-          var a = moment([this.endTime.year, this.endTime.month, this.endTime.day+1]);
+          var a = moment([this.endTime.year, this.endTime.month, this.endTime.day]);
           var b = moment([]);
           var c = a.diff(b);// 86400000
           // rest.days = Number((c).toFixed(0));
