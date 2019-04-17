@@ -9,7 +9,7 @@
     </b-col>
     <b-col cols="auto" sm="3">
       <!--<h1 class="text-hide" style="background-image: url('../icons/'); width: 50px; height: 50px;">Bootstrap</h1>-->
-      <ProductPage_sell :method="informacion()"></ProductPage_sell>
+      <ProductPage_sell :method="informacion()" :tipo="tipo"></ProductPage_sell>
     </b-col>
 
   </b-row>
@@ -25,6 +25,7 @@
     components: {ProductPage_img, ProductPage_details, ProductPage_sell},
     data() {
       return {
+        tipo: "Subasta",
         myData: "jojojojojojojojojoj",
         fotoPerfil: 'https://www.pcper.com/files/imagecache/article_max_width/review/2011-04-24/asusk53e-3.jpg',
         titulo: "Portátil Asus k-53, 2011",
