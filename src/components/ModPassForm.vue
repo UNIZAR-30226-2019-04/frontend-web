@@ -16,7 +16,8 @@
           <b-form-input type="password" class="form-control" placeholder="Repetir nueva contraseña" v-model="new_pass2" />
         </b-input-group>
         <p>Nueva contraseña: {{new_pass}}</p>
-        </b-form>
+        <b-button variant="success" v-on:click="updateData" block>Actualizar contraseña</b-button>
+      </b-form>
     </b-card>
   </div>
 </template>

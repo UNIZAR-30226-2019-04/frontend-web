@@ -18,17 +18,20 @@
         </b-carousel-slide>
       </b-carousel>
       <br>
+      <b-card-title>
+        {{ nombre }}
+      </b-card-title>
       <b-card-text>
         {{ descripcion }}
       </b-card-text>
-      <p style="color: blue">
-        {{ precio }}€
+      <p style="color: #20a8d8; margin-right: 10px;" align="right">
+        <b><h1>{{ precio }}€</h1></b>
       </p>
-      <b-row>
-        <router-link to="ProductPage" variant="primary" class="btn" style="background-color: darkgray; margin-right: 5px">Ver Producto
-        </router-link>
-        <ShareButton></ShareButton>
-      </b-row>
+
+      <router-link to="ProductPage" class="btn" style="border-color: #20a8d8; color: #20a8d8; margin-bottom: 5px;" align="center">
+        Ver Producto
+      </router-link>
+      <ShareButton></ShareButton>
     </b-card>
   </div>
 </template>
@@ -41,6 +44,7 @@
     components: {ShareButton},
     data() {
       return {
+        nombre: "Portátil ASUS nuevo",
         descripcion: "Producto a la venta, recién estrenado y en muy buen estado, todavía en garantía, solamente se vende porque me han regalado otro.",
         precio: 25,
         images: [{

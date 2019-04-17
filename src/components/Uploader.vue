@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button variant="primary" v-on:click="toggleShow" block>Establecer imagen de perfil</b-button>
+    <b-button variant="outline-primary" v-on:click="toggleShow" block>Establecer imagen de perfil</b-button>
     <my-upload field="img"
                @crop-success="cropSuccess"
                @crop-upload-success="cropUploadSuccess"
@@ -8,7 +8,7 @@
                v-model="show"
                :width="300"
                :height="300"
-               url=""
+               :url="imgDataUrl"
                lang-type="en"
                :params="params"
                :headers="headers"
@@ -31,7 +31,7 @@
         headers: {
           smail: '*_~'
         },
-        imgDataUrl: '' // the datebase64 url of created image
+        imgDataUrl: 'http://httpbin.org/post' // the datebase64 url of created image
       }
     },
     components: {

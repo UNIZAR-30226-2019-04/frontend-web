@@ -6,9 +6,24 @@
                   hashtags="medioambiente,RAMA"
                   inline-template>
     <div>
-      <network network="facebook">
+      <network network="facebook" style="margin-right: 5px;">
         <b-button variant="facebook icon">
           <i class="fa fa-facebook"></i>
+        </b-button>
+      </network>
+      <network network="twitter" style="margin-right: 5px;">
+        <b-button variant="twitter icon">
+          <i class="fa fa-twitter"></i>
+        </b-button>
+      </network>
+      <network network="linkedin" style="margin-right: 5px;">
+        <b-button variant="linkedin icon">
+          <i class="fa fa-linkedin"></i>
+        </b-button>
+      </network>
+      <network network="vk" style="margin-right: 5px;">
+        <b-button variant="vk icon">
+          <i class="fa fa-vk"></i>
         </b-button>
       </network>
     </div>

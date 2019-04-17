@@ -1,39 +1,44 @@
 <template>
-  <div>
-    <b-row style="height: 20rem; margin-top: 20px; margin-right: 15px;">
-        <b-card style="width: 15rem; height: 10rem; margin-left: 15px">
-          <b-card-body style="height: 2rem"><b-card-text><b-btn v-on:click="changePass(false)">Editar perfil</b-btn></b-card-text></b-card-body>
+  <b-container>
+    <b-row>
+        <b-card >
+          <b-btn v-on:click="changePass(false)" variant="outline-primary">Editar perfil</b-btn>
           <hr/>
-          <b-card-body style="height: 5rem"><b-card-text><b-btn v-on:click="changePass(true)">Cambiar contraseña</b-btn></b-card-text></b-card-body>
+          <b-btn v-on:click="changePass(true)" variant="outline-primary">Cambiar contraseña</b-btn>
+          <hr/>
+          <uploader></uploader>
         </b-card>
         <ModUserForm v-if="!optionPass" :userData="currentUser"></ModUserForm>
         <ModPassForm v-else></ModPassForm>
     </b-row>
-  </div>
+  </b-container>
 </template>
 
 <script>
   import ModUserForm from "../../components/ModUserForm";
   import ModPassForm from "../../components/ModPassForm";
+  import Uploader from "../../components/Uploader";
   export default {
     name: "EditProfile",
-    components: {ModPassForm, ModUserForm},
+    components: {Uploader, ModPassForm, ModUserForm},
     data() {
       return {
-        currentUser: {
-          location: 'Zaragoza',
-          name: 'Ignacio',
-          lastName: 'Galve Ceamanos',
-          username: 'Galvecea',
-          description: 'Soy ingeniero informático.',
-          mail: 'goingtoraftel@gmail.com'
-        },
         optionPass: false
       }
     },
     methods: {
       changePass: function (option) {
         this.optionPass = option;
+      }
+    },
+    beforeCreate() {
+      this.$store
+        .dispatch("retrieveProfile")
+        .catch(err => console.log(err));
+    },
+    computed: {
+      currentUser() {
+        return this.$store.getters.currentUser;
       }
     }
   }

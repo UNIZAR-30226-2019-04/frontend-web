@@ -4,16 +4,20 @@
       border-variant="none"
       no-body
 
-      style="max-width: 20rem; margin-top: 20px; margin-left: 15px;"
+      style=" margin-top: 20px; margin-left: 15px;"
       :img-src="fotoPerfil"
       img-alt="Foto de perfil"
       img-top
     >
-      <h4 slot="header" style="text-align: center; text-emphasis: black ">{{userInfo.nick}}</h4>
+      <h4 slot="header" style="text-align: center; text-emphasis: black ">{{ userInfo.nick }}</h4>
       <!--<Uploader></Uploader>-->
       <b-card-body>
+        <b-card-title>Nombre y apellido(s)</b-card-title>
+        <b-card-text>{{ userInfo.nombre }} {{ userInfo.apellidos }}</b-card-text>
+      </b-card-body>
+      <b-card-body>
         <b-card-title>Descripción</b-card-title>
-        <b-card-text>{{ description }}</b-card-text>
+        <b-card-text>{{ userInfo.description }}</b-card-text>
       </b-card-body>
 
       <b-list-group flush>
@@ -23,7 +27,9 @@
       </b-list-group>
 
       <b-card-body>
-        <a class="card-link" v-b-modal.modal1>Borrar cuenta</a>
+        <b-btn variant="outline-primary">
+          <a class="card-link" v-b-modal.modal1>Borrar cuenta</a>
+        </b-btn>
         <b-modal id="modal1"
                  title="Borrar cuenta"
                  header-bg-variant="danger"
@@ -34,7 +40,8 @@
           <!--<b-btn class="btn-primary">SI</b-btn>-->
           <!--<b-btn class="btn-danger">NO</b-btn>-->
         </b-modal>
-        <router-link to="EditProfile" class="btn" style="background-color: darkgray">Modificar</router-link>
+        <hr/>
+        <router-link to="EditProfile" class="btn" style="border-color: #20a8d8; color: #20a8d8">Modificar cuenta</router-link>
       </b-card-body>
     </b-card>
   </div>

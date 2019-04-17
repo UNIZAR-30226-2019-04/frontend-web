@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     status: "",
     token: localStorage.getItem("token") || "",
-    public_id: localStorage.getItem("public_id") || "no_user"
+    public_id: localStorage.getItem("public_id") || "no_user",
+    currentUser: {}
   },
   mutations: {
     auth_request(state) {
@@ -27,7 +28,27 @@ export default new Vuex.Store({
     logout(state) {
       state.status = "";
       state.token = "";
-    }
+    },
+    retrieve_request(state) {
+      state.status = "loading";
+    },
+    retrieve_success(state, data) {
+      state.status = "success";
+      state.currentUser = data;
+    },
+    retrieve_error(state) {
+      state.status = "error";
+    },
+    update_request(state) {
+      state.status = "loading";
+    },
+    update_success(state, data) {
+      state.status = "success";
+      state.currentUser = data;
+    },
+    update_error(state) {
+      state.status = "error";
+    },
   },
   actions: {
     login({ commit }, user) {
@@ -52,8 +73,6 @@ export default new Vuex.Store({
               token: resp.data.Authorization,
               public_id: resp.data.public_id,
             });
-
-
 
             // Add the following line:
             // axios.defaults.headers.common["Authorization"] = resp.data.token;
@@ -113,12 +132,56 @@ export default new Vuex.Store({
           resolve(resp);
         });
       });
+    },
+    retrieveProfile({ commit }) {
+      return new Promise( (resolve, reject) => {
+        const user_id = localStorage.getItem("public_id");
+        commit("retrieve_request");
+        axios({
+          url: `${API_BASE}/user/${user_id}`,
+          data: localStorage.getItem("public_id"),
+          method: "GET"
+        })
+          .then( resp => {
+          console.log(resp);
+          localStorage.setItem("currentUser",resp.data);
+          commit("retrieve_success", resp.data);
+          resolve(resp);
+        })
+          .catch( err => {
+          commit("retrieve_error");
+          localStorage.removeItem("currentUser");
+          reject(err);
+        })
+      });
+    },
+    updateProfile({ commit }, user) {
+      return new Promise( (resolve, reject) =>  {
+        const user_id = localStorage.getItem("public_id");
+        commit("update_request");
+        axios({
+          url: `${API_BASE}/user/${user_id}/edit`,
+          data: user,
+          method: "POST"
+        })
+          .then( resp => {
+            console.log(resp);
+            localStorage.setItem("currentUser", user);
+            commit("update_success", user);
+            resolve(resp);
+          })
+          .catch( err => {
+            commit("update_error");
+            reject(err);
+          })
+      });
     }
   },
   getters: {
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
     token: state => state.token,
-    user: state => state.public_id
+    user: state => state.public_id,
+    currentUser: state => state.currentUser
   }
 });
