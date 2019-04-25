@@ -10,9 +10,20 @@
       <!--&gt;-->
       <h4 slot="header" style="text-align: center; text-emphasis: black ">Detalles de la venta</h4>
 
-      <b-card-body>
-        <b-card-title>{{ method.precio }}€</b-card-title>
+      <b-card-body v-if="tipo === 'Compra'">
+        <b-card-title>{{precioFinal}}€</b-card-title>
         <button>COMPRAR AHORA</button>
+      </b-card-body>
+
+      <b-card-body v-else-if="tipo === 'Subasta'">
+
+        <b-card-title>Precio actual: {{precioFinal}}€</b-card-title>
+        <CountdownTimer :end-time="endTim"></CountdownTimer>
+        <!--<b-input :placeholder="Nueva puja"></b-input>-->
+        <b-form>
+          <b-input v-model="precio"></b-input>
+          <button v-on:click="actPrecio()">PUJAR</button>
+        </b-form>
       </b-card-body>
 
       <b-list-group flush>
@@ -31,14 +42,34 @@
 </template>
 
 <script>
+  import CountdownTimer from "../CountdownTimer";
+
   export default {
     name: "ProductPage_sell",
+    components: {CountdownTimer},
     // la funcion que hereda del papi
     props: {
       method: {type: Function},
+      tipo: {type: String}
     },
-    mounted(){
+    data() {
+      return {
+        endTim: {
+          day: 19,
+          month: 3,
+          year: 2019
+        },
+        precio: 1,
+        precioFinal: 500
+      }
+    },
+    mounted() {
       this.method();
+    },
+    methods: {
+      actPrecio: function () {
+        this.precioFinal = this.precio;
+      }
     }
   }
 </script>
