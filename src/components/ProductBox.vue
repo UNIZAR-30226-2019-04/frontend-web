@@ -14,18 +14,18 @@
         <!--v-model="slide"-->
         <!--@sliding-start="onSlideStart"-->
         <!--@sliding-end="onSlideEnd"-->
-        <b-carousel-slide class="carousel-inner" v-for="img in images" :img-src="img.src" :key="img.id">
+        <b-carousel-slide class="carousel-inner" v-for="img in product.images" :img-src="img.src" :key="img.id">
         </b-carousel-slide>
       </b-carousel>
       <br>
       <b-card-title>
-        {{ nombre }}
+        {{ product.nombre }}
       </b-card-title>
       <b-card-text>
-        {{ descripcion }}
+        {{ product.descripcion }}
       </b-card-text>
       <p style="color: #20a8d8; margin-right: 10px;" align="right">
-        <b><h1>{{ precio }}€</h1></b>
+        <b><h1>{{ product.precio }}€</h1></b>
       </p>
 
       <router-link to="ProductPage" class="btn" style="border-color: #20a8d8; color: #20a8d8; margin-bottom: 5px;" align="center">
@@ -42,6 +42,7 @@
   export default {
     name: "ProductBox",
     components: {ShareButton},
+    props: ['product'],
     data() {
       return {
         nombre: "Portátil ASUS nuevo",
