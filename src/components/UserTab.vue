@@ -10,7 +10,7 @@
           <ProductBox style="margin-bottom: 10px;"></ProductBox>
         </b-card-group>
       </b-tab>
-      <b-tab title="Mis Reseñas">
+      <b-tab title="Valoraciones recibidas">
         <UserReview></UserReview>
         <UserReview></UserReview>
         <UserReview></UserReview>
@@ -26,10 +26,7 @@
           <ProductBox style="margin-bottom: 10px;"></ProductBox>
         </b-card-group>
       </b-tab>
-      <b-tab title="Mis valoraciones">
-        <UserReview></UserReview>
-        <UserReview></UserReview>
-        <UserReview></UserReview>
+      <b-tab title="Valoraciones realizadas">
         <UserReview></UserReview>
         <UserReview></UserReview>
       </b-tab>
