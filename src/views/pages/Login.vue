@@ -13,8 +13,11 @@
                     <b-input-group-prepend>
                       <b-input-group-text>@</b-input-group-text>
                     </b-input-group-prepend>
-                    <b-form-input type="email" class="form-control" v-model="email" placeholder="Correo de usuario"
+                    <b-form-input :state="validateEmail" type="email" class="form-control" v-model="email" placeholder="Correo de usuario"
                                   autocomplete/>
+                    <b-form-invalid-feedback id="input-live-feedback2">
+                      El correo introducido no tiene un formato reconocido.
+                    </b-form-invalid-feedback>
                   </b-input-group>
                   <b-input-group class="mb-4">
                     <b-input-group-prepend>
@@ -83,6 +86,15 @@
             .dispatch("login", data)
             .then(() => this.$router.push("/"))
             .catch(err => console.log(err));
+        }
+      }
+    },
+    computed: {
+      validateEmail() {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+          return (true);
+        } else {
+          return (false);
         }
       }
     }
