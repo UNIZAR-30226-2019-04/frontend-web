@@ -30,6 +30,8 @@
     "moment": "^2.24.0",
     "perfect-scrollbar": "^1.4.0",
     "simple-line-icons": "^2.4.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
     "v-rating": "^1.1.2",
     "vue": "^2.5.22",
     "vue-chartjs": "^3.4.0",
@@ -38,6 +40,7 @@
     "vue-router": "^3.0.2",
     "vue-slide-bar": "^1.1.9",
     "vue-social-sharing": "^2.4.2",
+    "vuejs-datepicker": "^1.5.4",
     "vuex": "^3.1.0"
   },
   "devDependencies": {
