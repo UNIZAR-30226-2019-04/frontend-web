@@ -26,6 +26,13 @@
           <ProductBox style="margin-bottom: 10px;"></ProductBox>
         </b-card-group>
       </b-tab>
+      <b-tab title="Mis valoraciones">
+        <UserReview></UserReview>
+        <UserReview></UserReview>
+        <UserReview></UserReview>
+        <UserReview></UserReview>
+        <UserReview></UserReview>
+      </b-tab>
     </b-tabs>
   </div>
 </template>
