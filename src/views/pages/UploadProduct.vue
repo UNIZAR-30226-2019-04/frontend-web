@@ -55,7 +55,9 @@
           <datepicker @closed="fechaSeleccionada"
                       v-model="select"
                       name="fecha"
-                      calendar-button></datepicker>
+                      :open-date="today"
+                      calendar-button
+                      calendar-button-icon="icon-calendar"></datepicker>
           <!--class-calendar="bootstrap-datepicker3"-->
           <span v-if="err" style="color: red;">La fecha elegida debe ser posterior a la fecha actual</span>
         </b-input-group>
@@ -122,6 +124,11 @@
             this.endTime.year = this.select.getFullYear();
           }
         }
+      },
+      computed: {
+          today(){
+            return new Date();
+          }
       }
     }
 </script>
