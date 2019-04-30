@@ -2,7 +2,6 @@
   <div>
     <b-row>
       <b-col cols="2">
-        <p>Tipo de orden: {{order}}</p>
         <filters @selected="newTag"></filters>
       </b-col>
       <b-col>
@@ -21,21 +20,23 @@
         </b-row>
         <b-tab title="Productos encontrados" active style="margin-top: 30px; margin-left: 30px; margin-right: 30px">
           <p class="mt-3">Current Page: {{ pagina }}</p>
-          <!--<b-table-->
-          <!--id="buscados"-->
-          <!--:per-page="porPagina"-->
-          <!--:current-page="pagina"-->
-          <!--small-->
-          <!--&gt;</b-table>-->
           <b-card-group columns=true>
-            <ProductBox v-for="(product, index) in products" :key="index" v-if="index<(porPagina*pagina) && index>=(porPagina*pagina-porPagina)" :product="product" style="margin-bottom: 10px;"></ProductBox>
+            <ProductBox v-for="(product, index) in products" :key="index"
+                        v-if="index<(porPagina*pagina) && index>=(porPagina*pagina-porPagina)" :product="product"
+                        style="margin-bottom: 10px;"></ProductBox>
           </b-card-group>
           <b-pagination
+            style="align-self: center"
             v-model="pagina"
             :total-rows="elementos"
             :per-page="porPagina"
             aria-controls="buscados"
           ></b-pagination>
+          <b-button-group style="margin-bottom: 30px; align-self: center">
+            <b-button v-on:click="elemPerPage(25)" :variant="elegido(25) ? estilo : estilo2">25</b-button>
+            <b-button v-on:click="elemPerPage(50)" :variant="elegido(50) ? estilo: estilo2">50</b-button>
+            <b-button v-on:click="elemPerPage(100)" :variant="elegido(100) ? estilo: estilo2">100</b-button>
+          </b-button-group>
         </b-tab>
       </b-col>
     </b-row>
@@ -52,9 +53,11 @@
     data() {
       return {
         tags: [],
+        estilo: 'success',
+        estilo2: 'white',
         value: '',
-        order: '',
-        porPagina: 2,
+        order: null,
+        porPagina: 25,
         pagina: 1,
         options: [
           {value: null, text: 'Búsqueda'},
@@ -139,9 +142,14 @@
       showOrder: function (value) {
         console.log(value);
         this.order = value;
+      },
+      elemPerPage: function (num) {
+        this.porPagina = num;
+      },
+      elegido: function (num) {
+        return (num === this.porPagina);
       }
-    }
-    ,
+    },
     computed: {
       elementos() {
         return this.products.length;

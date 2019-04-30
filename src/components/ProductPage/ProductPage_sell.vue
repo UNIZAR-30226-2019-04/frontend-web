@@ -21,7 +21,7 @@
         <CountdownTimer :end-time="endTim"></CountdownTimer>
         <!--<b-input :placeholder="Nueva puja"></b-input>-->
         <b-form>
-          <b-input v-model="precio"></b-input>
+          <b-input type="number" v-model="precio"></b-input>
           <button v-on:click="actPrecio()">PUJAR</button>
         </b-form>
       </b-card-body>
