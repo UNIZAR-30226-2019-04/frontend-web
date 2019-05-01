@@ -69,6 +69,7 @@
         products: [
           {
             nombre: "Portátil ASUS nuevo",
+            like: false,
             descripcion: "Producto a la venta, recién estrenado y en muy buen estado, todavía en garantía, solamente se vende porque me han regalado otro.",
             precio: 25,
             images: [{

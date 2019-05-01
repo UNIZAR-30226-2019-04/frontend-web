@@ -1,5 +1,6 @@
 <template>
   <div>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <b-card border-variant="light" style="max-width: 26rem;">
       <b-carousel
         id="carousel1"
@@ -32,6 +33,7 @@
         Ver Producto
       </router-link>
       <ShareButton></ShareButton>
+      <b-btn v-on:click="liked" style="background-color: transparent"><i :class="isLiked() ? likeIcon : unlikeIcon" :style="isLiked() ? likeColor : unlikeColor"></i></b-btn>
     </b-card>
   </div>
 </template>
@@ -45,9 +47,14 @@
     props: ['product'],
     data() {
       return {
+        likeColor: 'color: #ff6b6b;',
+        unlikeColor: 'color: #000000;',
+        likeIcon: 'fas fa-heart',
+        unlikeIcon: 'far fa-heart',
         nombre: "Portátil ASUS nuevo",
         descripcion: "Producto a la venta, recién estrenado y en muy buen estado, todavía en garantía, solamente se vende porque me han regalado otro.",
         precio: 25,
+        like: false,
         images: [{
           src: "https://picsum.photos/1024/480/?image=52",
           id: 1
@@ -62,6 +69,14 @@
           },]
       }
     },
+    methods: {
+      liked: function () {
+        this.product.like = !this.product.like;
+      },
+      isLiked: function () {
+        return this.product.like;
+      }
+    }
   }
 </script>
 
