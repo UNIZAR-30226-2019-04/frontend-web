@@ -29,7 +29,7 @@
       </b-card-header>
       <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
         <b-card-body>
-          <radio-group :options="optionsCat"></radio-group>
+          <radio-group @nuevo-tag="resend" :options="cat.data"></radio-group>
         </b-card-body>
       </b-collapse>
     </b-card>
@@ -40,6 +40,7 @@
   import VueSlideBar from 'vue-slide-bar'
   import StarRating from "./StarRating";
   import RadioGroup from "./RadioGroup";
+  import axios from "axios";
 
   export default {
     name: "Filters",
@@ -47,11 +48,12 @@
     data() {
       return {
         text: 'Esto es un mensaje',
-        optionsCat: [{text: 'Option 1 ', value: '1'},
-          {text: 'Option 2 ', value: '2'},
-          {text: 'Option 3 ', value: '3'},
-          {text: 'Option 4 ', value: '4'},
-          {text: 'Option 5 ', value: '5'},],
+        optionsCat: [{nombre: 'Option 1 '},
+          {nombre: 'Option 2 '},
+          {nombre: 'Option 3 '},
+          {nombre: 'Option 4 '},
+          {nombre: 'Option 5 '},],
+        cat: [],
         value: 100,
         valVendedor: 1
       }
@@ -59,7 +61,18 @@
     methods: {
       minVal :function (newVal) {
         this.valVendedor = newVal;
+        let value = 'Val. '+newVal;
+        this.$emit('selected', value);
+      },
+      resend : function (val) {
+        console.log(val);
+        this.$emit('selected', val);
       }
+    },
+    mounted () {
+      axios
+        .get('http://155.210.47.51:5000/categoria/')
+        .then(response => (this.cat = response.data))
     }
   }
 </script>

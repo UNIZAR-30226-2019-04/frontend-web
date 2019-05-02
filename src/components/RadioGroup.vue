@@ -6,7 +6,11 @@
     :label-cols="3"
     vertical>
     <b-form-checkbox-group stacked id="basicCheckboxes" name="Checkboxes" :plain="true">
-      <b-form-checkbox v-if="show || option.value < 4" v-for="option in options" :value="option.value" :key="option.value" >{{option.text}}</b-form-checkbox>
+      <b-form-checkbox v-if="show || index < 4" v-for="(option,index) in options"
+                       :value="index"
+                       :key="index"
+                        v-on:change="catSel(option.nombre)"
+                        >{{option.nombre}}</b-form-checkbox>
     </b-form-checkbox-group>
   </b-form-group>
     <b-button v-if="show" class="btn-link" v-on:click="showMore()">Mostrar menos</b-button>
@@ -29,7 +33,11 @@
       methods: {
          showMore :function () {
            this.show = !this.show;
-         }
+         },
+        catSel : function (option) {
+           console.log(option);
+           this.$emit('nuevo-tag', option);
+        }
       }
     }
 </script>

@@ -1,5 +1,6 @@
 <template>
   <div class="flex-row align-items-center">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <div class="container">
       <b-row class="justify-content-center" style="margin-top: 20%">
         <b-col md="8">
@@ -13,15 +14,21 @@
                     <b-input-group-prepend>
                       <b-input-group-text>@</b-input-group-text>
                     </b-input-group-prepend>
-                    <b-form-input type="email" class="form-control" v-model="email" placeholder="Correo de usuario"
+                    <b-form-input :state="validateEmail" type="email" class="form-control" v-model="email" placeholder="Correo de usuario"
                                   autocomplete/>
+                    <b-form-invalid-feedback id="input-live-feedback2">
+                      El correo introducido no tiene un formato reconocido.
+                    </b-form-invalid-feedback>
                   </b-input-group>
                   <b-input-group class="mb-4">
                     <b-input-group-prepend>
                       <b-input-group-text><i class="icon-lock"></i></b-input-group-text>
                     </b-input-group-prepend>
-                    <b-form-input type="password" class="form-control" v-model="password" placeholder="Contraseña"
+                    <b-form-input :type="tipo" class="form-control" v-model="password" placeholder="Contraseña"
                                   autocomplete/>
+                    <b-input-group-prepend>
+                      <b-input-group-text v-on:click="showHidePass"><i :class="icono"></i></b-input-group-text>
+                    </b-input-group-prepend>
                   </b-input-group>
                   <a style="color: red;">{{ error_output }}</a>
                   <b-row>
@@ -59,7 +66,9 @@
       return {
         email: "",
         password: "",
-        error_output: ""
+        error_output: "",
+        tipo: 'password',
+        icono: 'far fa-eye-slash'
       };
     },
     methods: {
@@ -69,6 +78,15 @@
         }
         else {
           return (false);
+        }
+      },
+      showHidePass: function(){
+        if(this.tipo === "password"){
+          this.tipo = 'text';
+          this.icono = 'far fa-eye';
+        }else{
+          this.tipo = 'password';
+          this.icono = 'far fa-eye-slash';
         }
       },
       register: function () {
@@ -83,6 +101,15 @@
             .dispatch("login", data)
             .then(() => this.$router.push("/"))
             .catch(err => console.log(err));
+        }
+      }
+    },
+    computed: {
+      validateEmail() {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+          return (true);
+        } else {
+          return (false);
         }
       }
     }
