@@ -13,27 +13,28 @@
     </v-toolbar>
 
     <v-card>
-      <v-list subheader>
+      <v-list expand="true">
         <v-list-tile
-          v-for="(chat, index) in conversaciones"
-          :key="index"
+          style="align-items: end"
           avatar
+          v-for="(chat, index) in conversaciones" :key="index"
         >
+
           <v-list-tile-avatar v-if="!msjMio(chat.user)">
-            <img :src="msjMio(chat.user) ? avatar1 : avatar2">
+            <img :src="msjMio(chat.user) ? avatar1 : avatar2" alt="Avatar del usuario">
           </v-list-tile-avatar>
 
-          <!--<p :class=" msjMio(chat.user) ? 'message-in' : 'message-out'" :style="msjMio(chat.user) ? 'alingment-right' : 'alingment-left'">-->
-            <!--{{chat.text}}-->
-          <!--</p>-->
 
-          <v-list-tile-content :class=" msjMio(chat.user) ? 'message-in' : 'message-out'" >
-            <v-list-tile-title v-html="chat.text"></v-list-tile-title>
-            <v-list-tile-sub-title v-html="chat.hora"></v-list-tile-sub-title>
-          </v-list-tile-content>
+          <v-card class="message-in" :color="msjMio(chat.user) ? 'blue' : 'green'">
+            {{chat.text}}
+            <!--{{chat.text}}-->
+            <!--{{chat.text}}-->
+            <!--<span class="subheading mr-sm-n1">{{chat.hora}}</span>-->
+          </v-card>
+
 
           <v-list-tile-avatar v-if="msjMio(chat.user)">
-            <img :src="msjMio(chat.user) ? avatar1 : avatar2">
+            <img :src="msjMio(chat.user) ? avatar1 : avatar2" alt="Avatar del usuario">
           </v-list-tile-avatar>
         </v-list-tile>
       </v-list>
@@ -73,23 +74,23 @@
             user: 'R',
             text: 'Mensaje de prueba 1',
             hora: '11:22'
-          },{
+          }, {
             user: 'R',
             text: 'Mensaje de prueba 2',
             hora: '11:22'
-          },{
+          }, {
             user: 'L',
             text: 'Mensaje de prueba 3',
             hora: '11:22'
-          },{
+          }, {
             user: 'R',
             text: 'Mensaje de prueba 4',
             hora: '11:22'
-          },{
+          }, {
             user: 'L',
             text: 'Mensaje de prueba 5',
             hora: '11:22'
-          },{
+          }, {
             user: 'L',
             text: 'Mensaje de prueba 6',
             hora: '11:22'
@@ -98,15 +99,15 @@
       }
     },
     methods: {
-      msjMio(Usuario){
+      msjMio(Usuario) {
         return (Usuario === 'R');
       },
-      nuevoMsj(){
+      nuevoMsj() {
         let d = new Date();
         let a = {
           user: 'R',
           text: this.msj,
-          hora: d.getHours()+":"+d.getMinutes()
+          hora: d.getHours() + ":" + d.getMinutes()
         };
         this.conversaciones.push(a);
         this.msj = '';
@@ -125,6 +126,7 @@
     background: #407FFF;
     color: white;
   }
+
   .message-in {
     width: 45%;
     border-radius: 10px;
@@ -134,4 +136,74 @@
     background: #F1F0F0;
     color: black;
   }
+
+  .msg_cotainer {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+    border-radius: 25px;
+    background-color: #82ccdd;
+    padding: 10px;
+    position: relative;
+  }
+
+  .msg_cotainer_send {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+    border-radius: 25px;
+    background-color: #78e08f;
+    padding: 10px;
+    position: relative;
+  }
+
+  .msg_time_send {
+    position: absolute;
+    right: 0;
+    bottom: -15px;
+    color: rgba(115, 109, 108, 0.91);
+    font-size: 10px;
+  }
+
+  .msg_time {
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    color: rgba(115, 109, 108, 0.91);
+    font-size: 10px;
+  }
+
+  .message {
+    margin-bottom: 3px;
+  }
+
+  .message.own {
+    text-align: right;
+  }
+
+  .message.own .content {
+    background-color: lightskyblue;
+  }
+
+  .chat-container .username {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .chat-container .content {
+    padding: 8px;
+    background-color: lightgreen;
+    border-radius: 10px;
+    display: inline-block;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    max-width: 50%;
+    word-wrap: break-word;
+  }
+
+  @media (max-width: 480px) {
+    .chat-container .content {
+      max-width: 60%;
+    }
+  }
+
 </style>
