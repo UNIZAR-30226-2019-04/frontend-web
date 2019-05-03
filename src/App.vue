@@ -5,11 +5,13 @@
     <b-col cols="auto" sm="4">
       <!--<filters></filters>-->
     </b-col>
+    <Footer class="footer-fixed"></Footer>
   </div>
 </template>
 
 <script>
   import Header from "./components/Header";
+  import Footer from "./components/Footer";
   import Hello from "./views/Hello";
   import DefaultHeaderDropdownAccnt from "./containers/DefaultHeaderDropdownAccnt.vue";
   import Navbars from "./views/base/Navbars";
@@ -17,7 +19,7 @@
 
   export default {
     name: 'app',
-    components: {Filters, Hello, Header, DefaultHeaderDropdownAccnt, Navbars},
+    components: {Filters, Hello, Header, DefaultHeaderDropdownAccnt, Navbars, Footer},
     data() {
       return {
         card: 'One piece is real!'
