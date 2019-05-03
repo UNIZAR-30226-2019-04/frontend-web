@@ -61,7 +61,7 @@
     display: flex;
     flex-direction: column;
     /*height: fit-content; !* Hace que el header no desaparezca cuando se hace scroll vertical. *!*/
-    height: 105%; /* Hace que el header no desaparezca cuando se hace scroll vertical. */
+    /*height: 105%; !* Hace que el header no desaparezca cuando se hace scroll vertical. *!*/
   }
 
   html, body {
@@ -71,7 +71,6 @@
   Footer {
     /*bottom: 0%;*/
     width: 100%;
-    height: 2.5rem; /* Footer height */
   }
 
   main {
@@ -84,7 +83,7 @@
     height: 56px;
     padding: 0 16px 0 24px;
     background-color: #fffdf5;
-    color: #ffffff;
+    color: #123123;
   }
 
   header span {

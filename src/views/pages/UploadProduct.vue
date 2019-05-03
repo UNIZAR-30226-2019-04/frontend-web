@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--<b-card title="Subir Producto" style="alignment: center; margin-right: 50px; margin-left: 50px;">-->
-    <b-card title="Subir Producto" style="alignment: center; margin: auto; width: 75%;">
+    <b-card title="Subir Producto" style="alignment: center; margin: auto; width: 75%; margin-top: 6%; margin-bottom: 10%">
       <b-form>
         <!--<h1>Editar Perfil</h1>-->
         <b-input-group class="mb-3">
@@ -54,6 +54,7 @@
         <b-input-group v-if="type === 'Subasta'" class="mb-3">
           <!--<p>Fecha fin subasta: {{select}}</p>-->
           <datepicker @closed="fechaSeleccionada"
+                      :bootstrap-styling="true"
                       v-model="select"
                       name="fecha"
                       :open-date="today"
