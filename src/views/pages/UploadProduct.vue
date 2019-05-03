@@ -1,6 +1,7 @@
 <template>
   <div>
-    <b-card title="Subir Producto" style="width: 45rem; margin-left: 30px">
+    <!--<b-card title="Subir Producto" style="alignment: center; margin-right: 50px; margin-left: 50px;">-->
+    <b-card title="Subir Producto" style="alignment: center; margin: auto; width: 75%">
       <b-form>
         <!--<h1>Editar Perfil</h1>-->
         <b-input-group class="mb-3">
@@ -66,8 +67,8 @@
           <b-form-file
             v-model="file"
             :state="Boolean(file)"
-            placeholder="Choose a file..."
-            drop-placeholder="Drop file here..."
+            placeholder="Seleccione archivo..."
+            drop-placeholder="Arrastre archivo aquí..."
             accept=".jpg, .png"
             multiple
           ></b-form-file>
