@@ -10,14 +10,17 @@ import App from './App'
 import router from './router'
 import store from "./store";
 import Axios from "axios";
+import Vuetify from 'vuetify';
 
 Vue.prototype.$http = Axios;
+import 'vuetify/dist/vuetify.min.css'
 
 
 // todo
 // cssVars()
 
 Vue.use(BootstrapVue)
+Vue.use(Vuetify)
 
 const token = localStorage.getItem("user-token");
 if (token) {

@@ -1,10 +1,10 @@
 <template>
   <div>
     <b-row>
-      <b-col cols="2">
+      <b-col cols="2" style="margin-left: 15px">
         <filters @selected="newTag"></filters>
       </b-col>
-      <b-col>
+      <b-col style="margin-right: 0px">
         <b-row>
           <b-col cols="10">
             <b-btn v-for="(tag, index) in tags" style="margin-right: 4px" :key="index" v-on:click="deleteTag(index)">
