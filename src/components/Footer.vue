@@ -1,14 +1,10 @@
 <template>
-  <div>
+  <div id="Footer">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <v-footer
       dark
-      fixed="false"
-      app="true"
-      inset="true"
       height="auto"
-      color="red"
     >
       <v-card
         class="flex"
@@ -55,5 +51,7 @@
 </script>
 
 <style scoped>
-
+  Footer {
+    margin-top: 30px;
+  }
 </style>

@@ -6,9 +6,7 @@
     </head>
     <Header></Header>
     <router-view></router-view>
-    <b-col cols="auto" sm="4">
-      <!--<filters></filters>-->
-    </b-col>
+
     <div id="Footer">
       <Footer></Footer>
     </div>
