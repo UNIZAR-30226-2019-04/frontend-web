@@ -1,10 +1,14 @@
 <template>
   <div id="app">
+    <head>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+    </head>
     <Header></Header>
     <router-view></router-view>
     <b-col cols="auto" sm="4">
       <!--<filters></filters>-->
     </b-col>
+    <Footer id="footer"></Footer>
   </div>
 </template>
 
@@ -14,10 +18,11 @@
   import DefaultHeaderDropdownAccnt from "./containers/DefaultHeaderDropdownAccnt.vue";
   import Navbars from "./views/base/Navbars";
   import Filters from "./components/Filters";
+  import Footer from "./components/Footer";
 
   export default {
     name: 'app',
-    components: {Filters, Hello, Header, DefaultHeaderDropdownAccnt, Navbars},
+    components: {Footer, Filters, Hello, Header, DefaultHeaderDropdownAccnt, Navbars},
     data() {
       return {
         card: 'One piece is real!'
@@ -50,6 +55,23 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  footer {
+    position: fixed;
+    margin-top: -50px;
+    /*bottom: 0%;*/
+    width: 100%;
+    height: 1rem; /* Footer height */
   }
 
   main {

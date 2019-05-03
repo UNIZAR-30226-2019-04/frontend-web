@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--<b-card title="Subir Producto" style="alignment: center; margin-right: 50px; margin-left: 50px;">-->
-    <b-card title="Subir Producto" style="alignment: center; margin: auto; width: 75%">
+    <b-card title="Subir Producto" style="alignment: center; margin: auto; width: 75%;">
       <b-form>
         <!--<h1>Editar Perfil</h1>-->
         <b-input-group class="mb-3">
