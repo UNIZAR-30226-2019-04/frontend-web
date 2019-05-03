@@ -1,14 +1,17 @@
 <template>
   <div id="app">
     <head>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+      <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'
+            rel="stylesheet">
     </head>
     <Header></Header>
     <router-view></router-view>
     <b-col cols="auto" sm="4">
       <!--<filters></filters>-->
     </b-col>
-    <Footer id="footer"></Footer>
+    <div id="Footer">
+      <Footer></Footer>
+    </div>
   </div>
 </template>
 
@@ -59,19 +62,18 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 70%;
+    /*height: fit-content; !* Hace que el header no desaparezca cuando se hace scroll vertical. *!*/
+    height: 105%; /* Hace que el header no desaparezca cuando se hace scroll vertical. */
   }
 
   html, body {
     height: 100%;
   }
 
-  footer {
-    position: fixed;
-    margin-top: -50px;
+  Footer {
     /*bottom: 0%;*/
     width: 100%;
-    height: 1rem; /* Footer height */
+    height: 2.5rem; /* Footer height */
   }
 
   main {
