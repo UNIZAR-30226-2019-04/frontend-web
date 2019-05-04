@@ -10,6 +10,7 @@ import App from './App'
 import router from './router'
 import store from "./store";
 import Axios from "axios";
+
 import Vuetify from 'vuetify';
 
 Vue.prototype.$http = Axios;

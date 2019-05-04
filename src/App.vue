@@ -15,6 +15,7 @@
 
 <script>
   import Header from "./components/Header";
+  import Footer from "./components/Footer";
   import Hello from "./views/Hello";
   import DefaultHeaderDropdownAccnt from "./containers/DefaultHeaderDropdownAccnt.vue";
   import Navbars from "./views/base/Navbars";
