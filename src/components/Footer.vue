@@ -1,12 +1,10 @@
 <template>
-  <div>
+  <div id="Footer">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <v-footer
       dark
-      inset="true"
       height="auto"
-      color="red"
     >
       <v-card
         class="flex"
@@ -26,6 +24,7 @@
             <v-icon size="24px">{{ icon }}</v-icon>
           </v-btn>
         </v-card-title>
+
         <v-card-actions class="grey darken-3 justify-center">
           &copy;2019 — <strong>Telocam</strong>
         </v-card-actions>
@@ -33,6 +32,7 @@
     </v-footer>
   </div>
 </template>
+
 <script>
   export default {
     name: "Footer",
@@ -49,5 +49,7 @@
 </script>
 
 <style scoped>
-
+  Footer {
+    margin-top: 30px;
+  }
 </style>

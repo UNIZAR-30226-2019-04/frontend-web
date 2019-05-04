@@ -1,11 +1,15 @@
 <template>
   <div id="app">
+    <head>
+      <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'
+            rel="stylesheet">
+    </head>
     <Header></Header>
     <router-view></router-view>
-    <b-col cols="auto" sm="4">
-      <!--<filters></filters>-->
-    </b-col>
-    <Footer class="footer-fixed"></Footer>
+
+    <div id="Footer">
+      <Footer></Footer>
+    </div>
   </div>
 </template>
 
@@ -16,10 +20,11 @@
   import DefaultHeaderDropdownAccnt from "./containers/DefaultHeaderDropdownAccnt.vue";
   import Navbars from "./views/base/Navbars";
   import Filters from "./components/Filters";
+  import Footer from "./components/Footer";
 
   export default {
     name: 'app',
-    components: {Filters, Hello, Header, DefaultHeaderDropdownAccnt, Navbars, Footer},
+    components: {Footer, Filters, Hello, Header, DefaultHeaderDropdownAccnt, Navbars},
     data() {
       return {
         card: 'One piece is real!'
@@ -52,6 +57,21 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /*height: fit-content; !* Hace que el header no desaparezca cuando se hace scroll vertical. *!*/
+    /*height: 105%; !* Hace que el header no desaparezca cuando se hace scroll vertical. *!*/
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  Footer {
+    /*bottom: 0%;*/
+    width: 100%;
   }
 
   main {
@@ -64,7 +84,7 @@
     height: 56px;
     padding: 0 16px 0 24px;
     background-color: #fffdf5;
-    color: #ffffff;
+    color: #123123;
   }
 
   header span {
