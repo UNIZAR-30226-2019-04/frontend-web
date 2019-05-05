@@ -20,7 +20,6 @@
   import DefaultHeaderDropdownAccnt from "./containers/DefaultHeaderDropdownAccnt.vue";
   import Navbars from "./views/base/Navbars";
   import Filters from "./components/Filters";
-  import Footer from "./components/Footer";
 
   export default {
     name: 'app',
