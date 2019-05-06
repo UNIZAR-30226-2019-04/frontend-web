@@ -28,6 +28,7 @@ export default new Vuex.Store({
     logout(state) {
       state.status = "";
       state.token = "";
+      // state.public_id = "no_user";
     },
     retrieve_request(state) {
       state.status = "loading";

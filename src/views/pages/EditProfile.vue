@@ -4,7 +4,7 @@
         <b-card >
           <b-btn v-on:click="changePass(false)" variant="outline-primary">Editar perfil</b-btn>
           <hr/>
-          <b-btn v-on:click="changePass(true)" variant="outline-primary">Cambiar contraseña</b-btn>
+          <b-btn v-on:click="changePass(false)" variant="outline-primary">Cambiar contraseña</b-btn>
           <hr/>
           <uploader></uploader>
         </b-card>
