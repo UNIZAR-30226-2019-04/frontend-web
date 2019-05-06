@@ -80,13 +80,15 @@
 
 <style scoped>
   .header {
-    background: #333;
-    color: #fff;
+    /*background: #333;*/
+    background: #4DBD74;
+    /*color: #fff;*/
+    color: #4DBD74;
     text-align: center;
     padding: 10px;
   }
   .header a {
-    color: #fff;
+    color: #4DBD74;
     padding-right: 5px;
     text-decoration: none;
   }

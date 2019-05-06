@@ -15,7 +15,7 @@
           <b-input-group-prepend>
             <b-input-group-text><i class="icon-user"></i></b-input-group-text>
           </b-input-group-prepend>
-          <b-form-input type="text" class="form-control" v-model="description" placeholder="Descripción del producto"/>
+          <b-form-textarea type="text" class="form-control" v-model="description" placeholder="Descripción del producto"/>
         </b-input-group>
 
         <b-input-group class="mb-3">
@@ -41,7 +41,7 @@
           <b-input-group-prepend>
             <b-input-group-text><i class="icon-bag"></i></b-input-group-text>
           </b-input-group-prepend>
-          <b-form-input class="text" v-model="descriptionT" placeholder="Descripción del objetos de interes buscados"/>
+          <b-form-textarea class="text" v-model="descriptionT" placeholder="Descripción del objetos de interes buscados"/>
         </b-input-group>
 
         <b-input-group v-if="type === 'Subasta'" class="mb-3">

@@ -50,6 +50,6 @@
 
 <style scoped>
   Footer {
-    margin-top: 30px;
+    margin-top: 10rem;
   }
 </style>
