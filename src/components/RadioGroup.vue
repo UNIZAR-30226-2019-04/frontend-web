@@ -13,8 +13,10 @@
                         >{{option.nombre}}</b-form-checkbox>
     </b-form-checkbox-group>
   </b-form-group>
-    <b-button v-if="show" class="btn-link" v-on:click="showMore()">Mostrar menos</b-button>
-    <b-button v-else class="btn-link" v-on:click="showMore()">Mostrar más</b-button>
+    <b-button v-if="show" class="btn-link" v-on:click="showMore()" style="font-size: 0.9rem; text-decoration: none; background-color: #f0f3f5; color:black">Mostrar menos</b-button>
+    <!--<b-button v-if="show" class="btn-link" v-on:click="showMore()">Mostrar menos</b-button>-->
+    <b-button v-else class="btn-link" v-on:click="showMore()" style="font-size: 0.9rem; text-decoration: none; background-color: #f0f3f5; color:black ">Mostrar más</b-button>
+    <!--<b-button v-else class="btn-link" v-on:click="showMore()">Mostrar más</b-button>-->
 
   </div>
 </template>

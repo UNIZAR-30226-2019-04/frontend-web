@@ -4,6 +4,7 @@
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <v-footer
       dark
+      color="#20a8d8"
       height="auto"
     >
       <v-card
@@ -12,6 +13,7 @@
         tile
       >
         <v-card-title class="teal">
+        <!--<v-card-title style="color: #20a8d8">-->
           <strong class="subheading">Get connected with us on social networks!</strong>
           <v-spacer></v-spacer>
           <v-btn

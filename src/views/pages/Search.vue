@@ -1,20 +1,20 @@
 <template>
   <div>
     <b-row>
-      <b-col cols="3" style=" margin-left: 15px">
+      <b-col cols="3" style=" margin-left: 15px;">
         <filters @selected="newTag"></filters>
       </b-col>
       <b-col style="margin-right: 0px">
         <b-row>
           <b-col cols="8">
-            <b-btn v-for="(tag, index) in tags" style="margin-right: 4px" :key="index" v-on:click="deleteTag(index)">
+            <b-btn v-for="(tag, index) in tags" style="margin-right: 4px; font-size: 0.9rem" :key="index" v-on:click="deleteTag(index)">
               {{tag.tag}}
             </b-btn>
           </b-col>
           <b-col cols="4">
             <div
               style="margin-right: 50px; alignment: right">
-              <b-form-select v-model="order" :options="options" size="md" style="font-size: 1rem" class="mt-3"></b-form-select>
+              <b-form-select v-model="order" :options="options" size="md" style="font-size: 1rem;" class="mt-3"></b-form-select>
             </div>
           </b-col>
         </b-row>
