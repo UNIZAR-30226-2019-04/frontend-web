@@ -72,11 +72,10 @@
       };
     },
     methods: {
-      validateEmail: function (mail) {
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+      finalValidation: function () {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
           return (true);
-        }
-        else {
+        } else {
           return (false);
         }
       },
@@ -94,7 +93,7 @@
           "email": this.email,
           "password": this.password
         };
-        if (!this.validateEmail(this.email)) {
+        if (!this.finalValidation()) {
           this.error_output = "El campo email es incorrecto."
         } else {
           this.$store
