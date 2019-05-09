@@ -19,7 +19,7 @@
           </b-col>
         </b-row>
         <b-tab title="Productos encontrados" active style="margin-top: 30px; margin-left: 30px; margin-right: 30px">
-          <p class="mt-3">Current Page: {{ pagina }}</p>
+          <p class="mt-3">Página {{ pagina }} de {{ (elementos/porPagina + 1).toFixed(0) }}</p>
           <b-card-group columns=true>
             <ProductBox v-for="(product, index) in products" :key="index"
                         v-if="index<(porPagina*pagina) && index>=(porPagina*pagina-porPagina)" :product="product"

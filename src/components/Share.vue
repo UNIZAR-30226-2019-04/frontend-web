@@ -16,16 +16,16 @@
           <i class="fab fa-twitter"></i>
         </b-button>
       </network>
-      <network network="linkedin" style="margin-right: 5px;">
-        <b-button variant="linkedin icon">
-          <i class="fab fa-linkedin"></i>
-        </b-button>
-      </network>
-      <network network="vk" style="margin-right: 5px;">
-        <b-button variant="vk icon">
-          <i class="fab fa-vk"></i>
-        </b-button>
-      </network>
+      <!--<network network="linkedin" style="margin-right: 5px;">-->
+        <!--<b-button variant="linkedin icon">-->
+          <!--<i class="fab fa-linkedin"></i>-->
+        <!--</b-button>-->
+      <!--</network>-->
+      <!--<network network="vk" style="margin-right: 5px;">-->
+        <!--<b-button variant="vk icon">-->
+          <!--<i class="fab fa-vk"></i>-->
+        <!--</b-button>-->
+      <!--</network>-->
     </div>
   </social-sharing>
 </template>

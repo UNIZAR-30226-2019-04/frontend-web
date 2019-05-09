@@ -14,7 +14,7 @@
 
       <b-navbar-nav>
         <b-nav-item v-if="!isLogged" style="outline-color: green">
-          <router-link to="LogIn">Acceder</router-link>
+          <router-link to="LogIn" style="font-size: 1.3rem; color: white">Acceder</router-link>
         </b-nav-item>
         <!--<b-nav-item v-if="!isLogged" style="outline-color: green">-->
         <!--<router-link to="LogIn">Log In</router-link>-->
@@ -23,7 +23,7 @@
         <!--<router-link to="Sign">Sing Up</router-link>-->
         <!--</b-nav-item>-->
         <b-nav-item>
-          <router-link to="Search" style="font-size: 1.2rem; color: white">Búsqueda</router-link>
+          <router-link to="Search" style="font-size: 1.3rem; color: white">Búsqueda</router-link>
         </b-nav-item>
       </b-navbar-nav>
 
