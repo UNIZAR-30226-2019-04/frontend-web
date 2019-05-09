@@ -9,6 +9,7 @@ import Search from '../views/pages/Search'
 import EditProfile from "../views/pages/EditProfile";
 import ProductPage from '@/components/ProductPage/ProductPage'
 import UploadProduct from "../views/pages/UploadProduct"; // Ruta absoluta. Habrá que cambiar las rutas de arriba que son relativas
+import PruebaProducto from "../views/pages/PruebaProducto";
 
 // Containers
 const DefaultContainer = () => import('@/containers/DefaultContainer')
@@ -350,6 +351,11 @@ export default new Router({
       path: '/ProductPage',
       name: 'ProductPage',
       component: ProductPage
+    },
+    {
+      path: '/PruebaProducto',
+      name: 'PruebaProducto',
+      component: PruebaProducto
     },
     {
       path: '/UploadProduct',

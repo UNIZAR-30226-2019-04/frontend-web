@@ -1,60 +1,64 @@
 <template>
-  <div
-    id="e3"
-    style="max-width: 400px; margin: auto;"
-    class="grey lighten-3"
-  >
-    <v-toolbar
-      color="pink"
-      dark
+  <div>
+    <router-link to="PruebaProducto">Ir a integracion de producto</router-link>
+    <div
+      id="e3"
+      style="max-width: 400px; margin: auto;"
+      class="grey lighten-3"
     >
-      <v-toolbar-title>Chat</v-toolbar-title>
-      <v-spacer></v-spacer>
-    </v-toolbar>
 
-    <v-card>
-      <v-list expand="true">
-        <v-list-tile
-          style="align-items: end"
-          avatar
-          v-for="(chat, index) in conversaciones" :key="index"
-        >
-
-          <v-list-tile-avatar v-if="!msjMio(chat.user)">
-            <img :src="msjMio(chat.user) ? avatar1 : avatar2" alt="Avatar del usuario">
-          </v-list-tile-avatar>
-
-
-          <v-card class="message-in" :color="msjMio(chat.user) ? 'blue' : 'green'">
-            {{chat.text}}
-            <!--{{chat.text}}-->
-            <!--{{chat.text}}-->
-            <!--<span class="subheading mr-sm-n1">{{chat.hora}}</span>-->
-          </v-card>
-
-
-          <v-list-tile-avatar v-if="msjMio(chat.user)">
-            <img :src="msjMio(chat.user) ? avatar1 : avatar2" alt="Avatar del usuario">
-          </v-list-tile-avatar>
-        </v-list-tile>
-      </v-list>
-    </v-card>
-
-    <v-card>
-      <v-container
-        fluid
-        grid-list-lg
+      <v-toolbar
+        color="pink"
+        dark
       >
-        <b-row>
-          <v-flex>
-            <v-text-field label="Mensaje" v-model="msj" outline></v-text-field>
-          </v-flex>
-          <v-btn dark fab color="pink" v-on:click="nuevoMsj()">
-            <v-icon>send</v-icon>
-          </v-btn>
-        </b-row>
-      </v-container>
-    </v-card>
+        <v-toolbar-title>Chat</v-toolbar-title>
+        <v-spacer></v-spacer>
+      </v-toolbar>
+
+      <v-card>
+        <v-list expand="true">
+          <v-list-tile
+            style="align-items: end"
+            avatar
+            v-for="(chat, index) in conversaciones" :key="index"
+          >
+
+            <v-list-tile-avatar v-if="!msjMio(chat.user)">
+              <img :src="msjMio(chat.user) ? avatar1 : avatar2" alt="Avatar del usuario">
+            </v-list-tile-avatar>
+
+
+            <v-card class="message-in" :color="msjMio(chat.user) ? 'blue' : 'green'">
+              {{chat.text}}
+              <!--{{chat.text}}-->
+              <!--{{chat.text}}-->
+              <!--<span class="subheading mr-sm-n1">{{chat.hora}}</span>-->
+            </v-card>
+
+
+            <v-list-tile-avatar v-if="msjMio(chat.user)">
+              <img :src="msjMio(chat.user) ? avatar1 : avatar2" alt="Avatar del usuario">
+            </v-list-tile-avatar>
+          </v-list-tile>
+        </v-list>
+      </v-card>
+
+      <v-card>
+        <v-container
+          fluid
+          grid-list-lg
+        >
+          <b-row>
+            <v-flex>
+              <v-text-field label="Mensaje" v-model="msj" outline></v-text-field>
+            </v-flex>
+            <v-btn dark fab color="pink" v-on:click="nuevoMsj()">
+              <v-icon>send</v-icon>
+            </v-btn>
+          </b-row>
+        </v-container>
+      </v-card>
+    </div>
   </div>
 </template>
 

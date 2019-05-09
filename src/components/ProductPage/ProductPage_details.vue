@@ -34,9 +34,15 @@
       </b-card-body>
 
       <b-list-group flush>
-        <b-list-group-item>{{ method.titulo }}</b-list-group-item>
-        <b-list-group-item>{{ method.descripcion }}</b-list-group-item>
-        <b-list-group-item>{{ method.precio }}€</b-list-group-item>
+        <b-list-group-item>Titulo: {{ method.titulo }}</b-list-group-item>
+        <b-list-group-item>Descripcion: {{ method.descripcion }}</b-list-group-item>
+        <b-list-group-item>Numero de visualizaciones: {{ method.visualizaciones }}</b-list-group-item>
+        <b-list-group-item>Precio: {{ method.precio }}€</b-list-group-item>
+        <b-list-group-item>Tipo de venta: {{ method.tipoVenta }}</b-list-group-item>
+        <b-list-group-item>Categoria del producto: {{ method.categoria}}</b-list-group-item>
+        <b-list-group-item>Fecha: {{ method.fecha}}</b-list-group-item>
+        <b-list-group-item>Texto mio de prueba: {{ method.whatever }}</b-list-group-item>
+        <b-list-group-item>Numero mio de prueba{{ method.numero }}</b-list-group-item>
       </b-list-group>
 
       <!--<b-card-footer>Otras fotos</b-card-footer>-->
