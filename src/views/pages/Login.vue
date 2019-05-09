@@ -105,13 +105,13 @@
       }
     },
     computed: {
-      // validateEmail() {
-      //   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
-      //     return (true);
-      //   } else {
-      //     return (false);
-      //   }
-      // }
+      validateEmail() {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+          return (true);
+        } else {
+          return (false);
+        }
+      }
     }
   };
 </script>
