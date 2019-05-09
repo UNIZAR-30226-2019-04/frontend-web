@@ -1,5 +1,6 @@
 <template>
   <b-row style="margin-right: 10px;">
+    <makeReview></makeReview>
     <b-col cols="auto" sm="3">
       <ProductPage_img :method="informacion()"></ProductPage_img>
     </b-col>
@@ -11,7 +12,6 @@
       <!--<h1 class="text-hide" style="background-image: url('../icons/'); width: 50px; height: 50px;">Bootstrap</h1>-->
       <ProductPage_sell :method="informacion()" :tipo="tipo"></ProductPage_sell>
     </b-col>
-
   </b-row>
 </template>
 
@@ -19,6 +19,7 @@
   import ProductPage_img from './ProductPage_img'
   import ProductPage_details from './ProductPage_details'
   import ProductPage_sell from './ProductPage_sell'
+  import makeReview from '../makeReview'
 
   export default {
     name: "ProductPage",

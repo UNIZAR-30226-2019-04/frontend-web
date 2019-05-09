@@ -20,13 +20,13 @@
       </b-carousel>
       <br>
       <b-card-title>
-        {{ product.nombre }}
+        {{ product.titulo }}
       </b-card-title>
       <b-card-text>
         {{ product.descripcion }}
       </b-card-text>
       <p style="color: #20a8d8; margin-right: 10px;" align="right">
-        <b><h1>{{ product.precio }}€</h1></b>
+        <b><h1>{{ product.precioBase }}€</h1></b>
       </p>
 
       <router-link to="ProductPage" class="btn" style="border-color: #20a8d8; color: #20a8d8; margin-bottom: 5px;" align="center">

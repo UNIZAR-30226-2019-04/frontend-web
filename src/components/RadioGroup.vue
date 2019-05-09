@@ -36,7 +36,7 @@
          },
         catSel : function (option) {
            console.log(option);
-           this.$emit('nuevo-tag', option);
+           this.$emit('nuevo-tag', option, 'cat');
         }
       }
     }

@@ -2,13 +2,19 @@
   <div>
     <b-row>
       <b-col cols="2" style="margin-left: 15px">
-        <filters @selected="newTag"></filters>
+        <filters :valVendedor="valMax" :precioMax="prMax" @selected="newTag"></filters>
       </b-col>
       <b-col style="margin-right: 0px">
         <b-row>
           <b-col cols="10">
             <b-btn v-for="(tag, index) in tags" style="margin-right: 4px" :key="index" v-on:click="deleteTag(index)">
               {{tag.tag}}
+            </b-btn>
+            <b-btn v-for="(cat, index) in cats" style="margin-right: 4px" :key="index" v-on:click="deleteCat(index)">
+              {{cat}}
+            </b-btn>
+            <b-btn v-for="(tipo, index) in tipo" style="margin-right: 4px" :key="index" v-on:click="deleteTipo(index)">
+              {{tipo}}
             </b-btn>
           </b-col>
           <b-col cols="2">
@@ -46,19 +52,25 @@
 <script>
   import Filters from "../../components/Filters";
   import ProductBox from "../../components/ProductBox";
+  import axios from "axios";
 
   export default {
     name: "Search",
     components: {ProductBox, Filters},
+
     data() {
       return {
         tags: [],
+        valMax:5,
+        prMax: 1000,
         estilo: 'success',
         estilo2: 'white',
         value: '',
         order: null,
         porPagina: 25,
         pagina: 1,
+        cats: [],
+        tipo: [],
         options: [
           {value: null, text: 'Búsqueda'},
           {value: 'a', text: 'Precio: más caros primero'},
@@ -66,62 +78,63 @@
           {value: 'c', text: 'Novedades'},
           {value: 'd', text: 'Ofertas'}
         ],
-        products: [
-          {
-            nombre: "Portátil ASUS nuevo",
-            like: false,
-            descripcion: "Producto a la venta, recién estrenado y en muy buen estado, todavía en garantía, solamente se vende porque me han regalado otro.",
-            precio: 25,
-            images: [{
-              src: "https://picsum.photos/1024/480/?image=52",
-              id: 1
-            },
-              {
-                src: "https://picsum.photos/1024/480/?image=54",
-                id: 4
-              },
-              {
-                src: "https://picsum.photos/1024/480/?image=58",
-                id: 3
-              }]
-          },
-          {
-            nombre: "Portátil ASUS nuevo",
-            descripcion: "Producto a la venta, recién estrenado y en muy buen estado, todavía en garantía, solamente se vende porque me han regalado otro.",
-            precio: 25,
-            like: false,
-            images: [{
-              src: "https://picsum.photos/1024/480/?image=52",
-              id: 1
-            },
-              {
-                src: "https://picsum.photos/1024/480/?image=54",
-                id: 4
-              },
-              {
-                src: "https://picsum.photos/1024/480/?image=58",
-                id: 3
-              }]
-          },
-          {
-            nombre: "Portátil ASUS nuevo",
-            descripcion: "Producto a la venta, recién estrenado y en muy buen estado, todavía en garantía, solamente se vende porque me han regalado otro.",
-            precio: 25,
-            like: false,
-            images: [{
-              src: "https://picsum.photos/1024/480/?image=52",
-              id: 1
-            },
-              {
-                src: "https://picsum.photos/1024/480/?image=54",
-                id: 4
-              },
-              {
-                src: "https://picsum.photos/1024/480/?image=58",
-                id: 3
-              }]
-          }
-        ]
+        products: []
+        // products: [
+        //   {
+        //     nombre: "Portátil ASUS nuevo",
+        //     like: false,
+        //     descripcion: "Producto a la venta, recién estrenado y en muy buen estado, todavía en garantía, solamente se vende porque me han regalado otro.",
+        //     precio: 25,
+        //     images: [{
+        //       src: "https://picsum.photos/1024/480/?image=52",
+        //       id: 1
+        //     },
+        //       {
+        //         src: "https://picsum.photos/1024/480/?image=54",
+        //         id: 4
+        //       },
+        //       {
+        //         src: "https://picsum.photos/1024/480/?image=58",
+        //         id: 3
+        //       }]
+        //   },
+        //   {
+        //     nombre: "Portátil ASUS nuevo",
+        //     descripcion: "Producto a la venta, recién estrenado y en muy buen estado, todavía en garantía, solamente se vende porque me han regalado otro.",
+        //     precio: 25,
+        //     like: false,
+        //     images: [{
+        //       src: "https://picsum.photos/1024/480/?image=52",
+        //       id: 1
+        //     },
+        //       {
+        //         src: "https://picsum.photos/1024/480/?image=54",
+        //         id: 4
+        //       },
+        //       {
+        //         src: "https://picsum.photos/1024/480/?image=58",
+        //         id: 3
+        //       }]
+        //   },
+        //   {
+        //     nombre: "Portátil ASUS nuevo",
+        //     descripcion: "Producto a la venta, recién estrenado y en muy buen estado, todavía en garantía, solamente se vende porque me han regalado otro.",
+        //     precio: 25,
+        //     like: false,
+        //     images: [{
+        //       src: "https://picsum.photos/1024/480/?image=52",
+        //       id: 1
+        //     },
+        //       {
+        //         src: "https://picsum.photos/1024/480/?image=54",
+        //         id: 4
+        //       },
+        //       {
+        //         src: "https://picsum.photos/1024/480/?image=58",
+        //         id: 3
+        //       }]
+        //   }
+        // ]
       }
     }
     ,
@@ -130,16 +143,45 @@
         this.tags.splice(id, 1);
       }
       ,
-      newTag: function (elem) {
+      deleteCat: function (id) {
+        this.cats.splice(id, 1);
+      }
+      ,
+      deleteTipo: function (id) {
+        this.tipo.splice(id, 1);
+      }
+      ,
+      newTag: function (elem, tipo) {
         let a = {tag: elem};
-        let found = this.tags.findIndex(function (element) {
-          return element.tag === a.tag;
+          if(tipo === 'cat'){let found2 = this.cats.findIndex(function (element) {
+            return element === elem;
+          });
+            if (found2 === -1) {
+              this.cats.push(elem);
+            } else {
+              this.deleteCat(found2);
+            }
+          }
+        if(tipo === 'tipo'){let found2 = this.tipo.findIndex(function (element) {
+          return element === elem;
         });
-        if (found === -1) {
-          this.tags.push(a);
-        } else {
-          this.deleteTag(found);
+          if (found2 === -1) {
+            this.tipo.push(elem);
+          } else {
+            this.deleteTipo(found2);
+          }
         }
+        if(tipo === 'valoracion') {
+          let found = this.tags.findIndex(function (element) {
+            return element.tag === a.tag;
+          });
+          if (found === -1) {
+            this.tags.push(a);
+          } else {
+            this.deleteTag(found);
+          }
+        }
+        this.actualizarProds();
       }
       ,
       showOrder: function (value) {
@@ -148,15 +190,34 @@
       },
       elemPerPage: function (num) {
         this.porPagina = num;
+        this.actualizarProds();
       },
       elegido: function (num) {
+        console.log(this.products);
         return (num === this.porPagina);
+      },
+      actualizarProds: function () {
+        let urlTags = 'http://155.210.47.51:5000/producto/?preciomin=0&valoracionMax=' + this.valMax;
+        urlTags = urlTags + '&preciomax=' + this.prMax + '&page=' + (this.page - 1) + '&number=' + this.porPagina;
+        urlTags = urlTags + '&categorias=';
+        for (let i = 0; i < this.cats.length; i++) {
+          urlTags = urlTags + this.cats[i];
+          if(i < (this.cats.length-1)){
+            urlTags = urlTags + ',';
+          }
+        }
+        axios.get(urlTags).then(response => (this.products = response.data));
       }
     },
     computed: {
       elementos() {
         return this.products.length;
       }
+    },
+    mounted () {
+      let urlTags = 'http://155.210.47.51:5000/producto/?preciomin=0&valoracionMax=' + this.valMax;
+      urlTags = urlTags + '&preciomax=' + this.prMax + '&page=' + (this.page - 1) + '&number=' + this.porPagina;
+      axios.get(urlTags).then(response => (this.products = response.data));
     }
   }
 </script>
