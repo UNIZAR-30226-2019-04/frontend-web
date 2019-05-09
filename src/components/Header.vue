@@ -31,7 +31,7 @@
       <b-navbar-nav class="ml-auto">
         <b-nav-form>
           <b-form-input style="font-size: 1.1rem" size="sm" class="mr-sm-2" type="text" placeholder="Búsqueda"/>
-          <b-button style="font-size: 1.1rem" size="sm" class="my-2 my-sm-0" type="submit">Buscar</b-button>
+          <b-button style="font-size: 1.1rem; background-color: #f0f3f5" size="sm" class="my-2 my-sm-0" type="submit">Buscar</b-button>
         </b-nav-form>
 
         <b-nav-item-dropdown right>

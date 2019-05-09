@@ -42,10 +42,10 @@
       </b-row>
 
       <b-row>
-        <b-col>
+        <b-col class="column2">
           <ShareButton></ShareButton>
         </b-col>
-        <b-col align="right">
+        <b-col class="column1" align="right">
           <b-btn v-on:click="liked" style="background-color: transparent; margin-right: 8px"><i
             :class="isLiked() ? likeIcon : unlikeIcon" :style="isLiked() ? likeColor : unlikeColor" align="right"></i>
           </b-btn>
@@ -101,8 +101,14 @@
 </script>
 
 <style scoped>
-  .tales {
-    width: 100%;
+  .column2 {
+    width: 66.33%;
+
+  }
+
+  .column1 {
+    width: 33.33%;
+    /*margin-right: 44px;*/
   }
 
   .carousel-inner {

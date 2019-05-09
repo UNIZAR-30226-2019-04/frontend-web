@@ -1,18 +1,25 @@
 <template>
   <div>
-    <b-card
-      img-alt="Image"
-      img-top
-      tag="article"
-      no-body
-      style="margin-top: 20px; margin-left: 20px;">
-      <h4 slot="header" style="text-align: center; text-emphasis: black ">Detalles del vendedor</h4>
+    <b-card no-body class="mb-1" style="margin-left: 15px ">
+      <b-card-header header-tag="header" class="p-1" role="tab">
+        <b-button block href="#" v-b-toggle.accordion-1 variant="info"
+                  style="background-color: #20a8d8; color: white; font-size: 1.3rem; font-weight: bold; margin-top: 0.5%; margin-bottom: 0.5%">Detalles del
+          vendedor
+        </b-button>
+      </b-card-header>
+      <!--<b-card-->
+      <!--img-alt="Image"-->
+      <!--img-top-->
+      <!--tag="article"-->
+      <!--no-body-->
+      <!--style="margin-top: 20px; margin-left: 20px;">-->
+      <!--<h4 slot="header" style="text-align: center; text-emphasis: black ">Detalles del vendedor</h4>-->
 
       <!--<b-card-body>-->
       <!--<b-card-title>Imágenes del producto</b-card-title>-->
       <!--</b-card-body>-->
 
-      <b-list-group>
+      <b-list-group style="font-size: 1.1rem; font-weight: lighter">
         <b-list-group-item>{{ method.vendido_por }}</b-list-group-item>
         <b-list-group-item>Aqui viene la info del vendedor, obtenida de la bdd y comunicada del padre al hijo
         </b-list-group-item>

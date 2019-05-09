@@ -2,7 +2,7 @@
   <div>
     <b-row>
       <b-col cols="3" style=" margin-left: 15px;">
-        <filters @selected="newTag"></filters>
+        <Filters @selected="newTag"></Filters>
       </b-col>
       <b-col style="margin-right: 0px">
         <b-row>
