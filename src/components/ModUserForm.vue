@@ -124,17 +124,12 @@
             .dispatch("updateProfile", data)
             .then(() => this.$router.push("/#/Profile"))
             .catch(err => {
-              console.log("AAAAAA");
               console.log(err);
-              console.log("BBBBBB");
               this.showModal();
-              console.log("CCCCCC");
             });
         },
         showModal() {
-          console.log("BBBBCCC");
           this.$refs['modal1'].show();
-          console.log("BBCCCCC");
         },
         hideModal() {
           this.$refs['modal1'].hide();

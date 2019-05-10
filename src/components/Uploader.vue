@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button variant="outline-primary" v-on:click="toggleShow" block>Establecer imagen de perfil</b-button>
+    <b-button variant="outline-primary" v-on:click="toggleShow" block>{{ buttonTitle }}</b-button>
     <my-upload field="img"
                @crop-success="cropSuccess"
                @crop-upload-success="cropUploadSuccess"
@@ -21,6 +21,7 @@
 
   export default {
     name: "Uploader",
+    props: ['buttonTitle'],
     data() {
       return {
         show: false,
