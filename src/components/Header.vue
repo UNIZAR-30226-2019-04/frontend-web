@@ -58,21 +58,20 @@
 </template>
 
 <script>
-    export default {
-        name: "Header",
-      data() {
-          return {
-            picture : '../static/img/icons/safari-pinned-tab.svg',
-            texto: ''
-          }
-      },
-      methods: {
-        logout: function() {
-          this.$store
-            .dispatch("logout")
-            .then(() => this.$router.push("/"))
-            .catch(err => console.log(err));
-        },
+export default {
+    name: "Header",
+    data() {
+        return {
+          picture : '../static/img/icons/safari-pinned-tab.svg',
+          texto: ''
+        }
+    },
+    methods: {
+      logout: function() {
+        this.$store
+          .dispatch("logout")
+          .then(() => this.$router.push("/"))
+          .catch(err => console.log(err));
       },
     },
     computed: {
@@ -80,7 +79,7 @@
         return this.$store.getters.isLoggedIn
       }
     }
-  }
+}
 </script>
 
 <style scoped>
