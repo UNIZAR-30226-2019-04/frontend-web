@@ -1,6 +1,7 @@
 <template>
   <div>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <b-card border-variant="light" style="max-width: 26rem;">
       <b-carousel
         id="carousel1"
@@ -10,7 +11,6 @@
         background="#ababab"
         :interval="3000"
         img-width="60"
-
       >
         <!--v-model="slide"-->
         <!--@sliding-start="onSlideStart"-->
@@ -22,18 +22,42 @@
       <b-card-title>
         {{ product.titulo }}
       </b-card-title>
-      <b-card-text>
+      <b-card-text style="font-size: 1.1rem">
         {{ product.descripcion }}
       </b-card-text>
       <p style="color: #20a8d8; margin-right: 10px;" align="right">
         <b><h1>{{ product.precioBase }}€</h1></b>
       </p>
 
-      <router-link to="ProductPage" class="btn" style="border-color: #20a8d8; color: #20a8d8; margin-bottom: 5px;" align="center">
-        Ver Producto
-      </router-link>
-      <ShareButton></ShareButton>
-      <b-btn v-on:click="liked" style="background-color: transparent"><i :class="isLiked() ? likeIcon : unlikeIcon" :style="isLiked() ? likeColor : unlikeColor"></i></b-btn>
+
+      <b-row>
+        <b-col>
+          <router-link to="ProductPage" class="btn"
+                       style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-bottom: 5px;"
+                       align="center">
+            Ver producto
+          </router-link>
+        </b-col>
+        <b-col>
+          <p style="color: #20a8d8; margin-right: 10px;" align="right">
+            <b><h1>{{ product.precio }}€</h1></b>
+          </p>
+        </b-col>
+      </b-row>
+
+      <b-row>
+        <b-col class="column2">
+          <ShareButton></ShareButton>
+        </b-col>
+        <b-col class="column1" align="right">
+          <b-btn v-on:click="liked" style="background-color: transparent; margin-right: 8px"><i
+            :class="isLiked() ? likeIcon : unlikeIcon" :style="isLiked() ? likeColor : unlikeColor" align="right"></i>
+          </b-btn>
+        </b-col>
+      </b-row>
+      <!--<ShareButton></ShareButton>-->
+      <!--<b-btn v-on:click="liked" style="background-color: transparent; margin-top: 4px; margin-left: -1px"><i-->
+      <!--:class="isLiked() ? likeIcon : unlikeIcon" :style="isLiked() ? likeColor : unlikeColor"></i></b-btn>-->
     </b-card>
   </div>
 </template>
@@ -81,8 +105,14 @@
 </script>
 
 <style scoped>
-  .tales {
-    width: 100%;
+  .column2 {
+    width: 66.33%;
+
+  }
+
+  .column1 {
+    width: 33.33%;
+    /*margin-right: 44px;*/
   }
 
   .carousel-inner {

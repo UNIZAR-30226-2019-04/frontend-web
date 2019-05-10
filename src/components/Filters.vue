@@ -9,7 +9,7 @@
     </div>
     <b-card no-body class="mb-1">
       <b-card-header header-tag="header" class="p-1" role="tab">
-        <b-button block href="#" v-b-toggle.accordion-1 variant="info">Val. minima del vendedor</b-button>
+        <b-button block href="#" v-b-toggle.accordion-1 variant="info" style="font-size: 1.1rem; font-weight: bold; margin-top: 0.5%; margin-bottom: 0.5%">Val. minima del vendedor</b-button>
       </b-card-header>
       <b-collapse id="accordion-1" visible accordion="my-accordion">
         <b-card-body>
@@ -27,7 +27,7 @@
 
     <b-card no-body class="mb-1">
       <b-card-header header-tag="header" class="p-1">
-        <b-button block href="#" v-b-toggle.accordion-3 variant="info">Categorías</b-button>
+        <b-button block href="#" v-b-toggle.accordion-3 variant="info" style="font-size: 1.1rem; font-weight: bold; margin-top: 0.5%; margin-bottom: 0.5%">Categorías</b-button>
       </b-card-header>
       <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
         <b-card-body>

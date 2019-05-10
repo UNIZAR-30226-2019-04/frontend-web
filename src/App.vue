@@ -3,13 +3,16 @@
     <head title="Telocam">
       <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'
             rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
     </head>
-    <Header></Header>
+    <!--<div class="mainheader">-->
+      <Header></Header>
+    <!--</div>-->
     <router-view></router-view>
 
-    <div id="Footer">
+    <!--<div id="Footer">-->
       <Footer></Footer>
-    </div>
+    <!--</div>-->
   </div>
 </template>
 
@@ -52,10 +55,10 @@
   }
 
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+    font-size: 1.2rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
 
     position: relative;
     display: flex;
@@ -83,8 +86,12 @@
     height: 56px;
     padding: 0 16px 0 24px;
     background-color: #fffdf5;
-    color: #123123;
   }
+
+  /*mainheader{*/
+    /*!*color: #123123;*!*/
+    /*!*background-color: #123123;*!*/
+  /*}*/
 
   header span {
     display: block;
