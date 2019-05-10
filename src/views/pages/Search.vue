@@ -1,25 +1,25 @@
 <template>
   <div>
     <b-row>
-      <b-col cols="2" style="margin-left: 15px">
-        <filters @selected="newTag"></filters>
+      <b-col cols="3" style=" margin-left: 15px;">
+        <Filters @selected="newTag"></Filters>
       </b-col>
       <b-col style="margin-right: 0px">
         <b-row>
-          <b-col cols="10">
-            <b-btn v-for="(tag, index) in tags" style="margin-right: 4px" :key="index" v-on:click="deleteTag(index)">
+          <b-col cols="8">
+            <b-btn v-for="(tag, index) in tags" style="margin-right: 4px; font-size: 0.9rem" :key="index" v-on:click="deleteTag(index)">
               {{tag.tag}}
             </b-btn>
           </b-col>
-          <b-col cols="2">
+          <b-col cols="4">
             <div
-              style="margin-right: 50px;alignment: left">
-              <b-form-select v-model="order" :options="options" size="sm" class="mt-3"></b-form-select>
+              style="margin-right: 50px; alignment: right">
+              <b-form-select v-model="order" :options="options" size="md" style="font-size: 1rem;" class="mt-3"></b-form-select>
             </div>
           </b-col>
         </b-row>
         <b-tab title="Productos encontrados" active style="margin-top: 30px; margin-left: 30px; margin-right: 30px">
-          <p class="mt-3">Current Page: {{ pagina }}</p>
+          <p class="mt-3">Página {{ pagina }} de {{ (elementos/porPagina + 1).toFixed(0) }}</p>
           <b-card-group columns=true>
             <ProductBox v-for="(product, index) in products" :key="index"
                         v-if="index<(porPagina*pagina) && index>=(porPagina*pagina-porPagina)" :product="product"
@@ -60,7 +60,7 @@
         porPagina: 25,
         pagina: 1,
         options: [
-          {value: null, text: 'Búsqueda'},
+          {value: null, text: 'Filtrar'},
           {value: 'a', text: 'Precio: más caros primero'},
           {value: 'b', text: 'Precio: más baratos primero'},
           {value: 'c', text: 'Novedades'},

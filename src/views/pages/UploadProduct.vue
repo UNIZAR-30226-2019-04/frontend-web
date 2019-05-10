@@ -1,24 +1,24 @@
 <template>
   <div>
     <b-container style="max-width: 900px;">
-      <b-card title="Subir Producto" style="margin-left: 30px">
-        <b-form>
-          <!--<h1>Editar Perfil</h1>-->
-          <b-input-group class="mb-3">
-            <b-input-group-prepend>
-              <b-input-group-text><i class="icon-user"></i></b-input-group-text>
-            </b-input-group-prepend>
-            <b-form-input type="text" class="form-control" v-model="title" placeholder="Titulo del producto"/>
-          </b-input-group>
+		  <b-card title="Subir Producto" style="alignment: center; margin: auto; width: 75%; margin-top: 6%; margin-bottom: 10%">
+		    <b-form>
+		      <!--<h1>Editar Perfil</h1>-->
+		      <b-input-group class="mb-3">
+		        <b-input-group-prepend>
+		          <b-input-group-text><i class="icon-user"></i></b-input-group-text>
+		        </b-input-group-prepend>
+		        <b-form-input type="text" class="form-control" v-model="title" placeholder="Titulo del producto"/>
+		      </b-input-group>
 
-          <b-input-group class="mb-3">
-            <b-input-group-prepend>
-              <b-input-group-text><i class="icon-user"></i></b-input-group-text>
-            </b-input-group-prepend>
-            <b-form-textarea type="text" class="text-body" v-model="description" placeholder="Descripción del producto"/>
-          </b-input-group>
+		      <b-input-group class="mb-3">
+		        <b-input-group-prepend>
+		          <b-input-group-text><i class="icon-user"></i></b-input-group-text>
+		        </b-input-group-prepend>
+		        <b-form-textarea type="text" class="form-control" v-model="description" placeholder="Descripción del producto"/>
+		      </b-input-group>
 
-          <!--<b-input-group class="mb-3">-->
+					<!--<b-input-group class="mb-3">-->
             <!--<b-input-group-prepend>-->
               <!--<b-input-group-text><i class="icon-direction"></i></b-input-group-text>-->
             <!--</b-input-group-prepend>-->

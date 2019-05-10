@@ -45,7 +45,7 @@
                   <b-input-group-prepend>
                     <b-input-group-text><i class="icon-lock"></i></b-input-group-text>
                   </b-input-group-prepend>
-                  <b-form-input :state="secondPass" type="password" v-model="password_confirmation" class="form-control"
+                  <b-form-input :state="secondPass" @keypress.enter="register()" type="password" v-model="password_confirmation" class="form-control"
                                 placeholder="Repetir contraseña" autocomplete="new-password"/>
                   <b-form-invalid-feedback id="input-live-feedback4">
                     La contraseñas no coinciden.

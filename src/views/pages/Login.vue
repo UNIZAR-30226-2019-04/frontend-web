@@ -24,7 +24,7 @@
                     <b-input-group-prepend>
                       <b-input-group-text><i class="icon-lock"></i></b-input-group-text>
                     </b-input-group-prepend>
-                    <b-form-input :type="tipo" class="form-control" v-model="password" placeholder="Contraseña"
+                    <b-form-input :type="tipo" @keypress.enter="register()" class="form-control" v-model="password" placeholder="Contraseña"
                                   autocomplete/>
                     <b-input-group-prepend>
                       <b-input-group-text v-on:click="showHidePass"><i :class="icono"></i></b-input-group-text>
