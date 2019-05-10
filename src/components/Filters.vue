@@ -4,6 +4,7 @@
       <h4>Precio máximo</h4>
       <VueSlideBar v-model="precioMax" :max="1000">
       </VueSlideBar>
+      <b-btn v-on:click="nuevoPrecio">Aplicar precio</b-btn>
       <h6>Value: {{precioMax}}</h6>
     </div>
     <b-card no-body class="mb-1">
@@ -76,7 +77,7 @@
       minVal :function (newVal) {
         this.valVendedor = newVal;
         let value = 'Val. '+ newVal;
-        this.$emit('selected', value, 'valoracion');
+        this.$emit('selected', value, 'valoracion', newVal);
       },
       tipovent :function (newVal) {
         this.tipoVenta = newVal;
@@ -85,6 +86,9 @@
       resend : function (val, tipo) {
         console.log(val);
         this.$emit('selected', val, tipo);
+      },
+      nuevoPrecio: function () {
+        this.$emit('precio',this.precioMax);
       }
     },
     mounted () {

@@ -27,8 +27,8 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
           <b-nav-form>
-            <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Búsqueda"/>
-            <b-button size="sm" class="my-2 my-sm-0" type="submit">Buscar</b-button>
+            <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Búsqueda" v-model="texto"/>
+            <b-button size="sm" class="my-2 my-sm-0" type="submit" href="#/Search">Buscar</b-button>
           </b-nav-form>
 
           <b-nav-item-dropdown right>
@@ -59,7 +59,8 @@
         name: "Header",
       data() {
           return {
-            picture : '../static/img/icons/safari-pinned-tab.svg'
+            picture : '../static/img/icons/safari-pinned-tab.svg',
+            texto: ''
           }
       },
       methods: {

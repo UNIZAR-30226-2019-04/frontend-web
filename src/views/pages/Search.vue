@@ -2,7 +2,9 @@
   <div>
     <b-row>
       <b-col cols="2" style="margin-left: 15px">
-        <filters :valVendedor="valMax" :precioMax="prMax" @selected="newTag"></filters>
+        <p>Precio máximo: {{prMax}}</p>
+        <p>ValoracionMin: {{valMax}}</p>
+        <filters :valVendedor="valMax" :precioMax="prMax" @selected="newTag" @precio="nuevoPrecio"></filters>
       </b-col>
       <b-col style="margin-right: 0px">
         <b-row>
@@ -141,23 +143,27 @@
     methods: {
       deleteTag: function (id) {
         this.tags.splice(id, 1);
+        this.actualizarProds();
       }
       ,
       deleteCat: function (id) {
         this.cats.splice(id, 1);
+        this.actualizarProds();
       }
       ,
       deleteTipo: function (id) {
-        this.tipo.splice(id, 1);
+        this.tipo = [];
+        this.actualizarProds();
       }
       ,
-      newTag: function (elem, tipo) {
+      newTag: function (elem, tipo, newVal) {
         let a = {tag: elem};
           if(tipo === 'cat'){let found2 = this.cats.findIndex(function (element) {
             return element === elem;
           });
             if (found2 === -1) {
               this.cats.push(elem);
+              this.actualizarProds();
             } else {
               this.deleteCat(found2);
             }
@@ -165,27 +171,29 @@
         if(tipo === 'tipo'){let found2 = this.tipo.findIndex(function (element) {
           return element === elem;
         });
-          if (found2 === -1) {
-            this.tipo.push(elem);
-          } else {
-            this.deleteTipo(found2);
-          }
+          this.tipo = [];
+          this.tipo.push(elem);
+          this.actualizarProds();
         }
         if(tipo === 'valoracion') {
+          this.valMax = newVal;
           let found = this.tags.findIndex(function (element) {
             return element.tag === a.tag;
           });
           if (found === -1) {
             this.tags.push(a);
+            this.actualizarProds();
           } else {
             this.deleteTag(found);
           }
         }
+      },
+      nuevoPrecio: function (precio) {
+        this.prMax = precio;
         this.actualizarProds();
       }
       ,
       showOrder: function (value) {
-        console.log(value);
         this.order = value;
       },
       elemPerPage: function (num) {
@@ -193,19 +201,24 @@
         this.actualizarProds();
       },
       elegido: function (num) {
-        console.log(this.products);
         return (num === this.porPagina);
       },
       actualizarProds: function () {
         let urlTags = 'http://155.210.47.51:5000/producto/?preciomin=0&valoracionMax=' + this.valMax;
-        urlTags = urlTags + '&preciomax=' + this.prMax + '&page=' + (this.page - 1) + '&number=' + this.porPagina;
-        urlTags = urlTags + '&categorias=';
-        for (let i = 0; i < this.cats.length; i++) {
-          urlTags = urlTags + this.cats[i];
-          if(i < (this.cats.length-1)){
-            urlTags = urlTags + ',';
+        urlTags = urlTags + '&preciomax=' + this.prMax + '&page=' + this.page + '&number=' + this.porPagina;
+        if(this.tipo.length > 0) {
+          urlTags = urlTags + '&tipo=' + this.tipo[0];
+        }
+        if(this.cats.length > 0) {
+          urlTags = urlTags + '&categorias=';
+          for (let i = 0; i < this.cats.length; i++) {
+            urlTags = urlTags + this.cats[i];
+            if(i < (this.cats.length-1)){
+              urlTags = urlTags + ',';
+            }
           }
         }
+        console.log(urlTags);
         axios.get(urlTags).then(response => (this.products = response.data));
       }
     },
