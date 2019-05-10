@@ -3,6 +3,7 @@
     <head>
       <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'
             rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
     </head>
     <!--<div class="mainheader">-->
       <Header></Header>
@@ -84,8 +85,7 @@
     margin: 0;
     height: 56px;
     padding: 0 16px 0 24px;
-    /*background-color: #fffdf5;*/
-    /*color: #123123;*/
+    background-color: #fffdf5;
   }
 
   /*mainheader{*/

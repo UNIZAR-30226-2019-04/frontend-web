@@ -50,6 +50,15 @@ export default new Vuex.Store({
     update_error(state) {
       state.status = "error";
     },
+    upload_request(state) {
+      state.status = "loading";
+    },
+    upload_success(state) {
+      state.status = "success";
+    },
+    upload_error(state) {
+      state.status = "error";
+    },
   },
   actions: {
     login({ commit }, user) {
@@ -176,6 +185,25 @@ export default new Vuex.Store({
             reject(err);
           })
       });
+    },
+    uploadProduct({ commit }, product) {
+      return new Promise( (resolve, reject) => {
+        commit("upload_request");
+        axios({
+          url: `${API_BASE}/producto/`,
+          data: product,
+          method: "POST"
+        })
+          .then( resp => {
+            console.log(resp);
+            commit("upload_success");
+            resolve(resp);
+          })
+          .catch( err => {
+            commit("upload_error");
+            reject(err);
+          })
+      })
     }
   },
   getters: {

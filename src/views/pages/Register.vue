@@ -103,13 +103,20 @@
       };
     },
     methods: {
+      finalValidation: function () {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+          return (true);
+        } else {
+          return (false);
+        }
+      },
       register: function () {
         let data = {
           "email": this.email,
           "password": this.password,
           "username": this.username
         };
-        if (!this.validateEmail(this.email)){
+        if (!this.finalValidation()){
           this.error_output = "El campo email es incorrecto."
         }
         else if (this.password === this.password_confirmation) {
