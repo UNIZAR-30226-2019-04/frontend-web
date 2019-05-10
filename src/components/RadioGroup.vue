@@ -41,9 +41,14 @@
       showMore: function () {
         this.show = !this.show;
       },
-      catSel: function (option) {
-        console.log(option);
-        this.$emit('nuevo-tag', option);
+      methods: {
+         showMore :function () {
+           this.show = !this.show;
+         },
+        catSel : function (option) {
+           console.log(option);
+           this.$emit('nuevo-tag', option, 'cat');
+        }
       }
     }
   }

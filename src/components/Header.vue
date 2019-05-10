@@ -29,10 +29,10 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-form>
-          <b-form-input style="font-size: 1.1rem" size="sm" class="mr-sm-2" type="text" placeholder="Búsqueda"/>
-          <b-button style="font-size: 1.1rem; background-color: #f0f3f5" size="sm" class="my-2 my-sm-0" type="submit">Buscar</b-button>
-        </b-nav-form>
+          <b-nav-form>
+            <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Búsqueda" v-model="texto"/>
+            <b-button size="sm" class="my-2 my-sm-0" type="submit" href="#/Search">Buscar</b-button>
+          </b-nav-form>
 
         <b-nav-item-dropdown right>
           <!-- Using button-content slot -->
@@ -58,19 +58,21 @@
 </template>
 
 <script>
-  export default {
-    name: "Header",
-    data() {
-      return {
-        picture: '../static/img/icons/safari-pinned-tab.svg'
-      }
-    },
-    methods: {
-      logout: function () {
-        this.$store
-          .dispatch("logout")
-          .then(() => this.$router.push("/"))
-          .catch(err => console.log(err));
+    export default {
+        name: "Header",
+      data() {
+          return {
+            picture : '../static/img/icons/safari-pinned-tab.svg',
+            texto: ''
+          }
+      },
+      methods: {
+        logout: function() {
+          this.$store
+            .dispatch("logout")
+            .then(() => this.$router.push("/"))
+            .catch(err => console.log(err));
+        },
       },
     },
     computed: {

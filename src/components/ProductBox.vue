@@ -19,12 +19,16 @@
         </b-carousel-slide>
       </b-carousel>
       <br>
-      <b-card-title style="font-weight: bold;">
-        {{ product.nombre }}
+      <b-card-title>
+        {{ product.titulo }}
       </b-card-title>
       <b-card-text style="font-size: 1.1rem">
         {{ product.descripcion }}
       </b-card-text>
+      <p style="color: #20a8d8; margin-right: 10px;" align="right">
+        <b><h1>{{ product.precioBase }}€</h1></b>
+      </p>
+
 
       <b-row>
         <b-col>

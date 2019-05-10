@@ -51,9 +51,10 @@ export default {
         * Set the rating.
         */
         set: function(value) {
-        var self = this;
+            var self = this;
             if (!this.disabled) {
                 this.temp_value = value;
+                this.$emit('rating',value)
                 return this.value = value;
             }
         }

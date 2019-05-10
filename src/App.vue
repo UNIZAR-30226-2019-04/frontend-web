@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <head>
+    <head title="Telocam">
       <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'
             rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
