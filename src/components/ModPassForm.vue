@@ -30,6 +30,14 @@
         new_pass: '',
         new_pass2: ''
       }
+    },
+    methods: {
+      updateData: function () {
+        let url = 'http://155.210.47.51:5000/user/' + this.$store.getters.user;
+        axios.put(url,this.userData).then(function (response) {
+          console.log(response);
+        });
+      },
     }
   }
 </script>

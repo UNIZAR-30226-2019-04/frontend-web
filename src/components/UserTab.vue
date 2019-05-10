@@ -2,7 +2,7 @@
   <div>
     <b-tabs content-class="mt-3" style="margin-top: 20px; margin-left: 5px;">
       <b-tab title="Mis Productos" active style="margin-top: 10px; margin-left: 10px; ">
-        <b-card-group columns=true>
+        <b-card-group columns>
           <ProductBox style="margin-bottom: 10px;"></ProductBox>
           <ProductBox style="margin-bottom: 10px;"></ProductBox>
           <ProductBox style="margin-bottom: 10px;"></ProductBox>
@@ -21,7 +21,7 @@
         <UserReview></UserReview>
       </b-tab>
       <b-tab title="Lista de deseos" style="margin-top: 10px; margin-left: 10px; ">
-        <b-card-group columns=true>
+        <b-card-group columns>
           <ProductBox style="margin-bottom: 10px;"></ProductBox>
           <ProductBox style="margin-bottom: 10px;"></ProductBox>
           <ProductBox style="margin-bottom: 10px;"></ProductBox>

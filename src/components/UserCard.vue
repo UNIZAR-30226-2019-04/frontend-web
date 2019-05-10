@@ -17,13 +17,13 @@
       </b-card-body>
       <b-card-body>
         <b-card-title>Descripción</b-card-title>
-        <b-card-text>{{ userInfo.description }}</b-card-text>
+        <b-card-text>{{ userInfo.descripcion }}</b-card-text>
       </b-card-body>
 
       <b-list-group flush>
-        <b-list-group-item>Ventas realizadas: {{ ventas }}</b-list-group-item>
-        <b-list-group-item>Trueques realizados: {{ trueques }}</b-list-group-item>
-        <b-list-group-item>Compras realizadas: {{ compras }}</b-list-group-item>
+        <b-list-group-item>Ventas realizadas: {{ userInfo.productos_vendidos }}</b-list-group-item>
+        <!--<b-list-group-item>Trueques realizados: {{ trueques }}</b-list-group-item>-->
+        <b-list-group-item>Compras realizadas: {{ userInfo.productos_comprados }}</b-list-group-item>
       </b-list-group>
 
       <b-card-body>

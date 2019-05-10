@@ -22,7 +22,7 @@
     components: {UserTab, UserCard},
     data() {
       return {
-        currentUserAux: this.computed.currentUser()
+        //currentUserAux: this.computed.currentUser()
       }
     },
     beforeCreate() {
