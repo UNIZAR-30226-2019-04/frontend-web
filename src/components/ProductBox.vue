@@ -8,16 +8,28 @@
         style="text-shadow: 1px 1px 2px #333;"
         controls
         fade
-        background="#ababab"
+        background="#FFFFFF"
         :interval="3000"
         img-width="60"
       >
         <!--v-model="slide"-->
         <!--@sliding-start="onSlideStart"-->
         <!--@sliding-end="onSlideEnd"-->
-        <b-carousel-slide class="carousel-inner" v-for="img in product.images" :img-src="img.src" :key="img.id">
+        <b-carousel-slide class="carousel-inner"
+                          v-for="(img,index) in product.multimedia"
+                          :key="index"
+                          v-if="!img.tipo" :img-src="img.path"
+                          style="background-color: transparent">
         </b-carousel-slide>
       </b-carousel>
+      <!--<v-carousel hide-delimiters max="300px">-->
+      <!--<v-carousel-item-->
+      <!--v-for="(img,index) in product.multimedia"-->
+      <!--:key="index"-->
+      <!--v-if="!img.tipo" :img-src="img.path"-->
+      <!--style="background-color: transparent"-->
+      <!--&gt;</v-carousel-item>-->
+      <!--</v-carousel>-->
       <br>
       <b-card-title>
         {{ product.titulo }}
@@ -64,7 +76,7 @@
 
 <script>
   import ShareButton from "./Share";
-
+  import  axios from 'axios';
   export default {
     name: "ProductBox",
     components: {ShareButton},
@@ -95,10 +107,21 @@
     },
     methods: {
       liked: function () {
-        this.product.like = !this.product.like;
+        this.product.deseado = !this.product.deseado;
+        let url = 'http://155.210.47.51:5000/deseados/' + this.$store.getters.user;
+        if(!this.product.deseado){
+          url = url + '/remove';
+        }
+        let headers = {
+          Content_Type: 'application/json',
+          Authorization: this.$store.getters.token
+
+        };
+        let data = { producto_id : this.product.id };
+        axios.post(url,data,{headers}).then(response => (console.log(response)));
       },
       isLiked: function () {
-        return this.product.like;
+        return this.product.deseado;
       }
     }
   }
@@ -107,7 +130,6 @@
 <style scoped>
   .column2 {
     width: 66.33%;
-
   }
 
   .column1 {
@@ -116,7 +138,6 @@
   }
 
   .carousel-inner {
-    width: 100%;
-    max-height: 800px !important;
+    max-height: 300px !important;
   }
 </style>
