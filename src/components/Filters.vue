@@ -4,8 +4,15 @@
       <h4>Precio máximo</h4>
       <VueSlideBar v-model="precioMax" :max="1000">
       </VueSlideBar>
-      <b-btn v-on:click="nuevoPrecio">Aplicar precio</b-btn>
+      <b-btn v-on:click="nuevoPrecio" style="margin-top: 7px; margin-bottom: 7px">Aplicar precio</b-btn>
       <h6>Value: {{precioMax}}</h6>
+    </div>
+    <div>
+      <h4>Distancia máxima</h4>
+      <VueSlideBar v-model="distMax" :max="1000">
+      </VueSlideBar>
+      <b-btn v-on:click="nuevaDist" style="margin-top: 7px; margin-bottom: 7px">Aplicar distancia</b-btn>
+      <h6>Value: {{distMax}}</h6>
     </div>
     <b-card no-body class="mb-1">
       <b-card-header header-tag="header" class="p-1" role="tab">
@@ -70,6 +77,7 @@
           {nombre: 'Option 5 '},],
         cat: [],
         precioMax: 1000,
+        distMax: 1000,
         valVendedor: 1
       }
     },
@@ -89,6 +97,9 @@
       },
       nuevoPrecio: function () {
         this.$emit('precio',this.precioMax);
+      },
+      nuevaDist: function () {
+        this.$emit('dist',this.distMax);
       }
     },
     mounted () {

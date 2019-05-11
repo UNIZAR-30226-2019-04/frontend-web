@@ -2,7 +2,7 @@
     <v-card height="300px" width="500px">
     <form>
       <v-text-field
-        v-model="name"
+        v-model="titulo"
         label="Titulo"
         required
       ></v-text-field>

@@ -3,13 +3,26 @@
     <b-row>
       <b-col cols="2" style="margin-left: 15px">
         <p>Precio máximo: {{prMax}}</p>
+        <p>Distancia máxima: {{distanciaMax}}</p>
         <p>ValoracionMin: {{valMax}}</p>
-        <filters :valVendedor="valMax" :precioMax="prMax" @selected="newTag" @precio="nuevoPrecio"></filters>
+        <filters :valVendedor="valMax" :precioMax="prMax" @selected="newTag" @precio="nuevoPrecio" @dist="nuevaDistancia"></filters>
       </b-col>
-      <b-col style="margin-right: 0px">
+      <b-col style="margin-right: 10px">
+        <b-row class="justify-content-md-center">
+          <b-col col lg="4">
+            <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Búsqueda"
+                          v-on:change="actualizarProds"
+                          @keypress="actualizarProds"
+                          v-model="texto"/>
+          </b-col>
+          <b-btn v-on:click="actualizarProds">
+            Buscar
+          </b-btn>
+        </b-row>
         <b-row>
           <b-col cols="8">
-            <b-btn v-for="(tag, index) in tags" style="margin-right: 4px; font-size: 0.9rem" :key="index" v-on:click="deleteTag(index)">
+            <b-btn v-for="(tag, index) in tags" style="margin-right: 4px; font-size: 0.9rem" :key="index"
+                   v-on:click="deleteTag(index)">
               {{tag.tag}}
             </b-btn>
             <b-btn v-for="(cat, index) in cats" style="margin-right: 4px" :key="index" v-on:click="deleteCat(index)">
@@ -22,7 +35,8 @@
           <b-col cols="4">
             <div
               style="margin-right: 50px; alignment: right">
-              <b-form-select v-model="order" :options="options" size="md" style="font-size: 1rem;" class="mt-3"></b-form-select>
+              <b-form-select v-model="order" :options="options" size="md" style="font-size: 1rem;"
+                             class="mt-3"></b-form-select>
             </div>
           </b-col>
         </b-row>
@@ -59,12 +73,19 @@
   export default {
     name: "Search",
     components: {ProductBox, Filters},
-
+    props: {
+      textoProp: {
+        type: String,
+        default: 'prod'
+      }
+    },
     data() {
       return {
         tags: [],
-        valMax:5,
+        valMax: 5,
+        texto: '',
         prMax: 1000,
+        distanciaMax: 1000,
         estilo: 'success',
         estilo2: 'white',
         value: '',
@@ -102,22 +123,23 @@
       ,
       newTag: function (elem, tipo, newVal) {
         let a = {tag: elem};
-          if(tipo === 'cat'){let found2 = this.cats.findIndex(function (element) {
+        if (tipo === 'cat') {
+          let found2 = this.cats.findIndex(function (element) {
             return element === elem;
           });
-            if (found2 === -1) {
-              this.cats.push(elem);
-              this.actualizarProds();
-            } else {
-              this.deleteCat(found2);
-            }
+          if (found2 === -1) {
+            this.cats.push(elem);
+            this.actualizarProds();
+          } else {
+            this.deleteCat(found2);
           }
-        if(tipo === 'tipo'){
+        }
+        if (tipo === 'tipo') {
           this.tipo = [];
           this.tipo.push(elem);
           this.actualizarProds();
         }
-        if(tipo === 'valoracion') {
+        if (tipo === 'valoracion') {
           this.valMax = newVal;
           let found = this.tags.findIndex(function (element) {
             return element.tag === a.tag;
@@ -135,6 +157,11 @@
         this.actualizarProds();
       }
       ,
+      nuevaDistancia: function (dist) {
+        this.distanciaMax = dist;
+        this.actualizarProds();
+      }
+      ,
       showOrder: function (value) {
         this.order = value;
       },
@@ -148,19 +175,26 @@
       actualizarProds: function () {
         let urlTags = 'http://155.210.47.51:5000/producto/?preciomin=0&valoracionMax=' + this.valMax;
         urlTags = urlTags + '&preciomax=' + this.prMax + '&page=' + this.pagina + '&number=' + this.porPagina;
-        if(this.tipo.length > 0) {
+        // urlTags = urlTags + '&longitud=' + this.$store.getters.currentUser.longitud;
+        // urlTags = urlTags + '&latitud=' + this.$store.getters.currentUser.latitud;
+        // urlTags = urlTags + '&radioUbicacion=' + this.distanciaMax*1000;
+        if (this.texto.length > 0) {
+          // console.log('texto : ', this.texto);
+          urlTags = urlTags + '&textoBusqueda=' + this.texto;
+        }
+        if (this.tipo.length > 0) {
           urlTags = urlTags + '&tipo=' + this.tipo[0];
         }
-        if(this.cats.length > 0) {
+        if (this.cats.length > 0) {
           urlTags = urlTags + '&categorias=';
           for (let i = 0; i < this.cats.length; i++) {
             urlTags = urlTags + this.cats[i];
-            if(i < (this.cats.length-1)){
+            if (i < (this.cats.length - 1)) {
               urlTags = urlTags + ';';
             }
           }
         }
-        console.log(urlTags);
+        // console.log(urlTags);
         axios.get(urlTags).then(response => (this.products = response.data));
       }
     },
@@ -169,9 +203,18 @@
         return this.products.length;
       }
     },
-    mounted () {
+    mounted() {
       let urlTags = 'http://155.210.47.51:5000/producto/?preciomin=0&valoracionMax=' + this.valMax;
       urlTags = urlTags + '&preciomax=' + this.prMax + '&page=' + this.page + '&number=' + this.porPagina;
+      // urlTags = urlTags + '&longitud=' + this.$store.getters.currentUser.longitud;
+      // urlTags = urlTags + '&latitud=' + this.$store.getters.currentUser.latitud;
+      // urlTags = urlTags + '&radioUbicacion=' + this.distanciaMax*1000;
+      // console.log('texto : ', this.texto);
+      if (this.texto.length > 0) {
+        urlTags = urlTags + '&textoBusqueda=' + this.texto;
+      }
+      console.log('lat : ',this.$store.getters.currentUser.latitud);
+      console.log('long : ',this.$store.getters.currentUser.longitud);
       axios.get(urlTags).then(response => (this.products = response.data));
     }
   }
