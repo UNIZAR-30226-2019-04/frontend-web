@@ -1,6 +1,6 @@
 <template>
   <div>
-     <b-card
+    <b-card
       border-variant="none"
       no-body
 
@@ -9,7 +9,10 @@
       img-alt="Foto de perfil"
       img-top
     >
-      <h4 slot="header" style="text-align: center; text-emphasis: black ">{{ userInfo.nick }}</h4>
+      <div>
+        <floating-uploader buttonIcon="photo_camera"></floating-uploader>
+        <h4 slot="header" style="text-align: center; text-emphasis: black">{{ userInfo.nick }}</h4>
+      </div>
       <!--<Uploader></Uploader>-->
       <b-card-body>
         <b-card-title>Nombre y apellido(s)</b-card-title>
@@ -17,13 +20,13 @@
       </b-card-body>
       <b-card-body>
         <b-card-title>Descripción</b-card-title>
-        <b-card-text>{{ userInfo.description }}</b-card-text>
+        <b-card-text>{{ userInfo.descripcion }}</b-card-text>
       </b-card-body>
 
       <b-list-group flush>
-        <b-list-group-item>Ventas realizadas: {{ ventas }}</b-list-group-item>
-        <b-list-group-item>Trueques realizados: {{ trueques }}</b-list-group-item>
-        <b-list-group-item>Compras realizadas: {{ compras }}</b-list-group-item>
+        <b-list-group-item>Ventas realizadas: {{ userInfo.productos_vendidos }}</b-list-group-item>
+        <!--<b-list-group-item>Trueques realizados: {{ trueques }}</b-list-group-item>-->
+        <b-list-group-item>Compras realizadas: {{ userInfo.productos_comprados }}</b-list-group-item>
       </b-list-group>
 
       <b-card-body>
@@ -41,15 +44,18 @@
           <!--<b-btn class="btn-danger">NO</b-btn>-->
         </b-modal>
         <hr/>
-        <router-link to="EditProfile" class="btn" style="border-color: #20a8d8; color: #20a8d8">Modificar cuenta</router-link>
+        <router-link to="EditProfile" class="btn" style="border-color: #20a8d8; color: #20a8d8">Modificar cuenta
+        </router-link>
       </b-card-body>
     </b-card>
   </div>
 </template>
 
 <script>
+  import FloatingUploader from './FloatingUploader';
   export default {
     name: "UserCard",
+    components: {FloatingUploader},
     props: ['userInfo'],
     data() {
       return {
@@ -59,6 +65,11 @@
         compras: 1998,
         ventas: 22,
         trueques: 5
+      }
+    },
+    methods: {
+      cambiarFoto: function () {
+        this.$emit('cambiarFoto');
       }
     }
   }

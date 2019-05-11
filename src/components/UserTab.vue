@@ -2,36 +2,24 @@
   <div>
     <b-tabs content-class="mt-3" style="margin-top: 20px; margin-left: 5px;">
       <b-tab title="Mis Productos" active style="margin-top: 10px; margin-left: 10px; ">
-        <b-card-group columns=true>
-          <ProductBox style="margin-bottom: 10px;"></ProductBox>
-          <ProductBox style="margin-bottom: 10px;"></ProductBox>
-          <ProductBox style="margin-bottom: 10px;"></ProductBox>
-          <ProductBox style="margin-bottom: 10px;"></ProductBox>
-          <ProductBox style="margin-bottom: 10px;"></ProductBox>
+        <b-card-group columns>
+          <ProductBox v-for="(product, index) in prods" :key="index"
+                      :product="product"
+                      style="margin-bottom: 10px;"></ProductBox>
         </b-card-group>
       </b-tab>
       <b-tab title="Valoraciones recibidas">
-        <UserReview></UserReview>
-        <UserReview></UserReview>
-        <UserReview></UserReview>
-        <UserReview></UserReview>
-        <UserReview></UserReview>
-        <UserReview></UserReview>
-        <UserReview></UserReview>
-        <UserReview></UserReview>
+        <UserReview v-for="(val,index) in valGet" :key="index" :valoracion="val"></UserReview>
       </b-tab>
       <b-tab title="Lista de deseos" style="margin-top: 10px; margin-left: 10px; ">
-        <b-card-group columns=true>
-          <ProductBox style="margin-bottom: 10px;"></ProductBox>
-          <ProductBox style="margin-bottom: 10px;"></ProductBox>
-          <ProductBox style="margin-bottom: 10px;"></ProductBox>
-          <ProductBox style="margin-bottom: 10px;"></ProductBox>
-          <ProductBox style="margin-bottom: 10px;"></ProductBox>
+        <b-card-group columns>
+          <ProductBox v-for="(product, index) in deseados" :key="index"
+                      :product="product"
+                      style="margin-bottom: 10px;"></ProductBox>
         </b-card-group>
       </b-tab>
       <b-tab title="Valoraciones realizadas">
-        <UserReview></UserReview>
-        <UserReview></UserReview>
+        <UserReview v-for="(val,index) in valDone" :key="index" :valoracion="val"></UserReview>
       </b-tab>
     </b-tabs>
   </div>
@@ -41,10 +29,27 @@
   import ProductBox from './ProductBox'
   import ProductItem from './ProdItem'
   import UserReview from './UserReview'
-
+  import axios from 'axios';
   export default {
     name: 'UserTab',
-    components: {ProductItem, ProductBox, UserReview}
+    components: {ProductItem, ProductBox, UserReview},
+    data(){
+      return {
+        prods : [],
+        deseados: [],
+        valDone : [],
+        valGet : [],
+      }
+    },
+    mounted() {
+      let url = 'http://155.210.47.51:5000/user/' + this.$store.getters.user;
+      axios.get(url).then(response => {
+        this.prods = response.data.cajas_productos;
+        this.deseados = response.data.deseados;
+        this.valDone = response.data.valoraciones_hechas;
+        this.valGet = response.data.valoraciones_recibidas;
+      });
+    }
   }
 </script>
 

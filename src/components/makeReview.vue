@@ -2,7 +2,7 @@
     <v-card height="300px" width="500px">
     <form>
       <v-text-field
-        v-model="name"
+        v-model="titulo"
         label="Titulo"
         required
       ></v-text-field>
@@ -11,8 +11,8 @@
         label="descripcion"
         required
       ></v-textarea>
-      <StarRating @rating="setRating" :value="valor" style="mx-auto d-block"></StarRating>
-      <v-btn @click="submit">Submit</v-btn>
+      <StarRating @rating="setRating" :value="valor" class="d-block"></StarRating>
+      <v-btn @click="uploadReview">Submit</v-btn>
       <v-btn @click="clear">Clear</v-btn>
     </form>
     <p>Valoracion: {{valor}}</p>
@@ -21,11 +21,11 @@
 
 <script>
 import StarRating from './StarRating';
-
-
+import axios from 'axios';
   export default {
     name: "makeReview",
     components: {StarRating},
+    props: ['valorado'],
     data() {
       return {
         titulo: '',
@@ -44,6 +44,21 @@ import StarRating from './StarRating';
       },
       setRating (value){
         this.valor = value;
+      },
+      uploadReview (){
+        this.fecha = new Date();
+        let data = {
+          titulo: this.titulo,
+          descripcion: this.descripcion,
+          puntuacion: this.valor,
+          puntuado: this.valorado
+        };
+        let url = 'http://155.210.47.51:5000/valoracion/' + this.$store.getters.user;
+        let headers = {
+          'Content-Type': 'application/json',
+          'Authorization': this.$store.getters.token
+        };
+        axios.post(url,data,{headers: headers});
       }
     }
   }

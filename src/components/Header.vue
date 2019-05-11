@@ -29,10 +29,14 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-          <b-nav-form>
-            <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Búsqueda" v-model="texto"/>
-            <b-button size="sm" class="my-2 my-sm-0" type="submit" href="#/Search">Buscar</b-button>
-          </b-nav-form>
+          <!--<b-nav-form>-->
+            <!--<b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Búsqueda" v-model="texto"/>-->
+            <!--<router-link :to="{ name: 'Search', props: { texto: this.texto }}"-->
+                         <!--size="sm" class="my-2 my-sm-0" type="button"-->
+                         <!--&gt;-->
+              <!--Buscar-->
+            <!--</router-link>-->
+          <!--</b-nav-form>-->
 
         <b-nav-item-dropdown right>
           <!-- Using button-content slot -->
@@ -58,6 +62,8 @@
 </template>
 
 <script>
+import * as router from "vue-router";
+
 export default {
     name: "Header",
     data() {
@@ -73,6 +79,9 @@ export default {
           .then(() => this.$router.push("/"))
           .catch(err => console.log(err));
       },
+      // buscarTexto() {
+      //   router.push({ name: 'Search', params: { texto: this.texto }});
+      // }
     },
     computed: {
       isLogged() {
