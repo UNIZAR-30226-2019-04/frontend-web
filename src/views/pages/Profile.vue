@@ -23,7 +23,7 @@
     data() {
       return {
         //currentUserAux: this.computed.currentUser()
-      }
+    }
     },
     beforeCreate() {
       this.$store
@@ -35,7 +35,6 @@
         return this.$store.getters.currentUser;
       }
     }
-
   }
 </script>
 

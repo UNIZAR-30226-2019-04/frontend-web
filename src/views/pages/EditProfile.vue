@@ -5,8 +5,8 @@
           <b-btn v-on:click="changePass(false)" variant="outline-primary">Editar perfil</b-btn>
           <hr/>
           <b-btn v-on:click="changePass(true)" variant="outline-primary">Cambiar contraseña</b-btn>
-          <hr/>
-          <uploader buttonTitle="Establecer imagen de perfil"></uploader>
+          <!--<hr/>-->
+          <!--<uploader buttonTitle="Establecer imagen de perfil"></uploader>-->
         </b-card>
         <ModUserForm v-if="!optionPass" :userData="user_info"></ModUserForm>
         <ModPassForm v-else></ModPassForm>
