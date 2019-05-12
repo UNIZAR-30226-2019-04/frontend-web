@@ -17,10 +17,10 @@
           <b-input-group-prepend>
             <b-input-group-text><i class="icon-lock"></i></b-input-group-text>
           </b-input-group-prepend>
-          <b-form-input :type="tipo" :state="firstPass" class="form-control" v-model="new_pass" placeholder="Contraseña nueva"
+          <b-form-input :type="tipo2" :state="firstPass" class="form-control" v-model="new_pass" placeholder="Contraseña nueva"
                         autocomplete/>
           <b-input-group-prepend>
-            <b-input-group-text v-on:click="showHidePass"><i :class="icono"></i></b-input-group-text>
+            <b-input-group-text v-on:click="showHidePass2"><i :class="icono2"></i></b-input-group-text>
           </b-input-group-prepend>
           <b-form-invalid-feedback id="input-live-feedback3">
             La contraseña debe tener al menos 6 caracteres, y contener mayúsculas, minúsculas y números.
@@ -31,8 +31,11 @@
           <b-input-group-prepend>
             <b-input-group-text><i class="icon-lock"></i></b-input-group-text>
           </b-input-group-prepend>
-          <b-form-input type="password" class="form-control" placeholder="Repetir nueva contraseña"
+          <b-form-input type="password" :state="(new_pass2 === new_pass)" class="form-control" placeholder="Repetir nueva contraseña"
                         v-model="new_pass2"/>
+          <b-form-invalid-feedback id="input-live-feedback4">
+            La contraseña debe ser igual a la contraseña anterior.
+          </b-form-invalid-feedback>
         </b-input-group>
         <b-button variant="success" v-on:click="updateData" block>Actualizar contraseña</b-button>
       </b-form>
@@ -51,7 +54,9 @@
         actual_pass: '',
         new_pass2: '',
         tipo: 'password',
-        icono: 'far fa-eye-slash'
+        tipo2: 'password',
+        icono: 'far fa-eye-slash',
+        icono2: 'far fa-eye-slash'
       }
     },
     computed: {
@@ -69,15 +74,19 @@
     },
     methods: {
       updateData: function () {
-        let url = 'http://155.210.47.51:5000/user/' + this.$store.getters.user;
+        let url = 'http://155.210.47.51:5000/user/' + this.$store.getters.user + '/editpasswd';
         let headers = {
-          'Content-Type': 'application/json',
-          'Authorization': this.$store.getters.token
+          Content_Type: 'application/json',
+          Authorization: this.$store.getters.token
         };
         let data = {
+          oldpassword: this.actual_pass,
+          password: this.new_pass
 
         };
-        axios.post(url,data,{headers: headers});
+        if (this.new_pass === this.new_pass2) {
+          axios.post(url, data, {headers});
+        }
 
       },
       showHidePass: function(){
@@ -87,6 +96,15 @@
         }else{
           this.tipo = 'password';
           this.icono = 'far fa-eye-slash';
+        }
+      },
+      showHidePass2: function(){
+        if(this.tipo2 === "password"){
+          this.tipo2 = 'text';
+          this.icono2 = 'far fa-eye';
+        }else{
+          this.tipo2 = 'password';
+          this.icono2 = 'far fa-eye-slash';
         }
       }
     }

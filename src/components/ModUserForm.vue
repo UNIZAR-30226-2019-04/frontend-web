@@ -126,9 +126,11 @@
           }
           console.log(this.userData);
           let url = 'http://155.210.47.51:5000/user/' + this.$store.getters.user;
-          axios.put(url,this.userData).then(function (response) {
-            console.log(response);
-          });
+          if(this.validateEmail() && this.nameState()) {
+            axios.put(url, this.userData).then(function (response) {
+              console.log(response);
+            });
+          }
         },
         showModal() {
           this.$refs['modal1'].show();

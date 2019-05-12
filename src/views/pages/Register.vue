@@ -104,7 +104,7 @@
     },
     methods: {
       finalValidation: function () {
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+        if (this.nameState() && this.firstPass() && this.secondPass() && this.validateEmail()) {
           return (true);
         } else {
           return (false);
