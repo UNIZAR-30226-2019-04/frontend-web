@@ -16,6 +16,9 @@
 </template>
 
 <script>
+  import axios from "axios";
+  import {API_BASE} from "../../config";
+
   import ProductPage_img from './ProductPage_img'
   import ProductPage_details from './ProductPage_details'
   import ProductPage_sell from './ProductPage_sell'
@@ -26,32 +29,28 @@
     components: {ProductPage_img, ProductPage_details, ProductPage_sell},
     data() {
       return {
-        tipo: "Subasta",
-        myData: "jojojojojojojojojoj",
-        fotoPerfil: 'https://www.pcper.com/files/imagecache/article_max_width/review/2011-04-24/asusk53e-3.jpg',
-        titulo: "Portátil Asus k-53, 2011",
-        descripcion: "Especificaciones: Intel i5, 8GB RAM, 256GB SSD, Nvidia GeForce 520M\nOrdenador muy cuidado, siempre en casa y de uso ocasional. Únicamente navegación web y visualización de películas, nada de juegos.\n Se vende por falta de uso. Se acepta cambio por smartphone valorado en más de 300€",
-        precio: 500,
-        vendido_por: "Conan",
-        images: [{
-          src: "https://www.pcper.com/files/imagecache/article_max_width/review/2011-04-24/asusk53e-3.jpg",
-          id: 1
-        },
-          {
-            src: "https://www.google.es/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiVtN7isqXhAhWJDxQKHaa3C4wQjRx6BAgBEAU&url=%2Furl%3Fsa%3Di%26source%3Dimages%26cd%3D%26ved%3D%26url%3Dhttps%253A%252F%252Fwww.laptopmag.com%252Freviews%252Flaptops%252Fasus-k53e-b1%26psig%3DAOvVaw1Y4RlXW3JT1bb3sIzZ9D-G%26ust%3D1553881734706147&psig=AOvVaw1Y4RlXW3JT1bb3sIzZ9D-G&ust=1553881734706147",
-            id: 2
-          },]
+        id: 0,
+        info: null
       }
+    },
+    mounted() {
+      axios.get(`${API_BASE}/producto/`).then(response => (this.info = response))
     },
     methods: {
       informacion: function () {
-        return{
+        return {
           myData: "jojojojojojojojojoj",
           fotoPerfil: 'https://www.pcper.com/files/imagecache/article_max_width/review/2011-04-24/asusk53e-3.jpg',
-          titulo: "Portátil Asus k-53, 2011",
-          descripcion: "Especificaciones: Intel i5, 8GB RAM, 256GB SSD, Nvidia GeForce 520M\nOrdenador muy cuidado, siempre en casa y de uso ocasional. Únicamente navegación web y visualización de películas, nada de juegos.\n Se vende por falta de uso. Se acepta cambio por smartphone valorado en más de 300€",
-          precio: 500,
-          vendido_por: "Conan",
+          titulo: this.info.data.productos[this.id].titulo,
+          descripcion: this.info.data.productos[this.id].descripcion,
+          visualizaciones: this.info.data.productos[this.id].visualizaciones,
+          precio: this.info.data.productos[this.id].precioBase,
+          tipoVenta: this.info.data.productos[this.id].tipo,
+          categoria: this.info.data.productos[this.id].categoria_nombre,
+          fecha: this.info.data.productos[this.id].fecha,
+          vendido_por: this.info.data.productos[this.id].vendedor,
+          whatever: "jejejejjeje",
+          numero: 300,
           razones_venta: "Se vende por poco uso. Lo uso de pisapapeles y atrapapolvo.",
           zona_geografica: 'https://snazzy-maps-cdn.azureedge.net/assets/127403-no-label-bright-colors.png?v=20171101110035',
           trueque: true,
@@ -70,7 +69,6 @@
             },]
         }
       }
-
     }
   }
 
