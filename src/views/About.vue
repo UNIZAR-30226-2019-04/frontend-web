@@ -1,22 +1,28 @@
 <template>
   <div>
-    <makeReview></makeReview>
+    <div>
+      <router-link to="PruebaProducto">Ir a integracion de producto</router-link>
+    </div>
+    <div>
+      <makeReview></makeReview>
+    </div>
   </div>
 </template>
 
 <script>
   import ChatWindow from "../components/chatWindow";
   import makeReview from '../components/makeReview'
+
   export default {
     name: "About",
-    components: {ChatWindow,makeReview},
+    components: {ChatWindow, makeReview},
     data() {
       return {
         conversaciones: null
       }
 
     },
-    methods:{
+    methods: {
       getMsg: function (idConversacion) {
 
       }
