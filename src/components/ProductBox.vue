@@ -22,14 +22,7 @@
                           style="background-color: transparent">
         </b-carousel-slide>
       </b-carousel>
-      <!--<v-carousel hide-delimiters max="300px">-->
-      <!--<v-carousel-item-->
-      <!--v-for="(img,index) in product.multimedia"-->
-      <!--:key="index"-->
-      <!--v-if="!img.tipo" :img-src="img.path"-->
-      <!--style="background-color: transparent"-->
-      <!--&gt;</v-carousel-item>-->
-      <!--</v-carousel>-->
+
       <br>
       <b-card-title>
         {{ product.titulo }}
@@ -50,14 +43,24 @@
             Ver producto
           </router-link>
         </b-col>
-        <b-col>
-          <p style="color: #20a8d8; margin-right: 10px;" align="right">
-            <b><h1>{{ product.precio }}€</h1></b>
-          </p>
-        </b-col>
       </b-row>
 
       <b-row>
+        <b-col class="column2">
+          <b-btn v-if="comprado">
+            <a class="card-link" v-b-modal.modal2>Val. usuario</a>
+          </b-btn>
+          <b-modal id="modal2"
+                   ref="modalReview"
+                   title="Hacer review"
+                   header-bg-variant="danger"
+                   hide-footer
+          >
+            <make-review :valorado="product.vendedor" @close="ocultarModal"></make-review>
+            <!--<b-btn class="btn-primary" style="margin-right: 10px">SI</b-btn>-->
+            <!--<b-btn @click="ocultarModal">CANCELAR</b-btn>-->
+          </b-modal>
+        </b-col>
         <b-col class="column2">
           <ShareButton></ShareButton>
         </b-col>
@@ -77,35 +80,23 @@
 <script>
   import ShareButton from "./Share";
   import  axios from 'axios';
+  import MakeReview from "./makeReview";
   export default {
     name: "ProductBox",
-    components: {ShareButton},
-    props: ['product'],
+    components: {MakeReview, ShareButton},
+    props: ['product', 'comprado'],
     data() {
       return {
         likeColor: 'color: #ff6b6b;',
         unlikeColor: 'color: #000000;',
         likeIcon: 'fas fa-heart',
-        unlikeIcon: 'far fa-heart',
-        nombre: "Portátil ASUS nuevo",
-        descripcion: "Producto a la venta, recién estrenado y en muy buen estado, todavía en garantía, solamente se vende porque me han regalado otro.",
-        precio: 25,
-        like: false,
-        images: [{
-          src: "https://picsum.photos/1024/480/?image=52",
-          id: 1
-        },
-          {
-            src: "https://picsum.photos/1024/480/?image=54",
-            id: 4
-          },
-          {
-            src: "https://picsum.photos/1024/480/?image=58",
-            id: 3
-          },]
+        unlikeIcon: 'far fa-heart'
       }
     },
     methods: {
+      ocultarModal() {
+        this.$refs['modalReview'].hide()
+      },
       liked: function () {
         this.product.deseado = !this.product.deseado;
         let url = 'http://155.210.47.51:5000/deseados/' + this.$store.getters.user;
