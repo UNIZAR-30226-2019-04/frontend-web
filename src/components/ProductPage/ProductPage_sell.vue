@@ -8,12 +8,14 @@
         </b-button>
       </b-card-header>
 
-      <b-card-body v-if="tipo === 'no'">
+      <b-card-body v-if="tipo === normal">
+        <h1>Es un tipo de venta normal</h1>
         <b-card-title>{{precioFinal}}€</b-card-title>
         <button>COMPRAR AHORA</button>
       </b-card-body>
 
-      <b-card-body v-else-if="tipo === 'Subasta'">
+      <b-card-body v-else-if="tipo === subasta">
+        <h1>Es una subasta</h1>
         <b-card-title>Precio actual: {{precioFinal}}€</b-card-title>
         <CountdownTimer :end-time="endTim"></CountdownTimer>
         <!--<b-input :placeholder="Nueva puja"></b-input>-->
