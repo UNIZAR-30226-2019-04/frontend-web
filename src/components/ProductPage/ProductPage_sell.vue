@@ -8,7 +8,7 @@
         </b-button>
       </b-card-header>
 
-      <b-card-body v-if="tipo === 'Compra'">
+      <b-card-body v-if="tipo === 'no'">
         <b-card-title>{{precioFinal}}€</b-card-title>
         <button>COMPRAR AHORA</button>
       </b-card-body>

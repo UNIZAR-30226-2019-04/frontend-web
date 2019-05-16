@@ -50,11 +50,6 @@
             Ver producto
           </router-link>
         </b-col>
-        <b-col>
-          <p style="color: #20a8d8; margin-right: 10px;" align="right">
-            <b><h1>{{ product.precio }}€</h1></b>
-          </p>
-        </b-col>
       </b-row>
 
       <b-row>
