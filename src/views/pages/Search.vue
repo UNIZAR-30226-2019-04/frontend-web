@@ -2,9 +2,9 @@
   <div>
     <b-row>
       <b-col cols="2" style="margin-left: 15px">
-        <p>Precio máximo: {{prMax}}</p>
-        <p>Distancia máxima: {{distanciaMax}}</p>
-        <p>ValoracionMin: {{valMax}}</p>
+        <!--<p>Precio máximo: {{prMax}}</p>-->
+        <!--<p>Distancia máxima: {{distanciaMax}}</p>-->
+        <!--<p>ValoracionMin: {{valMax}}</p>-->
         <filters :valVendedor="valMax" :precioMax="prMax" @selected="newTag" @precio="nuevoPrecio" @dist="nuevaDistancia"></filters>
       </b-col>
       <b-col style="margin-right: 10px">
@@ -43,21 +43,23 @@
         <b-tab title="Productos encontrados" active style="margin-top: 30px; margin-left: 30px; margin-right: 30px">
           <!--<p class="mt-3">Página {{ pagina }} de {{ (elementos/porPagina + 1).toFixed(0) }}</p>-->
           <b-card-group columns>
+            <!--v-if="index<(porPagina*pagina) && index>=(porPagina*pagina-porPagina)"-->
             <ProductBox v-for="(product, index) in products" :key="index"
-                        v-if="index<(porPagina*pagina) && index>=(porPagina*pagina-porPagina)" :product="product"
+                         :product="product"
                         style="margin-bottom: 10px;"></ProductBox>
           </b-card-group>
-          <b-pagination
-            style="align-self: center"
-            v-model="pagina"
-            :total-rows="elementos"
-            :per-page="porPagina"
-            aria-controls="buscados"
-          ></b-pagination>
           <b-button-group style="margin-bottom: 30px; align-self: center">
-            <b-button v-on:click="elemPerPage(25)" :variant="elegido(25) ? estilo : estilo2">25</b-button>
-            <b-button v-on:click="elemPerPage(50)" :variant="elegido(50) ? estilo: estilo2">50</b-button>
-            <b-button v-on:click="elemPerPage(100)" :variant="elegido(100) ? estilo: estilo2">100</b-button>
+            <b-button v-on:click="currentPage(pagina-1)"><-</b-button>
+            <b-button v-for="i in paginas" :key="i"
+                      style="border-color: darkgray"
+                      v-on:click="currentPage(i)"
+                      :variant=" i === pagina ? 'primary' : 'white'">{{i}}</b-button>
+            <b-button v-on:click="currentPage(pagina+1)">-></b-button>
+          </b-button-group>
+          <b-button-group style="margin-bottom: 30px; align-self: center; border-color: darkgray">
+            <b-button v-on:click="elemPerPage(10)" :variant="elegido(10) ? 'success' : 'white'">10</b-button>
+            <b-button v-on:click="elemPerPage(25)" :variant="elegido(25) ? 'success': 'white'">25</b-button>
+            <b-button v-on:click="elemPerPage(50)" :variant="elegido(59) ? 'success': 'white'">50</b-button>
           </b-button-group>
         </b-tab>
       </b-col>
@@ -69,10 +71,11 @@
   import Filters from "../../components/Filters";
   import ProductBox from "../../components/ProductBox";
   import axios from "axios";
+  import LIcon from "vue2-leaflet/src/components/LIcon";
 
   export default {
     name: "Search",
-    components: {ProductBox, Filters},
+    components: {LIcon, ProductBox, Filters},
     props: {
       textoProp: {
         type: String,
@@ -82,15 +85,14 @@
     data() {
       return {
         tags: [],
+        total: 0,
         valMax: 5,
         texto: '',
         prMax: 1000,
         distanciaMax: 1000,
-        estilo: 'success',
-        estilo2: 'white',
         value: '',
         order: null,
-        porPagina: 25,
+        porPagina: 10,
         pagina: 1,
         cats: [],
         tipo: [],
@@ -172,14 +174,18 @@
       elegido: function (num) {
         return (num === this.porPagina);
       },
+      currentPage(val) {
+        this.pagina = val;
+        this.actualizarProds();
+      },
       actualizarProds: function () {
         let urlTags = 'http://155.210.47.51:5000/producto/?preciomin=0&valoracionMax=' + this.valMax;
-        urlTags = urlTags + '&preciomax=' + this.prMax + '&page=' + this.pagina + '&number=' + this.porPagina;
+        urlTags = urlTags + '&preciomax=' + this.prMax + '&page=' + (this.pagina-1) + '&number=' + this.porPagina;
         // urlTags = urlTags + '&longitud=' + this.$store.getters.currentUser.longitud;
         // urlTags = urlTags + '&latitud=' + this.$store.getters.currentUser.latitud;
         // urlTags = urlTags + '&radioUbicacion=' + this.distanciaMax*1000;
         if (this.texto.length > 0) {
-          // console.log('texto : ', this.texto);
+          console.log('texto : ' , this.texto);
           urlTags = urlTags + '&textoBusqueda=' + this.texto;
         }
         if (this.tipo.length > 0) {
@@ -195,17 +201,26 @@
           }
         }
         // console.log(urlTags);
-        axios.get(urlTags).then(response => (this.products = response.data));
+        axios.get(urlTags).then(response => {
+          this.products = response.data.productos;
+          this.total = response.data.resultados;
+          console.log(response);
+        });
       }
     },
     computed: {
-      elementos() {
-        return this.products.length;
+      paginas() {
+        let pag = Number((this.total/this.porPagina).toFixed(0));
+        if (pag < 1){
+          return 1;
+        }else{
+          return pag;
+        }
       }
     },
     mounted() {
       let urlTags = 'http://155.210.47.51:5000/producto/?preciomin=0&valoracionMax=' + this.valMax;
-      urlTags = urlTags + '&preciomax=' + this.prMax + '&page=' + this.page + '&number=' + this.porPagina;
+      urlTags = urlTags + '&preciomax=' + this.prMax + '&page=0' + '&number=' + this.porPagina;
       // urlTags = urlTags + '&longitud=' + this.$store.getters.currentUser.longitud;
       // urlTags = urlTags + '&latitud=' + this.$store.getters.currentUser.latitud;
       // urlTags = urlTags + '&radioUbicacion=' + this.distanciaMax*1000;
@@ -213,9 +228,14 @@
       if (this.texto.length > 0) {
         urlTags = urlTags + '&textoBusqueda=' + this.texto;
       }
-      console.log('lat : ',this.$store.getters.currentUser.latitud);
-      console.log('long : ',this.$store.getters.currentUser.longitud);
-      axios.get(urlTags).then(response => (this.products = response.data));
+      // console.log('lat : ',this.$store.getters.currentUser.latitud);
+      // console.log(urlTags);
+      // console.log('long : ',this.$store.getters.currentUser.longitud);
+      axios.get(urlTags).then(response => {
+        this.products = response.data.productos;
+        this.total = response.data.resultados;
+        // console.log(response);
+      });
     }
   }
 </script>
