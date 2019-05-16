@@ -30,25 +30,28 @@
     data() {
       return {
         id: 0,
-        info: null
+        info: null,
+        infoExtended: null,
       }
     },
     mounted() {
-      axios.get(`${API_BASE}/producto/`).then(response => (this.info = response))
+      axios.get(`${API_BASE}/producto/`).then(response => (this.info = response));
+      axios.get(`${API_BASE}/producto/${this.$route.query.idProd}`).then(response => (this.infoExtended = response));
+      console.log(this.$route.query.idProd)
     },
     methods: {
       informacion: function () {
         return {
           myData: "jojojojojojojojojoj",
           fotoPerfil: 'https://www.pcper.com/files/imagecache/article_max_width/review/2011-04-24/asusk53e-3.jpg',
-          titulo: this.info.data.productos[this.id].titulo,
-          descripcion: this.info.data.productos[this.id].descripcion,
-          visualizaciones: this.info.data.productos[this.id].visualizaciones,
-          precio: this.info.data.productos[this.id].precioBase,
-          tipoVenta: this.info.data.productos[this.id].tipo,
-          categoria: this.info.data.productos[this.id].categoria_nombre,
-          fecha: this.info.data.productos[this.id].fecha,
-          vendido_por: this.info.data.productos[this.id].vendedor,
+          titulo: this.infoExtended.data.titulo,
+          descripcion: this.infoExtended.data.descripcion,
+          visualizaciones: this.infoExtended.data.visualizaciones,
+          precio: this.infoExtended.data.precioBase,
+          tipoVenta: this.infoExtended.data.tipo,
+          categoria: this.infoExtended.data.categoria_nombre,
+          fecha: this.infoExtended.data.fecha,
+          vendido_por: this.infoExtended.data.vendedor,
           whatever: "jejejejjeje",
           numero: 300,
           razones_venta: "Se vende por poco uso. Lo uso de pisapapeles y atrapapolvo.",

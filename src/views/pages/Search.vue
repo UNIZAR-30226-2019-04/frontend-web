@@ -10,7 +10,7 @@
       <b-col style="margin-right: 10px">
         <b-row class="justify-content-md-center">
           <b-col col lg="4">
-            <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Búsqueda"
+            <b-form-input size="md" class="mr-sm-2" type="text" placeholder="Búsqueda"
                           v-on:change="actualizarProds"
                           @keypress="actualizarProds"
                           v-model="texto"/>

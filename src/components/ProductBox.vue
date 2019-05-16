@@ -50,6 +50,9 @@
             Ver producto
           </router-link>
         </b-col>
+        <b-col>
+          <button @click="infoProducto()">AQUI</button>
+        </b-col>
       </b-row>
 
       <b-row>
@@ -62,9 +65,6 @@
           </b-btn>
         </b-col>
       </b-row>
-      <!--<ShareButton></ShareButton>-->
-      <!--<b-btn v-on:click="liked" style="background-color: transparent; margin-top: 4px; margin-left: -1px"><i-->
-      <!--:class="isLiked() ? likeIcon : unlikeIcon" :style="isLiked() ? likeColor : unlikeColor"></i></b-btn>-->
     </b-card>
   </div>
 </template>
@@ -82,25 +82,15 @@
         unlikeColor: 'color: #000000;',
         likeIcon: 'fas fa-heart',
         unlikeIcon: 'far fa-heart',
-        nombre: "Portátil ASUS nuevo",
-        descripcion: "Producto a la venta, recién estrenado y en muy buen estado, todavía en garantía, solamente se vende porque me han regalado otro.",
-        precio: 25,
-        like: false,
-        images: [{
-          src: "https://picsum.photos/1024/480/?image=52",
-          id: 1
-        },
-          {
-            src: "https://picsum.photos/1024/480/?image=54",
-            id: 4
-          },
-          {
-            src: "https://picsum.photos/1024/480/?image=58",
-            id: 3
-          },]
       }
     },
     methods: {
+      infoProducto: function(){
+        console.log("AQUI");
+        console.log(this.product.id);
+        // with query, resulting in /register?plan=private
+        this.$router.push({ path: 'ProductPage', query: { idProd: this.product.id } })
+      },
       liked: function () {
         this.product.deseado = !this.product.deseado;
         let url = 'http://155.210.47.51:5000/deseados/' + this.$store.getters.user;
