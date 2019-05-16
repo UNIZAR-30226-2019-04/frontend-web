@@ -28,15 +28,16 @@
         </b-form>
       </b-card-body>
 
+      <b-card-body v-else-if="tipo === trueque">
+        <b-card-title>Trueque disponible</b-card-title>
+        <b-card-text>{{ method.cambioTrueque }}</b-card-text>
+      </b-card-body>
+
+
       <b-list-group flush>
         <b-list-group-item>{{ method.razones_venta }}</b-list-group-item>
         <img :src="method.zona_geografica">
       </b-list-group>
-
-      <b-card-body v-if="method.trueque">
-        <b-card-title>Trueque disponible</b-card-title>
-        <b-card-text>{{ method.cambioTrueque }}</b-card-text>
-      </b-card-body>
 
       <!--<b-card-footer>Otras fotos</b-card-footer>-->
     </b-card>

@@ -16,7 +16,7 @@
     </div>
     <b-card no-body class="mb-1">
       <b-card-header header-tag="header" class="p-1" role="tab">
-        <b-button block href="#" v-b-toggle.accordion-1 variant="info" style="font-size: 1.1rem; font-weight: bold; margin-top: 0.5%; margin-bottom: 0.5%">Val. minima del vendedor</b-button>
+        <b-button block href="#" v-b-toggle.accordion-1 variant="info" style="font-size: 1.1rem; font-weight: bold; margin-top: 0.5%; margin-bottom: 0.5%">Valoración mínima</b-button>
       </b-card-header>
       <b-collapse id="accordion-1" visible accordion="my-accordion">
         <b-card-body>
@@ -44,13 +44,16 @@
     </b-card>
     <b-card no-body class="mb-1">
       <b-card-header header-tag="header" class="p-1">
-        <b-button block href="#" v-b-toggle.accordion-4 variant="info">Tipo de venta</b-button>
+        <b-button block href="#" style="font-size: 1.1rem; font-weight: bold; margin-top: 0.5%; margin-bottom: 0.5%"v-b-toggle.accordion-4 variant="info">Tipo de venta</b-button>
       </b-card-header>
       <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
         <b-card-body>
-          <b-btn v-on:click="tipovent('normal')" style="background-color: transparent; border: transparent"><label>Venta normal</label></b-btn>
-          <b-btn v-on:click="tipovent('subasta')" style="background-color: transparent; border: transparent"><label>Subasta</label></b-btn>
-          <b-btn v-on:click="tipovent('trueque')" style="background-color: transparent; border: transparent"><label>Trueque</label></b-btn>
+          <b-btn v-on:click="tipovent('normal')" style="font-size: 1.1rem; background-color: transparent; border: transparent"><label>Venta normal</label></b-btn>
+          <br/>
+          <b-btn v-on:click="tipovent('subasta')" style="font-size: 1.1rem; background-color: transparent; border: transparent"><label>Subasta</label></b-btn>
+          <br/>
+          <b-btn v-on:click="tipovent('trueque')" style="font-size: 1.1rem; background-color: transparent; border: transparent"><label>Trueque</label></b-btn>
+          <br/>
         </b-card-body>
       </b-collapse>
     </b-card>
