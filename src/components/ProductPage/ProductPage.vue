@@ -1,6 +1,6 @@
 <template>
   <b-row style="margin-right: 10px;">
-    <makeReview></makeReview>
+    <!--<makeReview></makeReview>-->
     <br/>
     <b-col cols="auto" sm="3">
       <ProductPage_img :method="informacion()"></ProductPage_img>
@@ -23,7 +23,7 @@
   import ProductPage_img from './ProductPage_img'
   import ProductPage_details from './ProductPage_details'
   import ProductPage_sell from './ProductPage_sell'
-  import makeReview from '../makeReview'
+  // import MakeReview
 
   export default {
     name: "ProductPage",

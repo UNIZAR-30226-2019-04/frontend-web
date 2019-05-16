@@ -44,11 +44,16 @@
 
       <b-row>
         <b-col>
-          <router-link to="ProductPage" class="btn"
+          <!--<router-link to="ProductPage" @click="infoProducto()" class="btn"-->
+                       <!--style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-bottom: 5px;"-->
+                       <!--align="center">-->
+            <!--Ver producto-->
+          <!--</router-link>-->
+          <button @click="infoProducto()" class="btn"
                        style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-bottom: 5px;"
                        align="center">
             Ver producto
-          </router-link>
+          </button>
         </b-col>
         <b-col>
           <button @click="infoProducto()">AQUI</button>
