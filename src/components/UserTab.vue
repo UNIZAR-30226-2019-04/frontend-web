@@ -5,16 +5,26 @@
         <b-card-group columns>
           <ProductBox v-for="(product, index) in prods" :key="index"
                       :product="product"
+                      :comprado="false"
                       style="margin-bottom: 10px;"></ProductBox>
         </b-card-group>
       </b-tab>
       <b-tab title="Valoraciones recibidas">
         <UserReview v-for="(val,index) in valGet" :key="index" :valoracion="val"></UserReview>
       </b-tab>
+      <b-tab title="Comprados" style="margin-top: 10px; margin-left: 10px; ">
+        <b-card-group columns>
+          <ProductBox  v-if="comprados.length > 0" v-for="(product, index) in comprados" :key="index"
+                      :product="product"
+                      :comprado="true"
+                      style="margin-bottom: 10px;"></ProductBox>
+        </b-card-group>
+      </b-tab>
       <b-tab title="Lista de deseos" style="margin-top: 10px; margin-left: 10px; ">
         <b-card-group columns>
           <ProductBox v-for="(product, index) in deseados" :key="index"
                       :product="product"
+                      :comprado="false"
                       style="margin-bottom: 10px;"></ProductBox>
         </b-card-group>
       </b-tab>
@@ -39,6 +49,7 @@
         deseados: [],
         valDone : [],
         valGet : [],
+        comprados: []
       }
     },
     mounted() {
@@ -48,6 +59,10 @@
         this.deseados = response.data.deseados;
         this.valDone = response.data.valoraciones_hechas;
         this.valGet = response.data.valoraciones_recibidas;
+      });
+      url = url + '/comprados';
+      axios.get(url).then(response => {
+        this.comprados = response.data;
       });
     }
   }

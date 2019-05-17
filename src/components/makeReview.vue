@@ -1,5 +1,6 @@
 <template>
-    <v-card height="300px" width="500px">
+  <!--<v-card height="300px" width="500px">-->
+  <v-card>
     <form>
       <v-text-field
         v-model="titulo"
@@ -15,13 +16,13 @@
       <v-btn @click="uploadReview">Submit</v-btn>
       <v-btn @click="clear">Clear</v-btn>
     </form>
-    <p>Valoracion: {{valor}}</p>
-    </v-card>
+  </v-card>
 </template>
 
 <script>
-import StarRating from './StarRating';
-import axios from 'axios';
+  import StarRating from './StarRating';
+  import axios from 'axios';
+
   export default {
     name: "makeReview",
     components: {StarRating},
@@ -35,17 +36,17 @@ import axios from 'axios';
       }
     },
     methods: {
-      submit () {
+      submit() {
         this.fecha = new Date();
       },
-      clear () {
+      clear() {
         this.titulo = ''
         this.descripcion = ''
       },
-      setRating (value){
+      setRating(value) {
         this.valor = value;
       },
-      uploadReview (){
+      uploadReview() {
         this.fecha = new Date();
         let data = {
           titulo: this.titulo,
@@ -58,7 +59,9 @@ import axios from 'axios';
           'Content-Type': 'application/json',
           'Authorization': this.$store.getters.token
         };
-        axios.post(url,data,{headers: headers});
+        axios.post(url, data, {headers: headers}).catch(error => (console.log(error)));
+        console.log(data);
+        this.$emit('close');
       }
     }
   }
