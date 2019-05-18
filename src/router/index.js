@@ -10,7 +10,7 @@ import EditProfile from "../views/pages/EditProfile";
 import ProductPage from '@/components/ProductPage/ProductPage'
 import UploadProduct from "../views/pages/UploadProduct"; // Ruta absoluta. Habrá que cambiar las rutas de arriba que son relativas
 import PruebaProducto from "../views/pages/PruebaProducto";
-
+import store from "../store"
 // Containers
 const DefaultContainer = () => import('@/containers/DefaultContainer')
 
@@ -75,6 +75,9 @@ export default new Router({
   mode: 'hash', // https://router.vuejs.org/api/#mode
   linkActiveClass: 'open active',
   scrollBehavior: () => ({ y: 0 }),
+  beforeEach: {
+
+  },
   routes: [
     // {
     //   path: '/',
@@ -330,7 +333,14 @@ export default new Router({
     {
       path: '/login',
       name: 'LogIn',
-      component: Login
+      component: Login,
+      beforeEnter(to, from, next) {
+        if (store.getters.isLoggedIn) {
+          next('/Profile');
+        } else {
+          next();
+        }
+      }
     },
     {
       path: '/Sign',
@@ -340,17 +350,38 @@ export default new Router({
     {
       path: '/Profile',
       name: 'Profile',
-      component: Profile
+      component: Profile,
+      beforeEnter(to, from, next) {
+        if (store.getters.isLoggedIn) {
+          next();
+        } else {
+          next('/Login');
+        }
+      }
     },
     {
       path: '/EditProfile',
       name: 'EditProfile',
-      component: EditProfile
+      component: EditProfile,
+      beforeEnter(to, from, next) {
+        if (store.getters.isLoggedIn) {
+          next();
+        } else {
+          next('/Login');
+        }
+      }
      },
     {
       path: '/ProductPage',
       name: 'ProductPage',
-      component: ProductPage
+      component: ProductPage,
+      beforeEnter(to, from, next) {
+        if (store.getters.isLoggedIn) {
+          next();
+        } else {
+          next('/Login');
+        }
+      }
     },
     {
       path: '/PruebaProducto',
@@ -360,42 +391,19 @@ export default new Router({
     {
       path: '/UploadProduct',
       name: 'UploadProduct',
-      component: UploadProduct
+      component: UploadProduct,
+      beforeEnter(to, from, next) {
+        if (store.getters.isLoggedIn) {
+          next();
+        } else {
+          next('/Login');
+        }
+      }
     },
     {
       path: '/Search',
       name: 'Search',
       component: Search
-    },
-    {
-      path: '/pages',
-      redirect: '/pages/login',
-      name: 'Pages',
-      component: {
-        render (c) { return c('router-view') }
-      },
-      // children: [
-      //   {
-      //     path: '404',
-      //     name: 'Page404',
-      //     component: Page404
-      //   },
-      //   {
-      //     path: '500',
-      //     name: 'Page500',
-      //     component: Page500
-      //   },
-      //   {
-      //     path: 'login',
-      //     name: 'Login',
-      //     component: Login
-      //   },
-      //   {
-      //     path: 'register',
-      //     name: 'Register',
-      //     component: Register
-      //   }
-      // ]
     }
   ]
 })
