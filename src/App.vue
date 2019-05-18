@@ -5,14 +5,16 @@
             rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
     </head>
-    <!--<div class="mainheader">-->
+      <!--<div class="mainheader">-->
+      <!--</div>-->
+    <div class="content">
       <Header></Header>
-    <!--</div>-->
-    <router-view></router-view>
+      <router-view></router-view>
+      </div>
 
-    <!--<div id="Footer">-->
-      <Footer></Footer>
-    <!--</div>-->
+      <div class="footer">
+        <Footer></Footer>
+      </div>
   </div>
 </template>
 
@@ -63,6 +65,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
+
+
     /*height: fit-content; !* Hace que el header no desaparezca cuando se hace scroll vertical. *!*/
     /*height: 105%; !* Hace que el header no desaparezca cuando se hace scroll vertical. *!*/
   }
@@ -71,9 +75,9 @@
     height: 100%;
   }
 
-  Footer {
-    /*bottom: 0%;*/
+  footer {
     width: 100%;
+    height: 41px;
   }
 
   main {
@@ -102,6 +106,10 @@
     font-weight: 400;
     box-sizing: border-box;
     padding-top: 16px;
+  }
+
+  .content {
+    min-height: calc(100vh - 40px);
   }
 
 </style>
