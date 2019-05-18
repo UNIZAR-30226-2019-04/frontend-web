@@ -62,8 +62,8 @@
           trueque: true,
           cambioTrueque: "Smartphone valorado en más de 300€",
           images: [{
-            src: this.infoExtended.data.multimedia[0].path,
-            // src: 'https://www.asus.com/media/US/products/fCGFt3hiSAQYMnvO/P_500.jpg',
+            // src: this.infoExtended.data.multimedia[0].path,
+            src: 'https://www.asus.com/media/US/products/fCGFt3hiSAQYMnvO/P_500.jpg',
             id: 1
           },
             // {
