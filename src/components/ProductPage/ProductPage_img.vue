@@ -21,11 +21,7 @@
 
       <b-list-group style="font-size: 1.1rem; font-weight: lighter">
         <b-list-group-item>{{ method.vendido_por }}</b-list-group-item>
-        <!--<b-list-group-item>{{ method.vendor_data }}</b-list-group-item>-->
-        <!--<button @click="jeje()">jeje</button>-->
-        <!--<h1>{{this.info}}</h1>-->
         <b-list-group-item>
-          <!--<img src=info.data.imagen_perfil-->
           <img :src=info.data.imagen_perfil width=100%>
         </b-list-group-item>
         <b-list-group-item>
@@ -34,7 +30,10 @@
           {{ info.data.apellidos }}
         </b-list-group-item>
         <b-list-group-item>{{ info.data.descripcion }}</b-list-group-item>
-        <b-list-group-item>{{ info.data.productos_vendidos }}</b-list-group-item>
+        <b-list-group-item>
+          <p style="font-weight: bold">Ventas realizadas:</p>
+          {{ info.data.productos_vendidos }}
+        </b-list-group-item>
         <b-list-group-item>Aqui pueden venir las fotos del vendedor</b-list-group-item>
       </b-list-group>
       <!--<b-list-group flush border="none">-->

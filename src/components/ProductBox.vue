@@ -55,9 +55,6 @@
             Ver producto
           </button>
         </b-col>
-        <b-col>
-          <button @click="infoProducto()">AQUI</button>
-        </b-col>
       </b-row>
 
       <b-row>
@@ -93,7 +90,6 @@
       infoProducto: function(){
         console.log("AQUI");
         console.log(this.product.id);
-        // with query, resulting in /register?plan=private
         this.$router.push({ path: 'ProductPage', query: { idProd: this.product.id } })
       },
       liked: function () {
