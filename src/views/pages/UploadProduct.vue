@@ -45,7 +45,17 @@
             <a><b>
               <br/>Seleccione la ubicación del producto:<br/><br/>
             </b></a>
-            <Mapa ref="map"></Mapa>
+            <b-input-group>
+              <b-input
+                id="inline-form-input-name"
+                class="mb-2 mr-sm-2 mb-sm-0"
+                placeholder="Buscar dirección..."
+                v-model="address"
+              ></b-input>
+              <b-button class="mb-2 mr-sm-2 mb-sm-0" variant="primary" v-on:click="buscarPosicion">Buscar</b-button>
+            </b-input-group>
+
+            <Mapa ref="map" :preview="preview" :radius="radius"></Mapa>
           </div>
 
           <div style="margin: 5%;">
@@ -56,6 +66,7 @@
                          v-model="radius"
                          :data="radiusData"
                          :range="radiusRange"
+                         :tooltip-styles="{ backgroundColor: '#20a8d8', borderColor: '#20a8d8' }"
                          :labelStyles="{ color: '#4a4a4a', backgroundColor: '#4a4a4a' }"
                          :processStyle="{ backgroundColor: '#d8d8d8' }"
             ></VueSlideBar>
@@ -137,43 +148,63 @@
     components: {Uploader, VueSlideBar, Datepicker, Mapa},
     data() {
       return {
+        preview: false,
         title: '',
         file: [],
+        address: "",
         description: '',
         price: null,
         priceAux: null,
         radius: null,
         radiusData: [
-          5,
-          15,
-          30,
-          45,
-          60,
-          75,
-          90,
-          120,
-          300
+          100,
+          200,
+          500,
+          750,
+          1000,
+          5000,
+          15000,
+          30000,
+          45000,
+          60000,
+          90000,
+          120000,
+          300000
         ],
         radiusRange: [
           {
-            label: '5 km'
+            label: '100 m'
           },
           {
-            label: '15 km',
-            isHide: true,
-          },
-          {
-            label: '30 km'
-          },
-          {
-            label: '45 km',
+            label: '200 m',
             isHide: true
           },
           {
-            label: '60 km'
+            label: '500 m'
           },
           {
-            label: '75 km',
+            label: '750 m',
+            isHide: true
+          },
+          {
+            label: '1 km'
+          },
+          {
+            label: '5 km',
+            isHide: true
+          },
+          {
+            label: '15 km',
+          },
+          {
+            label: '30 km',
+            isHide: true
+          },
+          {
+            label: '45 km'
+          },
+          {
+            label: '60 km',
             isHide: true
           },
           {
@@ -233,6 +264,29 @@
           this.endTime.day = this.select.getDay();
           this.endTime.month = this.select.getMonth();
           this.endTime.year = this.select.getFullYear();
+        }
+      },
+      buscarPosicion: function () {
+        for (var i = 0; i < 3; i++) {
+          this.$store.dispatch("getPosition", this.address).then(() => {
+            let candidates = this.$store.getters.last_position;
+            console.log(candidates);
+
+            console.log(candidates.length)
+            if (candidates.length !== 1) {
+              this.notSelected = "Sea más específico con la dirección.\n"
+            } else {
+              this.notSelected = "";
+              let location = candidates[0];
+              let newCenter = {
+                lat: location['lat'],
+                lng: location['lon']
+              };
+              console.log(newCenter);
+              this.$refs.map.zoomUpdated("17");
+              this.$refs.map.centerUpdated(newCenter);
+            }
+          })
         }
       },
       subirProducto: function () {
