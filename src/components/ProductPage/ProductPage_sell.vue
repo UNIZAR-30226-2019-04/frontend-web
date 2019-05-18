@@ -9,14 +9,21 @@
       </b-card-header>
 
       <b-card-body v-if="tipo === normal">
-        <h1>Es un tipo de venta normal</h1>
-        <b-card-title>{{precioFinal}}€</b-card-title>
-        <button>COMPRAR AHORA</button>
+        <!--<h1>Es un tipo de venta normal</h1>-->
+        <br/>
+        <b-card-title style="font-size: xx-large"> {{ method.precio }} €</b-card-title>
+        <br/>
+        <button @click="procesoCompra()" class="btn"
+                style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-bottom: 5px;"
+                align="center">
+          COMPRAR AHORA
+        </button>
       </b-card-body>
 
       <b-card-body v-else-if="tipo === subasta">
         <h1>Es una subasta</h1>
-        <b-card-title>Precio actual: {{precioFinal}}€</b-card-title>
+        <b-card-title>Precio actual: {{method.precio}}€</b-card-title>
+        <br/>
         <CountdownTimer :end-time="endTim"></CountdownTimer>
         <!--<b-input :placeholder="Nueva puja"></b-input>-->
         <b-form>
@@ -46,32 +53,51 @@
 
 <script>
   import CountdownTimer from "../CountdownTimer";
+  import {API_BASE} from "../../config";
+  import axios from "axios";
 
   export default {
     name: "ProductPage_sell",
     components: {CountdownTimer},
     // la funcion que hereda del papi
-    props: {
-      method: {type: Function},
-      tipo: {type: String}
-    },
     data() {
       return {
+        id_vendedor: this.method.vendido_por,
+        idProducto: this.method.idProducto,
         endTim: {
           day: 19,
           month: 5,
-          year: 2019
+          year: 2019,
         },
-        precio: 1,
-        precioFinal: 500
+        precio_: this.method.precio,
       }
+    },
+    props: {
+      method: {type: Function},
     },
     mounted() {
       this.method();
+      console.log('Carga de _sell');
+      // console.log('El id_vendedor es: ', this.id_vendedor);
+      // console.log(${API_BASE}/user/${this.id_vendedor});
+      // axios.get(`${API_BASE}/user/${this.id_vendedor}`).then(response => (this.info = response));
     },
     methods: {
       actPrecio: function () {
-        this.precioFinal = this.precio;
+        // this.precioFinal = this.precio;
+      },
+
+      procesoCompra: function () {
+        console.log(this.precio_);
+        if(this.method.tipoVenta === 'normal'){
+          console.log('Es una venta normal');
+        }
+        else if(this.method.tipoVenta === 'subasta'){
+          console.log('Es una subasta');
+        }
+        console.log(`${API_BASE}/user/${this.id_vendedor}`);
+        console.log(`${API_BASE}/producto/${this.idProducto}`);
+        this.$router.push({path: 'CompraProducto', query: {idProd: this.idProducto, idVendor: this.id_vendedor}})
       }
     }
   }

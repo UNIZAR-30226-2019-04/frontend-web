@@ -48,6 +48,7 @@
       informacion: function () {
         return {
           // fotoPerfil: 'https://www.pcper.com/files/imagecache/article_max_width/review/2011-04-24/asusk53e-3.jpg',
+          idProducto: this.infoExtended.data.id,
           titulo: this.infoExtended.data.titulo,
           descripcion: this.infoExtended.data.descripcion,
           visualizaciones: this.infoExtended.data.visualizaciones,
