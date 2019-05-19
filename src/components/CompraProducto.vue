@@ -2,7 +2,6 @@
   <div>
     <b-row>
       <b-col style="margin-left: 5%" cols="4">
-        <p>Aqui va la caja del producto</p>
         <!--<p>{{producto}}</p>-->
         <!--<p>{{infoProd}}</p>-->
         <ProductBox :product=infoProdData :key=idProducto
@@ -12,12 +11,23 @@
         <div v-if="infoProdData.tipo === 'normal'">
           <h1> Usted va a comprar el producto con id {{this.idProducto}} vendido por {{this.idVendedor}}. Desea
             continuar?</h1>
-          <p> Nombre del vendedor {{ info.data.nombre }} </p>
+          <p> Nombre del vendedor {{ info.nombre }} </p>
           <p> y ya aqui vendria lo de PayPal o lo que fuera </p>
+          <p>fgddsdasfdsbgfgngfgdfd</p>
+          <PayPal
+            amount="10.00"
+            currency="USD"
+            :client="credentials"
+            env="sandbox">
+          </PayPal>
+          <p>fgddsdasfdsbgfgngfgdfd</p>
+
+
         </div>
         <div v-else-if="infoProdData.tipo === 'subasta'">
           <h1>Esto ES SUBASTA</h1>
-          <p>{{infoProdData.fecha}}</p>
+          <p>{{infoProdData.fechaexpiracion}}</p>
+          <p>{{infoProdData_date}}</p>
           <p>De momento el countdown timer está hardcodeado</p>
           <countdown-timer :end-time="endTim"></countdown-timer>
         </div>
@@ -26,7 +36,7 @@
         </div>
       </b-col>
     </b-row>
-    <button @click="sobreProd()">JEEJJEJEJ</button>
+    <button @click="sobreProd()">BOTON DEBUG</button>
   </div>
 </template>
 
@@ -36,27 +46,29 @@
   import axios from "axios";
   import {API_BASE} from "../config";
   import CountdownTimer from "./CountdownTimer";
-
+  import PayPal from 'vue-paypal-checkout'
 
   export default {
     name: "CompraProducto",
-    components: {CountdownTimer, BRow, ProductBox},
+    components: {CountdownTimer, BRow, ProductBox, PayPal},
     data() {
       return {
         idProducto: this.$route.query.idProd,
         idVendedor: this.$route.query.idVendor,
-        producto: `${API_BASE}/producto/${this.$route.query.idProd}`,
-        loquesea: null,
-        inte: 0,
+        // producto: `${API_BASE}/producto/${this.$route.query.idProd}`,
+        // loquesea: null,
+        // inte: 0,
         info: null,
         infoProd: null,
         infoProdData: null,
+        infoProdData_date: null,
         infoProd_type: null,
-        // fechaFin: this.infoProd.data.fecha,
+        loquesea: null,
         endTim: {
           // day: null,
           // month: null,
           // year: null,
+          // day: this.infoProdData.fechaexpiracion.split('/')[0],
           day: 5,
           month: 6,
           year: 2019,
@@ -66,17 +78,22 @@
     mounted() {
       console.log('desde la compra d producto');
       console.log(`${API_BASE}/producto/${this.idProducto}`);
-      axios.get(`${API_BASE}/user/${this.idVendedor}`).then(response => (this.info = response));
-      // axios.get(`${API_BASE}/producto/${this.idProducto}`).then(response => (this.infoProd = response));
+      axios.get(`${API_BASE}/user/${this.idVendedor}`).then(response => (this.info = response.data));
       axios.get(`${API_BASE}/producto/${this.idProducto}`).then(response => (this.infoProdData = response.data));
+      axios.get(`${API_BASE}/producto/${this.idProducto}`).then(response => (this.infoProdData_date = response.data.fechaexpiracion));
       console.log('PreCalculo');
+      console.log(this.infoProdData.fechaexpiracion);
     },
-    computed: {
-      // infoProd_type: this.infoProd.data.tipo,
+    created() {
+      // endTim: infoProdData.fechaexpiracion;
+      console.log('DESDE CREATTEEEEED');
+      console.log(this.infoProdData.fechaexpiracion);
     },
     methods: {
       sobreProd: function () {
         console.log('Al boton ajjajajaj');
+        console.log(this.infoProdData.fechaexpiracion);
+        // console.log(this.loquesea);
       }
     }
 

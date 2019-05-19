@@ -8,7 +8,7 @@
         </b-button>
       </b-card-header>
 
-      <b-card-body v-if="tipo === normal">
+      <b-card-body v-if="method.tipoVenta === 'normal'">
         <!--<h1>Es un tipo de venta normal</h1>-->
         <br/>
         <b-card-title style="font-size: xx-large"> {{ method.precio }} €</b-card-title>
@@ -20,14 +20,20 @@
         </button>
       </b-card-body>
 
-      <b-card-body v-else-if="tipo === subasta">
-        <h1>Es una subasta</h1>
+      <b-card-body v-else-if="method.tipoVenta === 'subasta'">
+        <!--<h1>Es una subasta</h1>-->
         <b-card-title>Precio actual: {{method.precio}}€</b-card-title>
         <br/>
         <CountdownTimer :end-time="endTim"></CountdownTimer>
-        <!--<b-input :placeholder="Nueva puja"></b-input>-->
         <b-form>
-          <b-input type="number" v-model="precio"></b-input>
+          <b-row>
+            <b-col>
+              <b-input type="number" v-model="precio"></b-input>
+            </b-col>
+            <b-col style="font-size: larger; margin-left: -15px">
+              €
+            </b-col>
+          </b-row>
           <b-button v-on:click="actPrecio()"
                     style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-top: 10px;">
             PUJAR
@@ -55,10 +61,11 @@
   import CountdownTimer from "../CountdownTimer";
   import {API_BASE} from "../../config";
   import axios from "axios";
+  import BRow from "bootstrap-vue/src/components/layout/row";
 
   export default {
     name: "ProductPage_sell",
-    components: {CountdownTimer},
+    components: {BRow, CountdownTimer},
     // la funcion que hereda del papi
     data() {
       return {
@@ -78,21 +85,17 @@
     mounted() {
       this.method();
       console.log('Carga de _sell');
-      // console.log('El id_vendedor es: ', this.id_vendedor);
-      // console.log(${API_BASE}/user/${this.id_vendedor});
-      // axios.get(`${API_BASE}/user/${this.id_vendedor}`).then(response => (this.info = response));
     },
     methods: {
       actPrecio: function () {
-        // this.precioFinal = this.precio;
+        this.precioFinal = this.precio;
       },
-
       procesoCompra: function () {
         console.log(this.precio_);
-        if(this.method.tipoVenta === 'normal'){
+        if (this.method.tipoVenta === 'normal') {
           console.log('Es una venta normal');
         }
-        else if(this.method.tipoVenta === 'subasta'){
+        else if (this.method.tipoVenta === 'subasta') {
           console.log('Es una subasta');
         }
         console.log(`${API_BASE}/user/${this.id_vendedor}`);
