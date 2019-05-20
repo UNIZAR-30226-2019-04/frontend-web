@@ -37,11 +37,16 @@
 
       <b-row>
         <b-col>
-          <router-link to="ProductPage" class="btn"
+          <!--<router-link to="ProductPage" @click="infoProducto()" class="btn"-->
+                       <!--style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-bottom: 5px;"-->
+                       <!--align="center">-->
+            <!--Ver producto-->
+          <!--</router-link>-->
+          <button @click="infoProducto()" class="btn"
                        style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-bottom: 5px;"
                        align="center">
             Ver producto
-          </router-link>
+          </button>
         </b-col>
       </b-row>
 
@@ -70,9 +75,6 @@
           </b-btn>
         </b-col>
       </b-row>
-      <!--<ShareButton></ShareButton>-->
-      <!--<b-btn v-on:click="liked" style="background-color: transparent; margin-top: 4px; margin-left: -1px"><i-->
-      <!--:class="isLiked() ? likeIcon : unlikeIcon" :style="isLiked() ? likeColor : unlikeColor"></i></b-btn>-->
     </b-card>
   </div>
 </template>
@@ -90,12 +92,17 @@
         likeColor: 'color: #ff6b6b;',
         unlikeColor: 'color: #000000;',
         likeIcon: 'fas fa-heart',
-        unlikeIcon: 'far fa-heart'
+        unlikeIcon: 'far fa-heart',
       }
     },
     methods: {
+      infoProducto: function(){
+        console.log("AQUI");
+        console.log(this.product.id);
+        this.$router.push({ path: 'ProductPage', query: { idProd: this.product.id } })
+      },
       ocultarModal() {
-        this.$refs['modalReview'].hide()
+        this.$refs['modalReview'].hide();
       },
       liked: function () {
         this.product.deseado = !this.product.deseado;

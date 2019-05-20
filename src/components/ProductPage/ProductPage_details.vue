@@ -34,8 +34,6 @@
         <b-list-group-item>Tipo de venta: {{ method.tipoVenta }}</b-list-group-item>
         <b-list-group-item>Categoria del producto: {{ method.categoria}}</b-list-group-item>
         <b-list-group-item>Fecha: {{ method.fecha}}</b-list-group-item>
-        <b-list-group-item>Texto mio de prueba: {{ method.whatever }}</b-list-group-item>
-        <b-list-group-item>Numero mio de prueba{{ method.numero }}</b-list-group-item>
       </b-list-group>
 
       <!--<b-card-footer>Otras fotos</b-card-footer>-->

@@ -1,5 +1,16 @@
 <template>
   <div>
+    <b-row class="justify-content-md-center">
+      <b-col col lg="4">
+        <b-form-input size="md" class="mr-sm-2" type="text" placeholder="Búsqueda"
+                      v-on:change="actualizarProds"
+                      @keypress="actualizarProds"
+                      v-model="texto"/>
+      </b-col>
+      <b-btn v-on:click="actualizarProds">
+        Buscar
+      </b-btn>
+    </b-row>
     <b-row>
       <b-col cols="2" style="margin-left: 15px">
         <!--<p>Precio máximo: {{prMax}}</p>-->
@@ -8,17 +19,17 @@
         <filters :valVendedor="valMax" :precioMax="prMax" @selected="newTag" @precio="nuevoPrecio" @dist="nuevaDistancia"></filters>
       </b-col>
       <b-col style="margin-right: 10px">
-        <b-row class="justify-content-md-center">
-          <b-col col lg="4">
-            <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Búsqueda"
-                          v-on:change="actualizarProds"
-                          @keypress="actualizarProds"
-                          v-model="texto"/>
-          </b-col>
-          <b-btn v-on:click="actualizarProds">
-            Buscar
-          </b-btn>
-        </b-row>
+        <!--<b-row class="justify-content-md-center">-->
+          <!--<b-col col lg="4">-->
+            <!--<b-form-input size="md" class="mr-sm-2" type="text" placeholder="Búsqueda"-->
+                          <!--v-on:change="actualizarProds"-->
+                          <!--@keypress="actualizarProds"-->
+                          <!--v-model="texto"/>-->
+          <!--</b-col>-->
+          <!--<b-btn v-on:click="actualizarProds">-->
+            <!--Buscar-->
+          <!--</b-btn>-->
+        <!--</b-row>-->
         <b-row>
           <b-col cols="8">
             <b-btn v-for="(tag, index) in tags" style="margin-right: 4px; font-size: 0.9rem" :key="index"

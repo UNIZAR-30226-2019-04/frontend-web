@@ -1,0 +1,113 @@
+<template>
+  <div>
+    <b-row>
+      <b-col style="margin-left: 5%" cols="4">
+        <!--<p>{{producto}}</p>-->
+        <!--<p>{{infoProd}}</p>-->
+        <ProductBox :product=infoProdData :key=idProducto
+                    style="margin-bottom: 10px;"></ProductBox>
+      </b-col>
+      <b-col style="margin-left: 2.5%; margin-right: 5%">
+        <div v-if="infoProdData.tipo === 'normal'">
+          <h1> Usted va a comprar el producto con id {{this.idProducto}} vendido por {{this.idVendedor}}. Desea
+            continuar?</h1>
+          <p> Nombre del vendedor {{ info.nombre }} </p>
+          <p> y ya aqui vendria lo de PayPal o lo que fuera </p>
+          <p>fgddsdasfdsbgfgngfgdfd</p>
+          <PayPal
+            amount="10.00"
+            currency="USD"
+            :client="credentials"
+            env="sandbox">
+          </PayPal>
+          <p>fgddsdasfdsbgfgngfgdfd</p>
+
+
+        </div>
+        <div v-else-if="infoProdData.tipo === 'subasta'">
+          <h1>Esto ES SUBASTA</h1>
+          <p>{{infoProdData.fechaexpiracion}}</p>
+          <p>{{infoProdData_date}}</p>
+          <p>De momento el countdown timer está hardcodeado</p>
+          <countdown-timer :end-time="endTim"></countdown-timer>
+        </div>
+        <div v-else>
+          <h1>Esto será trueque</h1>
+        </div>
+      </b-col>
+    </b-row>
+    {{typeof infoProdData_date}}
+    <br/>
+    {{this.infoProdData_date}}
+    <br/>
+    <button @click="sobreProd()">BOTON DEBUG</button>
+  </div>
+</template>
+
+<script>
+  import ProductBox from "./ProductBox";
+  import BRow from "bootstrap-vue/src/components/layout/row";
+  import axios from "axios";
+  import {API_BASE} from "../config";
+  import CountdownTimer from "./CountdownTimer";
+  import PayPal from 'vue-paypal-checkout'
+
+  export default {
+    name: "CompraProducto",
+    components: {CountdownTimer, BRow, ProductBox, PayPal},
+    data() {
+      return {
+        idProducto: this.$route.query.idProd,
+        idVendedor: this.$route.query.idVendor,
+        // producto: `${API_BASE}/producto/${this.$route.query.idProd}`,
+        // loquesea: null,
+        // inte: 0,
+        info: null,
+        infoProd: null,
+        infoProdData: null,
+        infoProdData_date: null,
+        infoProd_type: null,
+        loquesea: null,
+        endTim: {
+          // day: null,
+          // month: null,
+          // year: null,
+          // day: this.infoProdData.fechaexpiracion.split('/')[0],
+          day: 5,
+          month: 6,
+          year: 2019,
+        },
+      }
+    },
+    mounted() {
+      console.log('desde la compra d producto');
+      console.log(`${API_BASE}/producto/${this.idProducto}`);
+      axios.get(`${API_BASE}/user/${this.idVendedor}`).then(response => (this.info = response.data));
+      axios.get(`${API_BASE}/producto/${this.idProducto}`).then(response => (this.infoProdData = response.data));
+      axios.get(`${API_BASE}/producto/${this.idProducto}`).then(response => (this.infoProdData_date = response.data.fechaexpiracion));
+      console.log('PreCalculo');
+      console.log(this.infoProdData.fechaexpiracion);
+    },
+    created() {
+      // endTim: infoProdData.fechaexpiracion;
+      console.log('DESDE CREATTEEEEED');
+      console.log(this.infoProdData.fechaexpiracion);
+    },
+    methods: {
+      sobreProd: function () {
+        console.log('Al boton ajjajajaj');
+        console.log(this.infoProdData.fechaexpiracion);
+        console.log(this.infoProdData_date);
+        console.log(typeof this.infoProdData.fechaexpiracion);
+        console.log(typeof this.infoProdData.fecha);
+        console.log(typeof this.infoProdData_date);
+        // console.log(this.loquesea);
+      }
+    }
+
+  }
+</script>
+
+<style scoped>
+
+</style>

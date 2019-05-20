@@ -1,6 +1,7 @@
 <template>
   <b-row style="margin-right: 10px;">
-    <makeReview></makeReview>
+    <!--<makeReview></makeReview>-->
+    <br/>
     <b-col cols="auto" sm="3">
       <ProductPage_img :method="informacion()"></ProductPage_img>
     </b-col>
@@ -22,7 +23,7 @@
   import ProductPage_img from './ProductPage_img'
   import ProductPage_details from './ProductPage_details'
   import ProductPage_sell from './ProductPage_sell'
-  import makeReview from '../makeReview'
+  // import MakeReview
 
   export default {
     name: "ProductPage",
@@ -30,43 +31,51 @@
     data() {
       return {
         id: 0,
-        info: null
+        info: null,
+        infoExtended: null,
       }
     },
     mounted() {
-      axios.get(`${API_BASE}/producto/`).then(response => (this.info = response))
+      axios.get(`${API_BASE}/producto/`).then(response => (this.info = response));
+      axios.get(`${API_BASE}/producto/${this.$route.query.idProd}`).then(response => (this.infoExtended = response));
+      console.log(this.$route.query.idProd);
+      console.log('-------------------------------------');
+      // console.log(this.infoExtended.data.titulo);
+      console.log('-------------------------------------');
+
     },
     methods: {
       informacion: function () {
         return {
-          myData: "jojojojojojojojojoj",
-          fotoPerfil: 'https://www.pcper.com/files/imagecache/article_max_width/review/2011-04-24/asusk53e-3.jpg',
-          titulo: this.info.data.productos[this.id].titulo,
-          descripcion: this.info.data.productos[this.id].descripcion,
-          visualizaciones: this.info.data.productos[this.id].visualizaciones,
-          precio: this.info.data.productos[this.id].precioBase,
-          tipoVenta: this.info.data.productos[this.id].tipo,
-          categoria: this.info.data.productos[this.id].categoria_nombre,
-          fecha: this.info.data.productos[this.id].fecha,
-          vendido_por: this.info.data.productos[this.id].vendedor,
-          whatever: "jejejejjeje",
-          numero: 300,
+          // fotoPerfil: 'https://www.pcper.com/files/imagecache/article_max_width/review/2011-04-24/asusk53e-3.jpg',
+          idProducto: this.infoExtended.data.id,
+          titulo: this.infoExtended.data.titulo,
+          descripcion: this.infoExtended.data.descripcion,
+          visualizaciones: this.infoExtended.data.visualizaciones,
+          precio: this.infoExtended.data.precioBase,
+          tipoVenta: this.infoExtended.data.tipo,
+          categoria: this.infoExtended.data.categoria_nombre,
+          fecha: this.infoExtended.data.fecha,
+          fechaexpiracion: this.infoExtended.data.fechaexpiracion,
+          vendido_por: this.infoExtended.data.vendedor,
           razones_venta: "Se vende por poco uso. Lo uso de pisapapeles y atrapapolvo.",
           zona_geografica: 'https://snazzy-maps-cdn.azureedge.net/assets/127403-no-label-bright-colors.png?v=20171101110035',
           trueque: true,
           cambioTrueque: "Smartphone valorado en más de 300€",
           images: [{
+            // src: this.infoExtended.data.multimedia[0].path,
             src: 'https://www.asus.com/media/US/products/fCGFt3hiSAQYMnvO/P_500.jpg',
             id: 1
           },
-            {
-              src: 'https://dlcdnimgs.asus.com/websites/global/products/amrevEkgfqmrdCMD/K53_ov1.jpg',
-              id: 2
-            },
-            {
-              src: 'https://www.pcper.com/files/imagecache/article_max_width/review/2011-04-24/asusk53e-3.jpg',
-              id: 3
-            },]
+            // {
+            //   src: 'https://dlcdnimgs.asus.com/websites/global/products/amrevEkgfqmrdCMD/K53_ov1.jpg',
+            //   id: 2
+            // },
+            // {
+            //   src: 'https://www.pcper.com/files/imagecache/article_max_width/review/2011-04-24/asusk53e-3.jpg',
+            //   id: 3
+            // },
+          ]
         }
       }
     }
