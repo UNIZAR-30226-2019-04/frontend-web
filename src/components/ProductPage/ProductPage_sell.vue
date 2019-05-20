@@ -50,6 +50,13 @@
             <button @click="sobreProd()">BOTON DEBUG</button>
             <br/>
             {{method.fechaexpiracion}}
+            {{method.fechaexpiracion.split("/")[0]}}-
+            {{method.fechaexpiracion.split("/")[1]}}-
+            {{method.fechaexpiracion.split("/")[2]}}
+            <br/>
+            {{parseInt(method.fechaexpiracion.split("/")[0])}}-
+            {{method.fechaexpiracion.split("/")[1]}}-
+            {{method.fechaexpiracion.split("/")[2]}}
             <br/>
             {{typeof method.fechaexpiracion}}
             <br/>
@@ -60,6 +67,35 @@
       </b-card-body>
 
       <b-card-body v-else-if="tipo === trueque">
+        <div v-if="this.$store.state.public_id === method.vendido_por">
+          <h1>ESTE PRODUCTO ES TUYO</h1>
+        </div>
+        <div v-else>
+          <p>Esto es lo que se verá si el producto es tuyo y lo quieres asignar a alguien</p>
+          <b-btn variant="outline-primary">
+            <a class="card-link" v-b-modal.modal2>Vender producto trueque</a>
+          </b-btn>
+          <b-modal id="modal2"
+                   ref="modalVentaTrueque"
+                   title="Asignar producto de trueque"
+                   header-bg-variant="primary"
+                   hide-footer
+          >
+            <h3 class="my-4">Introduzca el nombre de usuario a quien quiera asignar el trueque del producto</h3>
+            <b-input-group class="mb-4">
+              <!--<b-input-group-prepend>-->
+                <b-input-group-text><i class="icon-user"></i></b-input-group-text>
+              <!--</b-input-group-prepend>-->
+              <b-form-input :type="tipo" class="form-control" v-model="asignarTrueque" placeholder="nick del usuario"
+                            autocomplete/>
+              <b-form-invalid-feedback id="input-live-feedback3">
+                Escriba su contraseña para poder borrar la cuenta (al menos 6 caracteres).
+              </b-form-invalid-feedback>
+            </b-input-group>
+            <b-btn class="btn-success" v-on:click="asignarUsuarioTrueque" style="margin-right: 10px; background-color: #20a8d8; font-weight: bold">ASIGNAR</b-btn>
+            <b-btn @click="ocultarModal">CANCELAR</b-btn>
+          </b-modal>
+        </div>
         <b-card-title>Trueque disponible</b-card-title>
         <b-card-text>{{ method.cambioTrueque }}</b-card-text>
       </b-card-body>
@@ -91,14 +127,18 @@
         id_vendedor: this.method.vendido_por,
         idProducto: this.method.idProducto,
         endTim: {
-          day: 19,
-          month: 5,
+          // day: parseInt(this.method.fechaexpiracion.split("/")[0]),
+          day: 1,
+          // month: parseInt(this.method.fechaexpiracion.split("/")[1]),
+          month: 6,
           year: 2019,
+          // year: parseInt(this.method.fechaexpiracion.split("/")[2]),
         },
         precio_: this.method.precio,
         infoProd: null,
         infoProdData: null,
         infoProdData_date: null,
+        asignarTrueque: ''
       }
     },
     props: {
@@ -113,6 +153,12 @@
     methods: {
       actPrecio: function () {
         this.precioFinal = this.precio;
+      },
+      ocultarModal() {
+        this.$refs['modalVentaTrueque'].hide()
+      },
+      asignarUsuarioTrueque: function(){
+        // TODO: funcion que haga algo cuando se le asigna a un usuario la compra de un trueque
       },
       procesoCompra: function () {
         console.log(this.precio_);
