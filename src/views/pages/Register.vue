@@ -1,8 +1,7 @@
 <template>
   <div class="flex-row align-items-center">
     <div class="container">
-      <b-row class="justify-content-center" style="margin-top: 20%">
-        <b-col md="6" sm="8">
+      <b-row class="justify-content-center" style="position: fixed;  top: 50%;  left: 50%;  transform: translate(-50%, -50%);">
           <b-card no-body class="mx-4">
             <b-card-body class="p-4">
               <b-form>
@@ -58,7 +57,6 @@
               </b-form>
             </b-card-body>
           </b-card>
-        </b-col>
       </b-row>
     </div>
   </div>
@@ -122,7 +120,7 @@
         else if (this.password === this.password_confirmation) {
           this.$store
             .dispatch("register", data)
-            .then(() => this.$router.push("/"))
+            .then(() => this.$router.push("/Login"))
             .catch(err => console.log(err));
         } else {
           this.error_output = "Las contraseñas no coinciden."

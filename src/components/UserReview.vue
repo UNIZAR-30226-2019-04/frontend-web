@@ -7,7 +7,7 @@
         <img src="../../public/img/telocam-icon.jpg" class="rounded-circle mx-auto d-block" width="50" height="50" alt="Logo de Telocam"/>
       </b-col>
       <b-col>
-        <h3>Review</h3>
+        <h3>{{valoracion.titulo}}</h3>
         <small>{{valoracion.puntuador}}</small>
         <p>{{valoracion.descripcion}}</p>
       </b-col>

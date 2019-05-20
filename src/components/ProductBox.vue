@@ -22,14 +22,7 @@
                           style="background-color: transparent">
         </b-carousel-slide>
       </b-carousel>
-      <!--<v-carousel hide-delimiters max="300px">-->
-      <!--<v-carousel-item-->
-      <!--v-for="(img,index) in product.multimedia"-->
-      <!--:key="index"-->
-      <!--v-if="!img.tipo" :img-src="img.path"-->
-      <!--style="background-color: transparent"-->
-      <!--&gt;</v-carousel-item>-->
-      <!--</v-carousel>-->
+
       <br>
       <b-card-title>
         {{ product.titulo }}
@@ -59,6 +52,21 @@
 
       <b-row>
         <b-col class="column2">
+          <b-btn v-if="comprado">
+            <a class="card-link" v-b-modal.modal2>Val. usuario</a>
+          </b-btn>
+          <b-modal id="modal2"
+                   ref="modalReview"
+                   title="Hacer review"
+                   header-bg-variant="danger"
+                   hide-footer
+          >
+            <make-review :valorado="product.vendedor" @close="ocultarModal"></make-review>
+            <!--<b-btn class="btn-primary" style="margin-right: 10px">SI</b-btn>-->
+            <!--<b-btn @click="ocultarModal">CANCELAR</b-btn>-->
+          </b-modal>
+        </b-col>
+        <b-col class="column2">
           <ShareButton></ShareButton>
         </b-col>
         <b-col class="column1" align="right">
@@ -74,10 +82,11 @@
 <script>
   import ShareButton from "./Share";
   import  axios from 'axios';
+  import MakeReview from "./makeReview";
   export default {
     name: "ProductBox",
-    components: {ShareButton},
-    props: ['product'],
+    components: {MakeReview, ShareButton},
+    props: ['product', 'comprado'],
     data() {
       return {
         likeColor: 'color: #ff6b6b;',
@@ -91,6 +100,9 @@
         console.log("AQUI");
         console.log(this.product.id);
         this.$router.push({ path: 'ProductPage', query: { idProd: this.product.id } })
+      },
+      ocultarModal() {
+        this.$refs['modalReview'].hide();
       },
       liked: function () {
         this.product.deseado = !this.product.deseado;

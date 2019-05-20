@@ -57,6 +57,7 @@
             <!--v-if="index<(porPagina*pagina) && index>=(porPagina*pagina-porPagina)"-->
             <ProductBox v-for="(product, index) in products" :key="index"
                          :product="product"
+                        :comprado="false"
                         style="margin-bottom: 10px;"></ProductBox>
           </b-card-group>
           <b-button-group style="margin-bottom: 30px; align-self: center">
