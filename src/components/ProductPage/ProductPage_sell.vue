@@ -9,7 +9,9 @@
       </b-card-header>
 
       <b-card-body v-if="method.tipoVenta === 'normal'">
-        <div v-if="this.$store.state.public_id === method.id_vendedor">
+        {{this.$store.state.public_id}}
+        {{method.vendido_por}}
+        <div v-if="this.$store.state.public_id === method.vendido_por">
           <h1>ESTE PRODUCTO ES TUYO</h1>
         </div>
         <div v-else>
@@ -27,7 +29,7 @@
 
       <b-card-body v-else-if="method.tipoVenta === 'subasta'">
         <!--<h1>Es una subasta</h1>-->
-        <div v-if="this.$store.state.public_id === method.id_vendedor">
+        <div v-if="this.$store.state.public_id === method.vendido_por">
           <h1>ESTE PRODUCTO ES TUYO</h1>
         </div>
         <div v-else>
