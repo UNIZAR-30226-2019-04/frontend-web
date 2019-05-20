@@ -56,6 +56,7 @@
           tipoVenta: this.infoExtended.data.tipo,
           categoria: this.infoExtended.data.categoria_nombre,
           fecha: this.infoExtended.data.fecha,
+          fechaexpiracion: this.infoExtended.data.fechaexpiracion,
           vendido_por: this.infoExtended.data.vendedor,
           razones_venta: "Se vende por poco uso. Lo uso de pisapapeles y atrapapolvo.",
           zona_geografica: 'https://snazzy-maps-cdn.azureedge.net/assets/127403-no-label-bright-colors.png?v=20171101110035',

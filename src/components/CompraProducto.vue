@@ -36,6 +36,10 @@
         </div>
       </b-col>
     </b-row>
+    {{typeof infoProdData_date}}
+    <br/>
+    {{this.infoProdData_date}}
+    <br/>
     <button @click="sobreProd()">BOTON DEBUG</button>
   </div>
 </template>
@@ -93,6 +97,10 @@
       sobreProd: function () {
         console.log('Al boton ajjajajaj');
         console.log(this.infoProdData.fechaexpiracion);
+        console.log(this.infoProdData_date);
+        console.log(typeof this.infoProdData.fechaexpiracion);
+        console.log(typeof this.infoProdData.fecha);
+        console.log(typeof this.infoProdData_date);
         // console.log(this.loquesea);
       }
     }
