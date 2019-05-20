@@ -194,7 +194,8 @@
           year: 0,
           month: 0,
           day: 0,
-          hour: 0,
+          hora: 0,
+          min: 0
         },
         type: null,
         optionsType: [
@@ -233,6 +234,7 @@
           this.endTime.day = this.select.getDay();
           this.endTime.month = this.select.getMonth();
           this.endTime.year = this.select.getFullYear();
+          let fecha = this.endTime.day + '/' + this.endTime.month + '/' + this.endTime.day + ', ' + this.endTime.hora + ':' + this.endTime.min + ':00';
         }
       },
       subirProducto: function () {
