@@ -131,6 +131,7 @@
 
           <a style="color: red;">{{ notSelected }}<br/><br/></a>
           <b-button variant="success" v-on:click="subirProducto" block>Subir producto</b-button>
+          <b-button variant="danger" v-on:click="cancelarSubida" block>Cancelar</b-button>
         </b-form>
       </b-card>
     </b-container>
@@ -320,8 +321,9 @@
             .then(() => this.$router.push("/"))
             .catch(err => console.log(err));
         }
-
-
+      },
+      cancelarSubida: function(){
+        this.$router.push({path:'Search'})
       }
     },
     computed: {
