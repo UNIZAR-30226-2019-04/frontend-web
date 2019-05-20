@@ -1,28 +1,30 @@
 <template>
   <div>
     <b-container style="max-width: 900px;">
-		  <b-card title="Subir Producto" style="alignment: center; margin: auto; width: 75%; margin-top: 6%; margin-bottom: 10%">
-		    <b-form>
-		      <!--<h1>Editar Perfil</h1>-->
-		      <b-input-group class="mb-3">
-		        <b-input-group-prepend>
-		          <b-input-group-text><i class="icon-user"></i></b-input-group-text>
-		        </b-input-group-prepend>
-		        <b-form-input type="text" class="form-control" v-model="title" placeholder="Titulo del producto"/>
-		      </b-input-group>
+      <b-card title="Subir Producto"
+              style="alignment: center; margin: auto; width: 75%; margin-top: 6%; margin-bottom: 10%">
+        <b-form>
+          <!--<h1>Editar Perfil</h1>-->
+          <b-input-group class="mb-3">
+            <b-input-group-prepend>
+              <b-input-group-text><i class="icon-user"></i></b-input-group-text>
+            </b-input-group-prepend>
+            <b-form-input type="text" class="form-control" v-model="title" placeholder="Titulo del producto"/>
+          </b-input-group>
 
-		      <b-input-group class="mb-3">
-		        <b-input-group-prepend>
-		          <b-input-group-text><i class="icon-user"></i></b-input-group-text>
-		        </b-input-group-prepend>
-		        <b-form-textarea type="text" class="form-control" v-model="description" placeholder="Descripción del producto"/>
-		      </b-input-group>
+          <b-input-group class="mb-3">
+            <b-input-group-prepend>
+              <b-input-group-text><i class="icon-user"></i></b-input-group-text>
+            </b-input-group-prepend>
+            <b-form-textarea type="text" class="form-control" v-model="description"
+                             placeholder="Descripción del producto"/>
+          </b-input-group>
 
-					<!--<b-input-group class="mb-3">-->
-            <!--<b-input-group-prepend>-->
-              <!--<b-input-group-text><i class="icon-direction"></i></b-input-group-text>-->
-            <!--</b-input-group-prepend>-->
-            <!--<b-form-input class="text" v-model="location" placeholder="Localización"/>-->
+          <!--<b-input-group class="mb-3">-->
+          <!--<b-input-group-prepend>-->
+          <!--<b-input-group-text><i class="icon-direction"></i></b-input-group-text>-->
+          <!--</b-input-group-prepend>-->
+          <!--<b-form-input class="text" v-model="location" placeholder="Localización"/>-->
           <!--</b-input-group>-->
 
           <b-input-group class="mb-3">
@@ -51,8 +53,13 @@
                 class="mb-2 mr-sm-2 mb-sm-0"
                 placeholder="Buscar dirección..."
                 v-model="address"
+                @keypress.enter="buscarPosicion"
               ></b-input>
-              <b-button class="mb-2 mr-sm-2 mb-sm-0" variant="primary" v-on:click="buscarPosicion">Buscar</b-button>
+              <b-button class="mb-2 mr-sm-2 mb-sm-0"
+                        variant="primary"
+                        v-on:click="buscarPosicion"
+              >Buscar
+              </b-button>
             </b-input-group>
 
             <Mapa ref="map" :preview="preview" :radius="radius"></Mapa>
@@ -117,18 +124,25 @@
             <span v-if="err" style="color: red;">La fecha elegida debe ser posterior a la fecha actual</span>
           </b-input-group>
 
-<!--          <b-input-group class="mb-3">
-            <b-form-file
-              v-model="file"
-              :state="Boolean(file)"
-              placeholder="Seleccione archivo..."
-              drop-placeholder="Arrastre archivo aquí..."
-              accept=".jpg, .png"
-              multiple
-            ></b-form-file>
-          </b-input-group>-->
-          <Uploader buttonTitle="Subir imagen de producto"></Uploader>
-
+          <!--          <b-input-group class="mb-3">
+                      <b-form-file
+                        v-model="file"
+                        :state="Boolean(file)"
+                        placeholder="Seleccione archivo..."
+                        drop-placeholder="Arrastre archivo aquí..."
+                        accept=".jpg, .png"
+                        multiple
+                      ></b-form-file>
+                    </b-input-group>-->
+          <!--<Uploader buttonTitle="Subir imagen de producto"></Uploader>-->
+          <b-form-file
+            v-model="file"
+            :state="Boolean(file)"
+            placeholder="Choose or drop a file..."
+            drop-placeholder="Drop file here..."
+            @change="logImage"
+          ></b-form-file>
+          <b-button variant="success" v-on:click="logImage" block>Log Image</b-button>
           <a style="color: red;">{{ notSelected }}<br/><br/></a>
           <b-button variant="success" v-on:click="subirProducto" block>Subir producto</b-button>
         </b-form>
@@ -150,7 +164,10 @@
       return {
         preview: false,
         title: '',
-        file: [],
+        file_2: [],
+        file: null,
+        CoverLetter: "",
+        CoverLetter_url: "",
         address: "",
         description: '',
         price: null,
@@ -274,8 +291,8 @@
             let candidates = this.$store.getters.last_position;
             console.log(candidates);
 
-            console.log(candidates.length)
-            if (candidates.length !== 1) {
+            console.log(candidates.length);
+            if (candidates.length < 1) {
               this.notSelected = "Sea más específico con la dirección.\n"
             } else {
               this.notSelected = "";
@@ -284,12 +301,17 @@
                 lat: location['lat'],
                 lng: location['lon']
               };
+              console.log("Holaaaaa");
               console.log(newCenter);
-              this.$refs.map.zoomUpdated("17");
+              console.log("Holaaaaa");
+              this.$refs.map.zoomUpdated(17);
               this.$refs.map.centerUpdated(newCenter);
             }
           })
         }
+      },
+      logImage(e) {
+
       },
       subirProducto: function () {
         let centerPos = this.$refs.map.getCenter();

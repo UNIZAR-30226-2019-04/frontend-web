@@ -242,7 +242,7 @@ export default new Vuex.Store({
           .then( resp => {
             console.log(resp);
 
-            const data = resp.data;
+            let data = resp.data;
 
             localStorage.setItem("last_position", data);
             commit("location_success", data);
