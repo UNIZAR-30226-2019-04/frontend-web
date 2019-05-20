@@ -1,13 +1,13 @@
 <template>
   <!--<b-navbar toggleable="md" type="357ff4" variant="357ff4" fixed="top" sticky class="shadow p-3 mb-5">-->
   <!--<b-navbar toggleable="md" type="light" variant="light" fixed="top" sticky class="shadow p-3 mb-5">-->
-  <b-navbar toggleable="md" type="dark" variant="blue" fixed="top" sticky class="shadow p-3 mb-5"> <!-- #20a8d8 -->
+  <b-navbar toggleable="md" type="dark" variant="blue" fixed="top" sticky class="shadow p-1 mb-5"> <!-- #20a8d8 -->
 
-    <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+    <b-navbar-toggle target="nav_collapse" ></b-navbar-toggle>
 
-    <b-navbar-brand href="#">
+    <b-navbar-brand style="margin-left: 10px;" href="#">
       <!--<img src="../../public/img/telocam-logo.png" class="rounded-circle" width="70" height="70" alt="Logo de Telocam"/>-->
-      <img src="../../public/img/logo_sombrablanca_v2.png" class="rounded-circle" width="70" height="70" alt="Logo de Telocam"/>
+      <img src="../../public/img/logo_sombrablanca_v2.png" class="rounded-circle" width="64" height="64" alt="Logo de Telocam"/>
     </b-navbar-brand>
 
     <b-collapse is-nav id="nav_collapse">
@@ -28,7 +28,7 @@
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto">
+      <b-navbar-nav class="ml-auto" style="margin-right: 20px;">
           <!--<b-nav-form>-->
             <!--<b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Búsqueda" v-model="texto"/>-->
             <!--<router-link :to="{ name: 'Search', props: { texto: this.texto }}"-->
@@ -53,7 +53,7 @@
           <b-dropdown-item v-on:click="logout">Salir</b-dropdown-item>
         </b-nav-item-dropdown>
 
-        <b-nav-item>
+        <b-nav-item >
           <router-link to="About" style="color: white">About</router-link>
         </b-nav-item>
       </b-navbar-nav>
@@ -76,7 +76,7 @@ export default {
       logout: function() {
         this.$store
           .dispatch("logout")
-          .then(() => this.$router.push("/"))
+          .then(() => this.$router.push("/Login"))
           .catch(err => console.log(err));
       },
       // buscarTexto() {

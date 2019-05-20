@@ -2,7 +2,7 @@
   <div class="flex-row align-items-center">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <div class="container">
-      <b-row class="justify-content-center" style="margin-top: 20%">
+      <b-row class="justify-content-center" style="position: fixed;  top: 50%;  left: 50%;  transform: translate(-50%, -50%);">
         <b-col md="8">
           <b-card-group>
             <b-card no-body class="p-4">

@@ -13,26 +13,50 @@
       @update:zoom="zoomUpdated"
       @update:center="centerUpdated"
       @update:bounds="boundsUpdated"
+      :options="options"
     >
-      <l-tile-layer :url="url"></l-tile-layer>
+      <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+      <l-marker :lat-lng="center" ></l-marker>
+      <l-circle
+        :lat-lng="center"
+        :radius="radius"
+      />
     </l-map>
   </div>
 </template>
 
 <script>
-  import {LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+  import {LMap, LTileLayer, LMarker, LCircle } from 'vue2-leaflet';
 
   export default {
-    components: {LMap, LMarker, LTileLayer},
+    components: {LMap, LMarker, LTileLayer, LCircle},
+    props: {
+      preview: {
+        type: Boolean,
+        default: false
+      },
+      radius: {
+        type: Number,
+        default: null
+      }
+    },
     data () {
       return {
         url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
         zoom: 5,
         center: {
-          lat: 40.385142747956806,
-          lng: -4.033185852475832
+          lat: 40.38,
+          lng: -4.033
         },
-        bounds: null
+        bounds: null,
+        attribution:
+          '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        options: {
+          dragging: !this.preview,
+          boxZoom: !this.preview,
+          doubleClickZoom: this.preview ? 'center' : true,
+          scrollWheelZoom: this.preview ? 'center' : true
+        }
       };
     },
     methods: {
