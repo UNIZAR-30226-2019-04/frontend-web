@@ -40,6 +40,8 @@
   import ProductItem from './ProdItem'
   import UserReview from './UserReview'
   import axios from 'axios';
+  import {API_BASE} from "../config";
+
   export default {
     name: 'UserTab',
     components: {ProductItem, ProductBox, UserReview},
@@ -53,7 +55,7 @@
       }
     },
     mounted() {
-      let url = 'http://155.210.47.51:5000/user/' + this.$store.getters.user;
+      let url = API_BASE+'/user/' + this.$store.getters.user;
       axios.get(url).then(response => {
         this.prods = response.data.cajas_productos;
         this.deseados = response.data.deseados;

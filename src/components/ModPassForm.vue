@@ -45,6 +45,7 @@
 
 <script>
   import axios from 'axios';
+  import {API_BASE} from "../config";
 
   export default {
     name: "ModPassForm",
@@ -74,7 +75,7 @@
     },
     methods: {
       updateData: function () {
-        let url = 'http://155.210.47.51:5000/user/' + this.$store.getters.user + '/editpasswd';
+        let url = API_BASE + '/user/' + this.$store.getters.user + '/editpasswd';
         let headers = {
           Content_Type: 'application/json',
           Authorization: this.$store.getters.token

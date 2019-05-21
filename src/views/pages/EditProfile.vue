@@ -19,6 +19,8 @@
   import ModPassForm from "../../components/ModPassForm";
   import Uploader from "../../components/Uploader";
   import axios from "axios";
+  import {API_BASE} from "../../config";
+
   export default {
     name: "EditProfile",
     components: {Uploader, ModPassForm, ModUserForm},
@@ -63,7 +65,7 @@
     //   }
     // },
     beforeCreate() {
-      let url = 'http://155.210.47.51:5000/user/' + this.$store.getters.user +'/edit';
+      let url = API_BASE + '/user/' + this.$store.getters.user +'/edit';
       axios.get(url).then(response => (this.user_info = response.data));
     }
   }
