@@ -49,7 +49,16 @@
                       style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-top: 10px;">PUJAR</b-button>
             <button @click="sobreProd()">BOTON DEBUG</button>
             <br/>
-            {{method.fechaexpiracion}}
+            {{method.fechaexpiracion}}<br/>
+            <!--Dia: {{this.endTim.day}}<br/>-->
+            <!--Mes: {{this.endTim.month}}<br/>-->
+            <!--Mes: {{this.endTim.month}}<br/>-->
+            <!--Mes: {{this.endTim.month}}<br/>-->
+            <!--Mes: {{this.endTim.month}}<br/>-->
+            <!--Mes: {{this.endTim.month}}<br/>-->
+            <!--Mes_tipo: {{typeof this.endTim.month}}<br/>-->
+            <!--Mes_tipo: {{typeof Number(this.method.fechaexpiracion.split("/")[1])}}<br/>-->
+            <!--Año: {{this.endTim.year}}<br/>-->
             {{method.fechaexpiracion.split("/")[0]}}-
             {{method.fechaexpiracion.split("/")[1]}}-
             {{method.fechaexpiracion.split("/")[2]}}
@@ -116,7 +125,7 @@
   import {API_BASE} from "../../config";
   import axios from "axios";
   import BRow from "bootstrap-vue/src/components/layout/row";
-  import store from "../../store";
+  import moment from "moment";
 
   export default {
     name: "ProductPage_sell",
@@ -127,10 +136,10 @@
         id_vendedor: this.method.vendido_por,
         idProducto: this.method.idProducto,
         endTim: {
-          // day: parseInt(this.method.fechaexpiracion.split("/")[0]),
-          day: 1,
-          // month: parseInt(this.method.fechaexpiracion.split("/")[1]),
-          month: 6,
+          // day: Number(this.method.fechaexpiracion.split("/")[0]),
+          day: 31,
+          // month: Number(this.method.fechaexpiracion.split("/")[1]),
+          month: 7,
           year: 2019,
           // year: parseInt(this.method.fechaexpiracion.split("/")[2]),
         },
@@ -175,6 +184,15 @@
       sobreProd: function () {
         console.log('Al boton ajjajajaj');
         console.log(this.infoProdData);
+        // console.log(Date().getFullYear());
+        let start = new Date();
+        let y = start.getFullYear();
+        console.log(y);
+        console.log(new Date().getFullYear());
+        console.log(new Date().getMonth());
+        console.log(new Date().getDay());
+        console.log(new Date().getDate());
+        console.log(new Date().getUTCMonth() + 1);
         // console.log(this.infoProdData.fechaexpiracion);
         // console.log(this.infoProdData_date);
         // console.log(typeof this.infoProdData.fechaexpiracion);
