@@ -98,7 +98,7 @@
         }
       },
       borrarUsuario() {
-        let url = 'http://155.210.47.51:5000/user/' + this.$store.getters.user + '/remove';
+        let url = 'http://34.90.77.95:5000/' + this.$store.getters.user + '/remove';
         let headers = {
           Content_Type: 'application/json',
           Authorization: this.$store.getters.token

@@ -180,7 +180,7 @@ export default new Vuex.Store({
         const user_id = localStorage.getItem("public_id");
         commit("retrieve_request");
         axios({
-          url: `${API_BASE}/user/${user_id}`,
+          url: `${API_BASE}user/${user_id}`,
           data: localStorage.getItem("public_id"),
           method: "GET"
         })

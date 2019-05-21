@@ -124,17 +124,11 @@
             <span v-if="err" style="color: red;">La fecha elegida debe ser posterior a la fecha actual</span>
           </b-input-group>
 
-          <!--          <b-input-group class="mb-3">
-                      <b-form-file
-                        v-model="file"
-                        :state="Boolean(file)"
-                        placeholder="Seleccione archivo..."
-                        drop-placeholder="Arrastre archivo aquí..."
-                        accept=".jpg, .png"
-                        multiple
-                      ></b-form-file>
-                    </b-input-group>-->
-          <!--<Uploader buttonTitle="Subir imagen de producto"></Uploader>-->
+          <b-input-group v-if="type === 'subasta'">
+            <v-time-picker v-model="picker" color="green lighten-1" header-color="primary"></v-time-picker>
+          </b-input-group>
+          <b-button v-on:click="logImg">Log picker</b-button>
+
           <b-form-file
             v-model="file_2"
             :state="Boolean(file_2)"
@@ -167,10 +161,8 @@
       return {
         preview: false,
         title: '',
+        picker: null,
         file_2: [],
-        photos: null,
-        CoverLetter: "",
-        CoverLetter_url: "",
         address: "",
         description: '',
         price: null,
@@ -248,6 +240,7 @@
           hora: 0,
           min: 0
         },
+        prod_id: 0,
         type: null,
         optionsType: [
           {value: 'trueque', text: 'Intercambiar producto'},
@@ -310,17 +303,8 @@
           })
         }
       },
-      filesChange(fieldName, fileList) {
-        // handle file changes
-        const formData = new FormData();
-        if (!fileList.length) return;
-        // append the files to FormData
-        Array
-          .from(Array(fileList.length).keys())
-          .map(x => {
-            formData.append(fieldName, fileList[x], fileList[x].name);
-          });
-        this.photos = formData;
+      logImg() {
+        console.log(this.picker);
       },
       subirProducto: function () {
         let centerPos = this.$refs.map.getCenter();
@@ -351,26 +335,22 @@
             .then(() => this.$router.push("/"))
             .catch(err => console.log(err));*/
           let url = 'http://34.90.77.95:5000/producto/';
-          let prod_id = 0;
-          /*axios.post(url,data).then(response => {
-            prod_id = response.data.id;
+          axios.post(url,data).then(response => {
+            this.prod_id = response.data.id;
             console.log(response);
-            console.log(prod_id);
-          });*/
+            console.log(this.prod_id);
+          });
 
-          /*for(var i = 0; i < this.file_2.length; i++){
-            photos.push({
-              path: this.file_2[i].name,
-              name: this.file_2[i].name,
-              type: this.file_2[i].type
-            });
-          }*/
-          url = 'http://34.90.77.95:5000/multimedia/' + 15;
+          url = 'http://34.90.77.95:5000/multimedia/' + this.prod_id;
           //console.log(prod_id);
-          console.log(this.photos);
-          axios.post(url,this.photos).then(response => {
-            console.log(response);
-          }).catch(error => (console.log(error)));
+          let formData = null;
+          for(let i = 0; i < this.file_2.length; i++) {
+            formData = new FormData();
+            formData.append('file',this.file_2[i]);
+            axios.post(url, formData).then(response => {
+              console.log(response);
+            }).catch(error => (console.log(error)));
+          }
         }
 
 

@@ -56,12 +56,23 @@
             </b-form-invalid-feedback>
           </b-input-group>
 
-          <b-input-group class="mb-3">
-            <b-input-group-prepend>
-              <b-input-group-text><i class="icon-direction"></i></b-input-group-text>
-            </b-input-group-prepend>
-            <b-form-input class="text" v-model="userData.location" placeholder="Localización"/>
-          </b-input-group>
+          <div style="align-content: center">
+            <b-input-group>
+              <b-input
+                id="inline-form-input-name"
+                class="mb-2 mr-sm-2 mb-sm-0"
+                placeholder="Buscar dirección..."
+                v-model="address"
+                @keypress.enter="buscarPosicion"
+              ></b-input>
+              <b-button class="mb-2 mr-sm-2 mb-sm-0"
+                        variant="primary"
+                        v-on:click="buscarPosicion"
+              >Buscar
+              </b-button>
+            </b-input-group>
+            <Mapa ref="map" :preview="false" :radius="100"></Mapa>
+          </div>
 
           <b-input-group class="mb-3">
             <b-form-checkbox
@@ -90,8 +101,10 @@
 
 <script>
   import axios from "axios";
+  import Mapa from "./Mapa";
     export default {
       name: "ModUserForm",
+      components: {Mapa},
       props: ['userData'],
       computed: {
         nameState() {
@@ -112,13 +125,38 @@
         return {
           userUpdatedData: this.userData,
           acceptMailsUpdated: "false",
+          notSelected: "",
+          address: null
         }
       },
       methods: {
+        buscarPosicion: function () {
+          for (var i = 0; i < 3; i++) {
+            this.$store.dispatch("getPosition", this.address).then(() => {
+              let candidates = this.$store.getters.last_position;
+              //console.log(candidates);
+
+              //console.log(candidates.length);
+              if (candidates.length < 1) {
+                this.notSelected = "Sea más específico con la dirección.\n"
+              } else {
+                this.notSelected = "";
+                let location = candidates[0];
+                let newCenter = {
+                  lat: location['lat'],
+                  lng: location['lon']
+                };
+                this.$refs.map.zoomUpdated(17);
+                this.$refs.map.centerUpdated(newCenter);
+              }
+            })
+          }
+        },
         updateData: function () {
-          this.userData.longitud = 3.14;
-          this.userData.latitud = 3.14;
-          this.userData.radio_ubicacion = 0.0;
+          let centerPos = this.$refs.map.getCenter();
+          this.userData.longitud = centerPos['lng'];
+          this.userData.latitud = centerPos['lat'];
+          this.userData.radio_ubicacion = 100.0;
           if(this.userData.quiereEmails === 'true'){
             this.userData.quiereEmails = true;
           }else{
@@ -127,7 +165,7 @@
           console.log(this.userData);
 
           let url = 'http://34.90.77.95:5000/user/' + this.$store.getters.user;
-          if(this.validateEmail() && this.nameState()) {
+          if(this.validateEmail && this.nameState) {
             axios.put(url, this.userData).then(function (response) {
               console.log(response);
             });
