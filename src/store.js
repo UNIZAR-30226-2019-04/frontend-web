@@ -83,7 +83,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         commit("auth_request");
         axios({
-          url: `${API_BASE}/user/login`,
+          url: `${API_BASE}user/login`,
           data: user,
           method: "POST"
         })
@@ -121,7 +121,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         commit("auth_request");
         axios({
-          url: `${API_BASE}/user/`,
+          url: `${API_BASE}user/`,
           data: user,
           method: "POST"
         })
@@ -152,8 +152,8 @@ export default new Vuex.Store({
         commit('resetState');
         console.log({"Authorization": localStorage.getItem("token")})
         axios({
-          url: `${API_BASE}/user/logout`,
-          data: {"Authorization": localStorage.getItem("token")},
+          url: `${API_BASE}user/logout`,
+          headers: {Authorization: localStorage.getItem("token")},
           method: "POST"
         }).then( resp => {
           localStorage.removeItem("token");
@@ -161,10 +161,16 @@ export default new Vuex.Store({
           localStorage.removeItem("current_user");
           delete axios.defaults.headers.common["Authorization"];
           resolve(resp);
+          this.$router.push("/");
           commit('resetState');
         }).catch( err => {
           commit("auth_error");
           console.log(err);
+          localStorage.removeItem("token");
+          localStorage.removeItem("public_id");
+          localStorage.removeItem("current_user");
+          delete axios.defaults.headers.common["Authorization"];
+          //this.$route.router.go("/LogIn");
           reject(err);
         });
       });

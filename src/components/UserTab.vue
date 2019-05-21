@@ -53,17 +53,17 @@
       }
     },
     mounted() {
-      let url = 'http://155.210.47.51:5000/user/' + this.$store.getters.user;
+      let url = 'http://34.90.77.95:5000/user/' + this.$store.getters.user;
       axios.get(url).then(response => {
         this.prods = response.data.cajas_productos;
         this.deseados = response.data.deseados;
         this.valDone = response.data.valoraciones_hechas;
         this.valGet = response.data.valoraciones_recibidas;
       });
-      url = url + '/comprados';
+      /*url = url + '/comprados';
       axios.get(url).then(response => {
         this.comprados = response.data;
-      });
+      });*/
     }
   }
 </script>

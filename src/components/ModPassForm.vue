@@ -74,7 +74,7 @@
     },
     methods: {
       updateData: function () {
-        let url = 'http://155.210.47.51:5000/user/' + this.$store.getters.user + '/editpasswd';
+        let url = 'http://34.90.77.95:5000/user/' + this.$store.getters.user + '/editpasswd';
         let headers = {
           Content_Type: 'application/json',
           Authorization: this.$store.getters.token

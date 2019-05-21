@@ -62,7 +62,7 @@
               </b-button>
             </b-input-group>
 
-            <Mapa ref="map" :preview="preview" :radius="radius"></Mapa>
+            <Mapa ref="map2" :preview="preview" :radius="radius"></Mapa>
           </div>
 
           <div style="margin: 5%;">
@@ -136,13 +136,15 @@
                     </b-input-group>-->
           <!--<Uploader buttonTitle="Subir imagen de producto"></Uploader>-->
           <b-form-file
-            v-model="file"
-            :state="Boolean(file)"
+            v-model="file_2"
+            :state="Boolean(file_2)"
             placeholder="Choose or drop a file..."
             drop-placeholder="Drop file here..."
-            @change="logImage"
+            multiple
+            accept=".jpg, .png, .gif"
+            @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length"
           ></b-form-file>
-          <b-button variant="success" v-on:click="logImage" block>Log Image</b-button>
+
           <a style="color: red;">{{ notSelected }}<br/><br/></a>
           <b-button variant="success" v-on:click="subirProducto" block>Subir producto</b-button>
         </b-form>
@@ -156,6 +158,7 @@
   import Datepicker from "vuejs-datepicker/src/components/Datepicker";
   import Mapa from "../../components/Mapa.vue";
   import Uploader from "../../components/Uploader";
+  import axios from "axios";
 
   export default {
     name: "UploadProduct",
@@ -165,7 +168,7 @@
         preview: false,
         title: '',
         file_2: [],
-        file: null,
+        photos: null,
         CoverLetter: "",
         CoverLetter_url: "",
         address: "",
@@ -289,9 +292,9 @@
         for (var i = 0; i < 3; i++) {
           this.$store.dispatch("getPosition", this.address).then(() => {
             let candidates = this.$store.getters.last_position;
-            console.log(candidates);
+            //console.log(candidates);
 
-            console.log(candidates.length);
+            //console.log(candidates.length);
             if (candidates.length < 1) {
               this.notSelected = "Sea más específico con la dirección.\n"
             } else {
@@ -301,17 +304,23 @@
                 lat: location['lat'],
                 lng: location['lon']
               };
-              console.log("Holaaaaa");
-              console.log(newCenter);
-              console.log("Holaaaaa");
               this.$refs.map.zoomUpdated(17);
               this.$refs.map.centerUpdated(newCenter);
             }
           })
         }
       },
-      logImage(e) {
-
+      filesChange(fieldName, fileList) {
+        // handle file changes
+        const formData = new FormData();
+        if (!fileList.length) return;
+        // append the files to FormData
+        Array
+          .from(Array(fileList.length).keys())
+          .map(x => {
+            formData.append(fieldName, fileList[x], fileList[x].name);
+          });
+        this.photos = formData;
       },
       subirProducto: function () {
         let centerPos = this.$refs.map.getCenter();
@@ -328,7 +337,7 @@
           "precioAux": parseInt(this.priceAux),
           "radio_ubicacion": this.radius
         };
-        console.log(data);
+        //console.log(data);
         if (data["categoria"] === null) {
           this.notSelected = "Seleccione una categoría.\n"
         } else if (data["tipo"] === null) {
@@ -336,11 +345,32 @@
         } else if (data["precio"] < data["precioAux"] && data["tipo"] === "trueque") {
           this.notSelected = "Ajuste el valor del máximo estimado.\n"
         } else {
-          this.notSelected = ""
-          this.$store
+          this.notSelected = "";
+          /*this.$store
             .dispatch("uploadProduct", data)
             .then(() => this.$router.push("/"))
-            .catch(err => console.log(err));
+            .catch(err => console.log(err));*/
+          let url = 'http://34.90.77.95:5000/producto/';
+          let prod_id = 0;
+          /*axios.post(url,data).then(response => {
+            prod_id = response.data.id;
+            console.log(response);
+            console.log(prod_id);
+          });*/
+
+          /*for(var i = 0; i < this.file_2.length; i++){
+            photos.push({
+              path: this.file_2[i].name,
+              name: this.file_2[i].name,
+              type: this.file_2[i].type
+            });
+          }*/
+          url = 'http://34.90.77.95:5000/multimedia/' + 15;
+          //console.log(prod_id);
+          console.log(this.photos);
+          axios.post(url,this.photos).then(response => {
+            console.log(response);
+          }).catch(error => (console.log(error)));
         }
 
 
