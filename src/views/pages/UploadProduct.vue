@@ -62,7 +62,7 @@
               </b-button>
             </b-input-group>
 
-            <Mapa ref="map2" :preview="preview" :radius="radius"></Mapa>
+            <Mapa ref="map" :preview="preview" :radius="radius"></Mapa>
           </div>
 
           <div style="margin: 5%;">
