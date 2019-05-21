@@ -109,7 +109,7 @@
       },
       liked: function () {
         this.product.deseado = !this.product.deseado;
-        let url = 'http://155.210.47.51:5000/deseados/' + this.$store.getters.user;
+        let url = 'http://34.90.77.95:5000/deseados/' + this.$store.getters.user;
         if(!this.product.deseado){
           url = url + '/remove';
         }

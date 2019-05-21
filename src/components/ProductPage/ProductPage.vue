@@ -35,9 +35,9 @@
         infoExtended: null,
       }
     },
-    mounted() {
-      axios.get(`${API_BASE}/producto/`).then(response => (this.info = response));
-      axios.get(`${API_BASE}/producto/${this.$route.query.idProd}`).then(response => (this.infoExtended = response));
+    beforeCreate() {
+      axios.get(`${API_BASE}producto/`).then(response => (this.info = response));
+      axios.get(`${API_BASE}producto/${this.$route.query.idProd}`).then(response => (this.infoExtended = response));
       console.log(this.$route.query.idProd);
       console.log('-------------------------------------');
       // console.log(this.infoExtended.data.titulo);

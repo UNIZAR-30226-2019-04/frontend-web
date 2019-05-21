@@ -125,7 +125,7 @@
           </b-input-group>
 
           <b-input-group v-if="type === 'subasta'">
-            <v-time-picker v-model="picker" color="green lighten-1" header-color="primary"></v-time-picker>
+            <v-time-picker v-model="picker" color="green lighten-1" header-color="blue"></v-time-picker>
           </b-input-group>
           <b-button v-on:click="logImg">Log picker</b-button>
 
@@ -278,7 +278,7 @@
           this.endTime.day = this.select.getDay();
           this.endTime.month = this.select.getMonth();
           this.endTime.year = this.select.getFullYear();
-          let fecha = this.endTime.day + '/' + this.endTime.month + '/' + this.endTime.day + ', ' + this.endTime.hora + ':' + this.endTime.min + ':00';
+
         }
       },
       buscarPosicion: function () {
@@ -305,15 +305,18 @@
       },
       logImg() {
         console.log(this.picker);
+        console.log(typeof this.picker);
       },
       subirProducto: function () {
+        this.endTime.hora = this.picker.split(':')([0]);
+        this.endTime.min = this.picker.split(':')([1]);
         let centerPos = this.$refs.map.getCenter();
         let data = {
           "tipo": this.type,
           "titulo": this.title,
           "descripcion": this.description,
           "categoria": this.selCategory,
-          //"fecha": "2019-05-03T16:47:58.480Z",
+          "fecha": this.endTime.day + '/' + this.endTime.month + '/' + this.endTime.day + ', ' + this.endTime.hora + ':' + this.endTime.min + ':00',
           "vendedor": this.$store.getters.user,
           "precioBase": parseInt(this.price),
           "longitud": centerPos['lng'],
