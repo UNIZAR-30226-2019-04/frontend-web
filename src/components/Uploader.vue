@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-button variant="outline-primary" v-on:click="toggleShow" block>{{ buttonTitle }}</b-button>
-    <my-upload field="img"
+    <my-upload field="file"
                @crop-success="cropSuccess"
                @crop-upload-success="cropUploadSuccess"
                @crop-upload-fail="cropUploadFail"
@@ -21,7 +21,7 @@
 
   export default {
     name: "Uploader",
-    props: ['buttonTitle'],
+    props: ['buttonTitle', 'dest'],
     data() {
       return {
         show: false,
@@ -32,7 +32,7 @@
         headers: {
           smail: '*_~'
         },
-        imgDataUrl: 'http://httpbin.org/post' // the datebase64 url of created image
+        imgDataUrl: 'http://155.210.47.51:5000/' + this.$props.dest // the datebase64 url of created image
       }
     },
     components: {

@@ -8,9 +8,15 @@
                       :comprado="false"
                       style="margin-bottom: 10px;"></ProductBox>
         </b-card-group>
+        <a v-if="!prods.length" style="color: #666666;">
+          Vaya, parece que no has subido ningún producto...<br/><br/>
+        </a>
       </b-tab>
-      <b-tab title="Valoraciones recibidas">
+      <b-tab title="Valoraciones recibidas" style="margin-top: 10px; margin-left: 10px; ">
         <UserReview v-for="(val,index) in valGet" :key="index" :valoracion="val"></UserReview>
+        <a v-if="!valGet.length" style="color: #666666;">
+          Todavía no te han valorado...<br/><br/>
+        </a>
       </b-tab>
       <b-tab title="Comprados" style="margin-top: 10px; margin-left: 10px; ">
         <b-card-group columns>
@@ -19,6 +25,9 @@
                       :comprado="true"
                       style="margin-bottom: 10px;"></ProductBox>
         </b-card-group>
+        <a v-if="!comprados.length" style="color: #666666;">
+          Esto está muy vacío... ¡Prueba a comprar algo!<br/><br/>
+        </a>
       </b-tab>
       <b-tab title="Lista de deseos" style="margin-top: 10px; margin-left: 10px; ">
         <b-card-group columns>
@@ -27,9 +36,15 @@
                       :comprado="false"
                       style="margin-bottom: 10px;"></ProductBox>
         </b-card-group>
+        <a v-if="!comprados.length" style="color: #666666;">
+          ¿No deseas ningún producto? :(<br/><br/>
+        </a>
       </b-tab>
-      <b-tab title="Valoraciones realizadas">
+      <b-tab title="Valoraciones realizadas" style="margin-top: 10px; margin-left: 10px; ">
         <UserReview v-for="(val,index) in valDone" :key="index" :valoracion="val"></UserReview>
+        <a v-if="!comprados.valDone" style="color: #666666;">
+          ¡No olvides valorar a los usuarios tras las compras!<br/><br/>
+        </a>
       </b-tab>
     </b-tabs>
   </div>

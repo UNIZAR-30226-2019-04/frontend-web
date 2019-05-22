@@ -2,9 +2,9 @@
   <b-container>
     <b-row>
         <b-card >
-          <b-btn v-on:click="changePass(false)" variant="outline-primary">Editar perfil</b-btn>
+          <b-btn size="lg" style="width: 100%;" v-on:click="changePass(false)" variant="outline-primary">Editar perfil</b-btn>
           <hr/>
-          <b-btn v-on:click="changePass(true)" variant="outline-primary">Cambiar contraseña</b-btn>
+          <b-btn size="lg" style="width: 100%;" v-on:click="changePass(true)" variant="outline-primary">Cambiar contraseña</b-btn>
           <!--<hr/>-->
           <!--<uploader buttonTitle="Establecer imagen de perfil"></uploader>-->
         </b-card>
