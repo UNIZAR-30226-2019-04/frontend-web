@@ -308,8 +308,9 @@
         console.log(typeof this.picker);
       },
       subirProducto: function () {
-        this.endTime.hora = this.picker.split(':')([0]);
-        this.endTime.min = this.picker.split(':')([1]);
+        let clock = this.picker.split(':');
+        this.endTime.hora = clock[0];
+        this.endTime.min = clock[1];
         let centerPos = this.$refs.map.getCenter();
         let data = {
           "tipo": this.type,

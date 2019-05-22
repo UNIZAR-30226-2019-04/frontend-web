@@ -12,6 +12,7 @@ import UploadProduct from "../views/pages/UploadProduct"; // Ruta absoluta. Habr
 import PruebaProducto from "../views/pages/PruebaProducto";
 import CompraProducto from "../components/CompraProducto";
 import store from "../store"
+import Chat from "../views/pages/Chat";
 
 // Containers
 const DefaultContainer = () => import('@/containers/DefaultContainer')
@@ -171,6 +172,11 @@ export default new Router({
       path: '/CompraProducto',
       name: 'CompraProducto,',
       component: CompraProducto
+    },
+    {
+      path: '/Chat',
+      name: 'Chat,',
+      component: Chat
     },
     {
       path: '/pages',

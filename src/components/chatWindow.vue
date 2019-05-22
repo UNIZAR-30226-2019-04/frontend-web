@@ -1,19 +1,15 @@
 <template>
   <div
+    style="max-width: 700px"
     id="e3"
-    style="max-width: 400px; margin: auto;"
     class="grey lighten-3"
   >
-    <v-toolbar
-      color="pink"
-      dark
-    >
-      <v-toolbar-title>Chat</v-toolbar-title>
-      <v-spacer></v-spacer>
-    </v-toolbar>
-
-    <v-card>
-      <v-list expand>
+    <v-card >
+      <v-toolbar color="blue" dark>
+        <v-toolbar-title class="text-xs-center">Chat</v-toolbar-title>
+        <v-spacer></v-spacer>
+      </v-toolbar>
+      <v-list class="v-list">
         <v-list-tile
           style="margin-bottom: 7px"
           avatar
@@ -51,9 +47,17 @@
       >
         <b-row>
           <v-flex>
-            <v-textarea label="Mensaje" v-model="msj" height="fluid" outline auto-grow></v-textarea>
+            <v-textarea
+              v-model="msj"
+              auto-grow
+              box
+              color="deep-purple"
+              label="Mensaje"
+              rows="1"
+            >
+            </v-textarea>
           </v-flex>
-          <v-btn dark fab color="pink" v-on:click="nuevoMsj()">
+          <v-btn dark fab color="blue" v-on:click="nuevoMsj()">
             <v-icon>send</v-icon>
           </v-btn>
         </b-row>
@@ -64,12 +68,16 @@
 
 <script>
 
+  import {API_BASE} from "../config";
+  import axios from "axios";
+
   export default {
     name: "chatWindow",
     components: {},
-    props: ['conversacion'],
+    props: ['id_conversacion'],
     data() {
       return {
+        mensajesChat: [],
         msj: '',
         user: 'R',
         avatar1: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
@@ -103,6 +111,16 @@
         ]
       }
     },
+    mounted: {
+      mensajes(){
+        let headers = {
+          Content_Type: 'application/json',
+          Authorization: this.$store.getters.token
+        };
+        let url = `${API_BASE}chat/` + this.id_conversacion;
+        axios.get(url).then(response => (this.mensajesChat = response.data));
+      }
+    },
     methods: {
       msjMio(Usuario) {
         return (Usuario === 'R');
@@ -122,6 +140,12 @@
 </script>
 
 <style scoped>
+
+  .v-list {
+    height: 400px;
+    overflow-y: auto;
+  }
+
   .message-out {
     width: 45%;
     border-radius: 10px;
