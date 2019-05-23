@@ -82,7 +82,7 @@
                style="margin-top: 30px; margin-left: 30px; margin-right: 30px">
           <p>Productos a mostrar: {{products.length}}</p>
           <b-button v-on:click="logProds">Log prods</b-button>
-          <Mapa :preview="preview" :radius="radius" :prods="products"
+          <Mapa :preview="preview" :radius="null" :prods="products"
                 style="margin-top: 30px; margin-left: 30px; margin-right: 30px; height: 55vh;"></Mapa>
         </b-tab>
       </b-col>

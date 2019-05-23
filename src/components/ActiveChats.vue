@@ -13,7 +13,7 @@
             v-for="(item, index) in chats"
             :key="index"
             avatar
-            @click="conversacionElegida(item.id)"
+            @click="conversacionElegida(item.id,mailOtro(item))"
           >
             <v-list-tile-avatar>
               <img :src="avatar(item)">
@@ -48,8 +48,8 @@
         }
       },
       methods: {
-          conversacionElegida(id){
-            this.$emit('nuevaConversacion', id);
+          conversacionElegida(id, mail){
+            this.$emit('nuevaConversacion', id, mail);
           },
         avatar: function (item) {
           if(item.vendedor === this.$store.getters.user){

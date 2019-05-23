@@ -6,7 +6,7 @@
   >
     <v-card >
       <v-toolbar color="blue" dark>
-        <v-toolbar-title class="text-xs-center">Chat</v-toolbar-title>
+        <v-toolbar-title class="text-xs-center">{{otro}}</v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
       <v-list class="v-list" ref="mensajes">
@@ -79,7 +79,7 @@
   export default {
     name: "chatWindow",
     components: {},
-    props: {id_chat: {default: 0}, msgs: {default: []}, imagenYo : {default: ""}, imagenOtro: {default: ""}},
+    props: {id_chat: {default: 0}, msgs: {default: []}, imagenYo : {default: ""}, imagenOtro: {default: ""}, otro: {default: ""}},
     data() {
       return {
         mensajesChat: [],
@@ -93,11 +93,8 @@
       }
     },
 
-    async mounted(){
-      console.log("Socket : ", this.socket);
-      this.socket.emit("JOINED", {
-        room: this.id_chat
-      });
+      mounted(){
+      this.nuevoSocket(this.id_chat);
 
       this.socket.on("MESSAGE", data => {
         console.log("MESSAGE", data);
@@ -116,6 +113,12 @@
       }
     },
     methods: {
+      nuevoSocket(id){
+        this.socket.emit("JOINED", {
+          room: id
+        });
+        console.log("Socket : ", this.socket);
+      },
       hora: function(fecha){
         let f = new Date(fecha);
         return (f.getHours() + ':' + f.getMinutes());

@@ -20,7 +20,7 @@
       <!--</b-card-body>-->
 
       <b-list-group style="font-size: 1.1rem; font-weight: lighter">
-        <b-list-group-item>{{ method.vendido_por }}</b-list-group-item>
+        <b-list-group-item style="text-align: center">{{ info.data.nick }}</b-list-group-item>
         <b-list-group-item>
           <img :src=info.data.imagen_perfil width=100%>
         </b-list-group-item>
@@ -43,7 +43,6 @@
           <p style="font-weight: bold">Ventas realizadas:</p>
           {{ info.data.productos_vendidos }}
         </b-list-group-item>
-        <b-list-group-item>Aqui pueden venir las fotos del vendedor</b-list-group-item>
       </b-list-group>
       <!--<b-list-group flush border="none">-->
       <!--<img :src=method.images[0].src width="40px">-->
@@ -52,7 +51,10 @@
 
       <!--<b-card-img :src="fotoExtra" alt="Image" bottom/>-->
       <br/>
-      <button @click="showInfo">AQUI</button>
+      <b-row style="margin-left: 30px">
+        <v-btn color="green" @click="nuevoChat">Chat</v-btn>
+        <v-btn color="blue" @click="seguirUser">Seguir Usuario</v-btn>
+      </b-row>
       <br/>
     </b-card>
   </div>
@@ -87,6 +89,46 @@
       // console.log(info.nombre);
     },
     methods: {
+      async nuevoChat() {
+        let url = API_BASE + 'conversacion/';
+        let header = {
+          Content_Type: 'application/json',
+          Authorization: this.$store.getters.token
+        };
+        let datos = {
+          "comprador": this.$store.getters.user,
+          "vendedor": this.id_vendedor,
+          "email_comprador": this.$store.getters.name,
+          "email_vendedor" : this.info.data.nick
+        };
+        console.log('---------------');
+        console.log(this.$store.getters.currentUser);
+        console.log('---------------');
+        console.log('---------------');
+        console.log(datos);
+        console.log('---------------');
+        console.log('---------------');
+        console.log(this.info);
+        console.log('---------------');
+        let respuesta = await axios.post(url,datos,{headers: header}).catch(error => (console.log(error)));
+        console.log(respuesta);
+        this.$router.push({path: 'Chat', query: {id_conv: respuesta.data}})
+
+      },
+      seguirUser(){
+        let url = API_BASE + 'seguir/' + this.$store.getters.user;
+        let header = {
+          Content_Type: 'application/json',
+          Authorization: this.$store.getters.token
+        };
+        let data = {
+          "seguido" : this.id_vendedor
+        };
+        console.log('---------------');
+        console.log(data);
+        console.log('---------------');
+        axios.post(url,data,{headers: header}).then(response => (console.log(response)));
+      },
       showInfo: function () {
         console.log(this.info);
         console.log(this.info.data);
