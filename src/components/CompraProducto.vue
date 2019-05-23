@@ -12,7 +12,7 @@
           <h1> Usted va a comprar el producto con id {{this.idProducto}} vendido por {{this.idVendedor}}. Desea
             continuar?</h1>
           <p> Nombre del vendedor {{ info.nombre }} </p>
-          <p> y ya aqui vendria lo de PayPal o lo que fuera </p>
+          <p> y ya aqui vendria lo de PayPal, Chat o lo que fuera </p>
           <p>fgddsdasfdsbgfgngfgdfd</p>
           <PayPal
             amount="10.00"

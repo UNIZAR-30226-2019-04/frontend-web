@@ -109,6 +109,8 @@
         </div>
         <div v-else>
          <h1>Este producto no es mio y quiero comprarlo</h1>
+          <br/>
+          <button class="btn" style="background-color: #20a8d8; color: white; font-weight: bold" >CHATEAR</button>
 
         </div>
         <b-card-title>Trueque disponible</b-card-title>
@@ -185,7 +187,13 @@
         }
         console.log(`${API_BASE}/user/${this.id_vendedor}`);
         console.log(`${API_BASE}/producto/${this.idProducto}`);
-        this.$router.push({path: 'CompraProducto', query: {idProd: this.idProducto, idVendor: this.id_vendedor}})
+        console.log('----------------------------');
+        console.log(this.idProducto);
+        console.log('idProducto: ', this.method.idProducto);
+        console.log('id_vendedor: ', this.method.vendido_por);
+        console.log(this.id_vendedor);
+        console.log('----------------------------');
+        this.$router.push({path: 'CompraProducto', query: {idProd: this.method.idProducto, idVendor: this.method.vendido_por}})
       },
       sobreProd: function () {
         console.log('Al boton ajjajajaj');

@@ -24,12 +24,21 @@
         <b-list-group-item>
           <img :src=info.data.imagen_perfil width=100%>
         </b-list-group-item>
-        <b-list-group-item>
-          {{ info.data.nombre }}
-          <br/>
-          {{ info.data.apellidos }}
-        </b-list-group-item>
-        <b-list-group-item>{{ info.data.descripcion }}</b-list-group-item>
+        <div v-if="info.data.nombre !== null">
+          <b-list-group-item>
+            {{ info.data.nombre }}
+          </b-list-group-item>
+        </div>
+        <div v-if="info.data.apellidos !== null">
+          <b-list-group-item>
+            {{ info.data.nombre }}
+          </b-list-group-item>
+        </div>
+        <div v-if="info.data.descripcion !== null">
+          <b-list-group-item>
+            {{ info.data.descripcion }}
+          </b-list-group-item>
+        </div>
         <b-list-group-item>
           <p style="font-weight: bold">Ventas realizadas:</p>
           {{ info.data.productos_vendidos }}
@@ -42,6 +51,9 @@
       <!--</b-list-group>-->
 
       <!--<b-card-img :src="fotoExtra" alt="Image" bottom/>-->
+      <br/>
+      <button @click="showInfo">AQUI</button>
+      <br/>
     </b-card>
   </div>
 </template>
@@ -49,9 +61,11 @@
 <script>
   import {API_BASE} from "../../config";
   import axios from "axios";
+  import ButtonGroups from "../../views/buttons/ButtonGroups";
 
   export default {
     name: "ProductPage_img",
+    components: {ButtonGroups},
     data() {
       return {
         id_vendedor: this.method.vendido_por,
@@ -72,7 +86,13 @@
       // axios.get(`http://155.210.47.51:5000/user/${this.id_vendedor}`).then(response => (this.info = response));
       // console.log(info.nombre);
     },
-    methods: {}
+    methods: {
+      showInfo: function () {
+        console.log(this.info);
+        console.log(this.info.data);
+
+      }
+    }
   }
 </script>
 
