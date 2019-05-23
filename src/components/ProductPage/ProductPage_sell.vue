@@ -78,8 +78,6 @@
       <b-card-body v-else-if="tipo === trueque">
         <div v-if="this.$store.state.public_id === method.vendido_por">
           <h1>ESTE PRODUCTO ES TUYO</h1>
-        </div>
-        <div v-else>
           <p>Esto es lo que se verá si el producto es tuyo y lo quieres asignar a alguien</p>
           <b-btn variant="outline-primary">
             <a class="card-link" v-b-modal.modal2>Vender producto trueque</a>
@@ -93,7 +91,7 @@
             <h3 class="my-4">Introduzca el nombre de usuario a quien quiera asignar el trueque del producto</h3>
             <b-input-group class="mb-4">
               <!--<b-input-group-prepend>-->
-                <b-input-group-text><i class="icon-user"></i></b-input-group-text>
+              <b-input-group-text><i class="icon-user"></i></b-input-group-text>
               <!--</b-input-group-prepend>-->
               <b-form-input :type="tipo" class="form-control" v-model="asignarTrueque" placeholder="nick del usuario"
                             autocomplete/>
@@ -104,6 +102,10 @@
             <b-btn class="btn-success" v-on:click="asignarUsuarioTrueque" style="margin-right: 10px; background-color: #20a8d8; font-weight: bold">ASIGNAR</b-btn>
             <b-btn @click="ocultarModal">CANCELAR</b-btn>
           </b-modal>
+        </div>
+        <div v-else>
+         <h1>Este producto no es mio y quiero comprarlo</h1>
+
         </div>
         <b-card-title>Trueque disponible</b-card-title>
         <b-card-text>{{ method.cambioTrueque }}</b-card-text>
