@@ -1,32 +1,38 @@
 <template>
-  <div style="margin-top: 30px">
+  <b-card  style="width: 100%; margin-left: 10px; margin-top: 30px">
     <div>
       <h4>Precio máximo</h4>
-      <VueSlideBar v-model="precioMax" :max="1000">
-      </VueSlideBar>
-      <b-btn v-on:click="nuevoPrecio" style="margin-top: 7px; margin-bottom: 7px">Aplicar precio</b-btn>
-      <h6>Value: {{precioMax}}</h6>
+      <VueSlideBar v-model="precioMax" lineHeight="6" max="1000"></VueSlideBar>
+      <b-btn v-on:click="nuevoPrecio" variant="outline-primary" style="width: 100%; margin-top: 7px; margin-bottom: 7px">Aplicar precio</b-btn>
     </div>
+
+    <br/>
+    <hr/>
+    <br/>
+
     <div>
       <h4>Distancia máxima</h4>
-      <VueSlideBar v-model="distMax" :max="1000">
-      </VueSlideBar>
-      <b-btn v-on:click="nuevaDist" style="margin-top: 7px; margin-bottom: 7px">Aplicar distancia</b-btn>
-      <h6>Value: {{distMax}}</h6>
+      <VueSlideBar v-model="distMax" lineHeight="6" max="1000"></VueSlideBar>
+      <b-btn v-on:click="nuevaDist" variant="outline-primary" style="width: 100%; margin-top: 7px; margin-bottom: 7px">Aplicar distancia</b-btn>
     </div>
+
+    <br/>
+    <hr/>
+    <br/>
+
     <b-card no-body class="mb-1">
       <b-card-header header-tag="header" class="p-1" role="tab" style="text-align: center; vertical-align: middle;">
         <b-button block href="#" v-b-toggle.accordion-1 variant="info" style="font-size: 1.1rem; font-weight: bold; margin-top: 0.5%; margin-bottom: 0.5%">Valoración mínima</b-button>
       </b-card-header>
       <b-collapse id="accordion-1" visible accordion="my-accordion">
-        <b-card-body>
+        <b-card-body style="margin-top: 10px;">
           <b-form-group>
             <b-btn v-on:click="minVal(5)" style="background-color: transparent; border: transparent"><label><star-rating value="5" :disabled="true"></star-rating></label></b-btn>
             <b-btn v-on:click="minVal(4)" style="background-color: transparent; border: transparent"><label><star-rating value="4" :disabled="true"></star-rating></label></b-btn>
             <b-btn v-on:click="minVal(3)" style="background-color: transparent; border: transparent"><label><star-rating value="3" :disabled="true"></star-rating></label></b-btn>
             <b-btn v-on:click="minVal(2)" style="background-color: transparent; border: transparent"><label><star-rating value="2" :disabled="true"></star-rating></label></b-btn>
             <b-btn v-on:click="minVal(1)" style="background-color: transparent; border: transparent"><label><star-rating value="1" :disabled="true"></star-rating></label></b-btn>
-            <p>Valoración mínima: {{valVendedor}}</p>
+            <!--<p>Valoración mínima: {{valVendedor}}</p>-->
           </b-form-group>
         </b-card-body>
       </b-collapse>
@@ -44,7 +50,7 @@
     </b-card>
     <b-card no-body class="mb-1">
       <b-card-header header-tag="header" class="p-1">
-        <b-button block href="#" style="font-size: 1.1rem; font-weight: bold; margin-top: 0.5%; margin-bottom: 0.5%"v-b-toggle.accordion-4 variant="info">Tipo de venta</b-button>
+        <b-button block href="#" style="font-size: 1.1rem; font-weight: bold; margin-top: 0.5%; margin-bottom: 0.5%" v-b-toggle.accordion-4 variant="info">Tipo de venta</b-button>
       </b-card-header>
       <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
         <b-card-body>
@@ -57,7 +63,7 @@
         </b-card-body>
       </b-collapse>
     </b-card>
-  </div>
+  </b-card>
 </template>
 
 <script>
@@ -79,8 +85,8 @@
           {nombre: 'Option 4 '},
           {nombre: 'Option 5 '},],
         cat: [],
-        precioMax: 1000,
-        distMax: 1000,
+        precioMax: 500,
+        distMax: 500,
         valVendedor: 1
       }
     },

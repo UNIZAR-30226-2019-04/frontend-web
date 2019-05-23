@@ -53,7 +53,6 @@
           <b-dropdown-item href="#/UploadProduct">
             Subir producto
           </b-dropdown-item>
-          <b-dropdown-item href="#">Ajustes</b-dropdown-item>
           <b-dropdown-item v-on:click="logout">Salir</b-dropdown-item>
         </b-nav-item-dropdown>
 
