@@ -1,18 +1,20 @@
 <template>
   <div>
-    <b-row class="justify-content-md-center">
-      <b-col col lg="4">
-        <b-form-input size="lg" class="mr-sm-2" type="text" placeholder="Búsqueda"
+    <b-row style="margin-right: 45px; margin-left: 45px;">
+      <b-col cols="10">
+        <b-form-input style="width: 100%;" size="lg" class="mr-sm-2" type="text" placeholder="Búsqueda"
                       v-on:change="actualizarProds"
                       @keypress="actualizarProds"
                       v-model="texto"/>
       </b-col>
-      <b-btn variant="outline-primary" v-on:click="actualizarProds">
-        Buscar
-      </b-btn>
+      <b-col cols="2">
+        <b-btn size="lg" style="width: 100%;" variant="outline-primary" v-on:click="actualizarProds">
+          Buscar
+        </b-btn>
+      </b-col>
     </b-row>
     <b-row>
-      <b-col cols="3" style="margin-left: 15px">
+      <b-col cols="3" style="margin-left: 50px">
         <!--<p>Precio máximo: {{prMax}}</p>-->
         <!--<p>Distancia máxima: {{distanciaMax}}</p>-->
         <!--<p>ValoracionMin: {{valMax}}</p>-->
@@ -20,9 +22,22 @@
                  @dist="nuevaDistancia"></filters>
       </b-col>
 
-      <b-col style="margin-right: 10px">
-        <b-row style="margin-top: 10px; margin-left: 30px;">
-          <b-col cols="8">
+      <b-col sm style="margin-right: 10px">
+        <b-row style="margin-top: 30px;">
+          <b-col cols="4">
+            <div v-if="noMapa"
+                 style="margin-right: 30px">
+              <a style="margin-left: 30px;">
+                Número de productos por página:
+              </a>
+              <b-button-group style="margin-left: 30px; align-self: center; border-color: darkgray">
+                <b-button size="lg" v-on:click="elemPerPage(10)" :variant="elegido(10) ? 'primary' : 'white'">10</b-button>
+                <b-button size="lg" v-on:click="elemPerPage(25)" :variant="elegido(25) ? 'primary': 'white'">25</b-button>
+                <b-button size="lg" v-on:click="elemPerPage(50)" :variant="elegido(50) ? 'primary': 'white'">50</b-button>
+              </b-button-group>
+            </div>
+          </b-col>
+          <b-col style="margin-top: 5px;">
             <b-btn size="lg" v-for="(tag, index) in tags" style="margin-right: 4px; font-size: 0.9rem" :key="index"
                    v-on:click="deleteTag(index)">
               {{tag.tag}}
@@ -39,22 +54,12 @@
               style="margin-right: 50px; alignment: right">
               <!--<b-form-select v-model="order" :options="options" size="md" style="font-size: 1rem;"-->
               <!--class="mt-3"></b-form-select>-->
-              <b-button v-on:click="noMapa = !noMapa">{{noMapa ? 'Ver mapa' : 'Ver lista'}}</b-button>
+              <b-button size="lg" variant="outline-primary" v-on:click="noMapa = !noMapa" style="width: 100%;">{{noMapa ? 'Ver mapa' : 'Ver lista'}}</b-button>
             </div>
           </b-col>
         </b-row>
-        <div v-if="noMapa"
-               style="margin-top: 30px; margin-left: 30px; margin-right: 30px">
-        <a style="margin-left: 30px;">
-          Número de productos por página:
-        </a>
-        <b-button-group style="margin-left: 30px; align-self: center; border-color: darkgray">
-          <b-button v-on:click="elemPerPage(10)" :variant="elegido(10) ? 'primary' : 'white'">10</b-button>
-          <b-button v-on:click="elemPerPage(25)" :variant="elegido(25) ? 'primary': 'white'">25</b-button>
-          <b-button v-on:click="elemPerPage(50)" :variant="elegido(59) ? 'primary': 'white'">50</b-button>
-        </b-button-group>
-        </div>
-        <b-tab v-if="noMapa" title="Productos encontrados" active style="margin-top: 30px; margin-left: 30px; margin-right: 30px">
+
+        <b-tab v-if="noMapa" title="Productos encontrados" active style="margin-top: 30px; margin-left: 30px; width: 99%;">
           <!--<p class="mt-3">Página {{ pagina }} de {{ (elementos/porPagina + 1).toFixed(0) }}</p>-->
           <b-card-group columns>
             <!--v-if="index<(porPagina*pagina) && index>=(porPagina*pagina-porPagina)"-->
@@ -64,20 +69,21 @@
                         style="margin-bottom: 10px;"></ProductBox>
           </b-card-group>
           <b-button-group style="margin-bottom: 30px; align-self: center">
-            <b-button v-on:click="currentPage(pagina-1)"><-</b-button>
-            <b-button v-for="i in paginas" :key="i"
+            <b-button size="lg" variant="outline-secondary" v-on:click="currentPage(pagina-1)">&lsaquo;</b-button>
+            <b-button size="lg" v-for="i in paginas" :key="i"
                       style="border-color: darkgray"
                       v-on:click="currentPage(i)"
                       :variant=" i === pagina ? 'primary' : 'white'">{{i}}
             </b-button>
-            <b-button v-on:click="currentPage(pagina+1)">-></b-button>
+            <b-button size="lg" variant="outline-secondary" v-on:click="currentPage(pagina+1)">&rsaquo;</b-button>
           </b-button-group>
         </b-tab>
         <b-tab v-else title="Mapa de productos encontrados" active
                style="margin-top: 30px; margin-left: 30px; margin-right: 30px">
           <p>Productos a mostrar: {{products.length}}</p>
           <b-button v-on:click="logProds">Log prods</b-button>
-          <Mapa :preview="preview" :radius="null" :prods="products"></Mapa>
+          <Mapa :preview="preview" :radius="null" :prods="products"
+                style="margin-top: 30px; margin-left: 30px; margin-right: 30px; height: 55vh;"></Mapa>
         </b-tab>
       </b-col>
     </b-row>
