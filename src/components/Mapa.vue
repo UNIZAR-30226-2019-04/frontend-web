@@ -21,15 +21,15 @@
         v-for="(marker, index) in prods"
         :key="marker.id"
         :visible="true"
-        :lat-lng="pos[index]"
-        :icon="icon(marker.multimedia[0].path)"
-        @click=""
+        :lat-lng="centro(marker.latitud,marker.longitud)"
+        :icon="icon(marker.multimedia)"
+        @click="verProducto(marker.id)"
       >
-        <l-popup :content="marker.titulo"></l-popup>
+        <!--<l-popup :content="boton(marker.titulo,marker.id)"></l-popup>-->
         <l-tooltip :content="marker.titulo"></l-tooltip>
       </l-marker>
       <l-circle
-        :lat-lng="centro(marker.latitud,marker.longitud)"
+        :lat-lng="center"
         :radius="radius"
       />
     </l-map>
@@ -83,6 +83,13 @@
       };
     },
     methods: {
+      boton: function(titulo,id){
+        return `<b-btn v-on:click=\"verProducto(${id})\" style=\"background-color: blue;\">${titulo}</b-btn>`;
+      },
+      verProducto(id){
+        console.log("Visiatando producto");
+        this.$router.push({ path: 'ProductPage', query: { idProd: id } })
+      },
       centro: function(lat,long){
         let center = {
           lat: lat,
@@ -91,8 +98,14 @@
         return center;
       },
       icon: function(imagen){
+        let path ;
+        if(imagen.length > 0){
+          path = imagen[0].path;
+        }else{
+          path = 'http://www.kerrick.co.nz/site/DefaultSite/filesystem/images/products/category-images/product-placeholder.png';
+        }
         const firefoxIcon = L.icon({
-          iconUrl: imagen,
+          iconUrl: path,
           iconSize: [50, 50], // size of the icon
         });
         return firefoxIcon;

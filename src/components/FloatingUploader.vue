@@ -53,6 +53,7 @@
       cropSuccess(imgDataUrl, field){
         console.log('-------- crop success --------');
         this.imgDataUrl = imgDataUrl;
+        console.log(this.imgDataUrl);
       },
       /**
        * upload success

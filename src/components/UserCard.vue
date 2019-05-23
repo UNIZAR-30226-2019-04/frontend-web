@@ -10,7 +10,17 @@
       img-top
     >
       <div>
-        <floating-uploader style="position: absolute; right: 5px; top: 5px; " buttonIcon="photo_camera"></floating-uploader>
+        <!--<floating-uploader style="position: absolute; right: 5px; top: 5px; " buttonIcon="photo_camera"></floating-uploader>-->
+        <v-btn dark fab small color="blue" style="position: absolute; right: 5px; top: 5px; ">
+          <v-icon class="material-icons">photo_camera</v-icon>
+          <b-form-file
+            v-model="file"
+            :state="Boolean(file)"
+            v-on:change="cambiarFoto"
+            placeholder="Choose a file..."
+            drop-placeholder="Drop file here..."
+          ></b-form-file>
+        </v-btn>
         <h3 slot="header" style="text-align: center; margin-top: 20px; text-emphasis: black">{{ userInfo.nick }}</h3>
       </div>
       <!--<Uploader></Uploader>-->
@@ -75,7 +85,7 @@
     props: ['userInfo'],
     data() {
       return {
-        fotoPerfil: 'https://cdn.normacomics.com/media/catalog/product/cache/1/image/588x473/9df78eab33525d08d6e5fb8d27136e95/d/e/detective-conan-18.jpg',
+        file: null,
         tipo: 'password',
         icono: 'far fa-eye-slash',
         delPass: ''
@@ -87,8 +97,14 @@
       }
     },
     methods: {
-      cambiarFoto: function () {
-        this.$emit('cambiarFoto');
+      cambiarFoto() {
+        console.log("Cambiando foto...");
+        let url = API_BASE + 'user/' + this.$store.getters.user + '/fotoPerfil/';
+        let formData = new FormData();
+        formData.append('file',this.file);
+        axios.put(url, formData).then(response => {
+          console.log(response);
+        }).catch(error => (console.log(error)));
       },
       showHidePass: function(){
         if(this.tipo === "password"){
