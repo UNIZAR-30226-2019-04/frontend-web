@@ -31,6 +31,19 @@
         <!--<h1>Es una subasta</h1>-->
         <div v-if="this.$store.state.public_id === method.vendido_por">
           <h1>ESTE PRODUCTO ES TUYO</h1>
+          <h3>Tiempo restante</h3>
+          <CountdownTimer :end-time="endTim"></CountdownTimer>
+          <h3>{{method.fechaexpiracion}}</h3>
+          <h3>{{method.fecha}}</h3>
+          <br/>
+          <p>------------------------------------------------</p>
+          Dia: {{Number(this.method.fechaexpiracion.split("/")[0])}} <br/>
+          Mes: {{Number(this.method.fechaexpiracion.split("/")[1])}} <br/>
+          Fecha completa: {{this.method.fechaexpiracion}} <br/>
+          Anyo: {{Number((this.method.fechaexpiracion.split("/")[2]).split(",")[0])}} <br/>
+
+          <p>------------------------------------------------</p>
+          <br/>
         </div>
         <div v-else>
           <b-card-title>Precio actual: {{method.precio}}€</b-card-title>
@@ -50,15 +63,6 @@
             <button @click="sobreProd()">BOTON DEBUG</button>
             <br/>
             {{method.fechaexpiracion}}<br/>
-            <!--Dia: {{this.endTim.day}}<br/>-->
-            <!--Mes: {{this.endTim.month}}<br/>-->
-            <!--Mes: {{this.endTim.month}}<br/>-->
-            <!--Mes: {{this.endTim.month}}<br/>-->
-            <!--Mes: {{this.endTim.month}}<br/>-->
-            <!--Mes: {{this.endTim.month}}<br/>-->
-            <!--Mes_tipo: {{typeof this.endTim.month}}<br/>-->
-            <!--Mes_tipo: {{typeof Number(this.method.fechaexpiracion.split("/")[1])}}<br/>-->
-            <!--Año: {{this.endTim.year}}<br/>-->
             {{method.fechaexpiracion.split("/")[0]}}-
             {{method.fechaexpiracion.split("/")[1]}}-
             {{method.fechaexpiracion.split("/")[2]}}
@@ -138,12 +142,12 @@
         id_vendedor: this.method.vendido_por,
         idProducto: this.method.idProducto,
         endTim: {
-          // day: Number(this.method.fechaexpiracion.split("/")[0]),
-          day: 31,
-          // month: Number(this.method.fechaexpiracion.split("/")[1]),
-          month: 7,
-          year: 2019,
-          // year: parseInt(this.method.fechaexpiracion.split("/")[2]),
+          day: Number(this.method.fechaexpiracion.split("/")[0]),
+          // day: 31,
+          month: Number(this.method.fechaexpiracion.split("/")[1]),
+          // month: 7,
+          // year: 2019,
+          year: Number((this.method.fechaexpiracion.split("/")[2]).split(",")[0]),
         },
         precio_: this.method.precio,
         infoProd: null,
