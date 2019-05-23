@@ -106,7 +106,7 @@
         }
         const firefoxIcon = L.icon({
           iconUrl: path,
-          iconSize: [50, 50], // size of the icon
+          iconSize: [70, 50], // size of the icon
         });
         return firefoxIcon;
       },

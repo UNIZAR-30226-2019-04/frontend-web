@@ -11,6 +11,7 @@
       <b-card-body style="width: 36rem; height: 36rem; align-self: center;">
         <!--<b-card-body class="carousel">-->
         <b-carousel
+          v-if="method.images.length > 0"
           id="carousel1"
           style="height:auto; "
           controls
@@ -24,6 +25,11 @@
           >
           </b-carousel-slide>
         </b-carousel>
+        <img src="../../../public/img/product-placeholder.png"
+             v-else
+             alt="SIN IMAGEN"
+             style="width: 100%;"
+        >
       </b-card-body>
 
       <b-list-group flush>

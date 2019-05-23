@@ -46,7 +46,7 @@
         fluid
         grid-list-lg
       >
-        <b-row>
+        <b-row v-if="id_chat > 0">
           <v-flex>
             <v-textarea
               v-model="msj"
