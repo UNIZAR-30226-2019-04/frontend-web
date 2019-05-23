@@ -20,7 +20,7 @@
           @sliding-start="onSlideStart"
           @sliding-end="onSlideEnd"
         >
-          <b-carousel-slide class="carousel-inner" v-for="img in method.images " :img-src="img.src" :key="img.id"
+          <b-carousel-slide class="carousel-inner" v-for="(img,index) in method.images " :img-src="img.path" :key="index"
           >
           </b-carousel-slide>
         </b-carousel>

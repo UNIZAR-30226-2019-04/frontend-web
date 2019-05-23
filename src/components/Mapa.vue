@@ -22,14 +22,14 @@
         :key="marker.id"
         :visible="true"
         :lat-lng="pos[index]"
-        :icon="icon()"
+        :icon="icon(marker.multimedia[0].path)"
         @click=""
       >
         <l-popup :content="marker.titulo"></l-popup>
         <l-tooltip :content="marker.titulo"></l-tooltip>
       </l-marker>
       <l-circle
-        :lat-lng="center"
+        :lat-lng="centro(marker.latitud,marker.longitud)"
         :radius="radius"
       />
     </l-map>
@@ -83,10 +83,17 @@
       };
     },
     methods: {
-      icon: function(){
+      centro: function(lat,long){
+        let center = {
+          lat: lat,
+          lng: long
+        };
+        return center;
+      },
+      icon: function(imagen){
         const firefoxIcon = L.icon({
-          iconUrl: 'https://m.media-amazon.com/images/M/MV5BMDkxZTJjZTEtMDRjMy00Yzk1LWI5YjItMjIwYmVlYzhlZWZhXkEyXkFqcGdeQXVyNDQxNjcxNQ@@._V1_UX182_CR0,0,182,268_AL_.jpg  ',
-          iconSize: [38, 95], // size of the icon
+          iconUrl: imagen,
+          iconSize: [50, 50], // size of the icon
         });
         return firefoxIcon;
       },

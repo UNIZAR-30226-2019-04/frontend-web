@@ -12,7 +12,8 @@ export default new Vuex.Store({
     token: localStorage.getItem("token") || "",
     public_id: localStorage.getItem("public_id") || "no_user",
     currentUser: {},
-    last_position: []
+    last_position: [],
+    name: ""
   },
   mutations: {
     auth_request(state) {
@@ -98,6 +99,7 @@ export default new Vuex.Store({
             console.log(resp.data.public_id);
             console.log(resp.data.Authorization);
             commit("auth_success", {
+              name: user.email,
               token: resp.data.Authorization,
               public_id: resp.data.public_id,
             });
@@ -267,6 +269,7 @@ export default new Vuex.Store({
     token: state => state.token,
     user: state => state.public_id,
     currentUser: state => state.currentUser,
-    last_position: state => state.last_position
+    last_position: state => state.last_position,
+    name: state => state.name
   }
 });
