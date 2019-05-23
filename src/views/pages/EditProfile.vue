@@ -63,7 +63,7 @@
     //   }
     // },
     beforeCreate() {
-      let url = 'http://155.210.47.51:5000/user/' + this.$store.getters.user +'/edit';
+      let url = 'http://34.90.77.95:5000/user/' + this.$store.getters.user +'/edit';
       axios.get(url).then(response => (this.user_info = response.data));
     }
   }

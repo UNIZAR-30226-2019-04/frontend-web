@@ -53,7 +53,7 @@
       <b-row>
         <b-col class="column2">
           <b-btn v-if="comprado">
-            <a class="card-link" v-b-modal.modal2>Val. usuario</a>
+            <a class="card-link" v-on:click="showModal">Val. usuario</a>
           </b-btn>
           <b-modal id="modal2"
                    ref="modalReview"
@@ -104,9 +104,12 @@
       ocultarModal() {
         this.$refs['modalReview'].hide();
       },
+      showModal() {
+        this.$refs['modalReview'].show();
+      },
       liked: function () {
         this.product.deseado = !this.product.deseado;
-        let url = 'http://155.210.47.51:5000/deseados/' + this.$store.getters.user;
+        let url = 'http://34.90.77.95:5000/deseados/' + this.$store.getters.user;
         if(!this.product.deseado){
           url = url + '/remove';
         }

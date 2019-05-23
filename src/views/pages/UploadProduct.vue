@@ -1,28 +1,30 @@
 <template>
   <div>
     <b-container style="max-width: 900px;">
-		  <b-card title="Subir Producto" style="alignment: center; margin: auto; width: 75%; margin-top: 6%; margin-bottom: 10%">
-		    <b-form>
-		      <!--<h1>Editar Perfil</h1>-->
-		      <b-input-group class="mb-3">
-		        <b-input-group-prepend>
-		          <b-input-group-text><i class="icon-user"></i></b-input-group-text>
-		        </b-input-group-prepend>
-		        <b-form-input type="text" class="form-control" v-model="title" placeholder="Titulo del producto"/>
-		      </b-input-group>
+      <b-card title="Subir Producto"
+              style="alignment: center; margin: auto; width: 75%; margin-top: 6%; margin-bottom: 10%">
+        <b-form>
+          <!--<h1>Editar Perfil</h1>-->
+          <b-input-group class="mb-3">
+            <b-input-group-prepend>
+              <b-input-group-text><i class="icon-user"></i></b-input-group-text>
+            </b-input-group-prepend>
+            <b-form-input type="text" class="form-control" v-model="title" placeholder="Titulo del producto"/>
+          </b-input-group>
 
-		      <b-input-group class="mb-3">
-		        <b-input-group-prepend>
-		          <b-input-group-text><i class="icon-user"></i></b-input-group-text>
-		        </b-input-group-prepend>
-		        <b-form-textarea type="text" class="form-control" v-model="description" placeholder="Descripción del producto"/>
-		      </b-input-group>
+          <b-input-group class="mb-3">
+            <b-input-group-prepend>
+              <b-input-group-text><i class="icon-user"></i></b-input-group-text>
+            </b-input-group-prepend>
+            <b-form-textarea type="text" class="form-control" v-model="description"
+                             placeholder="Descripción del producto"/>
+          </b-input-group>
 
-					<!--<b-input-group class="mb-3">-->
-            <!--<b-input-group-prepend>-->
-              <!--<b-input-group-text><i class="icon-direction"></i></b-input-group-text>-->
-            <!--</b-input-group-prepend>-->
-            <!--<b-form-input class="text" v-model="location" placeholder="Localización"/>-->
+          <!--<b-input-group class="mb-3">-->
+          <!--<b-input-group-prepend>-->
+          <!--<b-input-group-text><i class="icon-direction"></i></b-input-group-text>-->
+          <!--</b-input-group-prepend>-->
+          <!--<b-form-input class="text" v-model="location" placeholder="Localización"/>-->
           <!--</b-input-group>-->
 
           <b-input-group class="mb-3">
@@ -51,8 +53,13 @@
                 class="mb-2 mr-sm-2 mb-sm-0"
                 placeholder="Buscar dirección..."
                 v-model="address"
+                @keypress.enter="buscarPosicion"
               ></b-input>
-              <b-button class="mb-2 mr-sm-2 mb-sm-0" variant="primary" v-on:click="buscarPosicion">Buscar</b-button>
+              <b-button class="mb-2 mr-sm-2 mb-sm-0"
+                        variant="primary"
+                        v-on:click="buscarPosicion"
+              >Buscar
+              </b-button>
             </b-input-group>
 
             <Mapa ref="map" :preview="preview" :radius="radius"></Mapa>
@@ -117,17 +124,20 @@
             <span v-if="err" style="color: red;">La fecha elegida debe ser posterior a la fecha actual</span>
           </b-input-group>
 
-<!--          <b-input-group class="mb-3">
-            <b-form-file
-              v-model="file"
-              :state="Boolean(file)"
-              placeholder="Seleccione archivo..."
-              drop-placeholder="Arrastre archivo aquí..."
-              accept=".jpg, .png"
-              multiple
-            ></b-form-file>
-          </b-input-group>-->
-          <Uploader buttonTitle="Subir imagen de producto"></Uploader>
+          <b-input-group v-if="type === 'subasta'">
+            <v-time-picker v-model="picker" color="green lighten-1" header-color="blue"></v-time-picker>
+          </b-input-group>
+          <b-button v-on:click="logImg">Log picker</b-button>
+
+          <b-form-file
+            v-model="file_2"
+            :state="Boolean(file_2)"
+            placeholder="Choose or drop a file..."
+            drop-placeholder="Drop file here..."
+            multiple
+            accept=".jpg, .png, .gif"
+            @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length"
+          ></b-form-file>
 
           <a style="color: red;">{{ notSelected }}<br/><br/></a>
           <b-button variant="success" v-on:click="subirProducto" block>Subir producto</b-button>
@@ -143,6 +153,7 @@
   import Datepicker from "vuejs-datepicker/src/components/Datepicker";
   import Mapa from "../../components/Mapa.vue";
   import Uploader from "../../components/Uploader";
+  import axios from "axios";
 
   export default {
     name: "UploadProduct",
@@ -151,7 +162,8 @@
       return {
         preview: false,
         title: '',
-        file: [],
+        picker: null,
+        file_2: [],
         address: "",
         description: '',
         price: null,
@@ -229,6 +241,7 @@
           hora: 0,
           min: 0
         },
+        prod_id: 0,
         type: null,
         optionsType: [
           {value: 'trueque', text: 'Intercambiar producto'},
@@ -266,17 +279,17 @@
           this.endTime.day = this.select.getDay();
           this.endTime.month = this.select.getMonth();
           this.endTime.year = this.select.getFullYear();
-          let fecha = this.endTime.day + '/' + this.endTime.month + '/' + this.endTime.day + ', ' + this.endTime.hora + ':' + this.endTime.min + ':00';
+
         }
       },
       buscarPosicion: function () {
         for (var i = 0; i < 3; i++) {
           this.$store.dispatch("getPosition", this.address).then(() => {
             let candidates = this.$store.getters.last_position;
-            console.log(candidates);
+            //console.log(candidates);
 
-            console.log(candidates.length)
-            if (candidates.length !== 1) {
+            //console.log(candidates.length);
+            if (candidates.length < 1) {
               this.notSelected = "Sea más específico con la dirección.\n"
             } else {
               this.notSelected = "";
@@ -285,21 +298,27 @@
                 lat: location['lat'],
                 lng: location['lon']
               };
-              console.log(newCenter);
-              this.$refs.map.zoomUpdated("17");
+              this.$refs.map.zoomUpdated(17);
               this.$refs.map.centerUpdated(newCenter);
             }
           })
         }
       },
+      logImg() {
+        console.log(this.picker);
+        console.log(typeof this.picker);
+      },
       subirProducto: function () {
+        let clock = this.picker.split(':');
+        this.endTime.hora = clock[0];
+        this.endTime.min = clock[1];
         let centerPos = this.$refs.map.getCenter();
         let data = {
           "tipo": this.type,
           "titulo": this.title,
           "descripcion": this.description,
           "categoria": this.selCategory,
-          //"fecha": "2019-05-03T16:47:58.480Z",
+          "fecha": this.endTime.day + '/' + this.endTime.month + '/' + this.endTime.day + ', ' + this.endTime.hora + ':' + this.endTime.min + ':00',
           "vendedor": this.$store.getters.user,
           "precioBase": parseInt(this.price),
           "longitud": centerPos['lng'],
@@ -307,7 +326,7 @@
           "precioAux": parseInt(this.priceAux),
           "radio_ubicacion": this.radius
         };
-        console.log(data);
+        //console.log(data);
         if (data["categoria"] === null) {
           this.notSelected = "Seleccione una categoría.\n"
         } else if (data["tipo"] === null) {
@@ -315,11 +334,28 @@
         } else if (data["precio"] < data["precioAux"] && data["tipo"] === "trueque") {
           this.notSelected = "Ajuste el valor del máximo estimado.\n"
         } else {
-          this.notSelected = ""
-          this.$store
+          this.notSelected = "";
+          /*this.$store
             .dispatch("uploadProduct", data)
             .then(() => this.$router.push("/"))
-            .catch(err => console.log(err));
+            .catch(err => console.log(err));*/
+          let url = 'http://34.90.77.95:5000/producto/';
+          axios.post(url,data).then(response => {
+            this.prod_id = response.data.id;
+            console.log(response);
+            console.log(this.prod_id);
+          });
+
+          url = 'http://34.90.77.95:5000/multimedia/' + this.prod_id;
+          //console.log(prod_id);
+          let formData = null;
+          for(let i = 0; i < this.file_2.length; i++) {
+            formData = new FormData();
+            formData.append('file',this.file_2[i]);
+            axios.post(url, formData).then(response => {
+              console.log(response);
+            }).catch(error => (console.log(error)));
+          }
         }
       },
       cancelarSubida: function(){

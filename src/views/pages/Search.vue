@@ -16,10 +16,12 @@
         <!--<p>Precio máximo: {{prMax}}</p>-->
         <!--<p>Distancia máxima: {{distanciaMax}}</p>-->
         <!--<p>ValoracionMin: {{valMax}}</p>-->
-        <filters :valVendedor="valMax" :precioMax="prMax" @selected="newTag" @precio="nuevoPrecio" @dist="nuevaDistancia"></filters>
+        <filters :valVendedor="valMax" :precioMax="prMax" @selected="newTag" @precio="nuevoPrecio"
+                 @dist="nuevaDistancia"></filters>
       </b-col>
 
       <b-col style="margin-right: 10px">
+        <b-row>
         <!--<b-row class="justify-content-md-center">-->
           <!--<b-col col lg="4">-->
             <!--<b-form-input size="md" class="mr-sm-2" type="text" placeholder="Búsqueda"-->
@@ -47,11 +49,14 @@
           <b-col cols="4">
             <div
               style="margin-right: 50px; alignment: right">
-              <b-form-select v-model="order" :options="options" size="md" style="font-size: 1rem;"
-                             class="mt-3"></b-form-select>
+              <!--<b-form-select v-model="order" :options="options" size="md" style="font-size: 1rem;"-->
+              <!--class="mt-3"></b-form-select>-->
+              <b-button v-on:click="noMapa = !noMapa">{{noMapa ? 'Ver mapa' : 'Ver lista'}}</b-button>
             </div>
           </b-col>
         </b-row>
+        <b-tab v-if="noMapa" title="Productos encontrados" active
+               style="margin-top: 30px; margin-left: 30px; margin-right: 30px">
         <a style="margin-left: 30px;">
           Número de productos por página:
         </a>
@@ -65,7 +70,7 @@
           <b-card-group columns>
             <!--v-if="index<(porPagina*pagina) && index>=(porPagina*pagina-porPagina)"-->
             <ProductBox v-for="(product, index) in products" :key="index"
-                         :product="product"
+                        :product="product"
                         :comprado="false"
                         style="margin-bottom: 10px;"></ProductBox>
           </b-card-group>
@@ -74,9 +79,16 @@
             <b-button v-for="i in paginas" :key="i"
                       style="border-color: darkgray"
                       v-on:click="currentPage(i)"
-                      :variant=" i === pagina ? 'primary' : 'white'">{{i}}</b-button>
+                      :variant=" i === pagina ? 'primary' : 'white'">{{i}}
+            </b-button>
             <b-button v-on:click="currentPage(pagina+1)">-></b-button>
           </b-button-group>
+        </b-tab>
+        <b-tab v-else title="Mapa de productos encontrados" active
+               style="margin-top: 30px; margin-left: 30px; margin-right: 30px">
+          <p>Productos a mostrar: {{products.length}}</p>
+          <b-button v-on:click="logProds">Log prods</b-button>
+          <Mapa :preview="preview" :radius="radius" :prods="products"></Mapa>
         </b-tab>
       </b-col>
     </b-row>
@@ -88,10 +100,11 @@
   import ProductBox from "../../components/ProductBox";
   import axios from "axios";
   import LIcon from "vue2-leaflet/src/components/LIcon";
+  import Mapa from "../../components/Mapa";
 
   export default {
     name: "Search",
-    components: {LIcon, ProductBox, Filters},
+    components: {Mapa, LIcon, ProductBox, Filters},
     props: {
       textoProp: {
         type: String,
@@ -100,6 +113,9 @@
     },
     data() {
       return {
+        noMapa: true,
+        preview: false,
+        radius: null,
         tags: [],
         total: 0,
         valMax: 5,
@@ -127,6 +143,9 @@
       deleteTag: function (id) {
         this.tags.splice(id, 1);
         this.actualizarProds();
+      },
+      logProds(){
+        console.log(this.products);
       }
       ,
       deleteCat: function (id) {
@@ -196,12 +215,12 @@
       },
       actualizarProds: function () {
         let urlTags = 'http://155.210.47.51:5000/producto/?preciomin=0&valoracionMax=' + this.valMax;
-        urlTags = urlTags + '&preciomax=' + this.prMax + '&page=' + (this.pagina-1) + '&number=' + this.porPagina;
+        urlTags = urlTags + '&preciomax=' + this.prMax + '&page=' + (this.pagina - 1) + '&number=' + this.porPagina;
         // urlTags = urlTags + '&longitud=' + this.$store.getters.currentUser.longitud;
         // urlTags = urlTags + '&latitud=' + this.$store.getters.currentUser.latitud;
         // urlTags = urlTags + '&radioUbicacion=' + this.distanciaMax*1000;
         if (this.texto.length > 0) {
-          console.log('texto : ' , this.texto);
+          console.log('texto : ', this.texto);
           urlTags = urlTags + '&textoBusqueda=' + this.texto;
         }
         if (this.tipo.length > 0) {
@@ -226,10 +245,10 @@
     },
     computed: {
       paginas() {
-        let pag = Number((this.total/this.porPagina).toFixed(0));
-        if (pag < 1){
+        let pag = Number((this.total / this.porPagina).toFixed(0));
+        if (pag < 1) {
           return 1;
-        }else{
+        } else {
           return pag;
         }
       }

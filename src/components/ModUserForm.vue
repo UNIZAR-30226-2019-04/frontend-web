@@ -48,46 +48,22 @@
               <b-form-textarea class="text-body" v-model="userData.descripcion" placeholder="Descripción"/>
             </b-input-group>
 
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-input-group-text><i class="icon-phone"></i></b-input-group-text>
-              </b-input-group-prepend>
-              <b-form-input class="tel" v-model="userData.telefono" placeholder="Número de teléfono"/>
-              <b-form-invalid-feedback id="input-live-feedback3">
-                Introduce un teléfono de 9 dígitos.
-              </b-form-invalid-feedback>
-            </b-input-group>
-          </div>
-
           <div style="align-content: center">
-            <a><b>
-              <br/>Seleccione su ubicación:<br/><br/>
-            </b></a>
             <b-input-group>
               <b-input
                 id="inline-form-input-name"
                 class="mb-2 mr-sm-2 mb-sm-0"
                 placeholder="Buscar dirección..."
                 v-model="address"
+                @keypress.enter="buscarPosicion"
               ></b-input>
-              <b-button class="mb-2 mr-sm-2 mb-sm-0" variant="primary" v-on:click="buscarPosicion">Buscar</b-button>
+              <b-button class="mb-2 mr-sm-2 mb-sm-0"
+                        variant="primary"
+                        v-on:click="buscarPosicion"
+              >Buscar
+              </b-button>
             </b-input-group>
-
-            <Mapa ref="map" :preview="preview" :radius="radius"></Mapa>
-          </div>
-
-          <div style="margin: 5%;">
-            <a><b>
-              Seleccione el radio de interés de productos:<br/><br/>
-            </b></a>
-            <VueSlideBar style="margin-bottom: 2rem;"
-                         v-model="radius"
-                         :data="radiusData"
-                         :range="radiusRange"
-                         :tooltip-styles="{ backgroundColor: '#20a8d8', borderColor: '#20a8d8' }"
-                         :labelStyles="{ color: '#4a4a4a', backgroundColor: '#4a4a4a' }"
-                         :processStyle="{ backgroundColor: '#d8d8d8' }"
-            ></VueSlideBar>
+            <Mapa ref="map" :preview="false" :radius="100"></Mapa>
           </div>
 
           <b-input-group class="mb-3">
@@ -120,6 +96,7 @@
   import Mapa from "./Mapa.vue";
 
   import axios from "axios";
+  import Mapa from "./Mapa";
     export default {
       name: "ModUserForm",
       components: {VueSlideBar, Mapa},
@@ -138,89 +115,47 @@
       data() {
         return {
           acceptMailsUpdated: "false",
-          radius: null,
-          address: null,
-          preview: false,
-          radiusData: [
-            100,
-            200,
-            500,
-            750,
-            1000,
-            5000,
-            15000,
-            30000,
-            45000,
-            60000,
-            90000,
-            120000,
-            300000
-          ],
-          radiusRange: [
-            {
-              label: '100 m'
-            },
-            {
-              label: '200 m',
-              isHide: true
-            },
-            {
-              label: '500 m'
-            },
-            {
-              label: '750 m',
-              isHide: true
-            },
-            {
-              label: '1 km'
-            },
-            {
-              label: '5 km',
-              isHide: true
-            },
-            {
-              label: '15 km',
-            },
-            {
-              label: '30 km',
-              isHide: true
-            },
-            {
-              label: '45 km'
-            },
-            {
-              label: '60 km',
-              isHide: true
-            },
-            {
-              label: '90 km'
-            },
-            {
-              label: '120 km',
-              isHide: true
-            },
-            {
-              label: '300 km'
-            }
-          ]
+          notSelected: "",
+          address: null
         }
       },
       methods: {
-        validateEmail: function() {
-          return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.userData.mail);
-        },
-        nameState: function() {
-          return this.userData.nick.length >= 4;
+        buscarPosicion: function () {
+          for (var i = 0; i < 3; i++) {
+            this.$store.dispatch("getPosition", this.address).then(() => {
+              let candidates = this.$store.getters.last_position;
+              //console.log(candidates);
+
+              //console.log(candidates.length);
+              if (candidates.length < 1) {
+                this.notSelected = "Sea más específico con la dirección.\n"
+              } else {
+                this.notSelected = "";
+                let location = candidates[0];
+                let newCenter = {
+                  lat: location['lat'],
+                  lng: location['lon']
+                };
+                this.$refs.map.zoomUpdated(17);
+                this.$refs.map.centerUpdated(newCenter);
+              }
+            })
+          }
         },
         updateData: function () {
           let centerPos = this.$refs.map.getCenter();
           this.userData.longitud = centerPos['lng'];
           this.userData.latitud = centerPos['lat'];
-          this.userData.radio_ubicacion = this.radius;
-          this.userData.quiereEmails = this.userData.quiereEmails === 'true';
+          this.userData.radio_ubicacion = 100.0;
+          if(this.userData.quiereEmails === 'true'){
+            this.userData.quiereEmails = true;
+          }else{
+            this.userData.quiereEmails = false;
+          }
           console.log(this.userData);
-          let url = 'http://155.210.47.51:5000/user/' + this.$store.getters.user;
-          if (this.validateEmail() && this.nameState()) {
+
+          let url = 'http://34.90.77.95:5000/user/' + this.$store.getters.user;
+          if(this.validateEmail && this.nameState) {
             axios.put(url, this.userData).then(function (response) {
               console.log(response);
             });

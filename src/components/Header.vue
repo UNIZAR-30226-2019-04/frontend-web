@@ -29,14 +29,18 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto" style="margin-right: 20px;">
-          <!--<b-nav-form>-->
-            <!--<b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Búsqueda" v-model="texto"/>-->
-            <!--<router-link :to="{ name: 'Search', props: { texto: this.texto }}"-->
-                         <!--size="sm" class="my-2 my-sm-0" type="button"-->
-                         <!--&gt;-->
-              <!--Buscar-->
-            <!--</router-link>-->
-          <!--</b-nav-form>-->
+
+        <!--<span @mouseover="over = true"-->
+              <!--@mouseleave="over = false"-->
+              <!--:class="{elegido: over }"-->
+        <!--&gt;Chat</span>-->
+
+        <b-nav-item>
+          <router-link to="Chat"
+                       style="font-size: 1.3rem; color: white"
+          >Chat
+          </router-link>
+        </b-nav-item>
 
         <b-nav-item-dropdown right>
           <!-- Using button-content slot -->
@@ -68,7 +72,8 @@ export default {
     data() {
         return {
           picture : '../static/img/icons/safari-pinned-tab.svg',
-          texto: ''
+          texto: '',
+          over: false
         }
     },
     methods: {
@@ -104,5 +109,9 @@ export default {
     color: #4DBD74;
     padding-right: 5px;
     text-decoration: none;
+  }
+
+  .elegido {
+    background: green;
   }
 </style>
