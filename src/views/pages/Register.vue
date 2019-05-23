@@ -102,7 +102,7 @@
     },
     methods: {
       finalValidation: function () {
-        if (this.nameState() && this.firstPass() && this.secondPass() && this.validateEmail()) {
+        if (this.nameState && this.firstPass && this.secondPass && this.validateEmail) {
           return (true);
         } else {
           return (false);

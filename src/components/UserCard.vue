@@ -5,21 +5,21 @@
       no-body
 
       style=" margin-top: 20px; margin-left: 15px;"
-      :img-src="fotoPerfil"
+      :img-src="userInfo.imagen_perfil"
       img-alt="Foto de perfil"
       img-top
     >
       <div>
-        <floating-uploader buttonIcon="photo_camera"></floating-uploader>
-        <h4 slot="header" style="text-align: center; text-emphasis: black">{{ userInfo.nick }}</h4>
+        <floating-uploader style="position: absolute; right: 5px; top: 5px; " buttonIcon="photo_camera"></floating-uploader>
+        <h3 slot="header" style="text-align: center; margin-top: 20px; text-emphasis: black">{{ userInfo.nick }}</h3>
       </div>
       <!--<Uploader></Uploader>-->
       <b-card-body>
-        <b-card-title>Nombre y apellido(s)</b-card-title>
+        <b-card-title><b>Nombre y apellido(s)</b></b-card-title>
         <b-card-text>{{ userInfo.nombre }} {{ userInfo.apellidos }}</b-card-text>
       </b-card-body>
       <b-card-body>
-        <b-card-title>Descripción</b-card-title>
+        <b-card-title><b>Descripción</b></b-card-title>
         <b-card-text>{{ userInfo.descripcion }}</b-card-text>
       </b-card-body>
 
@@ -30,7 +30,7 @@
       </b-list-group>
 
       <b-card-body>
-        <b-btn variant="outline-primary">
+        <b-btn variant="outline-primary" style="width: 100%;">
           <a class="card-link" v-b-modal.modal1>Borrar cuenta</a>
         </b-btn>
         <b-modal id="modal1"
@@ -53,11 +53,11 @@
               Escriba su contraseña para poder borrar la cuenta (al menos 6 caracteres).
             </b-form-invalid-feedback>
           </b-input-group>
-          <b-btn class="btn-danger" v-on:click="borrarUsuario" style="margin-right: 10px">SI</b-btn>
+          <b-btn class="btn-danger" v-on:click="borrarUsuario" style="margin-right: 10px;">SI</b-btn>
           <b-btn @click="ocultarModal">CANCELAR</b-btn>
         </b-modal>
         <hr/>
-        <router-link to="EditProfile" class="btn" style="border-color: #20a8d8; color: #20a8d8">Modificar cuenta
+        <router-link to="EditProfile" class="btn" style="width: 100%; border-color: #20a8d8; color: #20a8d8">Modificar cuenta
         </router-link>
       </b-card-body>
     </b-card>
@@ -100,7 +100,7 @@
         }
       },
       borrarUsuario() {
-        let url = API_BASE + '/user/' + this.$store.getters.user + '/remove';
+        let url = API_BASE + 'user/' + this.$store.getters.user + '/remove';
         let headers = {
           Content_Type: 'application/json',
           Authorization: this.$store.getters.token

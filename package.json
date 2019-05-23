@@ -33,6 +33,7 @@
     "paypal-checkout": "^4.0.268",
     "perfect-scrollbar": "^1.4.0",
     "simple-line-icons": "^2.4.1",
+    "socket.io-client": "^2.2.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "v-rating": "^1.1.2",

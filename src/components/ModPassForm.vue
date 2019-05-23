@@ -75,7 +75,7 @@
     },
     methods: {
       updateData: function () {
-        let url = API_BASE + '/user/' + this.$store.getters.user + '/editpasswd';
+        let url = API_BASE + 'user/' + this.$store.getters.user + '/editpasswd';
         let headers = {
           Content_Type: 'application/json',
           Authorization: this.$store.getters.token
