@@ -3,7 +3,7 @@
     <div class="container">
       <b-row class="justify-content-center" style="position: fixed;  top: 50%;  left: 50%;  transform: translate(-50%, -50%);">
           <b-card no-body class="mx-4">
-            <b-card-body class="p-4">
+            <b-card-body class="p-4" style="width: 52rem ">
               <b-form>
                 <h1>Regístrate</h1>
                 <p class="text-muted">Crea tu cuenta</p>

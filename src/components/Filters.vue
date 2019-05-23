@@ -71,6 +71,7 @@
   import StarRating from "./StarRating";
   import RadioGroup from "./RadioGroup";
   import axios from "axios";
+  import {API_BASE} from "../config";
 
   export default {
     name: "Filters",
@@ -113,7 +114,7 @@
     },
     mounted () {
       axios
-        .get('http://155.210.47.51:5000/categoria/')
+        .get(API_BASE + '/categoria/')
         .then(response => (this.cat = response.data));
 
     }

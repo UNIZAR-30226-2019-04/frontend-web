@@ -12,13 +12,15 @@ import UploadProduct from "../views/pages/UploadProduct"; // Ruta absoluta. Habr
 import PruebaProducto from "../views/pages/PruebaProducto";
 import CompraProducto from "../components/CompraProducto";
 import store from "../store"
+import Dashboard from "../views/pages/Dashboard";
 import Chat from "../views/pages/Chat";
+
 
 // Containers
 const DefaultContainer = () => import('@/containers/DefaultContainer')
 
 // Views
-const Dashboard = () => import('@/views/Dashboard')
+// const Dashboard_coreui = () => import('@/views/Dashboard_coreui')
 
 const Colors = () => import('@/views/theme/Colors')
 const Typography = () => import('@/views/theme/Typography')
@@ -185,6 +187,11 @@ export default new Router({
       component: {
         render (c) { return c('router-view') }
       }
+    },
+    {
+      path: '/Dashboard',
+      name: 'Dashboard',
+      component: Dashboard
     }
   ]
 })

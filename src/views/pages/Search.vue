@@ -100,6 +100,7 @@
   import ProductBox from "../../components/ProductBox";
   import axios from "axios";
   import LIcon from "vue2-leaflet/src/components/LIcon";
+  import {API_BASE} from "../../config";
   import Mapa from "../../components/Mapa";
 
   export default {
@@ -214,8 +215,10 @@
         this.actualizarProds();
       },
       actualizarProds: function () {
-        let urlTags = 'http://155.210.47.51:5000/producto/?preciomin=0&valoracionMax=' + this.valMax;
-        urlTags = urlTags + '&preciomax=' + this.prMax + '&page=' + (this.pagina - 1) + '&number=' + this.porPagina;
+
+        let urlTags = API_BASE+'producto/?preciomin=0&valoracionMax=' + this.valMax;
+        urlTags = urlTags + '&preciomax=' + this.prMax + '&page=' + (this.pagina-1) + '&number=' + this.porPagina;
+
         // urlTags = urlTags + '&longitud=' + this.$store.getters.currentUser.longitud;
         // urlTags = urlTags + '&latitud=' + this.$store.getters.currentUser.latitud;
         // urlTags = urlTags + '&radioUbicacion=' + this.distanciaMax*1000;
@@ -254,7 +257,7 @@
       }
     },
     mounted() {
-      let urlTags = 'http://155.210.47.51:5000/producto/?preciomin=0&valoracionMax=' + this.valMax;
+      let urlTags = API_BASE +'/producto/?preciomin=0&valoracionMax=' + this.valMax;
       urlTags = urlTags + '&preciomax=' + this.prMax + '&page=0' + '&number=' + this.porPagina;
       // urlTags = urlTags + '&longitud=' + this.$store.getters.currentUser.longitud;
       // urlTags = urlTags + '&latitud=' + this.$store.getters.currentUser.latitud;

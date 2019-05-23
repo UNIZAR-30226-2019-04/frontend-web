@@ -3,7 +3,6 @@
       <b-card title="Editar Perfil" style="width: 60vw; margin-left: 30px">
         <b-form>
           <div style="width: 60%; margin: 40px auto;">
-
             <!--<h1>Editar Perfil</h1>-->
             <b-input-group class="mb-3">
               <b-input-group-prepend>
@@ -15,7 +14,12 @@
               </b-form-invalid-feedback>
             </b-input-group>
 
-
+        <b-input-group class="mb-3">
+          <b-input-group-prepend>
+            <b-input-group-text><i class="icon-user"></i></b-input-group-text>
+          </b-input-group-prepend>
+          <b-form-input type="text" class="form-control" v-model="userData.nombre" placeholder="Nombre"/>
+        </b-input-group>
 
             <b-input-group class="mb-3">
               <b-input-group-prepend>
@@ -66,29 +70,17 @@
             <Mapa ref="map" :preview="false" :radius="100"></Mapa>
           </div>
 
-          <b-input-group class="mb-3">
-            <b-form-checkbox
-              id="checkbox-1"
-              v-model="userData.quiereEmails"
-              name="checkbox-1"
-              value="true"
-              uncheckedValue="false"
-            >
-              <b>Deseo recibir recomendaciones de productos a mi cuenta de correo.</b>
-            </b-form-checkbox>
-          </b-input-group>
-
-          <b-button variant="success" v-on:click="updateData" block>Actualizar datos</b-button>
-          <b-modal id="modal1"
-                   title="Error"
-                   header-bg-variant="danger">
-            <h1 class="my-4">Ups...</h1>
-            <h3>Algo salió mal. Pruebe más tarde.</h3>
-            <b-btn class="btn-primary" v-on:click="hideModal">Aceptar</b-btn>
-          </b-modal>
-        </b-form>
-      </b-card>
-    </div>
+        <b-button variant="success" v-on:click="updateData" block>Actualizar datos</b-button>
+        <b-modal id="modal1"
+                 title="Error"
+                 header-bg-variant="danger">
+          <h1 class="my-4">Ups...</h1>
+          <h3>Algo salió mal. Pruebe más tarde.</h3>
+          <b-btn class="btn-primary" v-on:click="hideModal">Aceptar</b-btn>
+        </b-modal>
+      </b-form>
+    </b-card>
+  </div>
 </template>
 
 <script>
@@ -96,7 +88,8 @@
   import Mapa from "./Mapa.vue";
 
   import axios from "axios";
-  import Mapa from "./Mapa";
+  import {API_BASE} from "../config";
+  
     export default {
       name: "ModUserForm",
       components: {VueSlideBar, Mapa},
@@ -205,6 +198,7 @@
       //   this.$refs.map.centerUpdated(newCenter);
       // }
     }
+  }
 </script>
 
 <style scoped>

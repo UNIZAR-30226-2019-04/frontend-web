@@ -31,6 +31,19 @@
         <!--<h1>Es una subasta</h1>-->
         <div v-if="this.$store.state.public_id === method.vendido_por">
           <h1>ESTE PRODUCTO ES TUYO</h1>
+          <h3>Tiempo restante</h3>
+          <CountdownTimer :end-time="endTim"></CountdownTimer>
+          <h3>{{method.fechaexpiracion}}</h3>
+          <h3>{{method.fecha}}</h3>
+          <br/>
+          <p>------------------------------------------------</p>
+          Dia: {{Number(this.method.fechaexpiracion.split("/")[0])}} <br/>
+          Mes: {{Number(this.method.fechaexpiracion.split("/")[1])}} <br/>
+          Fecha completa: {{this.method.fechaexpiracion}} <br/>
+          Anyo: {{Number((this.method.fechaexpiracion.split("/")[2]).split(",")[0])}} <br/>
+
+          <p>------------------------------------------------</p>
+          <br/>
         </div>
         <div v-else>
           <b-card-title>Precio actual: {{method.precio}}€</b-card-title>
@@ -49,7 +62,14 @@
                       style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-top: 10px;">PUJAR</b-button>
             <button @click="sobreProd()">BOTON DEBUG</button>
             <br/>
-            {{method.fechaexpiracion}}
+            {{method.fechaexpiracion}}<br/>
+            {{method.fechaexpiracion.split("/")[0]}}-
+            {{method.fechaexpiracion.split("/")[1]}}-
+            {{method.fechaexpiracion.split("/")[2]}}
+            <br/>
+            {{parseInt(method.fechaexpiracion.split("/")[0])}}-
+            {{method.fechaexpiracion.split("/")[1]}}-
+            {{method.fechaexpiracion.split("/")[2]}}
             <br/>
             {{typeof method.fechaexpiracion}}
             <br/>
@@ -60,6 +80,39 @@
       </b-card-body>
 
       <b-card-body v-else-if="tipo === trueque">
+        <div v-if="this.$store.state.public_id === method.vendido_por">
+          <h1>ESTE PRODUCTO ES TUYO</h1>
+          <p>Esto es lo que se verá si el producto es tuyo y lo quieres asignar a alguien</p>
+          <b-btn variant="outline-primary">
+            <a class="card-link" v-b-modal.modal2>Vender producto trueque</a>
+          </b-btn>
+          <b-modal id="modal2"
+                   ref="modalVentaTrueque"
+                   title="Asignar producto de trueque"
+                   header-bg-variant="primary"
+                   hide-footer
+          >
+            <h3 class="my-4">Introduzca el nombre de usuario a quien quiera asignar el trueque del producto</h3>
+            <b-input-group class="mb-4">
+              <!--<b-input-group-prepend>-->
+              <b-input-group-text><i class="icon-user"></i></b-input-group-text>
+              <!--</b-input-group-prepend>-->
+              <b-form-input :type="tipo" class="form-control" v-model="asignarTrueque" placeholder="nick del usuario"
+                            autocomplete/>
+              <b-form-invalid-feedback id="input-live-feedback3">
+                Escriba su contraseña para poder borrar la cuenta (al menos 6 caracteres).
+              </b-form-invalid-feedback>
+            </b-input-group>
+            <b-btn class="btn-success" v-on:click="asignarUsuarioTrueque" style="margin-right: 10px; background-color: #20a8d8; font-weight: bold">ASIGNAR</b-btn>
+            <b-btn @click="ocultarModal">CANCELAR</b-btn>
+          </b-modal>
+        </div>
+        <div v-else>
+         <h1>Este producto no es mio y quiero comprarlo</h1>
+          <br/>
+          <button class="btn" style="background-color: #20a8d8; color: white; font-weight: bold" >CHATEAR</button>
+
+        </div>
         <b-card-title>Trueque disponible</b-card-title>
         <b-card-text>{{ method.cambioTrueque }}</b-card-text>
       </b-card-body>
@@ -80,7 +133,7 @@
   import {API_BASE} from "../../config";
   import axios from "axios";
   import BRow from "bootstrap-vue/src/components/layout/row";
-  import store from "../../store";
+  import moment from "moment";
 
   export default {
     name: "ProductPage_sell",
@@ -91,14 +144,18 @@
         id_vendedor: this.method.vendido_por,
         idProducto: this.method.idProducto,
         endTim: {
-          day: 19,
-          month: 5,
-          year: 2019,
+          day: Number(this.method.fechaexpiracion.split("/")[0]),
+          // day: 31,
+          month: Number(this.method.fechaexpiracion.split("/")[1]),
+          // month: 7,
+          // year: 2019,
+          year: Number((this.method.fechaexpiracion.split("/")[2]).split(",")[0]),
         },
         precio_: this.method.precio,
         infoProd: null,
         infoProdData: null,
         infoProdData_date: null,
+        asignarTrueque: ''
       }
     },
     props: {
@@ -114,6 +171,12 @@
       actPrecio: function () {
         this.precioFinal = this.precio;
       },
+      ocultarModal() {
+        this.$refs['modalVentaTrueque'].hide()
+      },
+      asignarUsuarioTrueque: function(){
+        // TODO: funcion que haga algo cuando se le asigna a un usuario la compra de un trueque
+      },
       procesoCompra: function () {
         console.log(this.precio_);
         if (this.method.tipoVenta === 'normal') {
@@ -124,11 +187,26 @@
         }
         console.log(`${API_BASE}/user/${this.id_vendedor}`);
         console.log(`${API_BASE}/producto/${this.idProducto}`);
-        this.$router.push({path: 'CompraProducto', query: {idProd: this.idProducto, idVendor: this.id_vendedor}})
+        console.log('----------------------------');
+        console.log(this.idProducto);
+        console.log('idProducto: ', this.method.idProducto);
+        console.log('id_vendedor: ', this.method.vendido_por);
+        console.log(this.id_vendedor);
+        console.log('----------------------------');
+        this.$router.push({path: 'CompraProducto', query: {idProd: this.method.idProducto, idVendor: this.method.vendido_por}})
       },
       sobreProd: function () {
         console.log('Al boton ajjajajaj');
         console.log(this.infoProdData);
+        // console.log(Date().getFullYear());
+        let start = new Date();
+        let y = start.getFullYear();
+        console.log(y);
+        console.log(new Date().getFullYear());
+        console.log(new Date().getMonth());
+        console.log(new Date().getDay());
+        console.log(new Date().getDate());
+        console.log(new Date().getUTCMonth() + 1);
         // console.log(this.infoProdData.fechaexpiracion);
         // console.log(this.infoProdData_date);
         // console.log(typeof this.infoProdData.fechaexpiracion);

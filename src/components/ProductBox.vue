@@ -83,6 +83,8 @@
   import ShareButton from "./Share";
   import  axios from 'axios';
   import MakeReview from "./makeReview";
+  import {API_BASE} from "../config";
+
   export default {
     name: "ProductBox",
     components: {MakeReview, ShareButton},
@@ -109,7 +111,7 @@
       },
       liked: function () {
         this.product.deseado = !this.product.deseado;
-        let url = 'http://34.90.77.95:5000/deseados/' + this.$store.getters.user;
+        let url = API_BASE + 'deseados/' + this.$store.getters.user;
         if(!this.product.deseado){
           url = url + '/remove';
         }
