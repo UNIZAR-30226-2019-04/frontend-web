@@ -9,14 +9,12 @@
       </b-card-header>
 
       <b-card-body v-if="method.tipoVenta === 'normal'">
-        {{this.$store.state.public_id}}
-        {{method.vendido_por}}
         <div v-if="this.$store.state.public_id === method.vendido_por">
           <h1>ESTE PRODUCTO ES TUYO</h1>
         </div>
         <div v-else>
-        <!--<h1>Es un tipo de venta normal</h1>-->
           <br/>
+          <h3>Precio:</h3>
           <b-card-title style="font-size: xx-large"> {{ method.precio }} €</b-card-title>
           <br/>
           <button @click="procesoCompra()" class="btn"

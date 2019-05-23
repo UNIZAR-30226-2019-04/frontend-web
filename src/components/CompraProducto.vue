@@ -9,8 +9,8 @@
       </b-col>
       <b-col style="margin-left: 2px; margin-right: 5%">
         <div v-if="infoProdData.tipo === 'normal'">
-          <h1> Usted va a comprar el producto con id {{this.idProducto}} vendido por {{this.idVendedor}}. Desea
-            continuar?</h1>
+          <h1> Usted va a comprar el producto "{{this.infoProdData.titulo}}" vendido por {{this.info.nick}}.</h1>
+          <h2> ¡Continúe con la compra! </h2>
           <b-tabs content-class="mt-3" style="margin-top: 20px; margin-left: 5px;">
             <b-tab title="Pago en efectivo" active style="margin-top: 10px; margin-left: 0px; ">
               <h3>¡Contacta con el vendedor!</h3>
@@ -137,6 +137,9 @@
         console.log(typeof this.infoProdData.fechaexpiracion);
         console.log(typeof this.infoProdData.fecha);
         console.log(typeof this.infoProdData_date);
+        console.log('---------------------');
+        console.log(this.info);
+
         // console.log(this.loquesea);
       }
     }
