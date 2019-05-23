@@ -10,22 +10,19 @@
         <v-list subheader>
           <v-subheader>Recent chat</v-subheader>
           <v-list-tile
-            v-for="item in items"
-            :key="item.title"
+            v-for="(item, index) in chats"
+            :key="index"
             avatar
             @click="conversacionElegida(item.id)"
           >
             <v-list-tile-avatar>
-              <img :src="item.avatar">
+              <img :src="avatar(item)">
             </v-list-tile-avatar>
 
             <v-list-tile-content>
-              <v-list-tile-title v-html="item.title"></v-list-tile-title>
+              <v-list-tile-title v-html="mailOtro(item)"></v-list-tile-title>
             </v-list-tile-content>
 
-            <v-list-tile-action>
-              <v-icon :color="item.active ? 'teal' : 'grey'">chat_bubble</v-icon>
-            </v-list-tile-action>
           </v-list-tile>
         </v-list>
       </v-card>
@@ -53,7 +50,22 @@
       methods: {
           conversacionElegida(id){
             this.$emit('nuevaConversacion', id);
+          },
+        avatar: function (item) {
+          if(item.vendedor === this.$store.getters.user){
+            return item.imagen_comprador;
+          }else{
+            return item.imagen_vendedor;
           }
+        },
+        mailOtro: function (item) {
+          if(item.vendedor === this.$store.getters.user){
+            return item.email_comprador;
+          }else{
+            return item.email_vendedor;
+          }
+        },
+
       }
     }
 </script>
