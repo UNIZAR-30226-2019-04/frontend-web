@@ -104,6 +104,32 @@
       console.log(this.infoProdData.fechaexpiracion);
     },
     methods: {
+      async nuevoChat() {
+        let url = API_BASE + 'conversacion/';
+        let header = {
+          Content_Type: 'application/json',
+          Authorization: this.$store.getters.token
+        };
+        let datos = {
+          "comprador": this.$store.getters.user,
+          "vendedor": this.idVendedor,
+          "email_comprador": this.$store.getters.name,
+          "email_vendedor": this.info.email
+        };
+        console.log('---------------');
+        console.log(this.$store.getters.currentUser);
+        console.log('---------------');
+        console.log('---------------');
+        console.log(datos);
+        console.log('---------------');
+        console.log('---------------');
+        console.log(this.info);
+        console.log('---------------');
+        let respuesta = await axios.post(url, datos, {headers: header}).catch(error => (console.log(error)));
+        console.log(respuesta);
+        this.$router.push({path: 'Chat', query: {id_conv: respuesta.data}})
+
+      },
       sobreProd: function () {
         console.log('Al boton ajjajajaj');
         console.log(this.infoProdData.fechaexpiracion);
