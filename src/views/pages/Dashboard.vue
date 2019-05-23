@@ -1,81 +1,101 @@
 <template>
   <div>
-    <h1>ESTO ES UNA PRUEBA</h1>
-    <h1>Hola Fulanito!</h1>
-    <h1>Productos para ti</h1>
-    <h1>Productos nuevos</h1>
-    <h1>ESTO ES UNA PRUEBA</h1>
-    <!--&lt;!&ndash;BÚSQUEDA DE PRODUCTOS&ndash;&gt;-->
-    <!--&lt;!&ndash;<b-row class="justify-content-md-center">&ndash;&gt;-->
-      <!--&lt;!&ndash;<b-col col lg="4">&ndash;&gt;-->
-        <!--&lt;!&ndash;<b-form-input size="md" class="mr-sm-2" type="text" placeholder="Búsqueda"&ndash;&gt;-->
-                      <!--&lt;!&ndash;v-on:change="actualizarProds"&ndash;&gt;-->
-                      <!--&lt;!&ndash;@keypress="actualizarProds"&ndash;&gt;-->
-                      <!--&lt;!&ndash;v-model="texto"/>&ndash;&gt;-->
-      <!--&lt;!&ndash;</b-col>&ndash;&gt;-->
-      <!--&lt;!&ndash;<b-btn v-on:click="actualizarProds">&ndash;&gt;-->
-        <!--&lt;!&ndash;Buscar&ndash;&gt;-->
-      <!--&lt;!&ndash;</b-btn>&ndash;&gt;-->
-    <!--&lt;!&ndash;</b-row>&ndash;&gt;-->
-    <!--<b-row>-->
-      <!--<b-col style="margin-right: 10px">-->
-        <!--<b-row>-->
-          <!--<b-col cols="4">-->
-            <!--<div-->
-              <!--style="margin-right: 50px; alignment: right">-->
-              <!--<b-form-select v-model="order" :options="options" size="md" style="font-size: 1rem;"-->
-                             <!--class="mt-3"></b-form-select>-->
-            <!--</div>-->
-          <!--</b-col>-->
-        <!--</b-row>-->
-        <!--<b-tab title="Productos encontrados" active style="margin-top: 30px; margin-left: 30px; margin-right: 30px">-->
-          <!--&lt;!&ndash;<p class="mt-3">Página {{ pagina }} de {{ (elementos/porPagina + 1).toFixed(0) }}</p>&ndash;&gt;-->
-          <!--<b-card-group columns>-->
-            <!--&lt;!&ndash;v-if="index<(porPagina*pagina) && index>=(porPagina*pagina-porPagina)"&ndash;&gt;-->
-            <!--<ProductBox v-for="(product, index) in productos" :key="index"-->
-                        <!--:product="product"-->
-                        <!--:comprado="false"-->
-                        <!--style="margin-bottom: 10px;"></ProductBox>-->
-          <!--</b-card-group>-->
-        <!--</b-tab>-->
-      <!--</b-col>-->
-    <!--</b-row>-->
-    <!--<br/>-->
-    <!--<br/>-->
-    <!--<br/>-->
-    <!--<br/>-->
-    <!--<br/>-->
-    <!--<br/>-->
-    <!--<br/>-->
-    <!--<br/>-->
-    <!--<br/>-->
-    <!--<br/>-->
-    <!--<br/>-->
-    <!--<br/>-->
-    <!--<br/>-->
-    <!--<h1>juejeujeujeuejeujeuje</h1>-->
-    <!--&lt;!&ndash;{{this.$store.state.public_id}}&ndash;&gt;-->
-    <!--<br/>-->
-    <!--{{this.temporary_public_id}}-->
+    <div style="position: center ">
+      <h1>ESTO ES UNA PRUEBA</h1>
+      <div v-if="this.infoUser.nombre !== null">
+        <h1>Hola {{this.infoUser.nombre}}!</h1>
+      </div>
+      <div v-else>
+        <h1>Hola {{this.infoUser.username}}!</h1>
+      </div>
+    </div>
+    {{this.$store.state.public_id}}
     <br/>
-    {{this.infoUser}}
+    {{this.public_id}}
     <br/>
-    <br/>
-    <br/>
-    Productos comprados: {{this.infoUser.productos_comprados}}
-    <br/>
-    Valoracion: {{this.infoUser.valoracion}}
-    <br/>
-    Nick: {{this.infoUser.nick}}
-    <br/>
-    <br/>
+    {{this.infoUser.nombre}}
+    <div style="margin-left: 15px">
+      <!--<b-row>-->
+      <!--<h1>Productos para ti</h1>-->
+      <!--</b-row>-->
+      <b-row>
+        <b-col>
+          <h1>Productos para ti</h1>
+          <ProductBox span v-for="(product,index) in products.slice(0,5)" :key="index"
+                      :product="product"
+                      :comprado="false"
+                      style="margin-bottom: 10px;"></ProductBox>
+        </b-col>
+        <b-col>
+          <h1>Productos nuevos</h1>
+          <ProductBox v-for="(product,index) in products.slice(0,5)" :key="index"
+                      :product="product"
+                      :comprado="false"
+                      style="margin-bottom: 10px;"></ProductBox>
+        </b-col>
 
+      </b-row>
+
+      <h1>rrtgjdkfnalrjvngslxkgbjnwñrtkjgnbsñgj </h1>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <!--<span>-->
+      <!--<ProductBox v-for="(product,index) in products" :key="index"-->
+      <!--:product="product"-->
+      <!--:comprado="false"-->
+      <!--style="margin-bottom: 10px;"></ProductBox>-->
+      <!--</span>-->
+      <h2 style="font-size:3rem;">Showcase</h2>
+      <div class="showcase__carousel--container">
+        <i class="fa fa-chevron-left" style="font-size:10rem; display:inline-block; float:left;"></i>
+        <div class="showcase__carousel--content">
+          <div class="showcase__carousel--item">
+            <p>jejejeje</p>
+          </div>
+          <div class="showcase__carousel--item">
+            <p>jejejeje</p>
+          </div>
+          <div class="showcase__carousel--item">
+            <p>jejejeje</p>
+          </div>
+          <div class="showcase__carousel--item">
+            <p>jejejeje</p>
+          </div>
+
+          <i class="fa fa-chevron-right" style="font-size:10rem; display:inline-block; float:right;"></i>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <br/>
+
+      <!--<b-row>-->
+      <!--<ProductBox :product=product :key="product.id"-->
+      <!--style="margin-bottom: 10px;"></ProductBox>-->
+      <!--</b-row>-->
+      <b-row>
+        <h1>Productos nuevos</h1>
+      </b-row>
+    </div>
+    <br/>
     <button @click="loquesea()">BOTON</button>
     <br/>
     <br/>
-    <!--<br/>-->
-    <!--<br/>-->
-    <!--<br/>-->
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <h1>---------------------------------------------------------------------------------------------</h1>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
 
   </div>
 </template>
@@ -84,29 +104,61 @@
   import axios from "axios";
   import {API_BASE} from "../../config";
   import ProductBox from "../../components/ProductBox";
+  import BRow from "bootstrap-vue/src/components/layout/row";
+  import BCarouselSlide from "bootstrap-vue/src/components/carousel/carousel-slide";
 
   export default {
     name: "Dashboard",
-    components: {ProductBox},
+    components: {BCarouselSlide, BRow, ProductBox},
     data() {
       return {
         temporary_public_id: "bbf845ee-c5cb-4a03-a7c0-7efbb101c48a",
+        public_id: this.$store.state.public_id,
         infoUser: null,
-        productos: [],
+        total: 0,
+        maxComponentsRecomended: 5,
+        cards: [
+          {
+            headline: "Makes App available Offline",
+            text:
+              "By using the CachingAPI all static elements on an app can be pre-cached",
+            imgName: "setting.svg"
+          },
+          {
+            headline: "Use background sync to defer actions",
+            text:
+              "User inputs entered when offline are sent in the background once they get connectivity.",
+            imgName: "cloud.svg"
+          },
+          {
+            headline: "Send Push Notifications",
+            text:
+              "The Notifications API lets us send push notifications to re-engage users.",
+            imgName: "antenna.svg"
+          }
+        ]
       }
     },
     mounted() {
-      axios.get(`${API_BASE}/user/${this.temporary_public_id}`).then(response => (this.infoUser = response.data));
+      axios.get(`${API_BASE}/user/${this.public_id}`).then(response => (this.infoUser = response.data));
       axios.get(`${API_BASE}/producto/`).then(response => (this.productos = response.data));
-  },
+      axios.get(`${API_BASE}/producto/`).then(response => {
+        this.products = response.data.productos;
+        this.total = response.data.resultados;
+        // console.log(response);
+      });
+    },
     methods: {
       loquesea: function () {
         console.log('JJEJEJEJ');
         console.log('JJEJEJEJ');
-        console.log(this.$store.state.public_id);
+        // console.log(this.$store.state.public_id);
         console.log(typeof this.productos.productos);
         console.log(this.productos.productos);
-        console.log(this.productos.productos);
+        console.log(this.products);
+        let product = this.products[0];
+        console.log('El producto 0: ');
+        console.log(product);
       }
     }
   }
