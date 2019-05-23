@@ -52,8 +52,8 @@
       <!--<b-card-img :src="fotoExtra" alt="Image" bottom/>-->
       <br/>
       <b-row style="margin-left: 30px">
-        <v-btn color="green" @click="nuevoChat">Chat</v-btn>
-        <v-btn color="blue" @click="seguirUser">Seguir Usuario</v-btn>
+        <v-btn style="background-color: green; font-weight: bold; color: white;" @click="nuevoChat">Chat</v-btn>
+        <v-btn style="background-color: #20a8d8; font-weight: bold; color: white;" @click="seguirUser">Seguir Usuario</v-btn>
       </b-row>
       <br/>
     </b-card>
