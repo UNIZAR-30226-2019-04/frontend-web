@@ -21,18 +21,6 @@
       </b-col>
 
       <b-col style="margin-right: 10px">
-        <b-row>
-        <!--<b-row class="justify-content-md-center">-->
-          <!--<b-col col lg="4">-->
-            <!--<b-form-input size="md" class="mr-sm-2" type="text" placeholder="Búsqueda"-->
-                          <!--v-on:change="actualizarProds"-->
-                          <!--@keypress="actualizarProds"-->
-                          <!--v-model="texto"/>-->
-          <!--</b-col>-->
-          <!--<b-btn v-on:click="actualizarProds">-->
-            <!--Buscar-->
-          <!--</b-btn>-->
-        <!--</b-row>-->
         <b-row style="margin-top: 10px; margin-left: 30px;">
           <b-col cols="8">
             <b-btn size="lg" v-for="(tag, index) in tags" style="margin-right: 4px; font-size: 0.9rem" :key="index"
@@ -55,7 +43,7 @@
             </div>
           </b-col>
         </b-row>
-        <b-tab v-if="noMapa" title="Productos encontrados" active
+        <div v-if="noMapa"
                style="margin-top: 30px; margin-left: 30px; margin-right: 30px">
         <a style="margin-left: 30px;">
           Número de productos por página:
@@ -65,7 +53,8 @@
           <b-button v-on:click="elemPerPage(25)" :variant="elegido(25) ? 'primary': 'white'">25</b-button>
           <b-button v-on:click="elemPerPage(50)" :variant="elegido(59) ? 'primary': 'white'">50</b-button>
         </b-button-group>
-        <b-tab title="Productos encontrados" active style="margin-top: 30px; margin-left: 30px; margin-right: 30px">
+        </div>
+        <b-tab v-if="noMapa" title="Productos encontrados" active style="margin-top: 30px; margin-left: 30px; margin-right: 30px">
           <!--<p class="mt-3">Página {{ pagina }} de {{ (elementos/porPagina + 1).toFixed(0) }}</p>-->
           <b-card-group columns>
             <!--v-if="index<(porPagina*pagina) && index>=(porPagina*pagina-porPagina)"-->
