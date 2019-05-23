@@ -339,14 +339,14 @@
             .dispatch("uploadProduct", data)
             .then(() => this.$router.push("/"))
             .catch(err => console.log(err));*/
-          let url = 'http://34.90.77.95:5000/producto/';
+          let url = API_BASE + 'producto/';
           axios.post(url,data).then(response => {
             this.prod_id = response.data.id;
             console.log(response);
             console.log(this.prod_id);
           });
 
-          url = 'http://34.90.77.95:5000/multimedia/' + this.prod_id;
+          url = API_BASE + 'multimedia/' + this.prod_id;
           //console.log(prod_id);
           let formData = null;
           for(let i = 0; i < this.file_2.length; i++) {

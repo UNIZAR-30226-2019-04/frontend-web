@@ -98,7 +98,6 @@
         let respuesta = await axios.post(url, datos, {headers: header}).catch(error => (console.log(error)));
         console.log(respuesta);
         this.$router.push({path: 'Chat', query: {id_conv: respuesta.data}})
-
       },
       seguirUser() {
         let url = API_BASE + 'seguir/' + this.$store.getters.user;
