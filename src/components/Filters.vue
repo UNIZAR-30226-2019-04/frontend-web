@@ -1,8 +1,11 @@
 <template>
   <b-card  style="width: 100%; margin-left: 10px; margin-top: 30px">
     <div>
-      <h4>Precio máximo</h4>
-      <VueSlideBar v-model="precioMax" lineHeight="6" max="1000"></VueSlideBar>
+      <h4>Precio máximo (€)</h4>
+      <VueSlideBar v-model="precioMax" lineHeight=6 max=1000
+                   :tooltip-styles="{ backgroundColor: '#20a8d8', borderColor: '#20a8d8' }"
+                   :labelStyles="{ color: '#4a4a4a', backgroundColor: '#4a4a4a' }"
+                   :processStyle="{ backgroundColor: '#20a8d8' }"></VueSlideBar>
       <b-btn v-on:click="nuevoPrecio" variant="outline-primary" style="width: 100%; margin-top: 7px; margin-bottom: 7px">Aplicar precio</b-btn>
     </div>
 
@@ -11,8 +14,11 @@
     <br/>
 
     <div>
-      <h4>Distancia máxima</h4>
-      <VueSlideBar v-model="distMax" lineHeight="6" max="1000"></VueSlideBar>
+      <h4>Distancia máxima (€)</h4>
+      <VueSlideBar v-model="distMax" lineHeight=6 max=1000
+                   :tooltip-styles="{ backgroundColor: '#20a8d8', borderColor: '#20a8d8' }"
+                   :labelStyles="{ color: '#4a4a4a', backgroundColor: '#4a4a4a' }"
+                   :processStyle="{ backgroundColor: '#20a8d8' }"></VueSlideBar>
       <b-btn v-on:click="nuevaDist" variant="outline-primary" style="width: 100%; margin-top: 7px; margin-bottom: 7px">Aplicar distancia</b-btn>
     </div>
 

@@ -5,7 +5,7 @@
                   quote="RAMA"
                   hashtags="medioambiente,RAMA"
                   inline-template>
-    <div>
+    <div style="width: 100%;">
       <network network="facebook" style="margin-right: 5px;">
         <b-button variant="facebook icon">
           <i class="fab fa-facebook"></i>

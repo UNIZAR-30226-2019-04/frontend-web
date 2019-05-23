@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div style="width: 20vw; height: 50vh; min-height: 550px;">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <b-card border-variant="light" style="max-width: 26rem;">
+    <b-card border-variant="light" style="width: 100%; height: 100%;">
       <b-carousel
         id="carousel1"
         style="text-shadow: 1px 1px 2px #333;"
@@ -22,6 +22,11 @@
                           style="background-color: transparent">
         </b-carousel-slide>
       </b-carousel>
+      <img src="../../public/img/product-placeholder.png"
+           v-if="!product.multimedia.length"
+           alt="SIN IMAGEN"
+           style="width: 100%;"
+      >
 
       <br>
       <b-card-title>
@@ -42,34 +47,35 @@
                        <!--align="center">-->
             <!--Ver producto-->
           <!--</router-link>-->
-          <button @click="infoProducto()" class="btn"
-                       style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-bottom: 5px;"
-                       align="center">
-            Ver producto
-          </button>
+
         </b-col>
+        <b-btn v-if="comprado">
+          <a class="card-link" v-on:click="showModal">Val. usuario</a>
+        </b-btn>
+        <b-modal id="modal2"
+                 ref="modalReview"
+                 title="Hacer review"
+                 header-bg-variant="danger"
+                 hide-footer
+        >
+          <make-review :valorado="product.vendedor" @close="ocultarModal"></make-review>
+          <!--<b-btn class="btn-primary" style="margin-right: 10px">SI</b-btn>-->
+          <!--<b-btn @click="ocultarModal">CANCELAR</b-btn>-->
+        </b-modal>
       </b-row>
 
       <b-row>
-        <b-col class="column2">
-          <b-btn v-if="comprado">
-            <a class="card-link" v-on:click="showModal">Val. usuario</a>
-          </b-btn>
-          <b-modal id="modal2"
-                   ref="modalReview"
-                   title="Hacer review"
-                   header-bg-variant="danger"
-                   hide-footer
-          >
-            <make-review :valorado="product.vendedor" @close="ocultarModal"></make-review>
-            <!--<b-btn class="btn-primary" style="margin-right: 10px">SI</b-btn>-->
-            <!--<b-btn @click="ocultarModal">CANCELAR</b-btn>-->
-          </b-modal>
+        <b-col cols="4">
+          <button @click="infoProducto()" class="btn"
+                  style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white;"
+                  align="center">
+            Ver producto
+          </button>
         </b-col>
-        <b-col class="column2">
+        <b-col cols="6">
           <ShareButton></ShareButton>
         </b-col>
-        <b-col class="column1" align="right">
+        <b-col cols="2" align="right">
           <b-btn v-on:click="liked" style="background-color: transparent; margin-right: 8px"><i
             :class="isLiked() ? likeIcon : unlikeIcon" :style="isLiked() ? likeColor : unlikeColor" align="right"></i>
           </b-btn>
