@@ -1,9 +1,9 @@
 <template>
-  <div style=" height: 50vh; min-height: 450px; max-height: 800px;">
+  <div style=" height: 50vh; min-height: 470px; max-height: 800px;">
     <v-hover>
       <b-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`"
               border-variant="light" style="width: 100%; height: 100%;">
-        <div style="min-height: 238px;">
+        <div style="min-height: 250px;">
           <b-carousel
             id="carousel1"
             style="text-shadow: 1px 1px 2px #333;"
@@ -20,7 +20,7 @@
                               v-for="(img,index) in product.multimedia"
                               :key="index"
                               v-if="!img.tipo" :img-src="img.path"
-                              style="background-color: transparent">
+                              style="background-color: transparent; max-height: 250px">
             </b-carousel-slide>
           </b-carousel>
           <img src="../../public/img/product-placeholder.png"
