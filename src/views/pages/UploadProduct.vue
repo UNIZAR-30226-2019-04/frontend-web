@@ -157,6 +157,32 @@
           <b-button variant="danger" style="font-weight: bold; font-size: 1.15rem" v-on:click="cancelarSubida" block>Cancelar</b-button>
         </b-form>
       </b-card>
+      <div>
+        <b-modal id="modalexito"
+                 ref="modalexito"
+                 title="Éxito"
+                 header-bg-variant="success"
+                 hide-footer>
+          <h3>Producto subido con éxito</h3>
+          <br/>
+          <b-btn class="btn-success" style="margin-right: 10px;font-weight: bold" @click="ocultarModal(1)">
+            ACEPTAR
+          </b-btn>
+        </b-modal>
+      </div>
+      <div>
+        <b-modal id="modalerror"
+                 ref="modalerror"
+                 title="Error"
+                 header-bg-variant="danger"
+                 hide-footer>
+          <h3>Algo salió mal. Pruebe más tarde.</h3>
+          <br/>
+          <b-btn class="btn-success" style="margin-right: 10px;font-weight: bold" @click="ocultarModal(2)">
+            ACEPTAR
+          </b-btn>
+        </b-modal>
+      </div>
     </b-container>
     <button class="btn" @click="infoCats">DEBUG</button>
   </div>
@@ -274,6 +300,28 @@
         .then(response => (this.cat = response.data.data));
     },
     methods: {
+      // llamadaALosModals: function(estado){
+      //   console.log('La response status: ',  estado);
+      //   console.log('Paso a evaluar la respuesta');
+      //   if (estado === 200) {
+      //     console.log('Ha habido éxito');
+      //     // $("#modalexito").modal("toggle");
+      //     $('#modalexito').on('shown.bs.collapse', function (e) {
+      //       // Action to execute once the collapsible area is expanded
+      //     })
+      //   }else{
+      //     console.log('Ha habido algun problema');
+      //     $("#modalerror").modal();
+      //   }
+      // },
+      ocultarModal(num) {
+        if(num === 1) {
+          this.$refs['modalexito'].hide();
+          this.$router.push("/Profile");
+        }else{
+          this.$refs['modalerror'].hide();
+        }
+      },
       infoCats: function () {
         console.log(this.tamanio);
         console.log(typeof this.cat);
@@ -344,7 +392,7 @@
           "precioAux": parseInt(this.priceAux),
           "radio_ubicacion": this.radius
         };
-        console.log(data);
+        console.log('Los datos: ', data);
         if (data["categoria"] === null) {
           this.notSelected = "Seleccione una categoría.\n"
         } else if (data["tipo"] === null) {
@@ -358,20 +406,35 @@
             .then(() => this.$router.push("/"))
             .catch(err => console.log(err));*/
 
-          let url = 'http://34.90.77.95:5000/producto/';
+          let url = API_BASE + 'producto/';
           let response = await axios.post(url, data);
-          console.log(response);
+          console.log('La response: ',  response);
+          let estado = response.status;
+
+          // this.llamadaALosModals(response.status);
+
+          console.log('La response status: ',  estado);
+          console.log('Paso a evaluar la respuesta');
+          if (estado === 200) {
+            console.log('Ha habido éxito');
+            $('#modalexito').modal();
+          }else{
+            console.log('Ha habido algun problema');
+            $("#modalerror").modal();
+          }
+
           this.prod_id = response.data.id;
-          url = 'http://34.90.77.95:5000/multimedia/' + this.prod_id;
+          url = API_BASE + 'multimedia/' + this.prod_id;
 
           //console.log(prod_id);
           let formData = null;
           for (let i = 0; i < this.file_2.length; i++) {
             formData = new FormData();
             formData.append('file', this.file_2[i]);
-            console.log(this.file_2[i]);
+            console.log('El form: ',this.file_2[i]);
             response = await axios.post(url, formData).catch(error => (console.log(error)));
           }
+
         }
       },
       cancelarSubida: function () {
