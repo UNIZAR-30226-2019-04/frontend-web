@@ -204,7 +204,7 @@ export default new Vuex.Store({
         const user_id = localStorage.getItem("public_id");
         commit("update_request");
         axios({
-          url: `${API_BASE}/user/${user_id}/edit`,
+          url: `${API_BASE}user/${user_id}/edit`,
           data: user,
           method: "POST"
         })
@@ -224,7 +224,7 @@ export default new Vuex.Store({
       return new Promise( (resolve, reject) => {
         commit("upload_request");
         axios({
-          url: `${API_BASE}/producto/`,
+          url: `${API_BASE}producto/`,
           data: product,
           method: "POST"
         })
@@ -243,7 +243,7 @@ export default new Vuex.Store({
       commit("location_request");
       return new Promise(  (resolve, reject) => {
         axios({
-          url: `${API_BASE}/geocode/point/${location}`,
+          url: `${API_BASE}geocode/point/${location}`,
           data: location,
           method: "GET"
         })

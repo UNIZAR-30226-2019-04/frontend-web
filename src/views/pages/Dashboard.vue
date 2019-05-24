@@ -140,9 +140,9 @@
       }
     },
     mounted() {
-      axios.get(`${API_BASE}/user/${this.public_id}`).then(response => (this.infoUser = response.data));
-      axios.get(`${API_BASE}/producto/`).then(response => (this.productos = response.data));
-      axios.get(`${API_BASE}/producto/`).then(response => {
+      axios.get(`${API_BASE}user/${this.public_id}`).then(response => (this.infoUser = response.data));
+      axios.get(`${API_BASE}producto/`).then(response => (this.productos = response.data));
+      axios.get(`${API_BASE}producto/`).then(response => {
         this.products = response.data.productos;
         this.total = response.data.resultados;
         // console.log(response);
