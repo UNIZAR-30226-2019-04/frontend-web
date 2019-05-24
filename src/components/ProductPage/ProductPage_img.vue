@@ -67,9 +67,9 @@
     mounted() {
       console.log('MOUUUUUUUUUUUUUUUUUUUUUUUUUUNTED--------------');
       // this.method();
-      console.log(`${API_BASE}/user/${this.id_vendedor}`);
+      console.log(`${API_BASE}user/${this.id_vendedor}`);
       //http://155.210.47.51:5000/user/8e4de80f-d9bf-411c-a696-58e3481a1b36
-      axios.get(`${API_BASE}/user/${this.id_vendedor}`).then(response => (this.info = response));
+      axios.get(`${API_BASE}user/${this.id_vendedor}`).then(response => (this.info = response));
       // axios.get(`http://155.210.47.51:5000/user/${this.id_vendedor}`).then(response => (this.info = response));
       // console.log(info.nombre);
     },

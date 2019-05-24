@@ -179,16 +179,16 @@
     async mounted() {
       this.method();
       console.log('Carga de _sell');
-      axios.get(`${API_BASE}/producto/${this.idProducto}`).then(response => (this.infoProdData = response.data));
-      axios.get(`${API_BASE}/producto/${this.idProducto}`).then(response => (this.infoProdData_date = response.data.fechaexpiracion));
-      axios.get(`${API_BASE}/puja/${this.idProducto}`).then(response => (this.ultimoPrecioValido = response.data));
+      axios.get(`${API_BASE}producto/${this.idProducto}`).then(response => (this.infoProdData = response.data));
+      axios.get(`${API_BASE}producto/${this.idProducto}`).then(response => (this.infoProdData_date = response.data.fechaexpiracion));
+      axios.get(`${API_BASE}puja/${this.idProducto}`).then(response => (this.ultimoPrecioValido = response.data));
       this.var_ = 'jeje';
       console.log(this.var_);
 
     },
     methods: {
       showPrecio(){
-        let kk = axios.get(`${API_BASE}/puja/${this.idProducto}`).then(response => (this.infoPujaProd = response.data));
+        let kk = axios.get(`${API_BASE}puja/${this.idProducto}`).then(response => (this.infoPujaProd = response.data));
       },
       /* Función que actualiza el precio del producto en la subasta */
       actPrecio: function (precioPujado) {
@@ -228,7 +228,7 @@
         console.log('La respuesta: ', respuesta); /* Devuelve si ha sido exitosa o no */
         /*----------------------------------------------*/
         console.log('U: ',this.ultimoPrecioValido);
-        this.ultimoPrecioValido = await axios.get(`${API_BASE}/puja/${idProducto}`).then(response => (this.infoPujaProd = response.data));
+        this.ultimoPrecioValido = await axios.get(`${API_BASE}puja/${idProducto}`).then(response => (this.infoPujaProd = response.data));
         console.log('infoPujaProd: ', this.infoPujaProd);
         console.log('ultimoPrecioValido: ', this.ultimoPrecioValido);
         console.log(this.ultimoPrecioValido.data[this.ultimoPrecioValido.data.length-1]);
@@ -253,8 +253,8 @@
         else if (this.method.tipoVenta === 'subasta') {
           console.log('Es una subasta');
         }
-        console.log(`${API_BASE}/user/${this.id_vendedor}`);
-        console.log(`${API_BASE}/producto/${this.idProducto}`);
+        console.log(`${API_BASE}user/${this.id_vendedor}`);
+        console.log(`${API_BASE}producto/${this.idProducto}`);
         console.log('----------------------------');
         console.log(this.idProducto);
         console.log('idProducto: ', this.method.idProducto);

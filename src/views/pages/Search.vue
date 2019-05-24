@@ -252,7 +252,7 @@
       }
     },
     mounted() {
-      let urlTags = API_BASE +'/producto/?preciomin=0&valoracionMax=' + this.valMax;
+      let urlTags = API_BASE +'producto/?preciomin=0&valoracionMax=' + this.valMax;
       urlTags = urlTags + '&preciomax=' + this.prMax + '&page=0' + '&number=' + this.porPagina;
       // urlTags = urlTags + '&longitud=' + this.$store.getters.currentUser.longitud;
       // urlTags = urlTags + '&latitud=' + this.$store.getters.currentUser.latitud;

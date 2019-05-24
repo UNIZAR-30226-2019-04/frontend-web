@@ -91,10 +91,10 @@
     },
     mounted() {
       console.log('desde la compra d producto');
-      console.log(`${API_BASE}/producto/${this.idProducto}`);
-      axios.get(`${API_BASE}/user/${this.idVendedor}`).then(response => (this.info = response.data));
-      axios.get(`${API_BASE}/producto/${this.idProducto}`).then(response => (this.infoProdData = response.data));
-      axios.get(`${API_BASE}/producto/${this.idProducto}`).then(response => (this.infoProdData_date = response.data.fechaexpiracion));
+      console.log(`${API_BASE}producto/${this.idProducto}`);
+      axios.get(`${API_BASE}user/${this.idVendedor}`).then(response => (this.info = response.data));
+      axios.get(`${API_BASE}producto/${this.idProducto}`).then(response => (this.infoProdData = response.data));
+      axios.get(`${API_BASE}producto/${this.idProducto}`).then(response => (this.infoProdData_date = response.data.fechaexpiracion));
       console.log('PreCalculo');
       console.log(this.infoProdData.fechaexpiracion);
     },

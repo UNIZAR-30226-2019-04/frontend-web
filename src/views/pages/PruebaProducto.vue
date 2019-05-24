@@ -72,7 +72,7 @@
     },
     mounted() {
       axios
-        .get(`${API_BASE}/producto/`)
+        .get(`${API_BASE}producto/`)
         // .get(`${API_V2}/producto/`)
         .then(response => (this.info = response))
     },
