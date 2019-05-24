@@ -102,6 +102,7 @@
         let url = API_BASE + 'user/' + this.$store.getters.user + '/fotoPerfil/';
         let formData = new FormData();
         formData.append('file',this.file);
+        console.log(this.file);
         axios.put(url, formData).then(response => {
           console.log(response);
         }).catch(error => (console.log(error)));
