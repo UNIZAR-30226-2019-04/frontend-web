@@ -7,17 +7,6 @@
           Detalles del vendedor
         </b-button>
       </b-card-header>
-      <!--<b-card-->
-      <!--img-alt="Image"-->
-      <!--img-top-->
-      <!--tag="article"-->
-      <!--no-body-->
-      <!--style="margin-top: 20px; margin-left: 20px;">-->
-      <!--<h4 slot="header" style="text-align: center; text-emphasis: black ">Detalles del vendedor</h4>-->
-
-      <!--<b-card-body>-->
-      <!--<b-card-title>Imágenes del producto</b-card-title>-->
-      <!--</b-card-body>-->
 
       <b-list-group style="font-size: 1.1rem; font-weight: lighter">
         <b-list-group-item style="text-align: center">{{ info.data.nick }}</b-list-group-item>
@@ -43,19 +32,14 @@
           <p style="font-weight: bold">Ventas realizadas:</p>
           {{ info.data.productos_vendidos }}
         </b-list-group-item>
+        <!--<b-row style="alignment: center; align-items: center; align-content: center; align-self: center">-->
+        <b-list-group-item style="align-content: center; ">
+          <v-btn style="background-color: green; font-weight: bold; color: white;" @click="nuevoChat">Chat</v-btn>
+          <v-btn style="background-color: #20a8d8; font-weight: bold; color: white;" @click="seguirUser">Seguir
+            Usuario
+          </v-btn>
+        </b-list-group-item>
       </b-list-group>
-      <!--<b-list-group flush border="none">-->
-      <!--<img :src=method.images[0].src width="40px">-->
-      <!--<img :src=method.images[1].src width="40px">-->
-      <!--</b-list-group>-->
-
-      <!--<b-card-img :src="fotoExtra" alt="Image" bottom/>-->
-      <br/>
-      <b-row style="margin-left: 30px">
-        <v-btn color="green" @click="nuevoChat">Chat</v-btn>
-        <v-btn color="blue" @click="seguirUser">Seguir Usuario</v-btn>
-      </b-row>
-      <br/>
     </b-card>
   </div>
 </template>
@@ -64,10 +48,11 @@
   import {API_BASE} from "../../config";
   import axios from "axios";
   import ButtonGroups from "../../views/buttons/ButtonGroups";
+  import BListGroup from "bootstrap-vue/src/components/list-group/list-group";
 
   export default {
     name: "ProductPage_img",
-    components: {ButtonGroups},
+    components: {BListGroup, ButtonGroups},
     data() {
       return {
         id_vendedor: this.method.vendido_por,
@@ -99,7 +84,7 @@
           "comprador": this.$store.getters.user,
           "vendedor": this.id_vendedor,
           "email_comprador": this.$store.getters.name,
-          "email_vendedor" : this.info.data.nick
+          "email_vendedor": this.info.data.nick
         };
         console.log('---------------');
         console.log(this.$store.getters.currentUser);
@@ -110,24 +95,23 @@
         console.log('---------------');
         console.log(this.info);
         console.log('---------------');
-        let respuesta = await axios.post(url,datos,{headers: header}).catch(error => (console.log(error)));
+        let respuesta = await axios.post(url, datos, {headers: header}).catch(error => (console.log(error)));
         console.log(respuesta);
         this.$router.push({path: 'Chat', query: {id_conv: respuesta.data}})
-
       },
-      seguirUser(){
+      seguirUser() {
         let url = API_BASE + 'seguir/' + this.$store.getters.user;
         let header = {
           Content_Type: 'application/json',
           Authorization: this.$store.getters.token
         };
         let data = {
-          "seguido" : this.id_vendedor
+          "seguido": this.id_vendedor
         };
         console.log('---------------');
         console.log(data);
         console.log('---------------');
-        axios.post(url,data,{headers: header}).then(response => (console.log(response)));
+        axios.post(url, data, {headers: header}).then(response => (console.log(response)));
       },
       showInfo: function () {
         console.log(this.info);

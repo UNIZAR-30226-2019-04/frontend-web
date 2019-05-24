@@ -21,7 +21,8 @@
           @sliding-start="onSlideStart"
           @sliding-end="onSlideEnd"
         >
-          <b-carousel-slide class="carousel-inner" v-for="(img,index) in method.images " :img-src="img.path" :key="index"
+          <b-carousel-slide class="carousel-inner" v-for="(img,index) in method.images " :img-src="img.path"
+                            :key="index"
           >
           </b-carousel-slide>
         </b-carousel>
@@ -33,18 +34,42 @@
       </b-card-body>
 
       <b-list-group flush>
-        <b-list-group-item>Titulo: {{ method.titulo }}</b-list-group-item>
-        <b-list-group-item>Descripcion: {{ method.descripcion }}</b-list-group-item>
-        <b-list-group-item>Numero de visualizaciones: {{ method.visualizaciones }}</b-list-group-item>
-        <b-list-group-item>Precio: {{ method.precio }}€</b-list-group-item>
-        <b-list-group-item>Tipo de venta: {{ method.tipoVenta }}</b-list-group-item>
-        <b-list-group-item>Categoria del producto: {{ method.categoria}}</b-list-group-item>
-        <b-list-group-item>Fecha: {{ method.fecha}}</b-list-group-item>
+        <b-list-group-item>
+          <h5>Titulo:</h5>
+          {{ method.titulo }}
+        </b-list-group-item>
+        <b-list-group-item>
+          <h5>Descripción:</h5>
+          {{ method.descripcion }}
+        </b-list-group-item>
+        <b-list-group-item>
+          <h5>Número de visualizaciones:</h5>
+          {{ method.visualizaciones }}
+        </b-list-group-item>
+        <b-list-group-item>
+          <h5>Precio:</h5>
+          {{ method.precio }}€
+        </b-list-group-item>
+        <!--<b-list-group-item>-->
+        <!--<h5>Tipo de venta:</h5>-->
+        <!--{{ method.tipoVenta }}-->
+        <!--</b-list-group-item>-->
+        <div v-if="method.categoria !== undefined">
+          <b-list-group-item>
+            <h5>Categoria del producto:</h5>
+            {{ method.categoria }}
+          </b-list-group-item>
+        </div>
+        <b-list-group-item>
+          <h5>Fecha de publicación:</h5>
+          {{ method.fecha}}
+        </b-list-group-item>
       </b-list-group>
 
       <!--<b-card-footer>Otras fotos</b-card-footer>-->
       <!--<b-card-img :src="fotoExtra" alt="Image" bottom/>-->
     </b-card>
+    <button class="btn" @click="infoCat()">DEBUG</button>
   </div>
 </template>
 
@@ -54,11 +79,21 @@
   export default {
     name: "ProductPage_details",
     components: {BCardBody},
+    data() {
+      return {
+        laCategoria: method.categoria,
+      }
+    },
     props: {
       method: {type: Function},
     },
     mounted() {
       this.method();
+    },
+    methods: {
+      infoCat: function () {
+        console.log(this.laCategoria);
+      }
     }
   }
 </script>
