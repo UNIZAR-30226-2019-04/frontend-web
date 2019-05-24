@@ -1,5 +1,7 @@
 <template>
   <div>
+    <b-btn v-on:click="logFile">Pic</b-btn>
+    <b-btn v-on:click="uploadFoto">Upload</b-btn>
     <b-card
       border-variant="none"
       no-body
@@ -11,6 +13,9 @@
     >
       <div>
         <!--<floating-uploader style="position: absolute; right: 5px; top: 5px; " buttonIcon="photo_camera"></floating-uploader>-->
+        <v-btn v-if="selectedFoto" v-on:click="uploadFoto" dark fab small color="blue" style="position: absolute; left: 5px; top: 5px; ">
+          <v-icon class="material-icons">cloud_upload</v-icon>
+        </v-btn>
         <v-btn dark fab small color="blue" style="position: absolute; right: 5px; top: 5px; ">
           <v-icon class="material-icons">photo_camera</v-icon>
           <b-form-file
@@ -88,7 +93,9 @@
         file: null,
         tipo: 'password',
         icono: 'far fa-eye-slash',
-        delPass: ''
+        delPass: '',
+        selectedFoto: false,
+        file2 : null
       }
     },
     computed: {
@@ -97,15 +104,28 @@
       }
     },
     methods: {
-      cambiarFoto() {
-        console.log("Cambiando foto...");
+      logFile(){
+        console.log(this.file);
+      },
+      uploadFoto(){
+        console.log("Cambiando fot...");
         let url = API_BASE + 'user/' + this.$store.getters.user + '/fotoPerfil/';
         let formData = new FormData();
+
         formData.append('file',this.file);
         console.log(this.file);
+
         axios.put(url, formData).then(response => {
+          console.log('0000000000000');
           console.log(response);
+          console.log('0000000000000');
+          this.userInfo.imagen_perfil = response.data.data[0].path;
         }).catch(error => (console.log(error)));
+        this.selectedFoto = false;
+      },
+      cambiarFoto() {
+        console.log("Foto elegida...");
+        this.selectedFoto = true;
       },
       showHidePass: function(){
         if(this.tipo === "password"){

@@ -319,7 +319,7 @@
           "titulo": this.title,
           "descripcion": this.description,
           "categoria": this.selCategory,
-          "fecha": this.endTime.day + '/' + this.endTime.month + '/' + this.endTime.day + ', ' + this.endTime.hora + ':' + this.endTime.min + ':00',
+          "fecha": this.endTime.day + '/' + this.endTime.month + '/' + this.endTime.day + ' ' + this.endTime.hora + ':' + this.endTime.min + ':00',
           "vendedor": this.$store.getters.user,
           "precioBase": parseInt(this.price),
           "longitud": centerPos['lng'],
