@@ -110,15 +110,6 @@
               </b-btn>
             </b-modal>
           </div>
-          <!---->
-          <!--<b-modal id="modal1"-->
-
-                   <!--title="Error"-->
-                   <!--header-bg-variant="danger">-->
-            <!--<h1 class="my-4">Ups...</h1>-->
-            <!--<h3>Algo salió mal. Pruebe más tarde.</h3>-->
-            <!--<b-btn class="btn-primary" v-on:click="hideModal">Aceptar</b-btn>-->
-          <!--</b-modal>-->
         </div>
       </b-form>
     </b-card>
@@ -160,6 +151,7 @@
       ocultarModal(num) {
         if(num === 1) {
           this.$refs['modalexito'].hide();
+          this.$router.push("/Profile");
         }else{
           this.$refs['modalerror'].hide();
         }
