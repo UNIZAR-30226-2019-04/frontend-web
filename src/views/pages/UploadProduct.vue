@@ -166,7 +166,7 @@
         address: "",
         description: '',
         price: null,
-        priceAux: null,
+        priceAux: 0,
         radius: null,
         radiusData: [
           100,
@@ -319,7 +319,7 @@
           "titulo": this.title,
           "descripcion": this.description,
           "categoria": this.selCategory,
-          "fecha": this.endTime.day + '/' + this.endTime.month + '/' + this.endTime.day + ' ' + this.endTime.hora + ':' + this.endTime.min + ':00',
+          "fechaexpiracion": this.endTime.day + '/' + this.endTime.month + '/' + this.endTime.year + ' ' + this.endTime.hora + ':' + this.endTime.min + ':00',
           "vendedor": this.$store.getters.user,
           "precioBase": parseInt(this.price),
           "longitud": centerPos['lng'],
@@ -327,7 +327,7 @@
           "precioAux": parseInt(this.priceAux),
           "radio_ubicacion": this.radius
         };
-        //console.log(data);
+        console.log(data);
         if (data["categoria"] === null) {
           this.notSelected = "Seleccione una categoría.\n"
         } else if (data["tipo"] === null) {
