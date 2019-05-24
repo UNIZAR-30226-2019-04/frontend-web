@@ -88,8 +88,7 @@
 
       <b-card-body v-else-if="tipo === trueque">
         <div v-if="this.$store.state.public_id === method.vendido_por">
-          <h1>ESTE PRODUCTO ES TUYO</h1>
-          <p>Esto es lo que se verá si el producto es tuyo y lo quieres asignar a alguien</p>
+          <h2>Este producto te pertenece</h2>
           <b-btn variant="outline-primary">
             <a class="card-link" v-b-modal.modal2>Vender producto trueque</a>
           </b-btn>
@@ -117,13 +116,11 @@
           </b-modal>
         </div>
         <div v-else>
-          <h1>Este producto no es mio y quiero comprarlo</h1>
+          <h1>¡Contacta con el vendedor para comprar el producto!</h1>
           <br/>
-          <button class="btn" style="background-color: #20a8d8; color: white; font-weight: bold">CHATEAR</button>
-
+          <button class="btn" style="background-color: #20a8d8; color: white; font-weight: bold; font-size: 1rem" @click="nuevoChat">CHATEAR</button>
+          <br/>
         </div>
-        <b-card-title>Trueque disponible</b-card-title>
-        <b-card-text>{{ method.cambioTrueque }}</b-card-text>
       </b-card-body>
 
       <b-list-group flush>
@@ -161,6 +158,7 @@
           year: Number((this.method.fechaexpiracion.split("/")[2]).split(",")[0]),
         },
         precio: this.method.precio,
+        info: null,
         infoProd: null,
         infoProdData: null,
         infoProdData_date: null,
@@ -179,14 +177,41 @@
     async mounted() {
       this.method();
       console.log('Carga de _sell');
-      axios.get(`${API_BASE}/producto/${this.idProducto}`).then(response => (this.infoProdData = response.data));
-      axios.get(`${API_BASE}/producto/${this.idProducto}`).then(response => (this.infoProdData_date = response.data.fechaexpiracion));
-      axios.get(`${API_BASE}/puja/${this.idProducto}`).then(response => (this.ultimoPrecioValido = response.data));
+      axios.get(`${API_BASE}user/${this.id_vendedor}`).then(response => (this.info = response.data));
+      axios.get(`${API_BASE}producto/${this.idProducto}`).then(response => (this.infoProdData = response.data));
+      axios.get(`${API_BASE}producto/${this.idProducto}`).then(response => (this.infoProdData_date = response.data.fechaexpiracion));
+      axios.get(`${API_BASE}puja/${this.idProducto}`).then(response => (this.ultimoPrecioValido = response.data));
       this.var_ = 'jeje';
       console.log(this.var_);
 
     },
     methods: {
+      async nuevoChat() {
+        let url = API_BASE + 'conversacion/';
+        let header = {
+          Content_Type: 'application/json',
+          Authorization: this.$store.getters.token
+        };
+        let datos = {
+          "comprador": this.$store.getters.user,
+          "vendedor": this.method.vendido_por,
+          "email_comprador": this.$store.getters.name,
+          "email_vendedor": ""
+        };
+        console.log('---------------');
+        console.log(this.$store.getters.currentUser);
+        console.log('---------------');
+        console.log('---------------');
+        console.log(datos);
+        console.log('---------------');
+        console.log('---------------');
+        console.log(this.info);
+        console.log('---------------');
+        let respuesta = await axios.post(url, datos, {headers: header}).catch(error => (console.log(error)));
+        console.log(respuesta);
+        this.$router.push({path: 'Chat', query: {id_conv: respuesta.data}})
+
+      },
       showPrecio(){
         let kk = axios.get(`${API_BASE}/puja/${this.idProducto}`).then(response => (this.infoPujaProd = response.data));
       },
