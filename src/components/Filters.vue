@@ -120,7 +120,7 @@
     },
     mounted () {
       axios
-        .get(API_BASE + '/categoria/')
+        .get(API_BASE + 'categoria/')
         .then(response => (this.cat = response.data));
 
     }

@@ -29,7 +29,6 @@
                style="width: 100%;"
           >
         </div>
-
         <br>
         <b-card-title>
           {{ product.titulo }}
@@ -90,7 +89,7 @@
 
 <script>
   import ShareButton from "./Share";
-  import  axios from 'axios';
+  import axios from 'axios';
   import MakeReview from "./makeReview";
   import {API_BASE} from "../config";
 
@@ -107,10 +106,10 @@
       }
     },
     methods: {
-      infoProducto: function(){
+      infoProducto: function () {
         console.log("AQUI");
         console.log(this.product.id);
-        this.$router.push({ path: 'ProductPage', query: { idProd: this.product.id } })
+        this.$router.push({path: 'ProductPage', query: {idProd: this.product.id}})
       },
       ocultarModal() {
         this.$refs['modalReview'].hide();
@@ -121,7 +120,7 @@
       liked: function () {
         this.product.deseado = !this.product.deseado;
         let url = API_BASE + 'deseados/' + this.$store.getters.user;
-        if(!this.product.deseado){
+        if (!this.product.deseado) {
           url = url + '/remove';
         }
         let headers = {
@@ -129,8 +128,8 @@
           Authorization: this.$store.getters.token
 
         };
-        let data = { producto_id : this.product.id };
-        axios.post(url,data,{headers}).then(response => (console.log(response)));
+        let data = {producto_id: this.product.id};
+        axios.post(url, data, {headers}).then(response => (console.log(response)));
       },
       isLiked: function () {
         return this.product.deseado;

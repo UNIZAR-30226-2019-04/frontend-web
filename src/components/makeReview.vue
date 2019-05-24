@@ -55,7 +55,7 @@
           puntuacion: this.valor,
           puntuado: this.valorado
         };
-        let url = API_BASE + '/valoracion/' + this.$store.getters.user;
+        let url = API_BASE + 'valoracion/' + this.$store.getters.user;
         let headers = {
           'Content-Type': 'application/json',
           'Authorization': this.$store.getters.token

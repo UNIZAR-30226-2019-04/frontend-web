@@ -136,7 +136,6 @@
             drop-placeholder="Drop file here..."
             multiple
             accept=".jpg, .png, .gif"
-            @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length"
           ></b-form-file>
 
           <a style="color: red;">{{ notSelected }}<br/><br/></a>
@@ -308,10 +307,12 @@
         console.log(this.picker);
         console.log(typeof this.picker);
       },
-      subirProducto: function () {
-        let clock = this.picker.split(':');
-        this.endTime.hora = clock[0];
-        this.endTime.min = clock[1];
+      async subirProducto () {
+        if(this.tipo === 'subasta') {
+          let clock = this.picker.split(':');
+          this.endTime.hora = clock[0];
+          this.endTime.min = clock[1];
+        }
         let centerPos = this.$refs.map.getCenter();
         let data = {
           "tipo": this.type,
@@ -339,22 +340,20 @@
             .dispatch("uploadProduct", data)
             .then(() => this.$router.push("/"))
             .catch(err => console.log(err));*/
-          let url = 'http://34.90.77.95:5000/producto/';
-          axios.post(url,data).then(response => {
-            this.prod_id = response.data.id;
-            console.log(response);
-            console.log(this.prod_id);
-          });
 
+          let url = 'http://34.90.77.95:5000/producto/';
+          let response = await axios.post(url,data);
+          console.log(response);
+          this.prod_id = response.data.id;
           url = 'http://34.90.77.95:5000/multimedia/' + this.prod_id;
+
           //console.log(prod_id);
           let formData = null;
           for(let i = 0; i < this.file_2.length; i++) {
             formData = new FormData();
             formData.append('file',this.file_2[i]);
-            axios.post(url, formData).then(response => {
-              console.log(response);
-            }).catch(error => (console.log(error)));
+            console.log(this.file_2[i]);
+            response = await axios.post(url, formData).catch(error => (console.log(error)));
           }
         }
       },

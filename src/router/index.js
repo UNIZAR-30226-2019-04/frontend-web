@@ -178,7 +178,14 @@ export default new Router({
     {
       path: '/Chat',
       name: 'Chat,',
-      component: Chat
+      component: Chat,
+      beforeEnter(to, from, next) {
+        if (store.getters.isLoggedIn) {
+          next();
+        } else {
+          next('/Login');
+        }
+      }
     },
     {
       path: '/pages',

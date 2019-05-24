@@ -53,6 +53,7 @@
           descripcion: this.infoExtended.data.descripcion,
           visualizaciones: this.infoExtended.data.visualizaciones,
           precio: this.infoExtended.data.precioBase,
+          precioAux: this.infoExtended.data.precioAux,
           tipoVenta: this.infoExtended.data.tipo,
           categoria: this.infoExtended.data.categoria_nombre,
           fecha: this.infoExtended.data.fecha,
@@ -60,22 +61,8 @@
           vendido_por: this.infoExtended.data.vendedor,
           razones_venta: "Se vende por poco uso. Lo uso de pisapapeles y atrapapolvo.",
           zona_geografica: 'https://snazzy-maps-cdn.azureedge.net/assets/127403-no-label-bright-colors.png?v=20171101110035',
-          trueque: true,
           cambioTrueque: "Smartphone valorado en más de 300€",
-          images: [{
-            // src: this.infoExtended.data.multimedia[0].path,
-            src: 'https://www.asus.com/media/US/products/fCGFt3hiSAQYMnvO/P_500.jpg',
-            id: 1
-          },
-            // {
-            //   src: 'https://dlcdnimgs.asus.com/websites/global/products/amrevEkgfqmrdCMD/K53_ov1.jpg',
-            //   id: 2
-            // },
-            // {
-            //   src: 'https://www.pcper.com/files/imagecache/article_max_width/review/2011-04-24/asusk53e-3.jpg',
-            //   id: 3
-            // },
-          ]
+          images: this.infoExtended.data.multimedia
         }
       }
     }

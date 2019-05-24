@@ -154,7 +154,7 @@
         }
         console.log(this.userData);
 
-        let url = 'http://34.90.77.95:5000/user/' + this.$store.getters.user;
+        let url = API_BASE + 'user/' + this.$store.getters.user;
         if(this.validateEmail && this.nameState) {
           axios.put(url, this.userData).then(function (response) {
             console.log(response);
