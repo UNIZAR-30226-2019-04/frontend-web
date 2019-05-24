@@ -14,7 +14,7 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col cols="3" style="margin-left: 50px">
+      <b-col cols="2" style="margin-left: 50px">
         <!--<p>Precio máximo: {{prMax}}</p>-->
         <!--<p>Distancia máxima: {{distanciaMax}}</p>-->
         <!--<p>ValoracionMin: {{valMax}}</p>-->
@@ -22,13 +22,13 @@
                  @dist="nuevaDistancia"></filters>
       </b-col>
 
-      <b-col sm style="margin-right: 10px">
+      <b-col sm style="margin-right: 60px;">
         <b-row style="margin-top: 30px;">
-          <b-col cols="4">
+          <b-col cols="6">
             <div v-if="noMapa"
-                 style="margin-right: 30px">
+                 style="margin-right: 10px;   padding: 0 0 0 15px;">
               <a style="margin-left: 30px;">
-                Número de productos por página:
+                Nº productos por página:
               </a>
               <b-button-group style="margin-left: 30px; align-self: center; border-color: darkgray">
                 <b-button size="lg" v-on:click="elemPerPage(10)" :variant="elegido(10) ? 'primary' : 'white'">10</b-button>
@@ -49,17 +49,12 @@
               {{tipo}}
             </b-btn>
           </b-col>
-          <b-col cols="4">
-            <div
-              style="margin-right: 50px; alignment: right">
-              <!--<b-form-select v-model="order" :options="options" size="md" style="font-size: 1rem;"-->
-              <!--class="mt-3"></b-form-select>-->
-              <b-button size="lg" variant="outline-primary" v-on:click="noMapa = !noMapa" style="width: 100%;">{{noMapa ? 'Ver mapa' : 'Ver lista'}}</b-button>
-            </div>
+          <b-col cols="4" >
+            <b-button size="lg" variant="outline-primary" v-on:click="noMapa = !noMapa" style="width: 100%;">{{noMapa ? 'Ver mapa' : 'Ver lista'}}</b-button>
           </b-col>
         </b-row>
 
-        <b-tab v-if="noMapa" title="Productos encontrados" active style="margin-top: 30px; margin-left: 30px; width: 99%;">
+        <b-tab v-if="noMapa" title="Productos encontrados" active style="margin-top: 30px; margin-left: 30px; width: 100%; padding: 0 30px 0 15px;">
           <!--<p class="mt-3">Página {{ pagina }} de {{ (elementos/porPagina + 1).toFixed(0) }}</p>-->
           <b-card-group columns>
             <!--v-if="index<(porPagina*pagina) && index>=(porPagina*pagina-porPagina)"-->

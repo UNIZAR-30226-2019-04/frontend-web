@@ -1,32 +1,32 @@
 <template>
-  <div style="width: 20vw; height: 50vh; min-height: 550px;">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <div style=" height: 50vh; min-height: 450px; max-height: 800px;">
     <b-card border-variant="light" style="width: 100%; height: 100%;">
-      <b-carousel
-        id="carousel1"
-        style="text-shadow: 1px 1px 2px #333;"
-        controls
-        fade
-        background="#FFFFFF"
-        :interval="3000"
-        img-width="60"
-      >
-        <!--v-model="slide"-->
-        <!--@sliding-start="onSlideStart"-->
-        <!--@sliding-end="onSlideEnd"-->
-        <b-carousel-slide class="carousel-inner"
-                          v-for="(img,index) in product.multimedia"
-                          :key="index"
-                          v-if="!img.tipo" :img-src="img.path"
-                          style="background-color: transparent">
-        </b-carousel-slide>
-      </b-carousel>
-      <img src="../../public/img/product-placeholder.png"
-           v-if="!product.multimedia.length"
-           alt="SIN IMAGEN"
-           style="width: 100%;"
-      >
+      <div style="min-height: 238px;">
+        <b-carousel
+          id="carousel1"
+          style="text-shadow: 1px 1px 2px #333;"
+          controls
+          fade
+          background="#FFFFFF"
+          :interval="3000"
+          img-width="60"
+        >
+          <!--v-model="slide"-->
+          <!--@sliding-start="onSlideStart"-->
+          <!--@sliding-end="onSlideEnd"-->
+          <b-carousel-slide class="carousel-inner"
+                            v-for="(img,index) in product.multimedia"
+                            :key="index"
+                            v-if="!img.tipo" :img-src="img.path"
+                            style="background-color: transparent">
+          </b-carousel-slide>
+        </b-carousel>
+        <img src="../../public/img/product-placeholder.png"
+             v-if="!product.multimedia.length"
+             alt="SIN IMAGEN"
+             style="width: 100%;"
+        >
+      </div>
 
       <br>
       <b-card-title>
@@ -65,17 +65,17 @@
       </b-row>
 
       <b-row>
-        <b-col cols="4">
+        <b-col cols="8">
           <button @click="infoProducto()" class="btn"
                   style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white;"
                   align="center">
             Ver producto
           </button>
         </b-col>
-        <b-col cols="6">
-          <ShareButton></ShareButton>
-        </b-col>
-        <b-col cols="2" align="right">
+        <!--<b-col cols="4">-->
+          <!--<ShareButton></ShareButton>-->
+        <!--</b-col>-->
+        <b-col cols="4" align="right">
           <b-btn v-on:click="liked" style="background-color: transparent; margin-right: 8px"><i
             :class="isLiked() ? likeIcon : unlikeIcon" :style="isLiked() ? likeColor : unlikeColor" align="right"></i>
           </b-btn>
