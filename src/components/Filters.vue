@@ -1,7 +1,7 @@
 <template>
   <b-card  style="width: 100%; margin-left: 10px; margin-top: 30px">
     <div>
-      <h4>Precio máximo (€)</h4>
+      <h5>Precio máximo (€)</h5>
       <VueSlideBar v-model="precioMax" lineHeight=6 max=1000
                    :tooltip-styles="{ backgroundColor: '#20a8d8', borderColor: '#20a8d8' }"
                    :labelStyles="{ color: '#4a4a4a', backgroundColor: '#4a4a4a' }"
@@ -14,7 +14,7 @@
     <br/>
 
     <div>
-      <h4>Distancia máxima (€)</h4>
+      <h5>Distancia máxima (€)</h5>
       <VueSlideBar v-model="distMax" lineHeight=6 max=1000
                    :tooltip-styles="{ backgroundColor: '#20a8d8', borderColor: '#20a8d8' }"
                    :labelStyles="{ color: '#4a4a4a', backgroundColor: '#4a4a4a' }"
@@ -28,16 +28,16 @@
 
     <b-card no-body class="mb-1">
       <b-card-header header-tag="header" class="p-1" role="tab" style="text-align: center; vertical-align: middle;">
-        <b-button block href="#" v-b-toggle.accordion-1 variant="info" style="font-size: 1.1rem; font-weight: bold; margin-top: 0.5%; margin-bottom: 0.5%">Valoración mínima</b-button>
+        <b-button block href="#" v-b-toggle.accordion-1 variant="primary" style="height: 100%; font-size: 1rem; font-weight: bold; margin-top: 0.5%; margin-bottom: 0.5%">Valoración mínima</b-button>
       </b-card-header>
       <b-collapse id="accordion-1" visible accordion="my-accordion">
-        <b-card-body style="margin-top: 10px;">
-          <b-form-group>
-            <b-btn v-on:click="minVal(5)" style="background-color: transparent; border: transparent"><label><star-rating value="5" :disabled="true"></star-rating></label></b-btn>
-            <b-btn v-on:click="minVal(4)" style="background-color: transparent; border: transparent"><label><star-rating value="4" :disabled="true"></star-rating></label></b-btn>
-            <b-btn v-on:click="minVal(3)" style="background-color: transparent; border: transparent"><label><star-rating value="3" :disabled="true"></star-rating></label></b-btn>
-            <b-btn v-on:click="minVal(2)" style="background-color: transparent; border: transparent"><label><star-rating value="2" :disabled="true"></star-rating></label></b-btn>
-            <b-btn v-on:click="minVal(1)" style="background-color: transparent; border: transparent"><label><star-rating value="1" :disabled="true"></star-rating></label></b-btn>
+        <b-card-body style="margin-top: 10px; width: 100%; ">
+          <b-form-group style="width: 100%; ">
+            <b-btn v-on:click="minVal(5)" style="width: 110%; background-color: transparent; border: transparent"><label><star-rating value="5" :disabled="true"></star-rating></label></b-btn>
+            <b-btn v-on:click="minVal(4)" style="width: 110%; background-color: transparent; border: transparent"><label><star-rating value="4" :disabled="true"></star-rating></label></b-btn>
+            <b-btn v-on:click="minVal(3)" style="width: 110%; background-color: transparent; border: transparent"><label><star-rating value="3" :disabled="true"></star-rating></label></b-btn>
+            <b-btn v-on:click="minVal(2)" style="width: 110%; background-color: transparent; border: transparent"><label><star-rating value="2" :disabled="true"></star-rating></label></b-btn>
+            <b-btn v-on:click="minVal(1)" style="width: 110%; background-color: transparent; border: transparent"><label><star-rating value="1" :disabled="true"></star-rating></label></b-btn>
             <!--<p>Valoración mínima: {{valVendedor}}</p>-->
           </b-form-group>
         </b-card-body>
@@ -46,7 +46,7 @@
 
     <b-card no-body class="mb-1">
       <b-card-header header-tag="header" class="p-1">
-        <b-button block href="#" v-b-toggle.accordion-3 variant="info" style="font-size: 1.1rem; font-weight: bold; margin-top: 0.5%; margin-bottom: 0.5%">Categorías</b-button>
+        <b-button block href="#" v-b-toggle.accordion-3 variant="primary" style="height: 100%; font-size: 1rem; font-weight: bold; margin-top: 0.5%; margin-bottom: 0.5%">Categorías</b-button>
       </b-card-header>
       <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
         <b-card-body>
@@ -56,7 +56,7 @@
     </b-card>
     <b-card no-body class="mb-1">
       <b-card-header header-tag="header" class="p-1">
-        <b-button block href="#" style="font-size: 1.1rem; font-weight: bold; margin-top: 0.5%; margin-bottom: 0.5%" v-b-toggle.accordion-4 variant="info">Tipo de venta</b-button>
+        <b-button block href="#" style="height: 100%; font-size: 1rem; font-weight: bold; margin-top: 0.5%; margin-bottom: 0.5%" v-b-toggle.accordion-4 variant="primary">Tipo de venta</b-button>
       </b-card-header>
       <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
         <b-card-body>
