@@ -36,7 +36,7 @@
                       :comprado="false"
                       style="margin-bottom: 10px;"></ProductBox>
         </b-card-group>
-        <a v-if="!comprados.length" style="color: #666666;">
+        <a v-if="!deseados.length" style="color: #666666;">
           ¿No deseas ningún producto? :(<br/><br/>
         </a>
       </b-tab>

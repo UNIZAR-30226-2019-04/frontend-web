@@ -417,7 +417,7 @@
           console.log('Paso a evaluar la respuesta');
           if (estado === 200) {
             console.log('Ha habido éxito');
-            $('#modalexito').modal();
+            this.$router.push("/Profile");
           }else{
             console.log('Ha habido algun problema');
             $("#modalerror").modal();
