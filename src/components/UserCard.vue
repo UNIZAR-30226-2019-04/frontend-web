@@ -15,7 +15,7 @@
           <v-icon class="material-icons">cloud_upload</v-icon>
         </v-btn>
         <v-btn dark fab small color="blue" style="position: absolute; right: 5px; top: 5px; ">
-          <v-icon class="material-icons">photo_camera</v-icon>
+          <v-icon class="material-icons"  style="position: absolute; top: -7px;">photo_camera</v-icon>
           <b-form-file
             v-model="file"
             :state="Boolean(file)"

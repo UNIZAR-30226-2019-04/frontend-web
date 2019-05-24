@@ -96,6 +96,7 @@
   import VueSlideBar from 'vue-slide-bar'
   import axios from "axios";
   import Mapa from "./Mapa";
+  import {API_BASE} from "../config";
 
   export default {
     name: "ModUserForm",
@@ -120,28 +121,6 @@
       }
     },
     methods: {
-      buscarPosicion: function () {
-        for (var i = 0; i < 3; i++) {
-          this.$store.dispatch("getPosition", this.address).then(() => {
-            let candidates = this.$store.getters.last_position;
-            //console.log(candidates);
-
-            //console.log(candidates.length);
-            if (candidates.length < 1) {
-              this.notSelected = "Sea más específico con la dirección.\n"
-            } else {
-              this.notSelected = "";
-              let location = candidates[0];
-              let newCenter = {
-                lat: location['lat'],
-                lng: location['lon']
-              };
-              this.$refs.map.zoomUpdated(17);
-              this.$refs.map.centerUpdated(newCenter);
-            }
-          })
-        }
-      },
       updateData: function () {
         let centerPos = this.$refs.map.getCenter();
         this.userData.longitud = centerPos['lng'];
