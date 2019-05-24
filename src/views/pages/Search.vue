@@ -242,7 +242,7 @@
         if (pag < 1) {
           return 1;
         } else {
-          return pag;
+          return pag+1;
         }
       }
     },

@@ -1,7 +1,5 @@
 <template>
   <div>
-    <b-btn v-on:click="logFile">Pic</b-btn>
-    <b-btn v-on:click="uploadFoto">Upload</b-btn>
     <b-card
       border-variant="none"
       no-body
