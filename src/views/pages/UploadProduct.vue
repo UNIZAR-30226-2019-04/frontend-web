@@ -166,7 +166,7 @@
         address: "",
         description: '',
         price: null,
-        priceAux: 0,
+        priceAux: null,
         radius: null,
         radiusData: [
           100,
@@ -234,11 +234,11 @@
         err: false,
         notSelected: "",
         endTime: {
-          year: 0,
-          month: 0,
-          day: 0,
-          hora: 0,
-          min: 0
+          year: 2020,
+          month: 4,
+          day: 22,
+          hora: 11,
+          min: 57
         },
         prod_id: 0,
         type: null,
