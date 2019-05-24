@@ -8,7 +8,7 @@
                       v-model="texto"/>
       </b-col>
       <b-col cols="2">
-        <b-btn size="lg" style="width: 100%;" variant="outline-primary" v-on:click="actualizarProds">
+        <b-btn size="lg" style="width: 100%; font-weight: bold" variant="outline-primary" v-on:click="actualizarProds">
           Buscar
         </b-btn>
       </b-col>
@@ -50,7 +50,7 @@
             </b-btn>
           </b-col>
           <b-col cols="4" >
-            <b-button size="lg" variant="outline-primary" v-on:click="noMapa = !noMapa" style="width: 100%;">{{noMapa ? 'Ver mapa' : 'Ver lista'}}</b-button>
+            <b-button size="lg" variant="outline-primary" v-on:click="noMapa = !noMapa" style="width: 100%; font-weight: bold">{{noMapa ? 'Ver mapa' : 'Ver lista'}}</b-button>
           </b-col>
         </b-row>
 
