@@ -1,23 +1,25 @@
 <template>
   <div>
     <b-container style="max-width: 900px;">
-      <b-card title="Subir Producto"
-              style="alignment: center; margin: auto; width: 75%; margin-top: 6%; margin-bottom: 10%">
+      <b-card style="alignment: center; margin: auto; width: 75%; margin-top: 6%; margin-bottom: 10%">
         <b-form>
-          <!--<h1>Editar Perfil</h1>-->
+          <h1>Subir producto</h1>
+          <br/>
+          <h4>Título del anuncio: </h4>
           <b-input-group class="mb-3">
             <b-input-group-prepend>
               <b-input-group-text><i class="icon-user"></i></b-input-group-text>
             </b-input-group-prepend>
-            <b-form-input type="text" class="form-control" v-model="title" placeholder="Titulo del producto"/>
+            <b-form-input type="text" class="form-control" v-model="title" placeholder="Titulo del producto" required/>
           </b-input-group>
 
+          <h4>Descripción del anuncio:</h4>
           <b-input-group class="mb-3">
             <b-input-group-prepend>
               <b-input-group-text><i class="icon-user"></i></b-input-group-text>
             </b-input-group-prepend>
             <b-form-textarea type="text" class="form-control" v-model="description"
-                             placeholder="Descripción del producto"/>
+                             placeholder="Descripción del producto" required/>
           </b-input-group>
 
           <!--<b-input-group class="mb-3">-->
@@ -27,31 +29,42 @@
           <!--<b-form-input class="text" v-model="location" placeholder="Localización"/>-->
           <!--</b-input-group>-->
 
+          <h4>Seleccione la categoría a la que pertenece:</h4>
           <b-input-group class="mb-3">
-            <b-form-select v-model="selCategory" :options="optionsCategory">
-              <template slot="first">
-                <option :value="null" disabled>-- Seleccione una categoría de producto --</option>
-              </template>
-            </b-form-select>
+            <select name="selCategory" v-model="selCategory" id="selCategory" class="form-control" tabindex="12"
+                    required>
+              <option v-for="(category, index) in cat"
+                      :key="index"
+                      :value="category.nombre">{{ category.nombre }}
+              </option>
+            </select>
           </b-input-group>
 
+          <h4>Seleccione una opción de venta:</h4>
           <b-input-group class="mb-3">
-            <b-form-select v-model="type" :options="optionsType">
-              <template slot="first">
-                <option :value="null" disabled>-- Seleccione una opción de venta --</option>
-              </template>
-            </b-form-select>
+            <select name="type" v-model="type" id="type" class="form-control" tabindex="12" required>
+              <option v-for="(option, index) in optionsType"
+                      :key="index"
+                      :value="option.value">{{ option.text }}
+              </option>
+            </select>
+            <!--<b-form-select v-model="type" :options="optionsType" required>-->
+            <!--<template slot="first">-->
+            <!--<option :value="null" disabled>&#45;&#45; Seleccione una opción de venta &#45;&#45;</option>-->
+            <!--</template>-->
+            <!--</b-form-select>-->
           </b-input-group>
 
           <div style="align-content: center">
             <a><b>
-              <br/>Seleccione la ubicación del producto:<br/><br/>
+              <h4>Seleccione la ubicación del producto:</h4>
             </b></a>
             <b-input-group>
               <b-input
                 id="inline-form-input-name"
                 class="mb-2 mr-sm-2 mb-sm-0"
                 placeholder="Buscar dirección..."
+                required
                 v-model="address"
                 @keypress.enter="buscarPosicion"
               ></b-input>
@@ -79,11 +92,11 @@
             ></VueSlideBar>
           </div>
 
-          <b-input-group v-if="type === 'normal'" class="mb-3">
+          <b-input-group v-if="type === 'normal'" class="mb-3" required>
             <b-input-group-prepend>
-              <b-input-group-text>€</b-input-group-text>
+              <b-input-group-text required>€</b-input-group-text>
             </b-input-group-prepend>
-            <b-form-input type="number" min="1" v-model="price" placeholder="Precio de compra"/>
+            <b-form-input type="number" min="1" v-model="price" placeholder="Precio de compra" required/>
           </b-input-group>
 
           <a v-if="type === 'trueque'" class="mb-3"><b>
@@ -92,26 +105,26 @@
 
           <b-input-group v-if="type === 'trueque'" class="mb-3">
             <b-input-group-prepend>
-              <b-input-group-text>€</b-input-group-text>
+              <b-input-group-text required>€</b-input-group-text>
             </b-input-group-prepend>
-            <b-form-input type="number" min="1" v-model="price" placeholder="Precio orientativo del producto"/>
+            <b-form-input type="number" min="1" v-model="price" placeholder="Precio orientativo del producto" required/>
           </b-input-group>
 
           <b-input-group v-if="type === 'trueque'" class="mb-3">
             <b-input-group-prepend>
-              <b-input-group-text>€</b-input-group-text>
+              <b-input-group-text required>€</b-input-group-text>
             </b-input-group-prepend>
-            <b-form-input type="number" min="1" v-model="priceAux" placeholder="Precio máximo del producto"/>
+            <b-form-input type="number" min="1" v-model="priceAux" placeholder="Precio máximo del producto" required/>
           </b-input-group>
 
           <b-input-group v-if="type === 'subasta'" class="mb-3">
             <b-input-group-prepend>
-              <b-input-group-text>€</b-input-group-text>
+              <b-input-group-text required>€</b-input-group-text>
             </b-input-group-prepend>
-            <b-form-input type="number" min="1" v-model="price" placeholder="Precio inicial de subasta"/>
+            <b-form-input type="number" min="1" v-model="price" placeholder="Precio inicial de subasta" required/>
           </b-input-group>
 
-          <b-input-group v-if="type === 'subasta'" class="mb-3">
+          <b-input-group v-if="type === 'subasta'" class="mb-3" required>
             <!--<p>Fecha fin subasta: {{select}}</p>-->
             <datepicker @closed="fechaSeleccionada"
                         :bootstrap-styling="true"
@@ -124,7 +137,7 @@
             <span v-if="err" style="color: red;">La fecha elegida debe ser posterior a la fecha actual</span>
           </b-input-group>
 
-          <b-input-group v-if="type === 'subasta'">
+          <b-input-group v-if="type === 'subasta'" required>
             <v-time-picker v-model="picker" color="green lighten-1" header-color="blue"></v-time-picker>
           </b-input-group>
           <b-button v-on:click="logImg">Log picker</b-button>
@@ -132,18 +145,20 @@
           <b-form-file
             v-model="file_2"
             :state="Boolean(file_2)"
-            placeholder="Choose or drop a file..."
-            drop-placeholder="Drop file here..."
+            placeholder="Escoja o arrastre un archivo..."
+            drop-placeholder="Arrastre archivo aquí..."
             multiple
-            accept=".jpg, .png, .gif"
+            button-text="Buscar"
+            accept=".jpg, .png, .gif, .jpeg"
           ></b-form-file>
 
           <a style="color: red;">{{ notSelected }}<br/><br/></a>
-          <b-button variant="success" v-on:click="subirProducto" block>Subir producto</b-button>
-          <b-button variant="danger" v-on:click="cancelarSubida" block>Cancelar</b-button>
+          <b-button variant="success" style="font-weight: bold; font-size: 1.15rem" v-on:click="subirProducto" block>Subir producto</b-button>
+          <b-button variant="danger" style="font-weight: bold; font-size: 1.15rem" v-on:click="cancelarSubida" block>Cancelar</b-button>
         </b-form>
       </b-card>
     </b-container>
+    <button class="btn" @click="infoCats">DEBUG</button>
   </div>
 </template>
 
@@ -153,10 +168,12 @@
   import Mapa from "../../components/Mapa.vue";
   import Uploader from "../../components/Uploader";
   import axios from "axios";
+  import {API_BASE} from "../../config";
+  import BRow from "bootstrap-vue/src/components/layout/row";
 
   export default {
     name: "UploadProduct",
-    components: {Uploader, VueSlideBar, Datepicker, Mapa},
+    components: {BRow, Uploader, VueSlideBar, Datepicker, Mapa},
     data() {
       return {
         preview: false,
@@ -248,24 +265,24 @@
           {value: 'subasta', text: 'Subastar producto'}
         ],
         selCategory: null,
-        optionsCategory: [
-          {value: 'Coche', text: 'Coche'},
-          {value: 'Inmuebles', text: 'Inmuebles'},
-          {value: 'Motos', text: 'Motos'},
-          {value: 'Moviles y Accesorios', text: 'Moviles y Accesorios'},
-          {value: 'TV, audio, cámaras', text: 'TV, audio, cámaras'},
-          {value: 'Ordenadores', text: 'Ordenadores'},
-          {value: 'Deportes', text: 'Deportes'},
-          {value: 'Bicicletas', text: 'Bicicletas'},
-          {value: 'Juegos y Consolas', text: 'Juegos y Consolas'},
-          {value: 'Moda y accesorios', text: 'Moda y accesorios'},
-          {value: 'Libros y música', text: 'Libros y música'},
-          {value: 'Servicios', text: 'Servicios'},
-          {value: 'Otros', text: 'Otros'}
-        ]
+        cat: [],
       }
     },
+    async mounted() {
+      axios
+        .get(API_BASE + 'categoria/')
+        .then(response => (this.cat = response.data.data));
+    },
     methods: {
+      infoCats: function () {
+        console.log(this.tamanio);
+        console.log(typeof this.cat);
+        console.log(this.cat);
+        // console.log(this.cat.length);
+        // console.log(typeof this.cat.data);
+        // console.log(typeof this.cat.data.nombre);
+        // console.log(this.cat.data[0].nombre);
+      },
       fechaSeleccionada: function () {
         let today = new Date().getTime();
         console.log(today);
@@ -307,8 +324,8 @@
         console.log(this.picker);
         console.log(typeof this.picker);
       },
-      async subirProducto () {
-        if(this.tipo === 'subasta') {
+      async subirProducto() {
+        if (this.tipo === 'subasta') {
           let clock = this.picker.split(':');
           this.endTime.hora = clock[0];
           this.endTime.min = clock[1];
@@ -342,23 +359,23 @@
             .catch(err => console.log(err));*/
 
           let url = 'http://34.90.77.95:5000/producto/';
-          let response = await axios.post(url,data);
+          let response = await axios.post(url, data);
           console.log(response);
           this.prod_id = response.data.id;
           url = 'http://34.90.77.95:5000/multimedia/' + this.prod_id;
 
           //console.log(prod_id);
           let formData = null;
-          for(let i = 0; i < this.file_2.length; i++) {
+          for (let i = 0; i < this.file_2.length; i++) {
             formData = new FormData();
-            formData.append('file',this.file_2[i]);
+            formData.append('file', this.file_2[i]);
             console.log(this.file_2[i]);
             response = await axios.post(url, formData).catch(error => (console.log(error)));
           }
         }
       },
-      cancelarSubida: function(){
-        this.$router.push({path:'Search'})
+      cancelarSubida: function () {
+        this.$router.push({path: 'Search'})
       }
     },
     computed: {

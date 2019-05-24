@@ -16,13 +16,12 @@
         <div v-if="info.data.nombre !== null">
           <b-list-group-item>
             {{ info.data.nombre }}
+            <div v-if="info.data.apellidos !== null">
+              {{ info.data.apellidos }}
+            </div>
           </b-list-group-item>
         </div>
-        <div v-if="info.data.apellidos !== null">
-          <b-list-group-item>
-            {{ info.data.nombre }}
-          </b-list-group-item>
-        </div>
+
         <div v-if="info.data.descripcion !== null">
           <b-list-group-item>
             {{ info.data.descripcion }}

@@ -1,39 +1,10 @@
 <template>
-  <div style=" height: 50vh; min-height: 470px; max-height: 800px;">
+  <div style="">
     <v-hover>
       <b-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`"
+              :title="product.titulo" :img-src="imageReady() ? product.multimedia[0].path : defaultImage"
               border-variant="light" style="width: 100%; height: 100%;">
-        <div style="min-height: 250px;">
-          <b-carousel
-            id="carousel1"
-            style="text-shadow: 1px 1px 2px #333;"
-            controls
-            fade
-            background="#FFFFFF"
-            :interval="3000"
-            img-width="60"
-          >
-            <!--v-model="slide"-->
-            <!--@sliding-start="onSlideStart"-->
-            <!--@sliding-end="onSlideEnd"-->
-            <b-carousel-slide class="carousel-inner"
-                              v-for="(img,index) in product.multimedia"
-                              :key="index"
-                              v-if="!img.tipo" :img-src="img.path"
-                              style="background-color: transparent; max-height: 250px">
-            </b-carousel-slide>
-          </b-carousel>
-          <img src="../../public/img/product-placeholder.png"
-               v-if="!product.multimedia.length"
-               alt="SIN IMAGEN"
-               style="width: 100%;"
-          >
-        </div>
-        <br>
-        <b-card-title>
-          {{ product.titulo }}
-        </b-card-title>
-        <b-card-text style="font-size: 1.1rem; width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <b-card-text style="font-size: 1.1rem;">
           {{ product.descripcion }}
         </b-card-text>
         <p style="color: #20a8d8; margin-right: 10px;" align="right">
@@ -44,9 +15,9 @@
         <b-row>
           <b-col>
             <!--<router-link to="ProductPage" @click="infoProducto()" class="btn"-->
-                         <!--style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-bottom: 5px;"-->
-                         <!--align="center">-->
-              <!--Ver producto-->
+            <!--style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-bottom: 5px;"-->
+            <!--align="center">-->
+            <!--Ver producto-->
             <!--</router-link>-->
 
           </b-col>
@@ -74,7 +45,7 @@
             </button>
           </b-col>
           <!--<b-col cols="4">-->
-            <!--<ShareButton></ShareButton>-->
+          <!--<ShareButton></ShareButton>-->
           <!--</b-col>-->
           <b-col cols="4" align="right">
             <b-btn v-on:click="liked" style="background-color: transparent; margin-right: 8px"><i
@@ -103,6 +74,7 @@
         unlikeColor: 'color: #000000;',
         likeIcon: 'fas fa-heart',
         unlikeIcon: 'far fa-heart',
+        defaultImage: 'http://www.kerrick.co.nz/site/DefaultSite/filesystem/images/products/category-images/product-placeholder.png'
       }
     },
     methods: {
@@ -116,6 +88,9 @@
       },
       showModal() {
         this.$refs['modalReview'].show();
+      },
+      imageReady() {
+        return this.$props.product.multimedia.length > 0;
       },
       liked: function () {
         this.product.deseado = !this.product.deseado;
