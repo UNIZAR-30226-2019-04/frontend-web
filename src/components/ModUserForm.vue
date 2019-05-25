@@ -157,7 +157,7 @@
         }
       },
       updateData: function () {
-        let centerPos = this.$refs.map.getCenter();
+        let centerPos = this.$refs.map2.getCenter();
         this.userData.longitud = centerPos['lng'];
         this.userData.latitud = centerPos['lat'];
         this.userData.radio_ubicacion = 100.0;
