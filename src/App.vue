@@ -9,6 +9,7 @@
       <!--</div>-->
     <div class="content">
       <Header></Header>
+      <vue-particles color="#ababab" :moveSpeed="2"></vue-particles>
       <router-view></router-view>
       </div>
 
@@ -54,6 +55,11 @@
   @import 'assets/scss/style';
   body {
     margin: 0;
+  }
+
+  #particles-js {
+    position: absolute; background-size: cover; top: 0; bottom: 0; left: 0; right: 0; overflow-y: hidden; z-index: 0;
+
   }
 
   #app {
