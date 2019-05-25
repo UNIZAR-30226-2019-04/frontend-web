@@ -35,8 +35,11 @@
         <!--<b-row style="alignment: center; align-items: center; align-content: center; align-self: center">-->
         <b-list-group-item style="align-content: center; ">
           <v-btn style="background-color: green; font-weight: bold; color: white;" @click="nuevoChat">Chat</v-btn>
-          <v-btn style="background-color: #20a8d8; font-weight: bold; color: white;" @click="seguirUser">Seguir
+          <v-btn v-if="!siguiendo" style="background-color: #20a8d8; font-weight: bold; color: white;" @click="seguirUser">Seguir
             Usuario
+          </v-btn>
+          <v-btn v-if="siguiendo" style="background-color: #20a8d8; font-weight: bold; color: white;" @click="dejarSeguir">
+            Dejar de Seguir
           </v-btn>
         </b-list-group-item>
       </b-list-group>
@@ -57,21 +60,30 @@
       return {
         id_vendedor: this.method.vendido_por,
         info: null,
+        seguidos: [],
+        siguiendo: false
         // vendor_data: null,
       }
     },
-    // la funcion que hereda del papi
     props: {
       method: {type: Function},
     },
-    mounted() {
-      console.log('MOUUUUUUUUUUUUUUUUUUUUUUUUUUNTED--------------');
+    async mounted() {
+      //console.log('MOUUUUUUUUUUUUUUUUUUUUUUUUUUNTED--------------');
       // this.method();
-      console.log(`${API_BASE}user/${this.id_vendedor}`);
+      //console.log(`${API_BASE}user/${this.id_vendedor}`);
       //http://155.210.47.51:5000/user/8e4de80f-d9bf-411c-a696-58e3481a1b36
       axios.get(`${API_BASE}user/${this.id_vendedor}`).then(response => (this.info = response));
-      // axios.get(`http://155.210.47.51:5000/user/${this.id_vendedor}`).then(response => (this.info = response));
-      // console.log(info.nombre);
+      let url = API_BASE + 'seguir/' + this.$store.getters.user +'/seguidos';
+      console.log('-------------');
+      let response = await axios.get(url);
+      this.seguidos = response.data;
+      let vend = this.id_vendedor;
+      let ind = this.seguidos.findIndex(function (element) {
+        return element.seguido === vend;
+      });
+      this.siguiendo = (ind > -1);
+
     },
     methods: {
       async nuevoChat() {
@@ -112,6 +124,22 @@
         console.log(data);
         console.log('---------------');
         axios.post(url, data, {headers: header}).then(response => (console.log(response)));
+        this.siguiendo = true;
+      },
+      dejarSeguir() {
+        let url = API_BASE + 'seguir/' + this.$store.getters.user + '/remove';
+        let header = {
+          Content_Type: 'application/json',
+          Authorization: this.$store.getters.token
+        };
+        let data = {
+          "seguido": this.id_vendedor
+        };
+        console.log('---------------');
+        console.log(data);
+        console.log('---------------');
+        axios.post(url, data, {headers: header}).then(response => (console.log(response)));
+        this.siguiendo = false;
       },
       showInfo: function () {
         console.log(this.info);
