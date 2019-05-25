@@ -340,8 +340,8 @@
           this.err = true;
         } else {
           this.err = false;
-          this.endTime.day = this.select.getDay();
-          this.endTime.month = this.select.getMonth();
+          this.endTime.day = this.select.getDate();
+          this.endTime.month = this.select.getUTCMonth() + 1;
           this.endTime.year = this.select.getFullYear();
 
         }

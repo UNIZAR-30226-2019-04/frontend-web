@@ -78,7 +78,7 @@
         </div>
         <div v-else>
           <b-list-group-item>
-            <h5>No es subasta</h5>
+            <h5>Tipo de venta: </h5>
             {{ method.tipoVenta }}
           </b-list-group-item>
         </div>

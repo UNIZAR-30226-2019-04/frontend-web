@@ -32,23 +32,23 @@
           <br/>
           <h2>Precio actual de la subasta:</h2>
           <h2>{{method.precioAux}}€</h2>
-          <br/>
+          <!--<br/>-->
         </b-card-title>
         <div v-if="this.$store.state.public_id === method.vendido_por"> <!-- SI EL PRODUCTO SÍ TE PERTENECE -->
-          <h1>Este producto te pertenece</h1>
+          <!--<h1>Este producto te pertenece</h1>-->
           <h3>Tiempo restante:</h3>
           <CountdownTimer :end-time="endTim"></CountdownTimer>
-          <h3>{{method.fechaexpiracion}}</h3>
-          <h3>{{method.fecha}}</h3>
-          <br/>
-          <p>------------------------------------------------</p>
-          Dia: {{Number(this.method.fechaexpiracion.split("/")[0])}} <br/>
-          Mes: {{Number(this.method.fechaexpiracion.split("/")[1])}} <br/>
-          Anyo: {{Number((this.method.fechaexpiracion.split("/")[2]).split(",")[0])}} <br/>
-          Fecha fin completa: {{this.method.fechaexpiracion}} <br/>
+          <!--<h3>{{method.fechaexpiracion}}</h3>-->
+          <!--<h3>{{method.fecha}}</h3>-->
+          <!--<br/>-->
+          <!--<p>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>-->
+          <!--Dia: {{Number(this.method.fechaexpiracion.split("/")[0])}} <br/>-->
+          <!--Mes: {{Number(this.method.fechaexpiracion.split("/")[1])}} <br/>-->
+          <!--Anyo: {{Number((this.method.fechaexpiracion.split("/")[2]).split(",")[0])}} <br/>-->
+          <!--Fecha fin completa: {{this.method.fechaexpiracion}} <br/>-->
 
-          <p>------------------------------------------------</p>
-          <br/>
+          <!--<p>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>-->
+          <!--<br/>-->
           <button @click="sobreProd()">BOTON DEBUG</button>
         </div>
         <div v-else> <!-- SI EL PRODUCTO NO TE PERTENECE -->
@@ -315,11 +315,11 @@
         let start = new Date();
         let y = start.getFullYear();
         console.log(y);
-        console.log(new Date().getFullYear());
-        console.log(new Date().getMonth());
-        console.log(new Date().getDay());
-        console.log(new Date().getDate());
-        console.log(new Date().getUTCMonth() + 1);
+        console.log('Full Year: ', new Date().getFullYear());
+        console.log('Get Month: ', new Date().getMonth());
+        console.log('Get Day: ', new Date().getDay());
+        console.log('Get Date: ', new Date().getDate());
+        console.log('Get UTCMonth+1: ', new Date().getUTCMonth() + 1);
         console.log('--------------------------------------');
         console.log('dia: ',this.method.fechaexpiracion.split("/")[0]);
         console.log('mes: ', this.method.fechaexpiracion.split("/")[1]);
