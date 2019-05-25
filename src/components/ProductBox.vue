@@ -8,7 +8,8 @@
           {{ product.descripcion }}
         </b-card-text>
         <p style="color: #20a8d8; margin-right: 10px;" align="right">
-          <b><h1>{{ product.precioBase }}€</h1></b>
+          <b v-if="isTrade"><h1>{{ product.precioBase }} - {{ product.precioAux }}€</h1></b>
+          <b v-else><h1>{{ product.precioBase }}€</h1></b>
         </p>
 
 
@@ -108,6 +109,11 @@
       },
       isLiked: function () {
         return this.product.deseado;
+      }
+    },
+    computed: {
+      isTrade() {
+        return this.$props.product.tipo === 'trueque';
       }
     }
   }

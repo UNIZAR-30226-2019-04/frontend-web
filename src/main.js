@@ -21,6 +21,9 @@ import * as Vue2Leaflet from 'vue2-leaflet'
 import { Icon }  from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
+import VueParticles from 'vue-particles'
+Vue.use(VueParticles)
+
 Vue.component('l-map', Vue2Leaflet.LMap);
 Vue.component('l-tile-layer', Vue2Leaflet.LTileLayer);
 

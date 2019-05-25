@@ -27,7 +27,7 @@
         <!--</v-card-title>-->
 
         <v-card-actions class="grey darken-3 justify-center">
-          &copy;2019 — <strong>Telocam</strong>
+          &copy;2019 — <strong><router-link to="About" style="color: white">Telocam</router-link></strong>
         </v-card-actions>
       </v-card>
     </v-footer>

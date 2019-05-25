@@ -5,64 +5,72 @@
 
     <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
-    <b-navbar-brand style="margin-left: 10px;" href="#">
+    <b-navbar-brand style="margin-left: 10px;" href="/">
       <!--<img src="../../public/img/telocam-logo.png" class="rounded-circle" width="70" height="70" alt="Logo de Telocam"/>-->
       <img src="../../public/img/logo_sombrablanca_v2.png" class="rounded-circle" width="64" height="64"
            alt="Logo de Telocam"/>
+      <a style="font-size: 1.3rem; margin-left: 5px">
+        Telocam
+      </a>
     </b-navbar-brand>
 
     <b-collapse is-nav id="nav_collapse">
 
-      <b-navbar-nav>
-        <b-nav-item v-if="!isLogged" style="outline-color: green">
-          <router-link to="LogIn" style="font-size: 1.3rem; color: white">Acceder</router-link>
-        </b-nav-item>
-        <!--<b-nav-item v-if="!isLogged" style="outline-color: green">-->
-        <!--<router-link to="LogIn">Log In</router-link>-->
-        <!--</b-nav-item>-->
-        <!--<b-nav-item v-if="!isLogged">-->
-        <!--<router-link to="Sign">Sing Up</router-link>-->
-        <!--</b-nav-item>-->
-        <b-nav-item>
-          <router-link to="Search" style="font-size: 1.3rem; color: white">Búsqueda</router-link>
-        </b-nav-item>
-      </b-navbar-nav>
-
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto" style="margin-right: 20px;">
+
+        <b-navbar-nav>
+          <b-nav-item v-if="!isLogged" style="outline-color: green">
+            <router-link to="LogIn" style="font-size: 1.3rem; color: white">
+              <b-btn variant="outline-white">
+                Acceder
+              </b-btn>
+            </router-link>
+          </b-nav-item>
+          <!--<b-nav-item v-if="!isLogged" style="outline-color: green">-->
+          <!--<router-link to="LogIn">Log In</router-link>-->
+          <!--</b-nav-item>-->
+          <!--<b-nav-item v-if="!isLogged">-->
+          <!--<router-link to="Sign">Sing Up</router-link>-->
+          <!--</b-nav-item>-->
+        </b-navbar-nav>
 
         <!--<span @mouseover="over = true"-->
         <!--@mouseleave="over = false"-->
         <!--:class="{elegido: over }"-->
         <!--&gt;Chat</span>-->
 
-        <b-nav-item>
-          <router-link to="Chat"
-                       style="font-size: 1.3rem; color: white"
-          >Chat
+        <b-nav-item v-if="this.$store.getters.user !== 'no_user'">
+          <router-link to="Search" style="color: white">
+            <b-btn variant="outline-light">
+              Búsqueda
+            </b-btn>
           </router-link>
         </b-nav-item>
 
-        <div v-if="this.$store.getters.user !== 'no_user'">
-          <b-nav-item-dropdown right>
-            <!-- Using button-content slot -->
-
-            <template slot="button-content" style="color: white">
-              <em style="color: white">Usuario</em>
-            </template>
-            <b-dropdown-item href="#/Profile">
-              <!--<router-link to="Profile">Perfil</router-link>-->Perfil
-            </b-dropdown-item>
-            <b-dropdown-item href="#/UploadProduct">
-              Subir producto
-            </b-dropdown-item>
-            <b-dropdown-item v-on:click="logout">Salir</b-dropdown-item>
-          </b-nav-item-dropdown>
-        </div>
-
-        <b-nav-item>
-          <router-link to="About" style="color: white">About</router-link>
+        <b-nav-item v-if="this.$store.getters.user !== 'no_user'">
+          <router-link to="Chat"
+                       style="color: white"
+          >
+            <b-btn variant="outline-light">
+              <b class="icon-envelope"></b>
+            </b-btn>
+          </router-link>
         </b-nav-item>
+
+        <b-nav-item-dropdown right v-if="this.$store.getters.user !== 'no_user'">
+          <!-- Using button-content slot -->
+          <template slot="button-content" style="color: white">
+            <em style="color: white"><b-btn variant="outline-light">Usuario</b-btn></em>
+          </template>
+          <b-dropdown-item href="#/Profile">
+            <!--<router-link to="Profile">Perfil</router-link>-->Perfil
+          </b-dropdown-item>
+          <b-dropdown-item href="#/UploadProduct">
+            Subir producto
+          </b-dropdown-item>
+          <b-dropdown-item v-on:click="logout">Salir</b-dropdown-item>
+          </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>

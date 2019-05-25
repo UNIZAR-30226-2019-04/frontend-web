@@ -2,10 +2,14 @@
   <b-card  style="width: 100%; margin-left: 10px; margin-top: 30px">
     <div>
       <h5>Precio máximo (€)</h5>
-      <VueSlideBar v-model="precioMax" lineHeight=6 max=1000
+      <VueSlideBar style="margin: 0 7px;" lineHeight=6 max=10000
+                   v-model="precioMax"
+                   :data="priceData"
+                   :range="priceRange"
                    :tooltip-styles="{ backgroundColor: '#20a8d8', borderColor: '#20a8d8' }"
                    :labelStyles="{ color: '#4a4a4a', backgroundColor: '#4a4a4a' }"
-                   :processStyle="{ backgroundColor: '#20a8d8' }"></VueSlideBar>
+                   :processStyle="{ backgroundColor: '#d8d8d8' }"
+      ></VueSlideBar>
       <b-btn v-on:click="nuevoPrecio" variant="outline-primary" style="width: 100%; margin-top: 7px; margin-bottom: 7px">Aplicar precio</b-btn>
     </div>
 
@@ -14,11 +18,15 @@
     <br/>
 
     <div>
-      <h5>Distancia máxima (€)</h5>
-      <VueSlideBar v-model="distMax" lineHeight=6 max=1000
+      <h5>Distancia máxima (m)</h5>
+      <VueSlideBar style="margin: 0 7px;" lineHeight=6
+                   v-model="distMax"
+                   :data="radiusData"
+                   :range="radiusRange"
                    :tooltip-styles="{ backgroundColor: '#20a8d8', borderColor: '#20a8d8' }"
                    :labelStyles="{ color: '#4a4a4a', backgroundColor: '#4a4a4a' }"
-                   :processStyle="{ backgroundColor: '#20a8d8' }"></VueSlideBar>
+                   :processStyle="{ backgroundColor: '#d8d8d8' }"
+      ></VueSlideBar>
       <b-btn v-on:click="nuevaDist" variant="outline-primary" style="width: 100%; margin-top: 7px; margin-bottom: 7px">Aplicar distancia</b-btn>
     </div>
 
@@ -94,7 +102,152 @@
         cat: [],
         precioMax: 500,
         distMax: 500,
-        valVendedor: 1
+        valVendedor: 1,
+        radiusData: [
+          100,
+          200,
+          500,
+          750,
+          1000,
+          5000,
+          15000,
+          30000,
+          45000,
+          60000,
+          90000,
+          120000,
+          300000
+        ],
+        radiusRange: [
+          {
+            label: '100 m'
+          },
+          {
+            label: '200 m',
+            isHide: true
+          },
+          {
+            label: '500 m',
+            isHide: true
+          },
+          {
+            label: '750 m',
+            isHide: true
+          },
+          {
+            label: '1 km'
+          },
+          {
+            label: '5 km',
+            isHide: true
+          },
+          {
+            label: '15 km',
+            isHide: true
+          },
+          {
+            label: '30 km',
+            isHide: true
+          },
+          {
+            label: '45 km'
+          },
+          {
+            label: '60 km',
+            isHide: true
+          },
+          {
+            label: '90 km',
+            isHide: true
+          },
+          {
+            label: '120 km',
+            isHide: true
+          },
+          {
+            label: '300 km'
+          }
+        ],
+        priceData: [
+          10,
+          20,
+          50,
+          100,
+          200,
+          500,
+          1000,
+          2000,
+          5000,
+          10000,
+          20000,
+          50000,
+          100000,
+          200000,
+          500000,
+          1000000
+        ],
+        priceRange: [
+          {
+            label: '10 €'
+          },
+          {
+            label: '20 €',
+            isHide: true
+          },
+          {
+            label: '50 €',
+            isHide: true
+          },
+          {
+            label: '100 €',
+            isHide: true
+          },
+          {
+            label: '200 €',
+            isHide: true
+          },
+          {
+            label: '500 €',
+          },
+          {
+            label: '1000 €',
+            isHide: true
+          },
+          {
+            label: '2000 €',
+            isHide: true
+          },
+          {
+            label: '5000 €',
+            isHide: true
+          },
+          {
+            label: '10 000 €',
+            isHide: true
+          },
+          {
+            label: '20 000 €',
+          },
+          {
+            label: '50 000 €',
+            isHide: true
+          },
+          {
+            label: '100 000 €',
+            isHide: true
+          },
+          {
+            label: '200 000 €',
+            isHide: true
+          },
+          {
+            label: '500 000 €',
+            isHide: true
+          },
+          {
+            label: '1 000 000 €'
+          },
+        ]
       }
     },
     methods: {
