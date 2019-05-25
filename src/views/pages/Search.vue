@@ -201,17 +201,22 @@
         return (num === this.porPagina);
       },
       currentPage(val) {
-        this.pagina = val;
-        this.actualizarProds();
+        let pag = Number((this.total / this.porPagina).toFixed(0))+1;
+        if(val > 0 && val <= pag) {
+          this.pagina = val;
+          this.actualizarProds();
+        }
       },
       actualizarProds: function () {
-
-        let urlTags = API_BASE+'producto/?preciomin=0&valoracionMax=' + this.valMax;
+        console.log("Actualizando prods...");
+        let urlTags = API_BASE+'producto/?preciomin=0&valoracionMax=5';
         urlTags = urlTags + '&preciomax=' + this.prMax + '&page=' + (this.pagina-1) + '&number=' + this.porPagina;
-
-        // urlTags = urlTags + '&longitud=' + this.$store.getters.currentUser.longitud;
-        // urlTags = urlTags + '&latitud=' + this.$store.getters.currentUser.latitud;
-        // urlTags = urlTags + '&radioUbicacion=' + this.distanciaMax*1000;
+        console.log("Pos: ",this.$store.getters.last_position);
+        if(this.$store.getters.last_position.length > 0) {
+          urlTags = urlTags + '&longitud=' + this.$store.getters.last_position[0].lon;
+          urlTags = urlTags + '&latitud=' + this.$store.getters.last_position[0].lat;
+          urlTags = urlTags + '&radioUbicacion=' + this.distanciaMax * 1000;
+        }
         if (this.texto.length > 0) {
           console.log('texto : ', this.texto);
           urlTags = urlTags + '&textoBusqueda=' + this.texto;
@@ -228,7 +233,7 @@
             }
           }
         }
-        // console.log(urlTags);
+        console.log(urlTags);
         axios.get(urlTags).then(response => {
           this.products = response.data.productos;
           this.total = response.data.resultados;
@@ -238,7 +243,7 @@
     },
     computed: {
       paginas() {
-        let pag = Number((this.total / this.porPagina).toFixed(0));
+        let pag = Math.floor(this.total / this.porPagina);
         if (pag < 1) {
           return 1;
         } else {
@@ -249,9 +254,9 @@
     mounted() {
       let urlTags = API_BASE +'producto/?preciomin=0&valoracionMax=' + this.valMax;
       urlTags = urlTags + '&preciomax=' + this.prMax + '&page=0' + '&number=' + this.porPagina;
-      // urlTags = urlTags + '&longitud=' + this.$store.getters.currentUser.longitud;
-      // urlTags = urlTags + '&latitud=' + this.$store.getters.currentUser.latitud;
-      // urlTags = urlTags + '&radioUbicacion=' + this.distanciaMax*1000;
+      urlTags = urlTags + '&longitud=' + this.$store.getters.currentUser.longitud;
+      urlTags = urlTags + '&latitud=' + this.$store.getters.currentUser.latitud;
+      urlTags = urlTags + '&radioUbicacion=' + this.distanciaMax*1000;
       // console.log('texto : ', this.texto);
       if (this.texto.length > 0) {
         urlTags = urlTags + '&textoBusqueda=' + this.texto;

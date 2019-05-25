@@ -347,7 +347,7 @@
         }
       },
       buscarPosicion: function () {
-        for (var i = 0; i < 3; i++) {
+        //for (var i = 0; i < 3; i++) {
           this.$store.dispatch("getPosition", this.address).then(() => {
             let candidates = this.$store.getters.last_position;
             //console.log(candidates);
@@ -366,7 +366,7 @@
               this.$refs.map.centerUpdated(newCenter);
             }
           })
-        }
+        //}
       },
       logImg() {
         console.log(this.picker);

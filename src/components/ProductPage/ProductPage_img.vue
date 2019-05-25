@@ -1,5 +1,6 @@
 <template>
   <div>
+    <b-btn v-on:click="logUser">Log user</b-btn>
     <b-card no-body class="mb-1" style="margin-left: 15px ">
       <b-card-header header-tag="header" class="p-1" role="tab">
         <b-button block href="#" v-b-toggle.accordion-1 variant="info"
@@ -35,13 +36,39 @@
         <div v-if="this.id_vendedor !== this.$store.getters.user">
           <b-list-group-item style="align-content: center; ">
             <v-btn style="background-color: green; font-weight: bold; color: white;" @click="nuevoChat">Chat</v-btn>
-            <v-btn style="background-color: #20a8d8; font-weight: bold; color: white;" @click="seguirUser">Seguir
-              Usuario
+            <v-btn  v-if="!siguiendo" style="background-color: #20a8d8; font-weight: bold; color: white;" @click="seguirUser">Seguir Usuario</v-btn>
+            <v-btn v-if="siguiendo" style="background-color: #20a8d8; font-weight: bold; color: white;" @click="dejarSeguir">
+            Dejar de Seguir
             </v-btn>
+            <v-btn style="background-color: red; font-weight: bold; color: white;" @click="mostrarReport">Reportar Usuario</v-btn>
+            <b-modal id="modal1"
+                     ref="modalReport"
+                     title="Reportar usuario"
+                     header-bg-variant="danger"
+                     hide-footer
+            >
+              <h3 class="my-4">Va a reportar a este vendedor. ¿Está seguro de que desea continuar?</h3>
+              <v-flex d-flex>
+                <v-select
+                  :items="items"
+                  outline
+                ></v-select>
+              </v-flex>
+              <b-btn class="btn-danger" v-on:click="reportarUser" style="margin-right: 10px;">SI</b-btn>
+              <b-btn @click="ocultarReport">CANCELAR</b-btn>
+            </b-modal>
           </b-list-group-item>
         </div>
 
-        <!--Aqui-->
+        <!--<b-list-group-item style="align-content: center; ">-->
+          <!--<v-btn style="background-color: green; font-weight: bold; color: white;" @click="nuevoChat">Chat</v-btn>-->
+          <!--<v-btn v-if="!siguiendo" style="background-color: #20a8d8; font-weight: bold; color: white;" @click="seguirUser">Seguir-->
+            <!--Usuario-->
+          <!--</v-btn>-->
+          <!--<v-btn v-if="siguiendo" style="background-color: #20a8d8; font-weight: bold; color: white;" @click="dejarSeguir">-->
+            <!--Dejar de Seguir-->
+          <!--</v-btn>-->
+        <!--</b-list-group-item>-->
 
       </b-list-group>
     </b-card>
@@ -64,19 +91,15 @@
         info: null,
         miNick: null,
         seguidos: [],
-        siguiendo: false
-
-        // vendor_data: null,
+        siguiendo: false,
+        reporte: "",
+        items: ['Contenido inapropiado', 'No me ha querido vender', 'Insulta por el chat']
       }
     },
     props: {
       method: {type: Function},
     },
     async mounted() {
-      //console.log('MOUUUUUUUUUUUUUUUUUUUUUUUUUUNTED--------------');
-      // this.method();
-      //console.log(`${API_BASE}user/${this.id_vendedor}`);
-      //http://155.210.47.51:5000/user/8e4de80f-d9bf-411c-a696-58e3481a1b36
       axios.get(`${API_BASE}user/${this.id_vendedor}`).then(response => (this.info = response));
       let url = API_BASE + 'seguir/' + this.$store.getters.user +'/seguidos';
       console.log('-------------');
@@ -90,6 +113,9 @@
 
     },
     methods: {
+      logUser(){
+        console.log(this.$store.getters.currentUser);
+      },
       async nuevoChat() {
         let url = API_BASE + 'conversacion/';
         let header = {
@@ -129,6 +155,16 @@
         console.log('---------------');
         axios.post(url, data, {headers: header}).then(response => (console.log(response)));
         this.siguiendo = true;
+
+        url = API_BASE + 'conversacion/';
+        let datos = {
+          "comprador": this.$store.getters.user,
+          "vendedor": this.id_vendedor,
+          "email_comprador": this.$store.getters.name,
+          "email_vendedor": this.info.data.nick
+        };
+
+        axios.post(url, datos, {headers: header}).catch(error => (console.log(error)));
       },
       dejarSeguir() {
         let url = API_BASE + 'seguir/' + this.$store.getters.user + '/remove';
@@ -145,6 +181,23 @@
         axios.post(url, data, {headers: header}).then(response => (console.log(response)));
         this.siguiendo = false;
       },
+      ocultarReport() {
+        this.$refs['modalReport'].hide()
+      },
+      mostrarReport() {
+        this.$refs['modalReport'].show()
+      },
+      reportarUser(){
+
+        let url = API_BASE + 'report/';
+        let data = {
+          "descripcion": "Usuario malo",
+          "tipoReporte": this.reporte,
+          "reportado": this.id_vendedor
+        };
+        axios.post(url,data).catch(error => (console.log(error)));
+        this.ocultarReport();
+      },
       showInfo: function () {
         console.log(this.info);
         console.log(this.info.data);
@@ -155,9 +208,6 @@
         let user = this.$store.getters.user;
         console.log(vende, user);
         console.log(vende === user);
-
-        // if(kkk === ){}
-
       }
     }
   }

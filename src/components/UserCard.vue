@@ -135,14 +135,15 @@
         }
       },
       borrarUsuario() {
-        let url = API_BASE + 'user/' + this.$store.getters.user + '/remove';
+        let url = API_BASE + 'user/' + this.$store.getters.user;
         let headers = {
           Content_Type: 'application/json',
           Authorization: this.$store.getters.token
         };
-        let data = { actual_pass: this.delPass};
+        let data = { "password": this.delPass};
         if(this.firstPass) {
-          axios.post(url, data, {headers}).catch(error => {
+          console.log("Borrando...");
+          axios.delete(url, {headers: headers, data: data}).catch(error => {
             console.log(error)
           });
         }

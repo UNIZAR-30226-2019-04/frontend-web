@@ -120,9 +120,6 @@
               <!--</b-input-group-prepend>-->
               <b-form-input :type="tipo" class="form-control" v-model="asignarTrueque" placeholder="nick del usuario"
                             autocomplete/>
-              <b-form-invalid-feedback id="input-live-feedback3">
-                Escriba su contraseña para poder borrar la cuenta (al menos 6 caracteres).
-              </b-form-invalid-feedback>
             </b-input-group>
             <b-btn class="btn-success" v-on:click="asignarUsuarioTrueque"
                    style="margin-right: 10px; background-color: #20a8d8; font-weight: bold">ASIGNAR
@@ -285,7 +282,14 @@
         console.log('post routerpush');
       },
       asignarUsuarioTrueque: function () {
-        // TODO: funcion que haga algo cuando se le asigna a un usuario la compra de un trueque
+        let url = API_BASE + 'producto/' + this.idProducto + '/ventapornick/'+this.asignarTrueque;
+        axios.post(url).then(response => {
+            this.$router.push({
+              path: 'Search'
+            });
+          }
+        ).catch(error => (console.log(error)));
+        //#TODO: mostrar mensaje de nick incorrecto.
       },
       procesoCompra: function () {
         console.log(this.precio);
