@@ -58,8 +58,11 @@
   }
 
   #particles-js {
-    position: absolute; background-size: cover; top: 0; bottom: 0; left: 0; right: 0; overflow-y: hidden; z-index: 0;
-
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -80px;
+    bottom: 0;
   }
 
   #app {
