@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-btn v-on:click="logUser">Log user</b-btn>
+    <!--<b-btn v-on:click="logUser">Log user</b-btn>-->
     <b-card no-body class="mb-1" style="margin-left: 15px ">
       <b-card-header header-tag="header" class="p-1" role="tab">
         <b-button block href="#" v-b-toggle.accordion-1 variant="info"
