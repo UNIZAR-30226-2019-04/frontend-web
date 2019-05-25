@@ -105,7 +105,7 @@
       logFile(){
         console.log(this.file);
       },
-      uploadFoto(){
+      async uploadFoto(){
         console.log("Cambiando fot...");
         let url = API_BASE + 'user/' + this.$store.getters.user + '/fotoPerfil/';
         let formData = new FormData();
@@ -113,12 +113,8 @@
         formData.append('file',this.file);
         console.log(this.file);
 
-        axios.put(url, formData).then(response => {
-          console.log('0000000000000');
-          console.log(response);
-          console.log('0000000000000');
-          this.userInfo.imagen_perfil = response.data.data[0].path;
-        }).catch(error => (console.log(error)));
+        let response = await axios.put(url, formData).catch(error => (console.log(error)));
+        this.userInfo.imagen_perfil = response.data.data[0].path;
         this.selectedFoto = false;
       },
       cambiarFoto() {
@@ -135,14 +131,15 @@
         }
       },
       borrarUsuario() {
-        let url = API_BASE + 'user/' + this.$store.getters.user + '/remove';
+        let url = API_BASE + 'user/' + this.$store.getters.user;
         let headers = {
           Content_Type: 'application/json',
           Authorization: this.$store.getters.token
         };
-        let data = { actual_pass: this.delPass};
+        let data = { "password": this.delPass};
         if(this.firstPass) {
-          axios.post(url, data, {headers}).catch(error => {
+          console.log("Borrando...");
+          axios.delete(url, {headers: headers, data: data}).catch(error => {
             console.log(error)
           });
         }

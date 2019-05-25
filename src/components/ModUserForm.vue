@@ -64,7 +64,7 @@
               >Buscar
               </b-button>
             </b-input-group>
-            <Mapa ref="map" :preview="false" :radius="100"></Mapa>
+            <Mapa ref="map2" :preview="true" :radius="100"></Mapa>
           </div>
 
           <b-input-group class="mb-3">
@@ -189,8 +189,9 @@
             let candidates = this.$store.getters.last_position;
             console.log(candidates);
 
-            console.log(candidates.length)
-            if (candidates.length !== 1) {
+            console.log(candidates.length);
+            if (candidates.length < 1) {
+              console.log("Sin coincidencias");
               this.notSelected = "Sea más específico con la dirección.\n"
             } else {
               this.notSelected = "";
@@ -200,8 +201,8 @@
                 lng: location['lon']
               };
               console.log(newCenter);
-              this.$refs.map.zoomUpdated(17);
-              this.$refs.map.centerUpdated(newCenter);
+              this.$refs.map2.zoomUpdated(17);
+              this.$refs.map2.centerUpdated(newCenter);
             }
           })
         }

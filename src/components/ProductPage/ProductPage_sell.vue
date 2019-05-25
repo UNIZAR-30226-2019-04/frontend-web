@@ -94,9 +94,6 @@
               <!--</b-input-group-prepend>-->
               <b-form-input :type="tipo" class="form-control" v-model="asignarTrueque" placeholder="nick del usuario"
                             autocomplete/>
-              <b-form-invalid-feedback id="input-live-feedback3">
-                Escriba su contraseña para poder borrar la cuenta (al menos 6 caracteres).
-              </b-form-invalid-feedback>
             </b-input-group>
             <b-btn class="btn-success" v-on:click="asignarUsuarioTrueque"
                    style="margin-right: 10px; background-color: #20a8d8; font-weight: bold">ASIGNAR
@@ -112,14 +109,12 @@
           </button>
           <br/>
         </div>
+
       </b-card-body>
-
-      <b-list-group flush>
-        <b-list-group-item>{{ method.razones_venta }}</b-list-group-item>
-        <img :src="method.zona_geografica">
-      </b-list-group>
-
-      <!--<b-card-footer>Otras fotos</b-card-footer>-->
+      <b-card-body>
+        <Mapa :preview="true" :radius="100" ></Mapa>
+      </b-card-body>
+      <!--#TODO: hacer que se vea el mapa con la pos del prodcuto, sin imagen el puntero por defecto-->
     </b-card>
   </div>
 </template>
@@ -131,10 +126,11 @@
   import BRow from "bootstrap-vue/src/components/layout/row";
   import moment from "moment";
   import ButtonGroups from "../../views/buttons/ButtonGroups";
+  import Mapa from "../Mapa";
 
   export default {
     name: "ProductPage_sell",
-    components: {ButtonGroups, BRow, CountdownTimer},
+    components: {Mapa, ButtonGroups, BRow, CountdownTimer},
     // la funcion que hereda del papi
     data() {
       return {
@@ -167,10 +163,18 @@
       this.method();
       console.log('Carga de _sell');
       axios.get(`${API_BASE}user/${this.id_vendedor}`).then(response => (this.info = response.data));
-      axios.get(`${API_BASE}producto/${this.idProducto}`).then(response => (this.infoProdData = response.data));
-      axios.get(`${API_BASE}producto/${this.idProducto}`).then(response => (this.infoProdData_date = response.data.fechaexpiracion));
+      let response = await axios.get(`${API_BASE}producto/${this.idProducto}`);
+      this.infoProdData = response.data;
+      this.infoProdData_date = response.data.fechaexpiracion
+      //axios.get(`${API_BASE}producto/${this.idProducto}`).then(response => (this.infoProdData_date = response.data.fechaexpiracion));
       axios.get(`${API_BASE}puja/${this.idProducto}`).then(response => (this.ultimoPrecioValido = response.data));
       this.mesActual = new Date().getUTCMonth() + 1;
+      let centro = {
+        lat: this.infoProdData.latitud,
+        lng: this.infoProdData.longitud
+      };
+      this.$refs.map.centerUpdated(centro);
+      this.$refs.map.zoomUpdated(17);
     },
     methods: {
       ocultarModal(num) {
@@ -261,7 +265,14 @@
         console.log('post routerpush');
       },
       asignarUsuarioTrueque: function () {
-        // TODO: funcion que haga algo cuando se le asigna a un usuario la compra de un trueque
+        let url = API_BASE + 'producto/' + this.idProducto + '/ventapornick/'+this.asignarTrueque;
+        axios.post(url).then(response => {
+            this.$router.push({
+              path: 'Search'
+            });
+          }
+        ).catch(error => (console.log(error)));
+        //#TODO: mostrar mensaje de nick incorrecto.
       },
       procesoCompra: function () {
         console.log(this.precio);

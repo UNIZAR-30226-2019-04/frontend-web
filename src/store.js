@@ -12,8 +12,9 @@ export default new Vuex.Store({
     token: localStorage.getItem("token") || "",
     public_id: localStorage.getItem("public_id") || "no_user",
     currentUser: {},
-    last_position: [],
-    name: "",
+    last_position: {},
+    name: ""
+
   },
   mutations: {
     auth_request(state) {
@@ -96,6 +97,7 @@ export default new Vuex.Store({
 
             localStorage.setItem("token", token);
             localStorage.setItem("public_id", public_id);
+            localStorage.setItem("name", resp.data.email);
             console.log(resp.data.public_id);
             console.log(resp.data.Authorization);
             commit("auth_success", {
@@ -248,11 +250,15 @@ export default new Vuex.Store({
           method: "GET"
         })
           .then( resp => {
-            console.log(resp);
+            // console.log('-----------');
+            // console.log(resp);
+            // console.log('-----------');
 
             let data = resp.data;
-
-            localStorage.setItem("last_position", data);
+            console.log('-----------');
+            console.log(data);
+            console.log('-----------');
+            localStorage.setItem("last_position", data[0]);
             commit("location_success", data);
             resolve(resp);
           })

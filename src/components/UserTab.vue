@@ -69,18 +69,17 @@
         comprados: []
       }
     },
-    mounted() {
+    async mounted() {
       let url = API_BASE+'user/' + this.$store.getters.user;
-      axios.get(url).then(response => {
-        this.prods = response.data.cajas_productos;
-        this.deseados = response.data.deseados;
-        this.valDone = response.data.valoraciones_hechas;
-        this.valGet = response.data.valoraciones_recibidas;
-      });
-      /*url = url + '/comprados';
-      axios.get(url).then(response => {
-        this.comprados = response.data;
-      });*/
+      let response = await axios.get(url);
+      this.prods = response.data.cajas_productos;
+      this.deseados = response.data.deseados;
+      this.valDone = response.data.valoraciones_hechas;
+      this.valGet = response.data.valoraciones_recibidas;
+      this.comprados = response.data.productos_comprados;
+      url = url + '/comprados';
+      response = await axios.get(url);
+      this.comprados = response.data.cajas_productos;
     }
   }
 </script>
