@@ -32,23 +32,15 @@
           <br/>
           <h2>Precio actual de la subasta:</h2>
           <h2>{{method.precioAux}}€</h2>
-          <!--<br/>-->
         </b-card-title>
         <div v-if="this.$store.state.public_id === method.vendido_por"> <!-- SI EL PRODUCTO SÍ TE PERTENECE -->
           <!--<h1>Este producto te pertenece</h1>-->
           <h3>Tiempo restante:</h3>
-          <CountdownTimer :end-time="endTim"></CountdownTimer>
-          <!--<h3>{{method.fechaexpiracion}}</h3>-->
-          <!--<h3>{{method.fecha}}</h3>-->
-          <!--<br/>-->
-          <!--<p>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>-->
-          <!--Dia: {{Number(this.method.fechaexpiracion.split("/")[0])}} <br/>-->
-          <!--Mes: {{Number(this.method.fechaexpiracion.split("/")[1])}} <br/>-->
-          <!--Anyo: {{Number((this.method.fechaexpiracion.split("/")[2]).split(",")[0])}} <br/>-->
-          <!--Fecha fin completa: {{this.method.fechaexpiracion}} <br/>-->
+          <div v-if>
 
-          <!--<p>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>-->
-          <!--<br/>-->
+            <CountdownTimer :end-time="endTim"></CountdownTimer>
+          </div>
+
           <button @click="sobreProd()">BOTON DEBUG</button>
         </div>
         <div v-else> <!-- SI EL PRODUCTO NO TE PERTENECE -->
@@ -74,30 +66,30 @@
           </b-form>
         </div>
         <!--<div>-->
-          <!--<b-modal id="modalexito"-->
-                   <!--ref="modalexito"-->
-                   <!--title="Éxito"-->
-                   <!--header-bg-variant="success"-->
-                   <!--hide-footer>-->
-            <!--<h3>Puja realizada con éxito</h3>-->
-            <!--<br/>-->
-            <!--<b-btn class="btn" style="margin-right: 10px;font-weight: bold" @click="ocultarModal(2)">-->
-              <!--ACEPTAR-->
-            <!--</b-btn>-->
-          <!--</b-modal>-->
+        <!--<b-modal id="modalexito"-->
+        <!--ref="modalexito"-->
+        <!--title="Éxito"-->
+        <!--header-bg-variant="success"-->
+        <!--hide-footer>-->
+        <!--<h3>Puja realizada con éxito</h3>-->
+        <!--<br/>-->
+        <!--<b-btn class="btn" style="margin-right: 10px;font-weight: bold" @click="ocultarModal(2)">-->
+        <!--ACEPTAR-->
+        <!--</b-btn>-->
+        <!--</b-modal>-->
         <!--</div>-->
         <!--<div>-->
-          <!--<b-modal id="modalerror"-->
-                   <!--ref="modalerror"-->
-                   <!--title="Error"-->
-                   <!--header-bg-variant="danger"-->
-                   <!--hide-footer>-->
-            <!--<h3>El precio de la puja ha de ser mayor</h3>-->
-            <!--<br/>-->
-            <!--<b-btn class="btn" style="margin-right: 10px;font-weight: bold" @click="ocultarModal(2)">-->
-              <!--ACEPTAR-->
-            <!--</b-btn>-->
-          <!--</b-modal>-->
+        <!--<b-modal id="modalerror"-->
+        <!--ref="modalerror"-->
+        <!--title="Error"-->
+        <!--header-bg-variant="danger"-->
+        <!--hide-footer>-->
+        <!--<h3>El precio de la puja ha de ser mayor</h3>-->
+        <!--<br/>-->
+        <!--<b-btn class="btn" style="margin-right: 10px;font-weight: bold" @click="ocultarModal(2)">-->
+        <!--ACEPTAR-->
+        <!--</b-btn>-->
+        <!--</b-modal>-->
         <!--</div>-->
       </b-card-body>
 
@@ -183,6 +175,7 @@
         asignarTrueque: '',
         infoPujaProd: null,
         ultimoPrecioValido: null,
+        mesActual: null,
       }
     },
     props: {
@@ -195,6 +188,7 @@
       axios.get(`${API_BASE}producto/${this.idProducto}`).then(response => (this.infoProdData = response.data));
       axios.get(`${API_BASE}producto/${this.idProducto}`).then(response => (this.infoProdData_date = response.data.fechaexpiracion));
       axios.get(`${API_BASE}puja/${this.idProducto}`).then(response => (this.ultimoPrecioValido = response.data));
+      this.mesActual = new Date().getUTCMonth() + 1;
     },
     methods: {
       ocultarModal(num) {
@@ -321,7 +315,7 @@
         console.log('Get Date: ', new Date().getDate());
         console.log('Get UTCMonth+1: ', new Date().getUTCMonth() + 1);
         console.log('--------------------------------------');
-        console.log('dia: ',this.method.fechaexpiracion.split("/")[0]);
+        console.log('dia: ', this.method.fechaexpiracion.split("/")[0]);
         console.log('mes: ', this.method.fechaexpiracion.split("/")[1]);
         console.log('anyo: ', this.method.fechaexpiracion.split("/")[2]);
         console.log('--------------------------------------');
