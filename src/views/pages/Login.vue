@@ -35,9 +35,7 @@
                     <b-col cols="6">
                       <b-button variant="primary" v-on:click="register" class="px-4">Acceso</b-button>
                     </b-col>
-                    <b-col cols="6" class="text-right">
-                      <b-button variant="link" class="px-0">¿Olvidaste tu contraseña?</b-button>
-                    </b-col>
+
                   </b-row>
                 </b-form>
               </b-card-body>
