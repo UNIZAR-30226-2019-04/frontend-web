@@ -59,6 +59,10 @@
 
   export default {
     name: 'UserTab',
+    prods: {userr: {
+      type: Object,
+        default: null
+      }},
     components: {ProductItem, ProductBox, UserReview},
     data(){
       return {
@@ -66,11 +70,12 @@
         deseados: [],
         valDone : [],
         valGet : [],
-        comprados: []
+        comprados: [],
+        user: null
       }
     },
     async mounted() {
-      let url = API_BASE+'user/' + this.$store.getters.user;
+      let url = API_BASE + 'user/' + this.$store.getters.user;
       let response = await axios.get(url);
       this.prods = response.data.cajas_productos;
       this.deseados = response.data.deseados;

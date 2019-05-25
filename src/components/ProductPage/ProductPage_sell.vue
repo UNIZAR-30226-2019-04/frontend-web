@@ -69,7 +69,7 @@
                 PUJAR
               </b-button>
             </div>
-            <button @click="sobreProd()">BOTON DEBUG</button>
+            <!--<button @click="sobreProd()">BOTON DEBUG</button>-->
             <br/>
           </b-form>
         </div>

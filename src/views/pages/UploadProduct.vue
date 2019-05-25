@@ -347,7 +347,7 @@
         }
       },
       buscarPosicion: function () {
-        //for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 3; i++) {
           this.$store.dispatch("getPosition", this.address).then(() => {
             let candidates = this.$store.getters.last_position;
             //console.log(candidates);
@@ -366,7 +366,7 @@
               this.$refs.map.centerUpdated(newCenter);
             }
           })
-        //}
+        }
       },
       logImg() {
         console.log(this.picker);
@@ -399,7 +399,10 @@
           this.notSelected = "Seleccione una opción de venta.\n"
         } else if (data["precio"] < data["precioAux"] && data["tipo"] === "trueque") {
           this.notSelected = "Ajuste el valor del máximo estimado.\n"
-        } else {
+        } else if(this.file_2.length < 2){
+          this.notSelected = "Debe seleccionar al menos 2 imágenes.\n";
+        }
+        else {
           this.notSelected = "";
           /*this.$store
             .dispatch("uploadProduct", data)

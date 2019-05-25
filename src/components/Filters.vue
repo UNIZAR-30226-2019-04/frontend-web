@@ -245,7 +245,8 @@
             isHide: true
           },
           {
-            label: '1 000 000 €'
+            label: '1 000 000 €',
+            isHide: true
           },
         ]
       }

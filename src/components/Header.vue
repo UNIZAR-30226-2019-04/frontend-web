@@ -22,7 +22,7 @@
         <b-navbar-nav>
           <b-nav-item v-if="!isLogged" style="outline-color: green">
             <router-link to="LogIn" style="font-size: 1.3rem; color: white">
-              <b-btn variant="outline-white">
+              <b-btn variant="outline-light">
                 Acceder
               </b-btn>
             </router-link>

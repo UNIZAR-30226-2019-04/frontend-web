@@ -215,7 +215,7 @@
         if(this.$store.getters.last_position.length > 0) {
           urlTags = urlTags + '&longitud=' + this.$store.getters.last_position[0].lon;
           urlTags = urlTags + '&latitud=' + this.$store.getters.last_position[0].lat;
-          urlTags = urlTags + '&radioUbicacion=' + this.distanciaMax * 1000;
+          urlTags = urlTags + '&radioUbicacion=' + this.distanciaMax / 1000;
         }
         if (this.texto.length > 0) {
           console.log('texto : ', this.texto);
