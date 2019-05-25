@@ -13,7 +13,7 @@ export default new Vuex.Store({
     public_id: localStorage.getItem("public_id") || "no_user",
     currentUser: {},
     last_position: [],
-    name: ""
+    name: "",
   },
   mutations: {
     auth_request(state) {
@@ -270,6 +270,6 @@ export default new Vuex.Store({
     user: state => state.public_id,
     currentUser: state => state.currentUser,
     last_position: state => state.last_position,
-    name: state => state.name
+    name: state => state.name,
   }
 });
