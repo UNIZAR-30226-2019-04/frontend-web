@@ -40,6 +40,9 @@
             </v-btn>
           </b-list-group-item>
         </div>
+
+        <!--Aqui-->
+
       </b-list-group>
     </b-card>
     <!--<button @click="showInfo">debug</button>-->
@@ -60,21 +63,31 @@
         id_vendedor: this.method.vendido_por,
         info: null,
         miNick: null,
+        seguidos: [],
+        siguiendo: false
+
         // vendor_data: null,
       }
     },
-    // la funcion que hereda del papi
     props: {
       method: {type: Function},
     },
-    mounted() {
-      console.log('MOUUUUUUUUUUUUUUUUUUUUUUUUUUNTED--------------');
+    async mounted() {
+      //console.log('MOUUUUUUUUUUUUUUUUUUUUUUUUUUNTED--------------');
       // this.method();
-      console.log(`${API_BASE}user/${this.id_vendedor}`);
+      //console.log(`${API_BASE}user/${this.id_vendedor}`);
       //http://155.210.47.51:5000/user/8e4de80f-d9bf-411c-a696-58e3481a1b36
       axios.get(`${API_BASE}user/${this.id_vendedor}`).then(response => (this.info = response));
-      // axios.get(`http://155.210.47.51:5000/user/${this.id_vendedor}`).then(response => (this.info = response));
-      // console.log(info.nombre);
+      let url = API_BASE + 'seguir/' + this.$store.getters.user +'/seguidos';
+      console.log('-------------');
+      let response = await axios.get(url);
+      this.seguidos = response.data;
+      let vend = this.id_vendedor;
+      let ind = this.seguidos.findIndex(function (element) {
+        return element.seguido === vend;
+      });
+      this.siguiendo = (ind > -1);
+
     },
     methods: {
       async nuevoChat() {
@@ -115,6 +128,22 @@
         console.log(data);
         console.log('---------------');
         axios.post(url, data, {headers: header}).then(response => (console.log(response)));
+        this.siguiendo = true;
+      },
+      dejarSeguir() {
+        let url = API_BASE + 'seguir/' + this.$store.getters.user + '/remove';
+        let header = {
+          Content_Type: 'application/json',
+          Authorization: this.$store.getters.token
+        };
+        let data = {
+          "seguido": this.id_vendedor
+        };
+        console.log('---------------');
+        console.log(data);
+        console.log('---------------');
+        axios.post(url, data, {headers: header}).then(response => (console.log(response)));
+        this.siguiendo = false;
       },
       showInfo: function () {
         console.log(this.info);

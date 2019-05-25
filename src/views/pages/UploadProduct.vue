@@ -422,7 +422,6 @@
             console.log('Ha habido algun problema');
             $("#modalerror").modal();
           }
-
           this.prod_id = response.data.id;
           url = API_BASE + 'multimedia/' + this.prod_id;
 
