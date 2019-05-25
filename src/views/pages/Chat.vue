@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-layout row wrap style="margin-right: 30px">
-      <v-flex xs5>
+      <v-flex xs4>
         <active-chats @nuevaConversacion="conversacionElegida" :chats="chatsActivos"></active-chats>
       </v-flex>
       <v-flex style="margin-left: 10px">

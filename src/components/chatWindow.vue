@@ -5,7 +5,7 @@
     class="grey lighten-3"
   >
     <v-card >
-      <v-toolbar color="blue" dark>
+      <v-toolbar color="#20a8d8" dark>
         <v-toolbar-title class="text-xs-center">{{otro}}</v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
@@ -59,7 +59,7 @@
             >
             </v-textarea>
           </v-flex>
-          <v-btn dark fab color="blue" v-on:click="nuevoMsj()">
+          <v-btn dark fab color="#20a8d8" v-on:click="nuevoMsj()">
             <v-icon>send</v-icon>
           </v-btn>
         </b-row>
@@ -156,17 +156,17 @@
   .message-out {
     width: 45%;
     border-radius: 10px;
-    padding: .5em;
+    padding: .6em;
     /*   margin-bottom: .5em; */
     font-size: .8em;
-    background: #407FFF;
+    background: #20a8d8;
     color: white;
   }
 
   .message-in {
     width: 45%;
     border-radius: 10px;
-    padding: .5em;
+    padding: .6em;
     /*   margin-bottom: .5em; */
     font-size: .8em;
     background: #F1F0F0;

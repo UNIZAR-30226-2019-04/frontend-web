@@ -2,7 +2,7 @@
   <v-layout row>
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
-        <v-toolbar color="blue" dark>
+        <v-toolbar color="#20a8d8" dark>
           <v-toolbar-title class="text-xs-center">Chats Activos</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
