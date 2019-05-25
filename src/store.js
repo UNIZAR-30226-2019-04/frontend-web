@@ -14,6 +14,7 @@ export default new Vuex.Store({
     currentUser: {},
     last_position: {},
     name: ""
+
   },
   mutations: {
     auth_request(state) {
@@ -275,6 +276,6 @@ export default new Vuex.Store({
     user: state => state.public_id,
     currentUser: state => state.currentUser,
     last_position: state => state.last_position,
-    name: state => state.name
+    name: state => state.name,
   }
 });

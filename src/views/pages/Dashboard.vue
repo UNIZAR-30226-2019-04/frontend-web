@@ -1,165 +1,304 @@
 <template>
   <div>
-    <div style="position: center ">
-      <h1>ESTO ES UNA PRUEBA</h1>
-      <div v-if="this.infoUser.nombre !== null">
-        <h1>Hola {{this.infoUser.nombre}}!</h1>
-      </div>
-      <div v-else>
-        <h1>Hola {{this.infoUser.username}}!</h1>
-      </div>
-    </div>
-    {{this.$store.state.public_id}}
+    <b-row>
+      <b-col sm style="margin-right: 60px;">
+        <b-row style="margin-top: 30px;">
+          <b-col cols="6">
+            <div
+              style="margin-right: 10px;   padding: 0 0 0 15px;">
+              <h3 style="margin-left: 30px;">
+                Productos recomendados para ti
+              </h3>
+            </div>
+          </b-col>
+        </b-row>
+
+        <b-tab title="Productos recomendados" active
+               style="margin-top: 30px; margin-left: 30px; width: 100%; padding: 0 30px 0 15px;">
+          <b-card-group columns>
+            <ProductBox v-for="(product, index) in products.slice(0, 5 + Math.floor(Math.random() * 2))" :key="index"
+                        :product="product"
+                        :comprado="false"
+                        style="margin-bottom: 10px;"></ProductBox>
+          </b-card-group>
+        </b-tab>
+      </b-col>
+      <b-col sm style="margin-right: 60px;">
+        <b-row style="margin-top: 30px;">
+          <b-col cols="6">
+            <div
+              style="margin-right: 10px;   padding: 0 0 0 15px;">
+              <h3 style="margin-left: 30px;">
+                Productos nuevos
+              </h3>
+            </div>
+          </b-col>
+        </b-row>
+        <b-tab title="Productos nuevos" active
+               style="margin-top: 30px; margin-left: 30px; width: 100%; padding: 0 30px 0 15px;">
+          <b-card-group columns>
+            <ProductBox v-for="(product, index) in productsById.slice(0, 5 + Math.floor(Math.random() * 2))"
+                        :key="index"
+                        :product="product"
+                        :comprado="false"
+                        style="margin-bottom: 10px;"></ProductBox>
+          </b-card-group>
+        </b-tab>
+      </b-col>
+      <button @click="showProds()">DEBUG</button>
+    </b-row>
     <br/>
-    {{this.public_id}}
     <br/>
-    {{this.infoUser.nombre}}
-    <div style="margin-left: 15px">
-      <!--<b-row>-->
-      <!--<h1>Productos para ti</h1>-->
-      <!--</b-row>-->
-      <b-row>
-        <b-col>
-          <h1>Productos para ti</h1>
-          <ProductBox span v-for="(product,index) in products.slice(0,5)" :key="index"
-                      :product="product"
-                      :comprado="false"
-                      style="margin-bottom: 10px;"></ProductBox>
-        </b-col>
-        <b-col>
-          <h1>Productos nuevos</h1>
-          <ProductBox v-for="(product,index) in products.slice(0,5)" :key="index"
-                      :product="product"
-                      :comprado="false"
-                      style="margin-bottom: 10px;"></ProductBox>
-        </b-col>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <h1>---------------------------------------------</h1>
+    <h1>---------------------------------------------</h1>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <h1>---------------------------------------------</h1>
+    <h1>---------------------------------------------</h1>
+    <h1>---------------------------------------------</h1>
+    <h1>---------------------------------------------</h1>
+    <h1>---------------------------------------------</h1>
 
-      </b-row>
 
-      <h1>rrtgjdkfnalrjvngslxkgbjnwñrtkjgnbsñgj </h1>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <!--<span>-->
-      <!--<ProductBox v-for="(product,index) in products" :key="index"-->
-      <!--:product="product"-->
-      <!--:comprado="false"-->
-      <!--style="margin-bottom: 10px;"></ProductBox>-->
-      <!--</span>-->
-      <h2 style="font-size:3rem;">Showcase</h2>
-      <div class="showcase__carousel--container">
-        <i class="fa fa-chevron-left" style="font-size:10rem; display:inline-block; float:left;"></i>
-        <div class="showcase__carousel--content">
-          <div class="showcase__carousel--item">
-            <p>jejejeje</p>
-          </div>
-          <div class="showcase__carousel--item">
-            <p>jejejeje</p>
-          </div>
-          <div class="showcase__carousel--item">
-            <p>jejejeje</p>
-          </div>
-          <div class="showcase__carousel--item">
-            <p>jejejeje</p>
+    <div class="container-fluid">
+      <h1 class="text-center my-3">Bootstrap 4 Card Carousel</h1>
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner row w-100 mx-auto">
+          <b-card-group columns>
+            <ProductBox v-for="(product, index) in products" :key="index"
+                        :product="product"
+                        :comprado="false"
+                        style="margin-bottom: 10px;"></ProductBox>
+          </b-card-group>
+
+
+          <div class="carousel-item col-md-4 active">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Card 1</h4>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
+                  content. This content is
+                  a little bit longer.</p>
+                <p class="card-text">
+                  <small class="text-muted">Last updated 3 mins ago</small>
+                </p>
+              </div>
+            </div>
           </div>
 
-          <i class="fa fa-chevron-right" style="font-size:10rem; display:inline-block; float:right;"></i>
+
+          <div class="carousel-item col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Card 7</h4>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
+                  content. This content is
+                  a little bit longer.</p>
+                <p class="card-text">
+                  <small class="text-muted">Last updated 3 mins ago</small>
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+          <!--</div>-->
+          <div class="container">
+            <div class="row">
+              <div class="col-12 text-center mt-4">
+                <a class="btn btn-outline-secondary mx-1 prev" href="javascript:void(0)" title="Previous">
+                  <i class="fa fa-lg fa-chevron-left"></i>
+                </a>
+                <a class="btn btn-outline-secondary mx-1 next" href="javascript:void(0)" title="Next">
+                  <i class="fa fa-lg fa-chevron-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <br/>
-      <br/>
-      <br/>
-
-      <!--<b-row>-->
-      <!--<ProductBox :product=product :key="product.id"-->
-      <!--style="margin-bottom: 10px;"></ProductBox>-->
-      <!--</b-row>-->
-      <b-row>
-        <h1>Productos nuevos</h1>
-      </b-row>
     </div>
-    <br/>
-    <button @click="loquesea()">BOTON</button>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <h1>---------------------------------------------------------------------------------------------</h1>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-
-
   </div>
 </template>
 
 <script>
-  import axios from "axios";
-  import {API_BASE} from "../../config";
+  import Filters from "../../components/Filters";
   import ProductBox from "../../components/ProductBox";
-  import BRow from "bootstrap-vue/src/components/layout/row";
-  import BCarouselSlide from "bootstrap-vue/src/components/carousel/carousel-slide";
+  import axios from "axios";
+  import LIcon from "vue2-leaflet/src/components/LIcon";
+  import {API_BASE} from "../../config";
+  import Mapa from "../../components/Mapa";
 
   export default {
-    name: "Dashboard",
-    components: {BCarouselSlide, BRow, ProductBox},
+    name: "Search",
+    components: {Mapa, LIcon, ProductBox, Filters},
+    props: {
+      textoProp: {
+        type: String,
+        default: 'prod'
+      }
+    },
     data() {
       return {
-        temporary_public_id: "bbf845ee-c5cb-4a03-a7c0-7efbb101c48a",
-        public_id: this.$store.state.public_id,
-        infoUser: null,
+        preview: false,
+        radius: null,
+        tags: [],
         total: 0,
-        maxComponentsRecomended: 5,
-        cards: [
-          {
-            headline: "Makes App available Offline",
-            text:
-              "By using the CachingAPI all static elements on an app can be pre-cached",
-            imgName: "setting.svg"
-          },
-          {
-            headline: "Use background sync to defer actions",
-            text:
-              "User inputs entered when offline are sent in the background once they get connectivity.",
-            imgName: "cloud.svg"
-          },
-          {
-            headline: "Send Push Notifications",
-            text:
-              "The Notifications API lets us send push notifications to re-engage users.",
-            imgName: "antenna.svg"
-          }
-        ]
+        totalById: 0,
+        valMax: 5,
+        texto: '',
+        prMax: 1000,
+        distanciaMax: 1000,
+        value: '',
+        order: null,
+        porPagina: 10,
+        pagina: 1,
+        cats: [],
+        tipo: [],
+        products: [],
+        productsById: [],
       }
+    }
+    ,
+    methods: {
+      showProds: function () {
+        console.log('debug');
+        console.log(this.products);
+        console.log(this.productsById);
+      },
+      deleteTag: function (id) {
+        this.tags.splice(id, 1);
+        this.actualizarProds();
+      },
+      logProds() {
+        console.log(this.products);
+      },
+      // ,
+      // deleteCat: function (id) {
+      //   this.cats.splice(id, 1);
+      //   this.actualizarProds();
+      // }
+      // ,
+      // deleteTipo: function (id) {
+      //   this.tipo = [];
+      //   this.actualizarProds();
+      // }
+      // ,
+      // newTag: function (elem, tipo, newVal) {
+      //   let a = {tag: elem};
+      //   if (tipo === 'cat') {
+      //     let found2 = this.cats.findIndex(function (element) {
+      //       return element === elem;
+      //     });
+      //     if (found2 === -1) {
+      //       this.cats.push(elem);
+      //       this.actualizarProds();
+      //     } else {
+      //       this.deleteCat(found2);
+      //     }
+      //   }
+      //   if (tipo === 'tipo') {
+      //     this.tipo = [];
+      //     this.tipo.push(elem);
+      //     this.actualizarProds();
+      //   }
+      //   if (tipo === 'valoracion') {
+      //     this.valMax = newVal;
+      //     let found = this.tags.findIndex(function (element) {
+      //       return element.tag === a.tag;
+      //     });
+      //     if (found === -1) {
+      //       this.tags.push(a);
+      //       this.actualizarProds();
+      //     } else {
+      //       this.deleteTag(found);
+      //     }
+      //   }
+      // },
+      // nuevoPrecio: function (precio) {
+      //   this.prMax = precio;
+      //   this.actualizarProds();
+      // }
+      // ,
+      // nuevaDistancia: function (dist) {
+      //   this.distanciaMax = dist;
+      //   this.actualizarProds();
+      // }
+      // ,
+      showOrder: function (value) {
+        this.order = value;
+      },
+      elemPerPage: function (num) {
+        this.porPagina = num;
+        this.actualizarProds();
+      },
+      // elegido: function (num) {
+      //   return (num === this.porPagina);
+      // },
+      currentPage(val) {
+        this.pagina = val;
+        this.actualizarProds();
+      },
+      // actualizarProds: function () {
+      //
+      //   let urlTags = API_BASE+'producto/?preciomin=0&valoracionMax=' + this.valMax;
+      //   urlTags = urlTags + '&preciomax=' + this.prMax + '&page=' + (this.pagina-1) + '&number=' + this.porPagina;
+      //   if (this.texto.length > 0) {
+      //     console.log('texto : ', this.texto);
+      //     urlTags = urlTags + '&textoBusqueda=' + this.texto;
+      //   }
+      //   if (this.tipo.length > 0) {
+      //     urlTags = urlTags + '&tipo=' + this.tipo[0];
+      //   }
+      //   if (this.cats.length > 0) {
+      //     urlTags = urlTags + '&categorias=';
+      //     for (let i = 0; i < this.cats.length; i++) {
+      //       urlTags = urlTags + this.cats[i];
+      //       if (i < (this.cats.length - 1)) {
+      //         urlTags = urlTags + ';';
+      //       }
+      //     }
+      //   }
+      //   // console.log(urlTags);
+      //   axios.get(urlTags).then(response => {
+      //     this.products = response.data.productos;
+      //     this.total = response.data.resultados;
+      //     console.log(response);
+      //   });
+      // }
     },
+    // computed: {
+    //   paginas() {
+    //     let pag = Number((this.total / this.porPagina).toFixed(0));
+    //     if (pag < 1) {
+    //       return 1;
+    //     } else {
+    //       return pag+1;
+    //     }
+    //   }
+    // },
     mounted() {
-      axios.get(`${API_BASE}user/${this.public_id}`).then(response => (this.infoUser = response.data));
-      axios.get(`${API_BASE}producto/`).then(response => (this.productos = response.data));
-      axios.get(`${API_BASE}producto/`).then(response => {
+      let url_prods = API_BASE + 'producto';
+      axios.get(url_prods).then(response => {
         this.products = response.data.productos;
         this.total = response.data.resultados;
-        // console.log(response);
       });
-    },
-    methods: {
-      loquesea: function () {
-        console.log('JJEJEJEJ');
-        console.log('JJEJEJEJ');
-        // console.log(this.$store.state.public_id);
-        console.log(typeof this.productos.productos);
-        console.log(this.productos.productos);
-        console.log(this.products);
-        let product = this.products[0];
-        console.log('El producto 0: ');
-        console.log(product);
-      }
+      let url_prods_by_id = API_BASE + 'producto/?orden_id=True&number=10';
+      axios.get(url_prods_by_id).then(response => {
+        this.productsById = response.data.productos;
+        this.totalById = response.data.resultados;
+      });
     }
   }
 </script>

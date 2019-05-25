@@ -36,61 +36,43 @@
         <div v-if="this.$store.state.public_id === method.vendido_por"> <!-- SI EL PRODUCTO SÍ TE PERTENECE -->
           <!--<h1>Este producto te pertenece</h1>-->
           <h3>Tiempo restante:</h3>
-          <div v-if>
-
+          <div v-if="">
             <CountdownTimer :end-time="endTim"></CountdownTimer>
           </div>
-
           <button @click="sobreProd()">BOTON DEBUG</button>
         </div>
+
         <div v-else> <!-- SI EL PRODUCTO NO TE PERTENECE -->
           <h3>Tiempo restante:</h3>
+          <!--Dia actual: {{this.diaActual}} <br/>-->
+          <!--Mes actual: {{this.mesActual}} <br/>-->
+          <!--Anyo actual: {{this.anyoActual}} <br/>-->
+          <!--Dia caduc: {{Number(this.method.fechaexpiracion.split("/")[0])}} <br/>-->
+          <!--Mes caduc: {{Number(this.method.fechaexpiracion.split("/")[1])}} <br/>-->
+          <!--Anyo caduc: {{Number((this.method.fechaexpiracion.split("/")[2]).split(",")[0])}} <br/>-->
           <CountdownTimer :end-time="endTim"></CountdownTimer>
           <b-form>
-            <b-row>
-              <b-col>
-                <b-input type="number" style="font-size: medium" id="precioPujado" v-model="precioPujado"></b-input>
-              </b-col>
-              <b-col style="font-size: larger; margin-left: -15px">
-                €
-              </b-col>
-            </b-row>
-            <b-button id="pujaRealizada"
-                      style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-top: 10px;"
-                      v-on:click="actPrecio(precioPujado)"
-            >
-              PUJAR
-            </b-button>
+            <div
+              v-if="anyoActual <= Number((this.method.fechaexpiracion.split('/')[2]).split(',')[0]) && mesActual <= Number(this.method.fechaexpiracion.split('/')[1]) && diaActual <= Number(this.method.fechaexpiracion.split('/')[0])">
+              <b-row>
+                <b-col>
+                  <b-input type="number" style="font-size: medium" id="precioPujado" v-model="precioPujado"></b-input>
+                </b-col>
+                <b-col style="font-size: larger; margin-left: -15px">
+                  €
+                </b-col>
+              </b-row>
+              <b-button id="pujaRealizada"
+                        style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-top: 10px;"
+                        v-on:click="actPrecio(precioPujado)"
+              >
+                PUJAR
+              </b-button>
+            </div>
             <button @click="sobreProd()">BOTON DEBUG</button>
             <br/>
           </b-form>
         </div>
-        <!--<div>-->
-        <!--<b-modal id="modalexito"-->
-        <!--ref="modalexito"-->
-        <!--title="Éxito"-->
-        <!--header-bg-variant="success"-->
-        <!--hide-footer>-->
-        <!--<h3>Puja realizada con éxito</h3>-->
-        <!--<br/>-->
-        <!--<b-btn class="btn" style="margin-right: 10px;font-weight: bold" @click="ocultarModal(2)">-->
-        <!--ACEPTAR-->
-        <!--</b-btn>-->
-        <!--</b-modal>-->
-        <!--</div>-->
-        <!--<div>-->
-        <!--<b-modal id="modalerror"-->
-        <!--ref="modalerror"-->
-        <!--title="Error"-->
-        <!--header-bg-variant="danger"-->
-        <!--hide-footer>-->
-        <!--<h3>El precio de la puja ha de ser mayor</h3>-->
-        <!--<br/>-->
-        <!--<b-btn class="btn" style="margin-right: 10px;font-weight: bold" @click="ocultarModal(2)">-->
-        <!--ACEPTAR-->
-        <!--</b-btn>-->
-        <!--</b-modal>-->
-        <!--</div>-->
       </b-card-body>
 
       <b-card-body v-else-if="tipo === trueque">
@@ -156,10 +138,7 @@
         idProducto: this.method.idProducto,
         endTim: {
           day: Number(this.method.fechaexpiracion.split("/")[0]),
-          // day: 31,
           month: Number(this.method.fechaexpiracion.split("/")[1]),
-          // month: 7,
-          // year: 2019,
           year: Number((this.method.fechaexpiracion.split("/")[2]).split(",")[0]),
         },
         precio: this.method.precio,
@@ -171,7 +150,10 @@
         asignarTrueque: '',
         infoPujaProd: null,
         ultimoPrecioValido: null,
-        mesActual: null,
+        // mesActual: this.$store.getters.actualMonth,
+        diaActual: new Date().getDate(),
+        mesActual: new Date().getUTCMonth() + 1,
+        anyoActual: new Date().getFullYear(),
       }
     },
     props: {
