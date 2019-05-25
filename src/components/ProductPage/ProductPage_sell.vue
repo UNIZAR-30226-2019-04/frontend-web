@@ -30,37 +30,26 @@
           <h2>Precio inicial:</h2>
           <h2>{{method.precio}}€</h2>
           <br/>
-          <!--Ultimo precio valido {{// this.ultimoPrecioValido.data[this.ultimoPrecioValido.data.length-1].valor}}-->
           <h2>Precio actual de la subasta:</h2>
-          <!--{{ultimoPrecioValido}}-->
-          <br/>
-          <h2>{{variableSuperSuperfinal}}</h2>
-          <!--{{ultimoPrecioValido.data[0].valor}}-->
-          <!--{{ultimoPrecioValido.data[ultimoPrecioValido.data.length-1].valor}}-->
-          <div v-if="this.showPrecioPujado === true">
-            <div v-if="precioPujado > this.ultimoPrecioValido.data[this.ultimoPrecioValido.data.length-1].valor">
-              <h2>{{precioPujado}}€</h2>
-            </div>
-          </div>
-          <div v-else>
-            <h2>{{method.precio}}€</h2>
-          </div>
+          <h2>{{method.precioAux}}€</h2>
+          <!--<br/>-->
         </b-card-title>
-        <div v-if="this.$store.state.public_id === method.vendido_por">
-          <h1>Este producto te pertenece</h1>
+        <div v-if="this.$store.state.public_id === method.vendido_por"> <!-- SI EL PRODUCTO SÍ TE PERTENECE -->
+          <!--<h1>Este producto te pertenece</h1>-->
           <h3>Tiempo restante:</h3>
           <CountdownTimer :end-time="endTim"></CountdownTimer>
-          <h3>{{method.fechaexpiracion}}</h3>
-          <h3>{{method.fecha}}</h3>
-          <br/>
-          <p>------------------------------------------------</p>
-          Dia: {{Number(this.method.fechaexpiracion.split("/")[0])}} <br/>
-          Mes: {{Number(this.method.fechaexpiracion.split("/")[1])}} <br/>
-          Fecha completa: {{this.method.fechaexpiracion}} <br/>
-          Anyo: {{Number((this.method.fechaexpiracion.split("/")[2]).split(",")[0])}} <br/>
+          <!--<h3>{{method.fechaexpiracion}}</h3>-->
+          <!--<h3>{{method.fecha}}</h3>-->
+          <!--<br/>-->
+          <!--<p>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>-->
+          <!--Dia: {{Number(this.method.fechaexpiracion.split("/")[0])}} <br/>-->
+          <!--Mes: {{Number(this.method.fechaexpiracion.split("/")[1])}} <br/>-->
+          <!--Anyo: {{Number((this.method.fechaexpiracion.split("/")[2]).split(",")[0])}} <br/>-->
+          <!--Fecha fin completa: {{this.method.fechaexpiracion}} <br/>-->
 
-          <p>------------------------------------------------</p>
-          <br/>
+          <!--<p>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>-->
+          <!--<br/>-->
+          <button @click="sobreProd()">BOTON DEBUG</button>
         </div>
         <div v-else> <!-- SI EL PRODUCTO NO TE PERTENECE -->
           <h3>Tiempo restante:</h3>
@@ -68,7 +57,7 @@
           <b-form>
             <b-row>
               <b-col>
-                <b-input type="number" id="precioPujado" v-model="precioPujado"></b-input>
+                <b-input type="number" style="font-size: medium" id="precioPujado" v-model="precioPujado"></b-input>
               </b-col>
               <b-col style="font-size: larger; margin-left: -15px">
                 €
@@ -84,6 +73,32 @@
             <br/>
           </b-form>
         </div>
+        <!--<div>-->
+          <!--<b-modal id="modalexito"-->
+                   <!--ref="modalexito"-->
+                   <!--title="Éxito"-->
+                   <!--header-bg-variant="success"-->
+                   <!--hide-footer>-->
+            <!--<h3>Puja realizada con éxito</h3>-->
+            <!--<br/>-->
+            <!--<b-btn class="btn" style="margin-right: 10px;font-weight: bold" @click="ocultarModal(2)">-->
+              <!--ACEPTAR-->
+            <!--</b-btn>-->
+          <!--</b-modal>-->
+        <!--</div>-->
+        <!--<div>-->
+          <!--<b-modal id="modalerror"-->
+                   <!--ref="modalerror"-->
+                   <!--title="Error"-->
+                   <!--header-bg-variant="danger"-->
+                   <!--hide-footer>-->
+            <!--<h3>El precio de la puja ha de ser mayor</h3>-->
+            <!--<br/>-->
+            <!--<b-btn class="btn" style="margin-right: 10px;font-weight: bold" @click="ocultarModal(2)">-->
+              <!--ACEPTAR-->
+            <!--</b-btn>-->
+          <!--</b-modal>-->
+        <!--</div>-->
       </b-card-body>
 
       <b-card-body v-else-if="tipo === trueque">
@@ -118,7 +133,9 @@
         <div v-else>
           <h1>¡Contacta con el vendedor para comprar el producto!</h1>
           <br/>
-          <button class="btn" style="background-color: #20a8d8; color: white; font-weight: bold; font-size: 1rem" @click="nuevoChat">CHATEAR</button>
+          <button class="btn" style="background-color: #20a8d8; color: white; font-weight: bold; font-size: 1rem"
+                  @click="nuevoChat">CHATEAR
+          </button>
           <br/>
         </div>
       </b-card-body>
@@ -158,17 +175,14 @@
           year: Number((this.method.fechaexpiracion.split("/")[2]).split(",")[0]),
         },
         precio: this.method.precio,
+        precioAux: this.method.precioAux,
         info: null,
         infoProd: null,
         infoProdData: null,
         infoProdData_date: null,
         asignarTrueque: '',
-        precioPujado: this.precio,
-        showPrecioPujado: false,
         infoPujaProd: null,
         ultimoPrecioValido: null,
-        var_: null,
-        variableSuperSuperfinal: null,
       }
     },
     props: {
@@ -181,11 +195,18 @@
       axios.get(`${API_BASE}producto/${this.idProducto}`).then(response => (this.infoProdData = response.data));
       axios.get(`${API_BASE}producto/${this.idProducto}`).then(response => (this.infoProdData_date = response.data.fechaexpiracion));
       axios.get(`${API_BASE}puja/${this.idProducto}`).then(response => (this.ultimoPrecioValido = response.data));
-      this.var_ = 'jeje';
-      console.log(this.var_);
-
     },
     methods: {
+      ocultarModal(num) {
+        if (num === 1) {
+          this.$refs['modalexito'].hide();
+          // this.$router.push("/Profile");
+        } else if (num === 2) {
+          this.$refs['modalerror'].hide();
+        } else {
+          this.$refs['modalVentaTrueque'].hide()
+        }
+      },
       async nuevoChat() {
         let url = API_BASE + 'conversacion/';
         let header = {
@@ -207,38 +228,43 @@
         console.log('---------------');
         console.log(this.info);
         console.log('---------------');
-        let respuesta = await axios.post(url, datos, {headers: header}).catch(error => (console.log(error)));
+        let respuesta = await
+          axios.post(url, datos, {headers: header}).catch(error => (console.log(error)));
         console.log(respuesta);
         this.$router.push({path: 'Chat', query: {id_conv: respuesta.data}})
-
       },
-      showPrecio(){
+      showPrecio() {
         let kk = axios.get(`${API_BASE}puja/${this.idProducto}`).then(response => (this.infoPujaProd = response.data));
       },
       /* Función que actualiza el precio del producto en la subasta */
       actPrecio: function (precioPujado) {
-        this.precioFinal = this.precio;
         console.log(precioPujado);
-        console.log(this.precio);
-        console.log(this.idProducto);
-        if (precioPujado > this.precio) {
+        console.log('Precio inicial: ', this.precio);
+        console.log('PrecioAux: ', this.precioAux);
+        console.log('El idProducto: ', this.idProducto);
+        if (precioPujado > this.precioAux) {
           console.log('El precio pujado es mayor');
-          console.log(this.showPrecioPujado);
-          this.showPrecioPujado = true;
-          this.precio = precioPujado;
-          console.log(this.showPrecioPujado);
-          console.log(this.$store.getters.token);
           this.actualizarPrecioEnBD(precioPujado, this.idProducto, this.$store.getters.user);
+          // this.$router.push('/ProductPage?=idProd=`${this.idProducto}`');
+          // this.$router.push({path: 'ProductPage', query: {idProd: this.idProducto}});
         }
         else {
           console.log('El precio pujado es menor');
-          this.showPrecioPujado = false;
+          // this.showModal(2);
+          // this.$('#modalerror').modal('show');
+        }
+      },
+      showModal(number) {
+        if (number === 1) {
+
+        } else {
+          $('#modalerror').modal('show');
         }
       },
       async actualizarPrecioEnBD(precioPujado, idProducto, usuario) {
         /* Se añade la puja a la lista de pujas del producto */
         let url = API_BASE + 'puja/';
-        console.log(url);
+        console.log('La URL donde se hará post de la puja: ', url);
         let header = {
           Content_Type: 'application/json',
           Authorization: this.$store.getters.token
@@ -249,23 +275,14 @@
           "fecha": new Date(),
           "usuario": usuario
         };
-        let respuesta = await axios.post(url, datos, {headers: header}).catch(error => (console.log(error)));
-        console.log('La respuesta: ', respuesta); /* Devuelve si ha sido exitosa o no */
-        /*----------------------------------------------*/
-        console.log('U: ',this.ultimoPrecioValido);
-        this.ultimoPrecioValido = await axios.get(`${API_BASE}puja/${idProducto}`).then(response => (this.infoPujaProd = response.data));
-        console.log('infoPujaProd: ', this.infoPujaProd);
-        console.log('ultimoPrecioValido: ', this.ultimoPrecioValido);
-        console.log(this.ultimoPrecioValido.data[this.ultimoPrecioValido.data.length-1]);
-        console.log('Ultimo precio valido:', this.ultimoPrecioValido.data[this.ultimoPrecioValido.data.length-1].valor);
-        this.variableSuperSuperfinal = this.ultimoPrecioValido.data[this.ultimoPrecioValido.data.length-1].valor;
-
-      },
-      getAuthHeader() {
-        return this.$store.getters.token;
-      },
-      ocultarModal() {
-        this.$refs['modalVentaTrueque'].hide()
+        let respuesta = await
+          axios.post(url, datos, {headers: header}).catch(error => (console.log(error)));
+        console.log('La respuesta: ', respuesta);
+        console.log('al routerpush');
+        // await this.$router.push({path: 'Search'});
+        // await this.$router.push({path: 'ProductPage', query: {idProd: this.idProducto}});
+        location.reload();
+        console.log('post routerpush');
       },
       asignarUsuarioTrueque: function () {
         // TODO: funcion que haga algo cuando se le asigna a un usuario la compra de un trueque
@@ -298,17 +315,16 @@
         let start = new Date();
         let y = start.getFullYear();
         console.log(y);
-        console.log(new Date().getFullYear());
-        console.log(new Date().getMonth());
-        console.log(new Date().getDay());
-        console.log(new Date().getDate());
-        console.log(new Date().getUTCMonth() + 1);
-        // console.log(this.infoProdData.fechaexpiracion);
-        // console.log(this.infoProdData_date);
-        // console.log(typeof this.infoProdData.fechaexpiracion);
-        // console.log(typeof this.infoProdData.fecha);
-        // console.log(typeof this.infoProdData_date);
-        // console.log(this.loquesea);
+        console.log('Full Year: ', new Date().getFullYear());
+        console.log('Get Month: ', new Date().getMonth());
+        console.log('Get Day: ', new Date().getDay());
+        console.log('Get Date: ', new Date().getDate());
+        console.log('Get UTCMonth+1: ', new Date().getUTCMonth() + 1);
+        console.log('--------------------------------------');
+        console.log('dia: ',this.method.fechaexpiracion.split("/")[0]);
+        console.log('mes: ', this.method.fechaexpiracion.split("/")[1]);
+        console.log('anyo: ', this.method.fechaexpiracion.split("/")[2]);
+        console.log('--------------------------------------');
       }
     }
   }

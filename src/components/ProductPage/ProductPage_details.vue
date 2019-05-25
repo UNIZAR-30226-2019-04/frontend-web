@@ -64,6 +64,24 @@
           <h5>Fecha de publicación:</h5>
           {{ method.fecha}}
         </b-list-group-item>
+        <div v-if="method.tipoVenta === 'subasta'">
+          <b-list-group-item>
+            <h5>Precio actual de la subasta:</h5>
+            {{ method.precioAux }}
+            <h5>Fecha de finalización de la misma: </h5>
+            {{ method.fechaexpiracion }}
+          </b-list-group-item>
+          <!--<b-list-group-item>-->
+            <!--<h5>Fecha de finalización de la misma: </h5>-->
+            <!--{{ method.fechaexpiracion }}-->
+          <!--</b-list-group-item>-->
+        </div>
+        <div v-else>
+          <b-list-group-item>
+            <h5>Tipo de venta: </h5>
+            {{ method.tipoVenta }}
+          </b-list-group-item>
+        </div>
       </b-list-group>
 
       <!--<b-card-footer>Otras fotos</b-card-footer>-->

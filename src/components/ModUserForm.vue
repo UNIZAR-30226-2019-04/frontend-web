@@ -9,12 +9,12 @@
             <b-input-group-prepend>
               <b-input-group-text><i class="icon-user"></i></b-input-group-text>
             </b-input-group-prepend>
-            <b-form-input :state="nameState" type="text" class="form-control" v-model="userData.nick" placeholder="Nombre de usuario"/>
+            <b-form-input :state="nameState" type="text" class="form-control" v-model="userData.nick"
+                          placeholder="Nombre de usuario"/>
             <b-form-invalid-feedback id="input-live-feedback">
               Introduce al menos 4 caracteres.
             </b-form-invalid-feedback>
           </b-input-group>
-
 
 
           <b-input-group class="mb-3">
@@ -35,7 +35,8 @@
             <b-input-group-prepend>
               <b-input-group-text>@</b-input-group-text>
             </b-input-group-prepend>
-            <b-form-input :state="validateEmail" type="email" class="form-control" v-model="userData.mail" placeholder="Correo"/>
+            <b-form-input :state="validateEmail" type="email" class="form-control" v-model="userData.mail"
+                          placeholder="Correo"/>
             <b-form-invalid-feedback id="input-live-feedback2">
               El correo introducido no tiene un formato reconocido.
             </b-form-invalid-feedback>
@@ -73,19 +74,42 @@
               name="checkbox-1"
               value="true"
               uncheckedValue="false"
+              style="margin-top: 10px; font-size: 1rem"
             >
-              <b>Deseo recibir recomendaciones de productos a mi cuenta de correo.</b>
+              Deseo recibir recomendaciones de productos a mi cuenta de correo
             </b-form-checkbox>
           </b-input-group>
 
-          <b-button variant="success" v-on:click="updateData" block>Actualizar datos</b-button>
-          <b-modal id="modal1"
-                   title="Error"
-                   header-bg-variant="danger">
-            <h1 class="my-4">Ups...</h1>
-            <h3>Algo salió mal. Pruebe más tarde.</h3>
-            <b-btn class="btn-primary" v-on:click="hideModal">Aceptar</b-btn>
-          </b-modal>
+          <b-button variant="success" v-b-modal.modalexito v-on:click="updateData" block
+                    style="font-weight: bold; font-size: 1rem">
+            Actualizar datos
+          </b-button>
+          <div>
+            <b-modal id="modalexito"
+                     ref="modalexito"
+                     title="Éxito"
+                     header-bg-variant="success"
+                     hide-footer>
+              <h3>Perfil actualizado con éxito</h3>
+              <br/>
+              <b-btn class="btn-success" style="margin-right: 10px;font-weight: bold" @click="ocultarModal(1)">
+                ACEPTAR
+              </b-btn>
+            </b-modal>
+          </div>
+          <div>
+            <b-modal id="modalerror"
+                     ref="modalerror"
+                     title="Error"
+                     header-bg-variant="danger"
+                     hide-footer>
+              <h3>Algo salió mal. Pruebe más tarde.</h3>
+              <br/>
+              <b-btn class="btn-success" style="margin-right: 10px;font-weight: bold" @click="ocultarModal(2)">
+                ACEPTAR
+              </b-btn>
+            </b-modal>
+          </div>
         </div>
       </b-form>
     </b-card>
@@ -117,26 +141,45 @@
       return {
         acceptMailsUpdated: "false",
         notSelected: "",
-        address: null
+        address: null,
+        showSuccessModal: false,
+        modalText: '',
+        exito: false,
       }
     },
     methods: {
+      ocultarModal(num) {
+        if(num === 1) {
+          this.$refs['modalexito'].hide();
+          this.$router.push("/Profile");
+        }else{
+          this.$refs['modalerror'].hide();
+        }
+      },
       updateData: function () {
         let centerPos = this.$refs.map.getCenter();
         this.userData.longitud = centerPos['lng'];
         this.userData.latitud = centerPos['lat'];
         this.userData.radio_ubicacion = 100.0;
-        if(this.userData.quiereEmails === 'true'){
+        if (this.userData.quiereEmails === 'true') {
           this.userData.quiereEmails = true;
-        }else{
+        } else {
           this.userData.quiereEmails = false;
         }
-        console.log(this.userData);
+        console.log('UserData: ', this.userData);
 
         let url = API_BASE + 'user/' + this.$store.getters.user;
-        if(this.validateEmail && this.nameState) {
+        if (this.validateEmail && this.nameState) {
           axios.put(url, this.userData).then(function (response) {
-            console.log(response);
+            console.log('Response: ', response);
+            if (response.status === 201) {
+              console.log('Ha habido éxito');
+              $("#modalexito").modal();
+            }
+            else{
+              console.log('Ha habido algun problema');
+              $("#modalerror").modal();
+            }
           });
         }
       },
@@ -163,8 +206,14 @@
           })
         }
       },
-      showModal() {
-        this.$refs['modal1'].show();
+      showModal: function (responseType) {
+        console.log('showModal');
+        if (responseType === 'exito') {
+          this.showSuccessModal = true;
+          this.modalText = '¡Perfil actualizado con éxito!';
+          // this.$refs['modal1'].show();
+
+        }
       },
       hideModal() {
         this.$refs['modal1'].hide();

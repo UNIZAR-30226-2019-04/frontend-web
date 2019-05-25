@@ -16,13 +16,12 @@
         <div v-if="info.data.nombre !== null">
           <b-list-group-item>
             {{ info.data.nombre }}
+            <div v-if="info.data.apellidos !== null">
+              {{ info.data.apellidos }}
+            </div>
           </b-list-group-item>
         </div>
-        <div v-if="info.data.apellidos !== null">
-          <b-list-group-item>
-            {{ info.data.nombre }}
-          </b-list-group-item>
-        </div>
+
         <div v-if="info.data.descripcion !== null">
           <b-list-group-item>
             {{ info.data.descripcion }}
@@ -33,17 +32,20 @@
           {{ info.data.productos_vendidos }}
         </b-list-group-item>
         <!--<b-row style="alignment: center; align-items: center; align-content: center; align-self: center">-->
-        <b-list-group-item style="align-content: center; ">
-          <v-btn style="background-color: green; font-weight: bold; color: white;" @click="nuevoChat">Chat</v-btn>
-          <v-btn v-if="!siguiendo" style="background-color: #20a8d8; font-weight: bold; color: white;" @click="seguirUser">Seguir
-            Usuario
-          </v-btn>
-          <v-btn v-if="siguiendo" style="background-color: #20a8d8; font-weight: bold; color: white;" @click="dejarSeguir">
-            Dejar de Seguir
-          </v-btn>
-        </b-list-group-item>
+        <div v-if="this.id_vendedor !== this.$store.getters.user">
+          <b-list-group-item style="align-content: center; ">
+            <v-btn style="background-color: green; font-weight: bold; color: white;" @click="nuevoChat">Chat</v-btn>
+            <v-btn style="background-color: #20a8d8; font-weight: bold; color: white;" @click="seguirUser">Seguir
+              Usuario
+            </v-btn>
+          </b-list-group-item>
+        </div>
+
+        <!--Aqui-->
+
       </b-list-group>
     </b-card>
+    <!--<button @click="showInfo">debug</button>-->
   </div>
 </template>
 
@@ -60,8 +62,10 @@
       return {
         id_vendedor: this.method.vendido_por,
         info: null,
+        miNick: null,
         seguidos: [],
         siguiendo: false
+
         // vendor_data: null,
       }
     },
@@ -144,6 +148,15 @@
       showInfo: function () {
         console.log(this.info);
         console.log(this.info.data);
+        console.log(this.info.data.nick);
+        console.log(this.id_vendedor);
+        console.log(this.$store.getters.user);
+        let vende = this.id_vendedor;
+        let user = this.$store.getters.user;
+        console.log(vende, user);
+        console.log(vende === user);
+
+        // if(kkk === ){}
 
       }
     }

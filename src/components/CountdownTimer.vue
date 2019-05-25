@@ -25,7 +25,7 @@
       methods:{
         timeLeft: function (inp) {
           var actualDate = new Date();
-          var end = moment([this.endTime.year, this.endTime.month, this.endTime.day]);
+          var end = moment([this.endTime.year, this.endTime.month-1, this.endTime.day]);
           // var current = moment([actualDate.getFullYear(), actualDate.getMonth()+1, actualDate.getDate()]);
           var current = moment([]);
           var timeGap = end.diff(current);
