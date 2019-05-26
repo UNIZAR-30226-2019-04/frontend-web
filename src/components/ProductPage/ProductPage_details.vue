@@ -9,28 +9,40 @@
       </b-card-header>
 
       <b-card-body style="width: 36rem; height: 36rem; align-self: center;">
-        <!--<b-card-body class="carousel">-->
-        <b-carousel
-          v-if="method.images.length > 0"
-          id="carousel1"
-          style="height:auto; "
-          controls
-          indicators
-          img-height="500"
-          :interval="5000"
-          @sliding-start="onSlideStart"
-          @sliding-end="onSlideEnd"
-        >
-          <b-carousel-slide class="carousel-inner" v-for="(img,index) in method.images " :img-src="img.path"
-                            :key="index"
-          >
-          </b-carousel-slide>
-        </b-carousel>
-        <img src="../../../public/img/product-placeholder.png"
-             v-else
-             alt="SIN IMAGEN"
-             style="width: 100%;"
-        >
+        <b-tabs>
+          <b-tab title="Imágenes" active>
+            <!--<b-card-body class="carousel">-->
+            <b-carousel
+              v-if="method.images.length > 0"
+              id="carousel1"
+              style="height:auto; "
+              controls
+              fade
+              indicators
+              img-height="500"
+              :interval="3000"
+            >
+              <!--@sliding-start="onSlideStart"-->
+              <!--@sliding-end="onSlideEnd"-->
+              <b-carousel-slide class="carousel-inner" v-for="(img,index) in method.images " v-if="!img.tipo"
+                                :img-src="img.path"
+                                :key="index"
+              >
+              </b-carousel-slide>
+            </b-carousel>
+            <img src="../../../public/img/product-placeholder.png"
+                 v-else
+                 alt="SIN IMAGEN"
+                 style="width: 100%;"
+            >
+          </b-tab>
+          <b-tab title="Videos">
+            <b-embed type="video" aspect="4by3" controls>
+              <source v-for="(img,index) in method.images " v-if="img.tipo" :src="img.path"
+                      :key="index" type="video/mp4">
+            </b-embed>
+          </b-tab>
+        </b-tabs>
       </b-card-body>
 
       <b-list-group flush>
@@ -72,8 +84,8 @@
             {{ method.fechaexpiracion }}
           </b-list-group-item>
           <!--<b-list-group-item>-->
-            <!--<h5>Fecha de finalización de la misma: </h5>-->
-            <!--{{ method.fechaexpiracion }}-->
+          <!--<h5>Fecha de finalización de la misma: </h5>-->
+          <!--{{ method.fechaexpiracion }}-->
           <!--</b-list-group-item>-->
         </div>
         <div v-else>
@@ -93,7 +105,7 @@
 
 <script>
   import BCardBody from "bootstrap-vue/src/components/card/card-body";
-
+  //import { mdbCarousel, mdbCarouselItem, mdbCarouselCaption } from 'mdbvue';
   export default {
     name: "ProductPage_details",
     components: {BCardBody},

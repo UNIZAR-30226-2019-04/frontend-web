@@ -20,15 +20,15 @@
             <b-tab title="Pago por PayPal" style="margin-top: 10px; margin-left: 0px; ">
               <h3>PayPal</h3>
               <p> Nombre del vendedor {{ info.nombre }} </p>
-              <p> y ya aqui vendria lo de PayPal, Chat o lo que fuera </p>
-              <p>fgddsdasfdsbgfgngfgdfd</p>
+              <!--<p> y ya aqui vendria lo de PayPal, Chat o lo que fuera </p>-->
+              <!--<p>fgddsdasfdsbgfgngfgdfd</p>-->
               <PayPal
                 amount="10.00"
                 currency="USD"
                 :client="credentials"
                 env="sandbox">
               </PayPal>
-              <p>fgddsdasfdsbgfgngfgdfd</p>
+              <!--<p>fgddsdasfdsbgfgngfgdfd</p>-->
             </b-tab>
           </b-tabs>
 
