@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-btn v-on:click="resta">Time count</b-btn>
+    <!--<b-btn v-on:click="resta">Time count</b-btn>-->
     <h3>{{msg}}</h3>
   </div>
 </template>

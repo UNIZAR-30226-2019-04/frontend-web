@@ -39,7 +39,7 @@
           <div v-if="">
             <CountdownTimer :end-time="endTim"></CountdownTimer>
           </div>
-          <button @click="sobreProd()">BOTON DEBUG</button>
+          <!--<button @click="sobreProd()">BOTON DEBUG</button>-->
         </div>
 
         <div v-else> <!-- SI EL PRODUCTO NO TE PERTENECE -->
@@ -51,7 +51,7 @@
           <!--Mes caduc: {{Number(this.method.fechaexpiracion.split("/")[1])}} <br/>-->
           <!--Anyo caduc: {{Number((this.method.fechaexpiracion.split("/")[2]).split(",")[0])}} <br/>-->
           <CountdownTimer :end-time="endTim"></CountdownTimer>
-          <b-btn v-on:click="logTime">Log time</b-btn>
+          <!--<b-btn v-on:click="logTime">Log time</b-btn>-->
           <b-form>
             <div
               v-if="anyoActual <= Number((this.method.fechaexpiracion.split('/')[2]).split(',')[0]) && mesActual <= Number(this.method.fechaexpiracion.split('/')[1]) && diaActual <= Number(this.method.fechaexpiracion.split('/')[0])">
@@ -261,14 +261,16 @@
           "fecha": new Date(),
           "usuario": usuario
         };
-        let respuesta = await
-          axios.post(url, datos, {headers: header}).catch(error => (console.log(error)));
+        let respuesta = await axios.post(url, datos, {headers: header}).catch(error => (console.log(error)));
         console.log('La respuesta: ', respuesta);
         console.log('al routerpush');
         // await this.$router.push({path: 'Search'});
         // await this.$router.push({path: 'ProductPage', query: {idProd: this.idProducto}});
         location.reload();
+        //respuesta = await axios.get(`${API_BASE}producto/${this.idProducto}`);
+        //this.method.precioAux = respuesta.data.precioAux;
         console.log('post routerpush');
+        //this.precioPujado = '';
       },
       asignarUsuarioTrueque: function () {
         let url = API_BASE + 'producto/' + this.idProducto + '/ventapornick/'+this.asignarTrueque;

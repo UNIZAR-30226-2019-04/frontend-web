@@ -3,9 +3,11 @@
     <b-row style="margin-right: 45px; margin-left: 45px;">
       <b-col cols="10">
         <b-form-input style="width: 100%;" size="lg" class="mr-sm-2" type="text" placeholder="Búsqueda"
-                      v-on:change="actualizarProds"
+
                       @keypress="actualizarProds"
                       v-model="texto"/>
+        <br>
+        <p>Buscando: {{textoBuscado}}</p>
       </b-col>
       <b-col cols="2">
         <b-btn size="lg" style="width: 100%; font-weight: bold" variant="outline-primary" v-on:click="actualizarProds">
@@ -212,12 +214,12 @@
         let urlTags = API_BASE+'producto/?preciomin=0&valoracionMax=5';
         urlTags = urlTags + '&preciomax=' + this.prMax + '&page=' + (this.pagina-1) + '&number=' + this.porPagina;
         urlTags = urlTags + '&usuario=' + this.$store.getters.user;
-        console.log("Pos: ",this.$store.getters.last_position);
-        if(this.$store.getters.last_position.length > 0) {
-          urlTags = urlTags + '&longitud=' + this.$store.getters.last_position[0].lon;
-          urlTags = urlTags + '&latitud=' + this.$store.getters.last_position[0].lat;
+        console.log("Pos: ",this.$store.getters.currentUser);
+        //if(this.$store.getters.currentUser.latitud > 0) {
+          urlTags = urlTags + '&longitud=' + this.$store.getters.currentUser.longitud;
+          urlTags = urlTags + '&latitud=' + this.$store.getters.currentUser.latitud;
           urlTags = urlTags + '&radioUbicacion=' + this.distanciaMax / 1000;
-        }
+        //}
         if (this.texto.length > 0) {
           console.log('texto : ', this.texto);
           urlTags = urlTags + '&textoBusqueda=' + this.texto;
@@ -243,6 +245,10 @@
       }
     },
     computed: {
+      textoBuscado(){
+        this.actualizarProds();
+        return this.texto;
+      },
       paginas() {
         let pag = Math.floor(this.total / this.porPagina);
         if (pag < 1) {
