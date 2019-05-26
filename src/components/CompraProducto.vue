@@ -20,15 +20,7 @@
             <b-tab title="Pago por PayPal" style="margin-top: 10px; margin-left: 0px; ">
               <h3>PayPal</h3>
               <p> Nombre del vendedor {{ info.nombre }} </p>
-              <!--<p> y ya aqui vendria lo de PayPal, Chat o lo que fuera </p>-->
-              <!--<p>fgddsdasfdsbgfgngfgdfd</p>-->
-              <PayPal
-                amount="10.00"
-                currency="USD"
-                :client="credentials"
-                env="sandbox">
-              </PayPal>
-              <!--<p>fgddsdasfdsbgfgngfgdfd</p>-->
+              <v-btn style="background-color: green; font-weight: bold; color: white;" @click="pagoPayPal">Pago con PayPal</v-btn>
             </b-tab>
           </b-tabs>
 
@@ -104,6 +96,20 @@
       console.log(this.infoProdData.fechaexpiracion);
     },
     methods: {
+      async pagoPayPal(){
+        console.log(this.$store.getters.user);
+        let urlPago = API_BASE + 'paypal/venta_producto/' + this.idProducto + '/' + this.$store.getters.user;
+        console.log(urlPago);
+        let urlToPay;
+
+                await axios.post(urlPago).then(response => urlToPay = response.data.link);
+        console.log('url: ', urlToPay);
+        console.log('url_t: ', typeof urlToPay);
+
+        window.open(urlToPay, "_blank", "toolbar=yes,top=500,left=500,width=650,height=650");
+
+        console.log('jejej');
+      },
       async nuevoChat() {
         let url = API_BASE + 'conversacion/';
         let header = {
