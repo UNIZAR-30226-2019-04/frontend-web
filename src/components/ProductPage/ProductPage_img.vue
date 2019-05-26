@@ -195,7 +195,7 @@
           "tipoReporte": this.reporte,
           "reportado": this.id_vendedor
         };
-        axios.post(url,data).catch(error => (console.log(error)));
+        axios.post(url,data).then(response => (console.log(response))).catch(error => (console.log(error)));
         this.ocultarReport();
       },
       showInfo: function () {

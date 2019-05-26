@@ -149,7 +149,7 @@
             drop-placeholder="Arrastre archivo aquí..."
             multiple
             button-text="Buscar"
-            accept=".jpg, .png, .gif, .jpeg"
+            accept=".jpg, .png, .gif, .jpeg, .mp4"
           ></b-form-file>
 
           <a style="color: red;">{{ notSelected }}<br/><br/></a>

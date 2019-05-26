@@ -36,8 +36,9 @@
       }
     },
     beforeCreate() {
-      axios.get(`${API_BASE}producto/`).then(response => (this.info = response));
-      axios.get(`${API_BASE}producto/${this.$route.query.idProd}`).then(response => (this.infoExtended = response));
+      //axios.get(`${API_BASE}producto/`).then(response => (this.info = response));
+      let url = API_BASE + 'producto/' + this.$route.query.idProd + '?usuario=' + this.$store.getters.user;
+      axios.get(url).then(response => (this.infoExtended = response));
       console.log(this.$route.query.idProd);
       console.log('-------------------------------------');
       // console.log(this.infoExtended.data.titulo);
