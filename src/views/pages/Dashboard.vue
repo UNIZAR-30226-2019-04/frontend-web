@@ -12,9 +12,11 @@
         <p>
           Compras, trueques o subastas. Tú eliges qué quieres y cómo lo quieres. ¿A qué esperas para descubrir qué hay en la tienda?
         </p>
-        <b-btn href="/Login" size="lg" variant="light" style="margin-right: 10px;">
-          <b class="icon-bag" style="margin-right: 4px;"></b> Entrar a la tienda
-        </b-btn>
+        <router-link to="Search">
+          <b-btn size="lg" variant="light" style="margin-right: 10px;">
+            <b class="icon-bag" style="margin-right: 4px;"></b> Entrar a la tienda
+          </b-btn>
+        </router-link>
       </b-jumbotron>
     </b-card>
     <b-row>
