@@ -14,6 +14,7 @@ import CompraProducto from "../components/CompraProducto";
 import store from "../store"
 import Dashboard from "../views/pages/Dashboard";
 import Chat from "../views/pages/Chat";
+import Confirmacion from "../views/pages/Confirmacion";
 
 
 // Containers
@@ -199,6 +200,11 @@ export default new Router({
       path: '/Dashboard',
       name: 'Dashboard',
       component: Dashboard
+    },
+    {
+      path: '/Confirmacion',
+      name: 'Confirmacion',
+      component: Confirmacion
     }
   ]
 })
