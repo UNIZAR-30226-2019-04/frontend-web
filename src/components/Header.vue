@@ -23,7 +23,9 @@
           <b-nav-item v-if="!isLogged" style="outline-color: green">
             <router-link to="LogIn" style="font-size: 1.3rem; color: white">
               <b-btn variant="outline-light" style="font-size: 1rem; color: white; font-weight: bold;">
-                Acceder
+                <b>
+                  Acceder
+                </b>
               </b-btn>
             </router-link>
           </b-nav-item>
@@ -43,7 +45,9 @@
         <b-nav-item v-if="this.$store.getters.user !== 'no_user'">
           <router-link to="Search" style="color: white">
             <b-btn variant="outline-light">
-              Búsqueda
+              <b>
+                Búsqueda
+              </b>
             </b-btn>
           </router-link>
         </b-nav-item>
@@ -61,7 +65,7 @@
         <b-nav-item-dropdown right v-if="this.$store.getters.user !== 'no_user'">
           <!-- Using button-content slot -->
           <template slot="button-content" style="color: white">
-            <em style="color: white"><b-btn variant="outline-light">Usuario</b-btn></em>
+            <em style="color: white"><b-btn variant="outline-light"><b>Usuario</b></b-btn></em>
           </template>
           <b-dropdown-item href="#/Profile">
             <!--<router-link to="Profile">Perfil</router-link>-->Perfil
