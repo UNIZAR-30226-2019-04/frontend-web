@@ -113,7 +113,7 @@
 
       </b-card-body>
       <b-card-body>
-        <Mapa :preview="true" :radius="100" ></Mapa>
+        <Mapa ref="mapProd" :preview="preview" :radius="0" ></Mapa>
       </b-card-body>
       <!--#TODO: hacer que se vea el mapa con la pos del prodcuto, sin imagen el puntero por defecto-->
     </b-card>
@@ -135,6 +135,7 @@
     // la funcion que hereda del papi
     data() {
       return {
+        preview: true,
         id_vendedor: this.method.vendido_por,
         idProducto: this.method.idProducto,
         endTim: {
@@ -163,7 +164,6 @@
       method: {type: Function},
     },
     async mounted() {
-      this.method();
       console.log('Carga de _sell');
       axios.get(`${API_BASE}user/${this.id_vendedor}`).then(response => (this.info = response.data));
       let response = await axios.get(`${API_BASE}producto/${this.idProducto}`);
@@ -176,8 +176,9 @@
         lat: this.infoProdData.latitud,
         lng: this.infoProdData.longitud
       };
-      this.$refs.map.centerUpdated(centro);
-      this.$refs.map.zoomUpdated(17);
+      console.log(centro);
+      this.$refs.mapProd.centerUpdated(centro);
+      this.$refs.mapProd.zoomUpdated(17);
     },
     methods: {
       logTime(){
