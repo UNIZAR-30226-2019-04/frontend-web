@@ -51,6 +51,7 @@
           <!--Mes caduc: {{Number(this.method.fechaexpiracion.split("/")[1])}} <br/>-->
           <!--Anyo caduc: {{Number((this.method.fechaexpiracion.split("/")[2]).split(",")[0])}} <br/>-->
           <CountdownTimer :end-time="endTim"></CountdownTimer>
+          <b-btn v-on:click="logTime">Log time</b-btn>
           <b-form>
             <div
               v-if="anyoActual <= Number((this.method.fechaexpiracion.split('/')[2]).split(',')[0]) && mesActual <= Number(this.method.fechaexpiracion.split('/')[1]) && diaActual <= Number(this.method.fechaexpiracion.split('/')[0])">
@@ -140,6 +141,8 @@
           day: Number(this.method.fechaexpiracion.split("/")[0]),
           month: Number(this.method.fechaexpiracion.split("/")[1]),
           year: Number((this.method.fechaexpiracion.split("/")[2]).split(",")[0]),
+          hour: Number((this.method.fechaexpiracion.split(",")[1]).split(":")[0]),
+          min: Number((this.method.fechaexpiracion.split(",")[1]).split(":")[1])
         },
         precio: this.method.precio,
         precioAux: this.method.precioAux,
@@ -165,7 +168,7 @@
       axios.get(`${API_BASE}user/${this.id_vendedor}`).then(response => (this.info = response.data));
       let response = await axios.get(`${API_BASE}producto/${this.idProducto}`);
       this.infoProdData = response.data;
-      this.infoProdData_date = response.data.fechaexpiracion
+      this.infoProdData_date = response.data.fechaexpiracion;
       //axios.get(`${API_BASE}producto/${this.idProducto}`).then(response => (this.infoProdData_date = response.data.fechaexpiracion));
       axios.get(`${API_BASE}puja/${this.idProducto}`).then(response => (this.ultimoPrecioValido = response.data));
       this.mesActual = new Date().getUTCMonth() + 1;
@@ -177,6 +180,9 @@
       this.$refs.map.zoomUpdated(17);
     },
     methods: {
+      logTime(){
+        console.log(this.endTim);
+      },
       ocultarModal(num) {
         if (num === 1) {
           this.$refs['modalexito'].hide();

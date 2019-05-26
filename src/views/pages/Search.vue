@@ -211,6 +211,7 @@
         console.log("Actualizando prods...");
         let urlTags = API_BASE+'producto/?preciomin=0&valoracionMax=5';
         urlTags = urlTags + '&preciomax=' + this.prMax + '&page=' + (this.pagina-1) + '&number=' + this.porPagina;
+        urlTags = urlTags + '&usuario=' + this.$store.getters.user;
         console.log("Pos: ",this.$store.getters.last_position);
         if(this.$store.getters.last_position.length > 0) {
           urlTags = urlTags + '&longitud=' + this.$store.getters.last_position[0].lon;
@@ -257,6 +258,7 @@
       urlTags = urlTags + '&longitud=' + this.$store.getters.currentUser.longitud;
       urlTags = urlTags + '&latitud=' + this.$store.getters.currentUser.latitud;
       urlTags = urlTags + '&radioUbicacion=' + this.distanciaMax*1000;
+      urlTags = urlTags + '&usuario=' + this.$store.getters.user;
       // console.log('texto : ', this.texto);
       if (this.texto.length > 0) {
         urlTags = urlTags + '&textoBusqueda=' + this.texto;
