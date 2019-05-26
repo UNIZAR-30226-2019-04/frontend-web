@@ -101,7 +101,7 @@
       <!--<b-card-footer>Otras fotos</b-card-footer>-->
       <!--<b-card-img :src="fotoExtra" alt="Image" bottom/>-->
     </b-card>
-    <button class="btn" @click="infoCat()">DEBUG</button>
+    <!--<button class="btn" @click="infoCat()">DEBUG</button>-->
   </div>
 </template>
 
