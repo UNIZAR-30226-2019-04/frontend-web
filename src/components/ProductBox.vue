@@ -4,12 +4,13 @@
       <b-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`"
               :title="product.titulo" :img-src="imageReady() ? product.multimedia[0].path : defaultImage"
               border-variant="light" style="width: 100%; height: 100%;">
-        <b-card-text style="font-size: 1.1rem;">
+        <b-card-text style="font-size: 1.1rem; height: 3.6rem; overflow: hidden; text-overflow: ellipsis;">
           {{ product.descripcion }}
         </b-card-text>
         <p style="color: #20a8d8; margin-right: 10px;" align="right">
           <b v-if="isTrade"><h1>{{ product.precioBase }} - {{ product.precioAux }}€</h1></b>
-          <b v-else><h1>{{ product.precioBase }}€</h1></b>
+          <b v-if="isAuction">Última puja: <h1>{{ product.precioAux }}€</h1></b>
+          <b v-if="!isTrade && !isAuction"><h1>{{ product.precioBase }}€</h1></b>
         </p>
 
 
@@ -114,6 +115,9 @@
     computed: {
       isTrade() {
         return this.$props.product.tipo === 'trueque';
+      },
+      isAuction() {
+        return this.$props.product.tipo === 'subasta';
       }
     }
   }

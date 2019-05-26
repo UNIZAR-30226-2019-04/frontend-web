@@ -1,134 +1,72 @@
 <template>
   <div>
+    <b-card style="margin-right: 20px; margin-left: 20px;">
+      <b-jumbotron bg-variant="blue" text-variant="white" style="width: 100%; height: 100%">
+        <template slot="header">
+          Bienvenido a Telocam
+        </template>
+        <template slot="lead">
+          Aquí podrás encontrar todo lo que necesitas, desde un boligrafo... ¡hasta la casa de tus sueños!
+        </template>
+        <hr class="my-4">
+        <p>
+          Compras, trueques o subastas. Tú eliges qué quieres y cómo lo quieres. ¿A qué esperas para descubrir qué hay en la tienda?
+        </p>
+        <b-btn href="/Login" size="lg" variant="light" style="margin-right: 10px;">
+          <b class="icon-bag" style="margin-right: 4px;"></b> Entrar a la tienda
+        </b-btn>
+      </b-jumbotron>
+    </b-card>
     <b-row>
-      <b-col sm style="margin-right: 60px;">
-        <b-row style="margin-top: 30px;">
-          <b-col cols="6">
-            <div
-              style="margin-right: 10px;   padding: 0 0 0 15px;">
-              <h3 style="margin-left: 30px;">
-                Productos recomendados para ti
-              </h3>
-            </div>
-          </b-col>
-        </b-row>
-
-        <b-tab title="Productos recomendados" active
-               style="margin-top: 30px; margin-left: 30px; width: 100%; padding: 0 30px 0 15px;">
-          <b-card-group columns>
-            <ProductBox v-for="(product, index) in products.slice(0, 5 + Math.floor(Math.random() * 2))" :key="index"
-                        :product="product"
-                        :comprado="false"
-                        style="margin-bottom: 10px;"></ProductBox>
-          </b-card-group>
-        </b-tab>
-      </b-col>
-      <b-col sm style="margin-right: 60px;">
-        <b-row style="margin-top: 30px;">
-          <b-col cols="6">
-            <div
-              style="margin-right: 10px;   padding: 0 0 0 15px;">
-              <h3 style="margin-left: 30px;">
-                Productos nuevos
-              </h3>
-            </div>
-          </b-col>
-        </b-row>
-        <b-tab title="Productos nuevos" active
-               style="margin-top: 30px; margin-left: 30px; width: 100%; padding: 0 30px 0 15px;">
-          <b-card-group columns>
-            <ProductBox v-for="(product, index) in productsById.slice(0, 5 + Math.floor(Math.random() * 2))"
-                        :key="index"
-                        :product="product"
-                        :comprado="false"
-                        style="margin-bottom: 10px;"></ProductBox>
-          </b-card-group>
-        </b-tab>
-      </b-col>
-      <button @click="showProds()">DEBUG</button>
-    </b-row>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <h1>---------------------------------------------</h1>
-    <h1>---------------------------------------------</h1>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <h1>---------------------------------------------</h1>
-    <h1>---------------------------------------------</h1>
-    <h1>---------------------------------------------</h1>
-    <h1>---------------------------------------------</h1>
-    <h1>---------------------------------------------</h1>
-
-
-    <div class="container-fluid">
-      <h1 class="text-center my-3">Bootstrap 4 Card Carousel</h1>
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner row w-100 mx-auto">
-          <b-card-group columns>
-            <ProductBox v-for="(product, index) in products" :key="index"
-                        :product="product"
-                        :comprado="false"
-                        style="margin-bottom: 10px;"></ProductBox>
-          </b-card-group>
-
-
-          <div class="carousel-item col-md-4 active">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Card 1</h4>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                  content. This content is
-                  a little bit longer.</p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
+      <b-row style="margin-top: 30px; width: 100%">
+        <b-col cols="9">
+          <div
+            style="margin-right: 10px;   padding: 0 0 0 15px;">
+            <h2 style="margin-left: 30px;">
+              Quizá te interese...
+            </h2>
           </div>
+        </b-col>
+        <b-col cols="3" align="right">
+          <b-btn v-on:click="resetSelection" size="lg" variant="outline-primary" style="margin-right: 10px;">
+            <b class="icon-refresh" style="margin-right: 4px;"></b> Recomiéndame otros
+          </b-btn>
+        </b-col>
+      </b-row>
 
-
-          <div class="carousel-item col-md-4">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Card 7</h4>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                  content. This content is
-                  a little bit longer.</p>
-                <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </p>
-              </div>
-            </div>
-          </div>
-
-
-          <!--</div>-->
-          <div class="container">
-            <div class="row">
-              <div class="col-12 text-center mt-4">
-                <a class="btn btn-outline-secondary mx-1 prev" href="javascript:void(0)" title="Previous">
-                  <i class="fa fa-lg fa-chevron-left"></i>
-                </a>
-                <a class="btn btn-outline-secondary mx-1 next" href="javascript:void(0)" title="Next">
-                  <i class="fa fa-lg fa-chevron-right"></i>
-                </a>
-              </div>
-            </div>
-          </div>
+      <b-tab title="Productos recomendados" active
+             style="margin-top: 10px; margin-left: 15px; max-height: 90vh; width: 1000%; padding: 0 30px 0 15px;">
+        <div id="wrapper">
+          <table id="fluid">
+            <tr>
+              <td v-for="(product, index) in productSelection" :key="index" ><ProductBox
+                              :product="product"
+                              :comprado="false"
+                              style="margin-right: 10px; margin-left: 10px;"></ProductBox></td>
+            </tr>
+          </table>
         </div>
-      </div>
-    </div>
+      </b-tab>
+      <hr/>
+      <b-row style="margin-top: 30px;">
+        <div
+          style="margin-right: 10px;   padding: 0 0 0 15px;">
+          <h2 style="margin-left: 50px;">
+            Últimos productos
+          </h2>
+        </div>
+      </b-row>
+      <b-tab title="Productos nuevos" active
+             style="margin-top: 30px; margin-bottom: 30px; margin-left: 30px; width: 100%; padding: 0 30px 0 15px;">
+        <b-card-group columns>
+          <ProductBox v-for="(product, index) in productsById.slice(0, 7 + Math.floor(Math.random() * 2))"
+                      :key="index"
+                      :product="product"
+                      :comprado="false"
+                      style="margin-bottom: 10px;"></ProductBox>
+        </b-card-group>
+      </b-tab>
+    </b-row>
   </div>
 </template>
 
@@ -168,9 +106,9 @@
         tipo: [],
         products: [],
         productsById: [],
+        productSelection: []
       }
-    }
-    ,
+    },
     methods: {
       showProds: function () {
         console.log('debug');
@@ -183,6 +121,13 @@
       },
       logProds() {
         console.log(this.products);
+      },
+      resetSelection: function() {
+        let max = this.products.length - 5;
+        let min = 0;
+        let baseSel = Math.floor(Math.random() * (max - min)) + min;
+        console.log(baseSel);
+        this.productSelection = this.products.slice(baseSel, 5 + baseSel);
       },
       // ,
       // deleteCat: function (id) {
@@ -292,6 +237,7 @@
       let url_prods = API_BASE + 'producto';
       axios.get(url_prods).then(response => {
         this.products = response.data.productos;
+        this.resetSelection();
         this.total = response.data.resultados;
       });
       let url_prods_by_id = API_BASE + 'producto/?orden_id=True&number=10';
@@ -299,10 +245,27 @@
         this.productsById = response.data.productos;
         this.totalById = response.data.resultados;
       });
+    },
+    computed: {
+      isLogged() {
+        return this.$store.getters.isLoggedIn
+      }
     }
   }
 </script>
 
 <style scoped>
+  #wrapper {
+  }
+  table#fluid {
+    width: 100%;
+  }
+  table#fixed {
+    width: 1000px;
+    margin: 10px 0 0;
+  }
+  table td {
+    width: 300px;
+  }
 
 </style>

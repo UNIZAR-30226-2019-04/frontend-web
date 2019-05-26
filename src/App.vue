@@ -63,6 +63,7 @@
     right: 0;
     top: -80px;
     bottom: 0;
+    height: 100%;
   }
 
   #app {

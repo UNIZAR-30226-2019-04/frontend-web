@@ -86,6 +86,11 @@ export default new Router({
   },
   routes: [
     {
+      path: '/',
+      name: 'Dashboard',
+      component: Dashboard
+    },
+    {
       path: '/hello',
       name: 'Hello',
       component: Hello
