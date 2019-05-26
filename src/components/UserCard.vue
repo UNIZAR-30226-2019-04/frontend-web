@@ -142,9 +142,10 @@
         let data = { "password": this.delPass};
         if(this.firstPass) {
           console.log("Borrando...");
-          axios.delete(url, {headers: headers, data: data}).catch(error => {
-            console.log(error)
-          });
+          axios.delete(url, {headers: headers, data: data}).then(response => {
+            console.log(response);
+            this.$route.push({path: 'LogIn'});
+          }).catch(error => (console.log(error)));
         }
       },
       ocultarModal() {
