@@ -7,7 +7,7 @@
 
     <b-navbar-brand style="margin-left: 10px;" href="/">
       <!--<img src="../../public/img/telocam-logo.png" class="rounded-circle" width="70" height="70" alt="Logo de Telocam"/>-->
-      <img src="../../public/img/logo_sombrablanca_v2.png" class="rounded-circle" width="64" height="64"
+      <img src="../../public/img/telocam-logo2.png" width="64" height="64"
            alt="Logo de Telocam"/>
       <a style="font-size: 1.3rem; margin-left: 5px">
         Telocam
