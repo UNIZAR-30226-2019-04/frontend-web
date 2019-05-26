@@ -25,6 +25,8 @@
           ></b-form-file>
         </v-btn>
         <h3 slot="header" style="text-align: center; margin-top: 20px; text-emphasis: black">{{ userInfo.nick }}</h3>
+        <StarRating :value="userInfo.valoracion" :disabled="true">
+        </StarRating>
       </div>
       <!--<Uploader></Uploader>-->
       <b-card-body>
@@ -79,12 +81,13 @@
 
 <script>
   import FloatingUploader from './FloatingUploader';
+  import StarRating from './StarRating';
   import axios from 'axios';
   import {API_BASE} from "../config";
 
   export default {
     name: "UserCard",
-    components: {FloatingUploader},
+    components: {FloatingUploader,StarRating},
     props: ['userInfo'],
     data() {
       return {

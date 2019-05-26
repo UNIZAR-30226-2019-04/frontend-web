@@ -55,8 +55,10 @@
           {{ method.descripcion }}
         </b-list-group-item>
         <b-list-group-item>
-          <h5>Número de visualizaciones:</h5>
+          <v-icon class="material-icons">remove_red_eye</v-icon>
           {{ method.visualizaciones }}
+          <v-icon class="material-icons" style="margin-left: 4px;">favorite</v-icon>
+          {{ method.likes }}
         </b-list-group-item>
         <b-list-group-item>
           <h5>Precio:</h5>

@@ -336,15 +336,15 @@
         console.log(today);
         let sel = this.select.getTime();
         console.log(sel);
-        if (today > sel) {
-          this.err = true;
-        } else {
+        // if (today > sel) {
+        //   this.err = true;
+        // } else {
           this.err = false;
           this.endTime.day = this.select.getDate();
           this.endTime.month = this.select.getUTCMonth() + 1;
           this.endTime.year = this.select.getFullYear();
 
-        }
+        // }
       },
       buscarPosicion: function () {
         for (var i = 0; i < 3; i++) {
@@ -369,14 +369,17 @@
         }
       },
       logImg() {
-        console.log(this.picker);
+        let fe = this.endTime.day + '/' + this.endTime.month + '/' + this.endTime.year + ' ' + this.endTime.hora + ':' + this.endTime.min + ':00';
+        console.log("fecha: " , fe);
         console.log(typeof this.picker);
       },
       async subirProducto() {
-        if (this.tipo === 'subasta') {
+        let fecha = this.endTime.day + '/' + this.endTime.month + '/' + this.endTime.year + ' 11:11:11';
+        if (this.type === 'subasta') {
           let clock = this.picker.split(':');
           this.endTime.hora = clock[0];
           this.endTime.min = clock[1];
+          fecha = this.endTime.day + '/' + this.endTime.month + '/' + this.endTime.year + ' ' + this.endTime.hora + ':' + this.endTime.min + ':00'
         }
         let centerPos = this.$refs.map.getCenter();
         let data = {
@@ -384,7 +387,7 @@
           "titulo": this.title,
           "descripcion": this.description,
           "categoria": this.selCategory,
-          "fechaexpiracion": this.endTime.day + '/' + this.endTime.month + '/' + this.endTime.year + ' ' + this.endTime.hora + ':' + this.endTime.min + ':00',
+          "fechaexpiracion": fecha,
           "vendedor": this.$store.getters.user,
           "precioBase": parseInt(this.price),
           "longitud": centerPos['lng'],
