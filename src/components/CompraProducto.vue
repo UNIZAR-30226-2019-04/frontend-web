@@ -21,6 +21,8 @@
               <h3>PayPal</h3>
               <p> Nombre del vendedor {{ info.nombre }} </p>
               <v-btn style="background-color: green; font-weight: bold; color: white;" @click="pagoPayPal">Pago con PayPal</v-btn>
+              <br/>
+              <b-btn v-on:click="ventana">BOTON VENTANA</b-btn>
             </b-tab>
           </b-tabs>
 
@@ -38,11 +40,9 @@
         <!--</div>-->
       </b-col>
     </b-row>
-    {{typeof infoProdData_date}}
-    <br/>
-    {{this.infoProdData_date}}
-    <br/>
-    <button @click="sobreProd()">BOTON DEBUG</button>
+    <!--{{typeof infoProdData_date}}-->
+    <!--<br/>-->
+    <!--{{this.infoProdData_date}}-->
   </div>
 </template>
 
@@ -96,19 +96,21 @@
       console.log(this.infoProdData.fechaexpiracion);
     },
     methods: {
+      ventana(url){
+        window.open(url, "_blank","toolbar=yes,top=500,left=500,width=650,height=650");
+      },
       async pagoPayPal(){
         console.log(this.$store.getters.user);
         let urlPago = API_BASE + 'paypal/venta_producto/' + this.idProducto + '/' + this.$store.getters.user;
         console.log(urlPago);
         let urlToPay;
 
-                await axios.post(urlPago).then(response => urlToPay = response.data.link);
+        let response = await axios.post(urlPago);
+        urlToPay = response.data.link;
         console.log('url: ', urlToPay);
         console.log('url_t: ', typeof urlToPay);
 
-        window.open(urlToPay, "_blank", "toolbar=yes,top=500,left=500,width=650,height=650");
-
-        console.log('jejej');
+        this.ventana(urlToPay);
       },
       async nuevoChat() {
         let url = API_BASE + 'conversacion/';
