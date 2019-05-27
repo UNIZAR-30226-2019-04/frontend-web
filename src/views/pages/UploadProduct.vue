@@ -140,7 +140,7 @@
           <b-input-group v-if="type === 'subasta'" required>
             <v-time-picker v-model="picker" color="green lighten-1" header-color="blue"></v-time-picker>
           </b-input-group>
-          <b-button v-on:click="logImg">Log picker</b-button>
+          <!--<b-button v-on:click="logImg">Log picker</b-button>-->
 
           <b-form-file
             v-model="file_2"
