@@ -75,7 +75,7 @@
           <CountdownTimer :end-time="endTim"></CountdownTimer>
           <!--<b-btn v-on:click="logTime">Log time</b-btn>-->
           <b-form>
-            <div v-if="this.anyoActual <= Number((this.method.fechaexpiracion.split('/')[2]).split(',')[0])">
+            <div v-if="this.anyoActual === Number((this.method.fechaexpiracion.split('/')[2]).split(',')[0])">
               <div v-if="this.mesActual < Number((this.method.fechaexpiracion.split('/')[1]))">
                                 <b-row>
                                   <b-col>
@@ -141,9 +141,36 @@
                                   PUJAR
                                 </b-button>
                     </div>
+                    <!--<div v-else>-->
+                      <!--<p>aaaaa</p>-->
+                    <!--</div>-->
                   </div>
+                  <!--<div v-else>-->
+                    <!--<p>eeeee</p>-->
+                  <!--</div>-->
                 </div>
+                <!--<div v-else>-->
+                  <!--<p>iiii</p>-->
+                <!--</div>-->
               </div>
+              <!--<div v-else>-->
+                <!--<p>oooooooo</p>-->
+              <!--</div>-->
+            </div>
+            <div v-else-if="this.anyoActual < Number((this.method.fechaexpiracion.split('/')[2]).split(',')[0])">
+              <b-row>
+                <b-col>
+                  <b-input type="number" style="font-size: medium" id="precioPujado"
+                           v-model="precioPujado"></b-input>
+                </b-col>
+                <b-col style="font-size: larger; margin-left: -15px">
+                  €
+                </b-col>
+              </b-row>
+              <b-button id="pujaRealizada" v-on:click="actPrecio(precioPujado)"
+                        style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-top: 10px;">
+                PUJAR
+              </b-button>
             </div>
             <!--<b-row>-->
             <!--<b-col>-->
