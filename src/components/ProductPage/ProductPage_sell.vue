@@ -77,69 +77,69 @@
           <b-form>
             <div v-if="this.anyoActual === Number((this.method.fechaexpiracion.split('/')[2]).split(',')[0])">
               <div v-if="this.mesActual < Number((this.method.fechaexpiracion.split('/')[1]))">
-                                <b-row>
-                                  <b-col>
-                                    <b-input type="number" style="font-size: medium" id="precioPujado" v-model="precioPujado"></b-input>
-                                  </b-col>
-                                  <b-col style="font-size: larger; margin-left: -15px">
-                                    €
-                                  </b-col>
-                                </b-row>
-                                <b-button id="pujaRealizada" v-on:click="actPrecio(precioPujado)"
-                                          style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-top: 10px;">
-                                  PUJAR
-                                </b-button>
+                <b-row>
+                  <b-col>
+                    <b-input type="number" style="font-size: medium" id="precioPujado" v-model="precioPujado"></b-input>
+                  </b-col>
+                  <b-col style="font-size: larger; margin-left: -15px">
+                    €
+                  </b-col>
+                </b-row>
+                <b-button id="pujaRealizada" v-on:click="actPrecio(precioPujado)"
+                          style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-top: 10px;">
+                  PUJAR
+                </b-button>
               </div>
               <div v-else-if="this.mesActual === Number((this.method.fechaexpiracion.split('/')[1]))">
                 <div v-if="this.diaActual < Number((this.method.fechaexpiracion.split('/')[0]))">
-                                <b-row>
-                                  <b-col>
-                                    <b-input type="number" style="font-size: medium" id="precioPujado"
-                                             v-model="precioPujado"></b-input>
-                                  </b-col>
-                                  <b-col style="font-size: larger; margin-left: -15px">
-                                    €
-                                  </b-col>
-                                </b-row>
-                                <b-button id="pujaRealizada" v-on:click="actPrecio(precioPujado)"
-                                          style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-top: 10px;">
-                                  PUJAR
-                                </b-button>
+                  <b-row>
+                    <b-col>
+                      <b-input type="number" style="font-size: medium" id="precioPujado"
+                               v-model="precioPujado"></b-input>
+                    </b-col>
+                    <b-col style="font-size: larger; margin-left: -15px">
+                      €
+                    </b-col>
+                  </b-row>
+                  <b-button id="pujaRealizada" v-on:click="actPrecio(precioPujado)"
+                            style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-top: 10px;">
+                    PUJAR
+                  </b-button>
                 </div>
                 <div v-else-if="this.diaActual === Number((this.method.fechaexpiracion.split('/')[0]))">
                   <div
                     v-if="this.horaActual < Number((this.method.fechaexpiracion.split('/')[2]).split(',')[1].split(':')[0])">
-                                <b-row>
-                                  <b-col>
-                                    <b-input type="number" style="font-size: medium" id="precioPujado"
-                                             v-model="precioPujado"></b-input>
-                                  </b-col>
-                                  <b-col style="font-size: larger; margin-left: -15px">
-                                    €
-                                  </b-col>
-                                </b-row>
-                                <b-button id="pujaRealizada" v-on:click="actPrecio(precioPujado)"
-                                          style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-top: 10px;">
-                                  PUJAR
-                                </b-button>
+                    <b-row>
+                      <b-col>
+                        <b-input type="number" style="font-size: medium" id="precioPujado"
+                                 v-model="precioPujado"></b-input>
+                      </b-col>
+                      <b-col style="font-size: larger; margin-left: -15px">
+                        €
+                      </b-col>
+                    </b-row>
+                    <b-button id="pujaRealizada" v-on:click="actPrecio(precioPujado)"
+                              style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-top: 10px;">
+                      PUJAR
+                    </b-button>
                   </div>
                   <div
                     v-else-if="this.horaActual === Number((this.method.fechaexpiracion.split('/')[2]).split(',')[1].split(':')[0])">
                     <div
                       v-if="this.minActual < Number((this.method.fechaexpiracion.split('/')[2]).split(',')[1].split(':')[1])">
-                                <b-row>
-                                  <b-col>
-                                    <b-input type="number" style="font-size: medium" id="precioPujado"
-                                             v-model="precioPujado"></b-input>
-                                  </b-col>
-                                  <b-col style="font-size: larger; margin-left: -15px">
-                                    €
-                                  </b-col>
-                                </b-row>
-                                <b-button id="pujaRealizada" v-on:click="actPrecio(precioPujado)"
-                                          style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-top: 10px;">
-                                  PUJAR
-                                </b-button>
+                      <b-row>
+                        <b-col>
+                          <b-input type="number" style="font-size: medium" id="precioPujado"
+                                   v-model="precioPujado"></b-input>
+                        </b-col>
+                        <b-col style="font-size: larger; margin-left: -15px">
+                          €
+                        </b-col>
+                      </b-row>
+                      <b-button id="pujaRealizada" v-on:click="actPrecio(precioPujado)"
+                                style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-top: 10px;">
+                        PUJAR
+                      </b-button>
                     </div>
                     <!--<div v-else>-->
                       <!--<p>aaaaa</p>-->
@@ -171,22 +171,6 @@
                         style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-top: 10px;">
                 PUJAR
               </b-button>
-            </div>
-            <!--<b-row>-->
-            <!--<b-col>-->
-            <!--<b-input type="number" style="font-size: medium" id="precioPujado" v-model="precioPujado"></b-input>-->
-            <!--</b-col>-->
-            <!--<b-col style="font-size: larger; margin-left: -15px">-->
-            <!--€-->
-            <!--</b-col>-->
-            <!--</b-row>-->
-            <!--<b-button id="pujaRealizada"v-on:click="actPrecio(precioPujado)"-->
-            <!--style="font-size: 1rem; font-weight:bold; background-color: #20a8d8; color: white; margin-top: 10px;">-->
-            <!--PUJAR-->
-            <!--</b-button>-->
-
-            <div v-else>
-              jejejje
             </div>
             <!--<button @click="sobreProd()">BOTON DEBUG</button>-->
             <br/>
