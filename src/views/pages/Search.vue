@@ -6,8 +6,7 @@
 
                       @keypress="actualizarProds"
                       v-model="texto"/>
-        <br>
-        <p>Buscando: {{textoBuscado}}</p>
+        <p hidden>Buscando: {{textoBuscado}}</p>
       </b-col>
       <b-col cols="2">
         <b-btn size="lg" style="width: 100%; font-weight: bold" variant="outline-primary" v-on:click="actualizarProds">
@@ -52,7 +51,7 @@
             </b-btn>
           </b-col>
           <b-col cols="4" >
-            <b-button size="lg" variant="outline-primary" v-on:click="noMapa = !noMapa" style="width: 100%; font-weight: bold">{{noMapa ? 'Ver mapa' : 'Ver lista'}}</b-button>
+            <b-button size="lg" variant="outline-primary" v-on:click="alternateMap()" style="width: 100%; font-weight: bold">{{noMapa ? 'Ver mapa' : 'Ver lista'}}</b-button>
           </b-col>
         </b-row>
 
@@ -207,6 +206,14 @@
         if(val > 0 && val <= pag) {
           this.pagina = val;
           this.actualizarProds();
+        }
+      },
+      alternateMap() {
+        this.noMapa = !this.noMapa;
+        if (this.noMapa) {
+          this.elemPerPage(10);
+        } else {
+          this.elemPerPage(100);
         }
       },
       actualizarProds: function () {
