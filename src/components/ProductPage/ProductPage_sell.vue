@@ -199,8 +199,13 @@
         lng: this.infoProdData.longitud
       };
       console.log(centro);
-      this.$refs.mapProd.centerUpdated(centro);
-      this.$refs.mapProd.zoomUpdated(17);
+      for (var i = 0; i < 3; i++) {
+
+        this.$refs.mapProd.centerUpdated(centro);
+        console.log("Banana");
+        console.log(this.$refs.mapProd.getCenter());
+        this.$refs.mapProd.zoomUpdated(17);
+      }
     },
     methods: {
       logTime(){

@@ -8,7 +8,7 @@
         </v-toolbar>
 
         <v-list subheader>
-          <v-subheader>Recent chat</v-subheader>
+          <v-subheader>Chats recientes</v-subheader>
           <v-list-tile
             v-for="(item, index) in chats"
             :key="index"
