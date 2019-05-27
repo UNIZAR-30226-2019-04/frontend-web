@@ -141,6 +141,7 @@
       nuevoMsj() {
         this.sendMessage(this.msj);
         this.msj = '';
+        this.scrollbarXBottom();
       }
     }
   }

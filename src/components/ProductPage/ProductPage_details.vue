@@ -36,8 +36,8 @@
                  style="width: 100%;"
             >
           </b-tab>
-          <b-tab title="Videos">
-            <b-embed type="video" aspect="4by3" controls>
+          <b-tab title="Videos" v-if="videoAv">
+            <b-embed type="video" aspect="4by3" controls >
               <source v-for="(img,index) in method.images " v-if="img.tipo" :src="img.path"
                       :key="index" type="video/mp4">
             </b-embed>
@@ -125,6 +125,16 @@
     methods: {
       infoCat: function () {
         console.log(this.laCategoria);
+      }
+    },
+    computed: {
+      videoAv() {
+        for (var i = 0; i < this.$props.method.images.length; i++) {
+          if (this.$props.method.images[i]["tipo"]) {
+            return true;
+          }
+        }
+        return false;
       }
     }
   }
