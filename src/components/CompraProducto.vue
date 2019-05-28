@@ -22,7 +22,7 @@
               <p> Nombre del vendedor {{ info.nombre }} </p>
               <v-btn style="background-color: green; font-weight: bold; color: white;" @click="pagoPayPal">Pago con PayPal</v-btn>
               <br/>
-              <b-btn v-on:click="ventana">BOTON VENTANA</b-btn>
+              <!--<b-btn v-on:click="ventana">BOTON VENTANA</b-btn>-->
             </b-tab>
           </b-tabs>
 
